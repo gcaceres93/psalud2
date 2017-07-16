@@ -97,7 +97,7 @@
                   <li><a href="#">Tipo impuestos</a></li>
                   <li><a href="#">Tipo familiares</a></li>
                   <li><a href="#">Cargos</a></li>
-                  <li><a href="#">Tipo terapias</a></li>
+                  <li><a href="{{ url('/tipoTerapia') }}">Tipo terapias</a></li>
                   <li><a href="#">Facturas concepto</a></li>
               </ul>
           </li>

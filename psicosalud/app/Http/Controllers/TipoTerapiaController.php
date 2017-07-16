@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Exception;
+
 use App\TipoTerapia;
 class TipoTerapiaController extends Controller
 {
@@ -25,7 +27,7 @@ class TipoTerapiaController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.tipoTerapia.create');    
     }
 
     /**
@@ -36,7 +38,14 @@ class TipoTerapiaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $tipoTerapia = new TipoTerapia();
+            $tipoTerapia->nombre=$request->nombre;
+            $tipoTerapia->save();
+            return redirect()->route('tipoTerapia.index');     
+        } catch (Exception $e) {
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 
     /**
@@ -58,7 +67,8 @@ class TipoTerapiaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tipoTerapia = TipoTerapia::findOrFail($id);
+        return view('pages.tipoTerapia.edit',compact('tipoTerapia'));
     }
 
     /**
@@ -70,7 +80,10 @@ class TipoTerapiaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tipoTerapia = TipoTerapia::findOrFail($id);
+        $tipoTerapia->nombre = $request->nombre;
+        $tipoTerapia->save();
+        return redirect()->route('tipoTerapia.index');
     }
 
     /**
@@ -81,6 +94,12 @@ class TipoTerapiaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $tipoTerapia = TipoTerapia::findOrFail($id);
+            $tipoTerapia->delete();
+            return redirect()->route('tipoTerapia.index');
+        } catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 }
