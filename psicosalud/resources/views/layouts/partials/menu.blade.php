@@ -94,7 +94,7 @@
                   <li><a href="{{ url('/sucursal') }}">Sucursales</a></li>
                   <li><a href="{{ url('/familiarestipo') }}">Tipo familiares</a></li>
                   <li><a href="{{ url('/modalidad') }}">Modalidades de consulta</a></li>
-                  <li><a href="#">Tipo impuestos</a></li>
+                  <li><a href="{{ url('/impuestos') }}">Tipo impuestos</a></li>
                   <li><a href="#">Tipo familiares</a></li>
                   <li><a href="{{ url('/cargos') }}">Cargos</a></li>
                   <li><a href="{{ url('/tipoTerapia') }}">Tipo terapias</a></li>
