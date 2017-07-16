@@ -1,8 +1,10 @@
 <style type="text/css">
   .navbar-default .navbar-brand {
-    color:#000;
+    color:#2E64FE;
 }
-
+.navbar-default .navbar-nav > li > a {
+    color: black;
+}
 .dropdown li a {
   color:black;
 }
