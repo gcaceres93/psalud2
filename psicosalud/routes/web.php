@@ -12,6 +12,7 @@
 */
 Route::resource('ocupacion', 'OcupacionController');
 Route::resource('modalidad','ModalidadController');
+Route::resource('tipoTerapia','TipoTerapiaController');
 Route::get('/', 'HomeController@index')->name('home');
 
 // Route::get('tipo_terapia','TipoTerapiaController@index');
