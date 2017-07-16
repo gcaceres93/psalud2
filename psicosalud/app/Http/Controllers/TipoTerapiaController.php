@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\TipoTerapia;
 class TipoTerapiaController extends Controller
 {
     /**
@@ -13,7 +14,8 @@ class TipoTerapiaController extends Controller
      */
     public function index()
     {
-        //
+        $data = TipoTerapia::all()->sortBy('id');
+        return view('pages.tipoTerapia.index', compact('data'));
     }
 
     /**
