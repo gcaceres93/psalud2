@@ -13,6 +13,10 @@
 Route::resource('ocupacion', 'OcupacionController');
 Route::resource('modalidad','ModalidadController');
 Route::resource('tipoTerapia','TipoTerapiaController');
+Route::resource('roles','RolesController');
+Route::resource('cargos','CargosController');
+Route::resource('familiarestipo','FamiliaresTipoController');
+Route::resource('sucursal','SucursalController');
 Route::get('/', 'HomeController@index')->name('home');
 
 // Route::get('tipo_terapia','TipoTerapiaController@index');
