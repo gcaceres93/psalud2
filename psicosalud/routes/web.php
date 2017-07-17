@@ -13,13 +13,19 @@
 Route::resource('ocupacion', 'OcupacionController');
 Route::resource('modalidad','ModalidadController');
 Route::resource('tipoTerapia','TipoTerapiaController');
-Route::resource('roles','RolesController');
-Route::resource('cargos','CargosController');
-Route::resource('familiarestipo','FamiliaresTipoController');
+Route::resource('rol','RolController');
+Route::resource('cargo','CargoController');
+Route::resource('tipoFamiliar','TipoFamiliarController');
 Route::resource('sucursal','SucursalController');
 Route::resource('impuestos','ImpuestosController');
 Route::resource('facturaconcepto','FacturaConceptoController');
+
+/*          PERSONAS          */
 Route::resource('persona','PersonaController');
+Route::resource('paciente','PacienteController');
+Route::resource('empleado','EmpleadoController');
+/*			PERSONAS 		  */
+
 Route::get('/', 'HomeController@index')->name('home');
 
 // Route::get('tipo_terapia','TipoTerapiaController@index');

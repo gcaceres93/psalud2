@@ -13,7 +13,7 @@
 <div class="container table-responsive">
   <div class="row">
     <h1>Lista de Roles</h1>
-    <h4><a href="{{ route('roles.create') }}">Registrar nuevo Rol</a></h4>
+    <h4><a href="{{ route('rol.create') }}">Registrar nuevo Rol</a></h4>
     <hr />
   </div>
   <div class="row">
@@ -34,8 +34,8 @@
 	  					<td>{{ $row->nombre }}</td>
 	  					<td>
 	  					<center>
-	  						<a href="{{ route('roles.edit', $row->id) }}" class="btn btn-info">Editar</a>
-							<form action="{{ route('roles.destroy', $row->id) }}" method="post">
+	  						<a href="{{ route('rol.edit', $row->id) }}" class="btn btn-info">Editar</a>
+							<form action="{{ route('rol.destroy', $row->id) }}" method="post">
 								<input type="hidden" name="_method" value="DELETE">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<button type="submit" class="btn btn-danger">Eliminar</button>

@@ -13,7 +13,7 @@
 <div class="container table-responsive">
   <div class="row">
     <h1>Lista de Tipos de Familiar</h1>
-    <h4><a href="{{ route('familiarestipo.create') }}">Registrar nuevo Tipo de Familiar</a></h4>
+    <h4><a href="{{ route('tipoFamiliar.create') }}">Registrar nuevo Tipo de Familiar</a></h4>
     <hr />
   </div>
   <div class="row">
@@ -31,11 +31,11 @@
 	  			@foreach($data as $row)
 	  				<tr>
 	  					<td>{{ $row->id }}</td>
-	  					<td>{{ $row->tipo_de_familiar }}</td>
+	  					<td>{{ $row->nombre }}</td>
 	  					<td>
 	  					<center>
-	  						<a href="{{ route('familiarestipo.edit', $row->id) }}" class="btn btn-info">Editar</a>
-							<form action="{{ route('familiarestipo.destroy', $row->id) }}" method="post">
+	  						<a href="{{ route('tipoFamiliar.edit', $row->id) }}" class="btn btn-info">Editar</a>
+							<form action="{{ route('tipoFamiliar.destroy', $row->id) }}" method="post">
 								<input type="hidden" name="_method" value="DELETE">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<button type="submit" class="btn btn-danger">Eliminar</button>

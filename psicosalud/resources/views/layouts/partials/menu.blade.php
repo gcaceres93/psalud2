@@ -82,7 +82,7 @@
               <ul class="dropdown-menu">
                   <li class="dropdown-header">ABM USUARIOS</li>
                   <li><a href="#">Usuarios</a></li>
-                  <li><a href="{{ url('/roles') }}">Roles</a></li>
+                  <li><a href="{{ url('/rol') }}">Roles</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">CONFIGURACION DE TEST Y ANAMNESIS</li>
                   <li><a href="#">Cuestionario anamnesis</a></li>
@@ -92,10 +92,10 @@
                   <li class="dropdown-header">ABM TABLAS PARAMETRICAS</li>
                   <li><a href="{{ url('/ocupacion') }}">Ocupaciones</a></li>
                   <li><a href="{{ url('/sucursal') }}">Sucursales</a></li>
-                  <li><a href="{{ url('/familiarestipo') }}">Tipo familiares</a></li>
+                  <li><a href="{{ url('/tipoFamiliar') }}">Tipo familiares</a></li>
                   <li><a href="{{ url('/modalidad') }}">Modalidades de consulta</a></li>
                   <li><a href="{{ url('/impuestos') }}">Tipo impuestos</a></li>
-                  <li><a href="{{ url('/cargos') }}">Cargos</a></li>
+                  <li><a href="{{ url('/cargo') }}">Cargos</a></li>
                   <li><a href="{{ url('/tipoTerapia') }}">Tipo terapias</a></li>
                   <li><a href="{{ url('/facturaconcepto') }}">Facturas concepto</a></li>
               </ul>

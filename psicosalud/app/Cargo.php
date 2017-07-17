@@ -4,8 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FamiliaresTipo extends Model
+class Cargo extends Model
 {
-    protected $table = 'familiares_tipo';
+    protected $table = 'cargo';
     public $timestamps = False;
 }
+

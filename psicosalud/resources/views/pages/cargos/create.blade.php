@@ -10,12 +10,12 @@
 <div class="container">
   <div class="row">
     <h1>Registro de Cargos</h1>
-    <h4><a href="{{ route('cargos.index') }}">Listar cargos</a></h4>
+    <h4><a href="{{ route('cargo.index') }}">Listar cargos</a></h4>
     <hr />
   </div>
   <div class="row">
     <div class="col-md-6">
-  	<form method="post" action="/cargos">
+  	<form method="post" action="/cargo">
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
   			

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\FamiliaresTipo;
+use App\TipoFamiliar;
 use Illuminate\Http\Request;
 
-class FamiliaresTipoController extends Controller
+class TipoFamiliarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class FamiliaresTipoController extends Controller
      */
     public function index()
     {
-        $data= FamiliaresTipo::all()->sortBy('id');
+        $data= TipoFamiliar::all()->sortBy('id');
         return view('pages.familiarestipo.index',compact('data'));
     }
 
@@ -37,10 +37,10 @@ class FamiliaresTipoController extends Controller
     public function store(Request $request)
     {
         try{
-            $familiarestipo = new FamiliaresTipo();
-            $familiarestipo->tipo_de_familiar = $request->tipo_de_familiar;
+            $familiarestipo = new TipoFamiliar();
+            $familiarestipo->nombre = $request->nombre;
             $familiarestipo->save();
-            return redirect()->route('familiarestipo.index');
+            return redirect()->route('tipoFamiliar.index');
         }catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
         }
@@ -52,7 +52,7 @@ class FamiliaresTipoController extends Controller
      * @param  \App\FamiliaresTipo  $familiaresTipo
      * @return \Illuminate\Http\Response
      */
-    public function show(FamiliaresTipo $familiaresTipo)
+    public function show(TipoFamiliar $familiaresTipo)
     {
         //
     }
@@ -65,7 +65,7 @@ class FamiliaresTipoController extends Controller
      */
     public function edit ($familiarestipo)
     {
-        $familiarestipo = familiarestipo::findOrFail($familiarestipo);
+        $familiarestipo = TipoFamiliar::findOrFail($familiarestipo);
         return view('pages.familiarestipo.edit',compact('familiarestipo'));
     }
 
@@ -78,10 +78,10 @@ class FamiliaresTipoController extends Controller
      */
     public function update(Request $request, $familiarestipo)
     {
-        $familiarestipo = FamiliaresTipo::findOrFail($familiarestipo);
-        $familiarestipo->tipo_de_familiar = $request->tipo_de_familiar;
+        $familiarestipo = TipoFamiliar::findOrFail($familiarestipo);
+        $familiarestipo->nombre = $request->nombre;
         $familiarestipo->save();
-        return redirect()->route('familiarestipo.index');
+        return redirect()->route('tipoFamiliar.index');
     }
 
     /**
@@ -93,9 +93,9 @@ class FamiliaresTipoController extends Controller
     public function destroy( $familiarestipo)
     {
          try{
-            $familiarestipo = FamiliaresTipo::findOrFail($familiarestipo);
+            $familiarestipo = TipoFamiliar::findOrFail($familiarestipo);
             $familiarestipo->delete();
-            return redirect()->route('familiarestipo.index');
+            return redirect()->route('tipoFamiliar.index');
         } catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
         }

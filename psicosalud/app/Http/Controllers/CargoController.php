@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Roles;
+use App\Cargo;
 use Illuminate\Http\Request;
 
-class RolesController extends Controller
+class CargoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,9 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $data= Roles::all()->sortBy('id');
-        return view('pages.roles.index',compact('data'));
+        $data= Cargo::all()->sortBy('id');
+        return view('pages.cargos.index',compact('data'));
     }
-    
 
     /**
      * Show the form for creating a new resource.
@@ -26,7 +25,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-         return view('pages.roles.create');
+        return view('pages.cargos.create');
     }
 
     /**
@@ -37,23 +36,24 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-          try{
-            $roles = new Roles();
-            $roles->nombre = $request->nombre;
-            $roles->save();
-            return redirect()->route('roles.index');
+        try{
+            $cargos = new Cargo();
+            $cargos->descripcion = $request->descripcion;
+            $cargos->save();
+            return redirect()->route('cargo.index');
         }catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
         }
     }
+    
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Roles  $roles
+     * @param  \App\Cargos  $cargos
      * @return \Illuminate\Http\Response
      */
-    public function show(Roles $roles)
+    public function show(Cargos $cargos)
     {
         //
     }
@@ -61,42 +61,43 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Roles  $roles
+     * @param  \App\Cargos  $cargos
      * @return \Illuminate\Http\Response
      */
-    public function edit($roles)
+    public function edit( $cargos)
     {
-        $roles = Roles::findOrFail($roles);
-        return view('pages.roles.edit',compact('roles'));
+         $cargos = Cargo::findOrFail($cargos);
+        return view('pages.cargos.edit',compact('cargos'));
     }
+    
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Roles  $roles
+     * @param  \App\Cargos  $cargos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $roles)
+    public function update(Request $request, $cargos)
     {
-        $roles = Roles::findOrFail($roles);
-        $roles->nombre = $request->nombre;
-        $roles->save();
-        return redirect()->route('roles.index');
+        $cargos = Cargo::findOrFail($cargos);
+        $cargos->descripcion = $request->descripcion;
+        $cargos->save();
+        return redirect()->route('cargo.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Roles  $roles
+     * @param  \App\Cargos  $cargos
      * @return \Illuminate\Http\Response
      */
-    public function destroy($roles)
+    public function destroy( $cargos)
     {
          try{
-            $roles = Roles::findOrFail($roles);
-            $roles->delete();
-            return redirect()->route('roles.index');
+            $cargos = Cargo::findOrFail($cargos);
+            $cargos->delete();
+            return redirect()->route('cargo.index');
         } catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
         }
