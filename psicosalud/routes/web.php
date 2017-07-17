@@ -19,6 +19,7 @@ Route::resource('familiarestipo','FamiliaresTipoController');
 Route::resource('sucursal','SucursalController');
 Route::resource('impuestos','ImpuestosController');
 Route::resource('facturaconcepto','FacturaConceptoController');
+Route::resource('persona','PersonaController');
 Route::get('/', 'HomeController@index')->name('home');
 
 // Route::get('tipo_terapia','TipoTerapiaController@index');
