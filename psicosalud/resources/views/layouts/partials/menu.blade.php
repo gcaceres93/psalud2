@@ -91,6 +91,7 @@
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">ABM TABLAS PARAMETRICAS</li>
                   <li><a href="{{ url('/ocupacion') }}">Ocupaciones</a></li>
+                  <li><a href="{{ url('/empleado') }}"></a></li>
                   <li><a href="{{ url('/sucursal') }}">Sucursales</a></li>
                   <li><a href="{{ url('/tipoFamiliar') }}">Tipo familiares</a></li>
                   <li><a href="{{ url('/modalidad') }}">Modalidades de consulta</a></li>
