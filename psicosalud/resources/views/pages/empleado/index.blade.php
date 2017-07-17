@@ -37,7 +37,7 @@
 	  			</thead>
 	  			<tbody>
 	  			@foreach($data as $row)
-	  				<tr>
+	  				<tr class="clickable-row" data-href="{{ route('empleado.show', $row->id)  }}"> <a href=""></a>
 	  					<td>{{ $row->id }}</td>
 	  					<td>{{ $row->persona->nombre }}</td>
 	  					<td>{{ $row->persona->apellido	}}</td>

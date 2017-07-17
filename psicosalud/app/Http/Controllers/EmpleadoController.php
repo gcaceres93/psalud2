@@ -28,7 +28,7 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        $cargos = Cargo::all();
+        $cargos = Cargo::all()->sortBy('descripcion');
         return view('pages.'.$this->path.'.create',compact('cargos'));
     }
 
@@ -81,7 +81,9 @@ class EmpleadoController extends Controller
      */
     public function show($id)
     {
-        //
+        $empleado = Empleado::findOrFail($id);
+        $cargos = Cargo::all()->sortBy('descripcion');
+        return view('pages.'.$this->path.'.show',compact('empleado','cargos'));
     }
 
     /**
@@ -92,7 +94,9 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $empleado = Empleado::findOrFail($id);
+        $cargos = Cargo::all()->sortBy('descripcion');
+        return view('pages.'.$this->path.'.edit',compact('empleado','cargos'));
     }
 
     /**
@@ -103,8 +107,24 @@ class EmpleadoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {    
+
+        $empleado = Empleado::findOrFail($id);
+        $empleado->persona->nombre=$request->nombre;
+        $empleado->persona->apellido=$request->apellido;
+        $empleado->persona->nacimiento=$request->nacimiento;
+        $empleado->persona->email=$request->email;
+        $empleado->persona->telefono=$request->telefono;
+        $empleado->persona->cedula=$request->cedula;
+        $empleado->persona->direccion=$request->direccion;
+        $empleado->codigo=$request->codigo;
+        $empleado->cargo_id=$request->cargo;
+        $empleado->persona_id=$lastInsertedId;
+        $empleado->disponibilidad_desde=$request->disponibilidad_desde;
+        $empleado->disponibilidad_hasta=$request->disponibilidad_hasta;
+        $empleado->save();
+        return redirect()->route('empleado.index'); 
+
     }
 
     /**

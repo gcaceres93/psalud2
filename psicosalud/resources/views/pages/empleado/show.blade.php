@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.popup')
 
 @section('main_content')
 {{-- <style type="text/css">
@@ -6,10 +6,9 @@
         background-color: #CEE3F6;
     }
 </style> --}}
-<form class="form-horizontal" action="/empleado" method="post"userd="contact_form">
-<center><img class="img-responsive" src="/img/user.png" alt="Logo" width="8%" height="8%" class="img-responsive"></center>
-<center><h2 >Registro de empleados</h2></center>
-<br />
+
+<form class="form-horizontal" action="/empleado/{{ $empleado->id }}" method="post"  id="contact_form">
+{{ method_field('PUT') }}
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 <fieldset>
 
@@ -22,7 +21,7 @@
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  name="nombre" placeholder="Nombres" class="form-control"  type="text">
+  <input  name="nombre" placeholder="Nombres" class="form-control" type="text" value="{{ $empleado->persona->nombre }}" readonly>
     </div>
   </div>
 </div>
@@ -34,7 +33,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="apellido" placeholder="Apellidos" class="form-control"  type="text">
+  <input name="apellido" placeholder="Apellidos" class="form-control"  type="text" value="{{ $empleado->persona->apellido }}" readonly>
     </div>
   </div>
 </div>
@@ -44,7 +43,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="cedula" placeholder="Cédula de identidad" class="form-control"  type="text">
+  <input name="cedula" placeholder="Cédula de identidad" class="form-control"  type="text" value="{{ $empleado->persona->cedula }}" readonly>
     </div>
   </div>
 </div>
@@ -54,7 +53,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-  <input name="nacimiento" placeholder="Fecha y año de nacimiento" class="form-control"  type="date">
+  <input name="nacimiento" placeholder="Fecha y año de nacimiento" class="form-control"  type="date" value="{{ $empleado->persona->nacimiento }}" readonly>
     </div>
   </div>
 </div>
@@ -64,7 +63,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i></span>
-  <input name="codigo" placeholder="Código de empleado" class="form-control"  type="text">
+  <input name="codigo" placeholder="Código de empleado" class="form-control"  type="text" value="{{ $empleado->codigo }}" readonly>
     </div>
   </div>
 </div>
@@ -75,7 +74,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="email" placeholder="Dirección de correo" class="form-control"  type="text">
+  <input name="email" placeholder="Dirección de correo" class="form-control"  type="text" value="{{ $empleado->persona->email }}" readonly>
     </div>
   </div>
 </div>
@@ -88,7 +87,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-  <input name="telefono" placeholder="Ej.:(0961)555-1212" class="form-control" type="text">
+  <input name="telefono" placeholder="Ej.:(0961)555-1212" class="form-control" type="text" value="{{ $empleado->persona->telefono }}" readonly>
     </div>
   </div>
 </div>
@@ -100,7 +99,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="direccion" placeholder="Dirección particular y/o profesional" class="form-control" type="text">
+  <input name="direccion" placeholder="Dirección particular y/o profesional" class="form-control" type="text" value="{{ $empleado->persona->direccion }}" readonly>
     </div>
   </div>
 </div>
@@ -111,9 +110,9 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"> Desde:  <i class="glyphicon glyphicon-calendar"></i></span>
-  <input name="disponibilidad_desde" placeholder="Ej.:08:00:00" class="form-control"  type="text">
+  <input name="disponibilidad_desde" placeholder="Ej.:08:00:00" class="form-control"  type="text" value="{{ $empleado->disponibilidad_desde }}" readonly>
   <span class="input-group-addon">  Hasta:  <i class="glyphicon glyphicon-calendar"></i></span>
-   <input name="disponibilidad_hasta" placeholder="Ej.:17:00:00" class="form-control"  type="text">
+   <input name="disponibilidad_hasta" placeholder="Ej.:17:00:00" class="form-control"  type="text" value="{{ $empleado->disponibilidad_hasta }}" readonly>
     </div>
   </div>
 </div>
@@ -121,35 +120,20 @@
 
 
 <!-- Select Basic -->
-@if($cargos)   
   <div class="form-group"> 
     <label class="col-md-4 control-label">Cargo</label>
-      <div class="col-md-4 selectContainer">
+      <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-      <select name="cargo" class="form-control selectpicker" >
-        <option value=" " >Seleccionar cargo</option>
-        @foreach($cargos as $cargo)
-          <option value="{{ $cargo->id }}">{{ $cargo->descripcion }}</option>
-        @endforeach
-      </select>
+        <input name="cargo" type="text" class="form-control" value="{{ $empleado->cargo->descripcion }}" readonly>
     </div>
   </div>
   </div>
-@endif
 
 
-
-
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label"></label>
-  <div class="col-md-4">
-    <center><button type="submit" class="btn btn-success" >Guardar <span class="glyphicon glyphicon-send"></span></button></center>
-  </div>
-</div>
 
 </fieldset>
 </form>
 </div>
+
 @endsection

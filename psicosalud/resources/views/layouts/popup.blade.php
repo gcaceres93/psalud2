@@ -9,17 +9,7 @@
      <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
      <link rel="stylesheet" href="{{ URL::asset('laravel/bootstrap-3.3.7-dist/css/bootstrap.css') }}"/>
     
-    <script type="text/javascript">
-    jQuery(document).ready(function($) {
-        $(".clickable-row").click(function() {
-            var left  = ($(window).width()/2)-(900/2),
-            top   = ($(window).height()/2)-(600/2),
-            popup = window.open ($(this).data("href"), "popup", "width=900, height=600, top="+top+", left="+left);
-            // window.open($(this).data("href"),'_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
-        });
-    });
-    </script>
-
+    
      <style type="text/css">
    /* body{
         background-color: #EFF8FB;
@@ -28,14 +18,9 @@
     	background-color: #F8E0F7;
     	text-align: center;
     }
-
-    .clickable-row{
-        cursor: pointer;    
-    }
 </style>
 </head>
 <body>
-@include('layouts.partials.menu')
 
 @yield('main_content')
 
