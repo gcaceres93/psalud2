@@ -110,21 +110,21 @@ class EmpleadoController extends Controller
     {    
 
         $empleado = Empleado::findOrFail($id);
-        $empleado->persona->nombre=$request->nombre;
-        $empleado->persona->apellido=$request->apellido;
-        $empleado->persona->nacimiento=$request->nacimiento;
-        $empleado->persona->email=$request->email;
-        $empleado->persona->telefono=$request->telefono;
-        $empleado->persona->cedula=$request->cedula;
-        $empleado->persona->direccion=$request->direccion;
+        $persona = Persona::findOrFail($empleado->persona->id);
+        $persona->nombre=$request->nombre;
+        $persona->apellido=$request->apellido;
+        $persona->nacimiento=$request->nacimiento;
+        $persona->email=$request->email;
+        $persona->telefono=$request->telefono;
+        $persona->cedula=$request->cedula;
+        $persona->direccion=$request->direccion;
+        $persona->save();
         $empleado->codigo=$request->codigo;
         $empleado->cargo_id=$request->cargo;
-        $empleado->persona_id=$lastInsertedId;
         $empleado->disponibilidad_desde=$request->disponibilidad_desde;
         $empleado->disponibilidad_hasta=$request->disponibilidad_hasta;
         $empleado->save();
         return redirect()->route('empleado.index'); 
-
     }
 
     /**

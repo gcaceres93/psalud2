@@ -21,7 +21,7 @@
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  name="nombre" placeholder="Nombres" class="form-control" type="text" value="{{ $empleado->persona->nombre }}" readonly>
+  <input  name="nombre" placeholder="Nombres" class="form-control" type="text" value="{{ $empleado->persona->nombre }}" >
     </div>
   </div>
 </div>
@@ -33,7 +33,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="apellido" placeholder="Apellidos" class="form-control"  type="text" value="{{ $empleado->persona->apellido }}" readonly>
+  <input name="apellido" placeholder="Apellidos" class="form-control"  type="text" value="{{ $empleado->persona->apellido }}" >
     </div>
   </div>
 </div>
@@ -43,7 +43,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="cedula" placeholder="Cédula de identidad" class="form-control"  type="text" value="{{ $empleado->persona->cedula }}" readonly>
+  <input name="cedula" placeholder="Cédula de identidad" class="form-control"  type="text" value="{{ $empleado->persona->cedula }}" >
     </div>
   </div>
 </div>
@@ -53,7 +53,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-  <input name="nacimiento" placeholder="Fecha y año de nacimiento" class="form-control"  type="date" value="{{ $empleado->persona->nacimiento }}" readonly>
+  <input name="nacimiento" placeholder="Fecha y año de nacimiento" class="form-control"  type="date" value="{{ $empleado->persona->nacimiento }}" >
     </div>
   </div>
 </div>
@@ -63,7 +63,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i></span>
-  <input name="codigo" placeholder="Código de empleado" class="form-control"  type="text"cvalue="{{ $empleado->codigo }}" readonly>
+  <input name="codigo" placeholder="Código de empleado" class="form-control"  type="text" value="{{ $empleado->codigo }}" >
     </div>
   </div>
 </div>
@@ -74,7 +74,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="email" placeholder="Dirección de correo" class="form-control"  type="text" value="{{ $empleado->persona->email }}" readonly>
+  <input name="email" placeholder="Dirección de correo" class="form-control"  type="text" value="{{ $empleado->persona->email }}" >
     </div>
   </div>
 </div>
@@ -87,7 +87,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-  <input name="telefono" placeholder="Ej.:(0961)555-1212" class="form-control" type="text" value="{{ $empleado->persona->telefono }}" readonly>
+  <input name="telefono" placeholder="Ej.:(0961)555-1212" class="form-control" type="text" value="{{ $empleado->persona->telefono }}" >
     </div>
   </div>
 </div>
@@ -99,7 +99,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="direccion" placeholder="Dirección particular y/o profesional" class="form-control" type="text" value="{{ $empleado->persona->direccion }}" readonly>
+  <input name="direccion" placeholder="Dirección particular y/o profesional" class="form-control" type="text" value="{{ $empleado->persona->direccion }}" >
     </div>
   </div>
 </div>
@@ -110,9 +110,9 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"> Desde:  <i class="glyphicon glyphicon-calendar"></i></span>
-  <input name="disponibilidad_desde" placeholder="Ej.:08:00:00" class="form-control"  type="text" value="{{ $empleado->disponibilidad_desde }}" readonly>
+  <input name="disponibilidad_desde" placeholder="Ej.:08:00:00" class="form-control"  type="text" value="{{ $empleado->disponibilidad_desde }}" >
   <span class="input-group-addon">  Hasta:  <i class="glyphicon glyphicon-calendar"></i></span>
-   <input name="disponibilidad_hasta" placeholder="Ej.:17:00:00" class="form-control"  type="text" value="{{ $empleado->disponibilidad_hasta }}" readonly>
+   <input name="disponibilidad_hasta" placeholder="Ej.:17:00:00" class="form-control"  type="text" value="{{ $empleado->disponibilidad_hasta }}" >
     </div>
   </div>
 </div>
@@ -127,7 +127,7 @@
       <div class="input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
       <select name="cargo" class="form-control selectpicker" >
-        <option value="{{ $empleado->cargo->id }}" >{{ $empleado->cargo->descripcion }}}</option>
+        <option value="{{ $empleado->cargo->id }}" >{{ $empleado->cargo->descripcion }}</option>
         @foreach($cargos as $cargo)
           <option value="{{ $cargo->id }}">{{ $cargo->descripcion }}</option>
         @endforeach
@@ -137,7 +137,7 @@
   </div>
 @endif
 
-
+<center><button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-save"></span> Actualizar</button> </center>
 
 </fieldset>
 </form>

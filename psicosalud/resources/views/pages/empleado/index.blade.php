@@ -37,14 +37,14 @@
 	  			</thead>
 	  			<tbody>
 	  			@foreach($data as $row)
-	  				<tr class="clickable-row" data-href="{{ route('empleado.show', $row->id)  }}"> <a href=""></a>
-	  					<td>{{ $row->id }}</td>
-	  					<td>{{ $row->persona->nombre }}</td>
-	  					<td>{{ $row->persona->apellido	}}</td>
-	  					<td>{{ $row->persona->cedula	}}</td>
-	  					<td>{{ $row->cargo->descripcion	}}</td>
-	  					<td>{{ $row->disponibilidad_desde }}</td>
-	  					<td>{{ $row->disponibilidad_hasta }}</td>
+	  				<tr> <a href=""></a>
+	  					<td class="clickable-row" data-href="{{ route('empleado.show', $row->id)  }}">{{ $row->id }}</td>
+	  					<td class="clickable-row" data-href="{{ route('empleado.show', $row->id)  }}">{{ $row->persona->nombre }}</td>
+	  					<td class="clickable-row" data-href="{{ route('empleado.show', $row->id)  }}" >{{ $row->persona->apellido	}}</td>
+	  					<td class="clickable-row" data-href="{{ route('empleado.show', $row->id)  }}">{{ $row->persona->cedula	}}</td>
+	  					<td class="clickable-row" data-href="{{ route('empleado.show', $row->id)  }}">{{ $row->cargo->descripcion	}}</td>
+	  					<td class="clickable-row" data-href="{{ route('empleado.show', $row->id)  }}">{{ $row->disponibilidad_desde }}</td>
+	  					<td class="clickable-row" data-href="{{ route('empleado.show', $row->id)  }}">{{ $row->disponibilidad_hasta }}</td>
 	  					<td>
 	  						<center>
 	  						<a href="{{ route('empleado.edit', $row->id) }}" class="btn btn-info">Editar</a>
