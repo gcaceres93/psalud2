@@ -6,7 +6,10 @@
         background-color: #CEE3F6;
     }
 </style> --}}
-<form class="form-horizontal" action="/empleado" method="post"  id="contact_form">
+<form class="form-horizontal" action="/empleado" method="post"userd="contact_form">
+<center><img class="img-responsive" src="/img/user.png" alt="Logo" width="5%" height="5%"></center>
+<center><h2 >Registro de empleados</h2></center>
+<br />
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 <fieldset>
 
