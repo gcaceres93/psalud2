@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
 @section('main_content')
-<style type="text/css">
+{{-- <style type="text/css">
    /* body{
         background-color: #EFF8FB;
     }*/
     th{
     	background-color: #819FF7;
     }
-</style>
+</style> --}}
 
 <div class="container table-responsive">
   <div class="row">

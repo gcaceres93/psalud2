@@ -15,7 +15,7 @@
         background-color: #EFF8FB;
     }*/
     th{
-    	background-color: #819FF7;
+    	background-color: #F8E0F7;
     	text-align: center;
     }
 </style>
