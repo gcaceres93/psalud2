@@ -47,7 +47,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Médicos <span class="glyphicon glyphicon-eye-open"></span></a>
               <ul class="dropdown-menu">
                   <li><a href="#">Registrar médico</a></li>
-                  <li><a href="#">Listar médicos</a></li>
+                  <li><a href="{{ url('/empleado') }}">Listar médicos</a></li>
                   <li><a href="#">Consultar agenda de médico</a></li>
               </ul>
           </li>

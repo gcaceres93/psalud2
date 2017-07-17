@@ -13,7 +13,7 @@
 <div class="container table-responsive">
   <div class="row">
     <h1>Lista de modalidades</h1>
-    <h4><a href="{{ route('modalidad.create') }}">Registrar nueva modalidad</a></h4>
+    <h4><a class="btn btn-success" href="{{ route('modalidad.create') }}">Registrar nueva modalidad</a></h4>
     <hr />
   </div>
   <div class="row">

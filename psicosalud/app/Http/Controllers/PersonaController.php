@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class PersonaController extends Controller
 {
+
+    private $path = 'persona';
     /**
      * Display a listing of the resource.
      *
@@ -14,11 +16,6 @@ class PersonaController extends Controller
     public function index()
     {
         //
-    }
-
-    public function paciente()
-    {
-        return $this->hasOne->('App\Paciente');
     }
 
     /**

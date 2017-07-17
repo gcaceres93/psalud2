@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Empleado;
+use App\Cargo;
+use App\Persona;
 class EmpleadoController extends Controller
 {
+    private $path = 'empleado';
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +17,8 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        //
+        $data = Empleado::all()->sortBy('id');
+        return view('pages.'.$this->path.'.index',compact('data'));
     }
 
     /**
@@ -23,7 +28,8 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        //
+        $cargos = Cargo::all();
+        return view('pages.'.$this->path.'.create',compact('cargos'));
     }
 
     /**
@@ -34,7 +40,37 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            /* Primero instanciamos el modelo persona */
+
+            $persona = new Persona();
+            $persona->nombre=$request->nombre;
+            $persona->apellido=$request->apellido;
+            $persona->nacimiento=$request->nacimiento;
+            $persona->email=$request->email;
+            $persona->telefono=$request->telefono;
+            $persona->cedula=$request->cedula;
+            $persona->direccion=$request->direccion;
+            $persona->save();
+
+            /* Guardamos el valor del ID generado para la persona */
+
+            $lastInsertedId=$persona->id;
+
+            /* Creamos el empleado */
+
+            $empleado = new Empleado();
+            $empleado->codigo=$request->codigo;
+            $empleado->cargo_id=$request->cargo;
+            $empleado->persona_id=$lastInsertedId;
+            $empleado->disponibilidad_desde=$request->disponibilidad_desde;
+            $empleado->disponibilidad_hasta=$request->disponibilidad_hasta;
+            $empleado->save();
+            return redirect()->route('empleado.index');
+            
+        } catch (Exception $e) {
+             return "Fatal error - ".$e->getMessage();
+        }
     }
 
     /**
@@ -79,6 +115,12 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
-        //
+         try{
+            $empleado = Empleado::findOrFail($id);
+            $empleado->delete();
+            return redirect()->route('empleado.index');
+        } catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 }

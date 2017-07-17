@@ -13,7 +13,7 @@
 <div class="container table-responsive">
   <div class="row">
     <h1>Lista de ocupaciones</h1>
-    <h4><a href="{{ route('ocupacion.create') }}">Registrar nueva ocupacion</a></h4>
+    <h4><a  class="btn btn-success" href="{{ route('ocupacion.create') }}">Registrar nueva ocupacion</a></h4>
     <hr />
   </div>
   <div class="row">

@@ -13,7 +13,7 @@
 <div class="container table-responsive">
   <div class="row">
     <h1>Lista de Roles</h1>
-    <h4><a href="{{ route('rol.create') }}">Registrar nuevo Rol</a></h4>
+    <h4><a class="btn btn-success" href="{{ route('rol.create') }}">Registrar nuevo Rol</a></h4>
     <hr />
   </div>
   <div class="row">

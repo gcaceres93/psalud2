@@ -13,7 +13,7 @@
 <div class="container table-responsive">
   <div class="row">
     <h1>Lista de Conceptos de Factura</h1>
-    <h4><a href="{{ route('facturaconcepto.create') }}">Registrar nuevo concepto</a></h4>
+    <h4><a class="btn btn-success" href="{{ route('facturaconcepto.create') }}">Registrar nuevo concepto</a></h4>
     <hr />
   </div>
   <div class="row">

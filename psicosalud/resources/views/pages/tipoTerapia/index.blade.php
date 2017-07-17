@@ -6,7 +6,7 @@
 <div class="container">
   <div class="row">
     <h1>Lista de ocupaciones</h1>
-    <h4><a href="{{ route('tipoTerapia.create') }}">Registrar nuevo tipo de terapia</a></h4>
+    <h4><a class="btn btn-success" href="{{ route('tipoTerapia.create') }}">Registrar nuevo tipo de terapia</a></h4>
     <hr />
   </div>
   <div class="row">
