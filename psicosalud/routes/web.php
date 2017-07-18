@@ -22,6 +22,7 @@ Route::resource('facturaconcepto','FacturaConceptoController');
 
 /*          PERSONAS          */
 Route::resource('persona','PersonaController');
+Route::resource('user','Auth\RegisterController');
 Route::resource('paciente','PacienteController');
 Route::resource('empleado','EmpleadoController');
 /*			PERSONAS 		  */
@@ -91,6 +92,10 @@ Route::get('users',function() {
 	return $users;
 */	
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
