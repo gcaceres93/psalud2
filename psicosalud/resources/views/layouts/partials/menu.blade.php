@@ -37,7 +37,7 @@
           <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pacientes <span class="glyphicon glyphicon-heart"></span></a>
               <ul class="dropdown-menu">
-                  <li><a href="#">Registrar paciente</a></li>
+                  <li><a href="{{ route('paciente.create') }}">Registrar paciente</a></li>
                   <li><a href="{{ url('/paciente') }}">Listar pacientes</a></li>
                   <li><a href="#">Historial de pacientes</a></li>
               </ul>
