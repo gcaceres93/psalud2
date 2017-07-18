@@ -130,14 +130,17 @@
 
 <!-- Select Basic -->
 @if(Route::currentRouteName() == 'medico.create')
-  @if($cargo)
+  @if($profesionales_salud)
   <div class="form-group"> 
     <label class="col-md-4 control-label">Cargo</label>
       <div class="col-md-4 selectContainer">
       <div class="input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-      <select name="cargo" class="form-control selectpicker" disabled>
-        <option value="{{ $cargo->id }}" >{{ $cargo->descripcion }}</option>
+      <select name="cargo" class="form-control selectpicker">
+        <option value="" >Seleccionar cargo</option>
+        @foreach($profesionales_salud as $cargo)
+          <option value="{{ $cargo->id }}">{{ $cargo->descripcion }}</option>
+        @endforeach
       </select>
     </div>
   </div>
@@ -168,7 +171,7 @@
     <div class="input-group">
    <div class="checkbox">
    @if(Route::currentRouteName() == 'medico.create')
-      <label><input id="es_medico" type="checkbox" name="es_medico" value="1" checked disabled></label>
+      <label><input id="es_medico" type="checkbox" name="es_medico" value="1" checked readonly></label>
    @else
       <label><input id="es_medico" type="checkbox" name="es_medico" value="1"></label>  
    @endif

@@ -47,9 +47,9 @@ class EmpleadoController extends Controller
 
     public function createMedico()
     {
-        $cargo = Cargo::where('descripcion','=','Psicologo')->first();
+        $profesionales_salud = Cargo::where('profesional_salud','=',true)->get();
 
-        return view('pages.'.$this->path.'.create',compact('cargo'));
+        return view('pages.'.$this->path.'.create',compact('profesionales_salud'));
     }
 
     public function store(Request $request)
@@ -87,7 +87,13 @@ class EmpleadoController extends Controller
             }
 
             $empleado->save();
-            return redirect()->route('empleado.index');
+
+            if ($empleado -> es_medico){
+                return redirect()->route('medico.index');
+            }else{
+                return redirect()->route('empleado.index');
+            }
+            
             
         } catch (Exception $e) {
              return "Fatal error - ".$e->getMessage();
@@ -150,7 +156,11 @@ class EmpleadoController extends Controller
             $empleado->es_medico=false;
         }
         $empleado->save();
-        return redirect()->route('empleado.index'); 
+        if ($empleado -> es_medico){
+                return redirect()->route('medico.index');
+            }else{
+                return redirect()->route('empleado.index');
+        } 
     }
 
     /**
@@ -164,7 +174,11 @@ class EmpleadoController extends Controller
          try{
             $empleado = Empleado::findOrFail($id);
             $empleado->delete();
-            return redirect()->route('empleado.index');
+            if ($empleado -> es_medico){
+                return redirect()->route('medico.index');
+            }else{
+                return redirect()->route('empleado.index');
+            }
         } catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
         }
