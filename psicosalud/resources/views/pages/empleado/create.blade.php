@@ -6,6 +6,14 @@
         background-color: #CEE3F6;
     }
 </style> --}}
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("p").click(function(){
+        $(this).hide();
+    });
+});
+</script>
+
 <form class="form-horizontal" action="/empleado" method="post"userd="contact_form">
 <center><img class="img-responsive" src="/img/user.png" alt="Logo" width="8%" height="8%" class="img-responsive"></center>
 <center><h2 >Registro de empleados</h2></center>
@@ -121,6 +129,24 @@
 
 
 <!-- Select Basic -->
+@if(Route::currentRouteName() == 'medico.create')
+  @if($profesionales_salud)
+  <div class="form-group"> 
+    <label class="col-md-4 control-label">Cargo</label>
+      <div class="col-md-4 selectContainer">
+      <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+      <select name="cargo" class="form-control selectpicker">
+        <option value="" >Seleccionar cargo</option>
+        @foreach($profesionales_salud as $cargo)
+          <option value="{{ $cargo->id }}">{{ $cargo->descripcion }}</option>
+        @endforeach
+      </select>
+    </div>
+  </div>
+  </div>
+  @endif
+@else
 @if($cargos)   
   <div class="form-group"> 
     <label class="col-md-4 control-label">Cargo</label>
@@ -137,6 +163,29 @@
   </div>
   </div>
 @endif
+@endif
+
+<div class="form-group">
+  <label class="col-md-4 control-label" >¿Es médico?</label> 
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+   <div class="checkbox">
+   @if(Route::currentRouteName() == 'medico.create')
+      <label><input id="es_medico" type="checkbox" name="es_medico" value="1" checked readonly></label>
+   @else
+      <label><input id="es_medico" type="checkbox" name="es_medico" value="1"></label>  
+   @endif
+    </div>
+  </div>
+</div>
+</div>
+
+{{-- <div class="form-group">
+
+  <div class="checkbox">
+  <label><input type="checkbox" value="">¿Es médico?</label>
+</div>
+</div> --}}
 
 
 

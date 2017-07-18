@@ -25,6 +25,16 @@
   			<input type="text" name="descripcion" class="form-control" placeholder="Descripci&oacute;n del cargo" value="{{ $cargos->descripcion }}"> 	
   		</div>
 
+      <div class="form-group">
+      <div class="checkbox">
+         @if($cargos->profesional_salud)
+            <label><input type="checkbox" name="profesional_salud" value="1" checked>Es profesional de la salud?</label>
+         @else
+            <label><input type="checkbox" name="profesional_salud" value="1" >Es profesional de la salud?</label>
+         @endif
+      </div>
+      </div>
+
   		<button type="submit" class="btn btn-success">Actualizar</button>
   	</form>	
     </div>

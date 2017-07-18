@@ -38,6 +38,20 @@ class EmpleadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
+    public function getMedicos()
+    {
+        $data = Empleado::where('es_medico','true')->get();
+        return view('pages.'.$this->path.'.index',compact('data'));
+    }
+
+    public function createMedico()
+    {
+        $profesionales_salud = Cargo::where('profesional_salud','=',true)->get();
+
+        return view('pages.'.$this->path.'.create',compact('profesionales_salud'));
+    }
+
     public function store(Request $request)
     {
         try {
@@ -65,8 +79,21 @@ class EmpleadoController extends Controller
             $empleado->persona_id=$lastInsertedId;
             $empleado->disponibilidad_desde=$request->disponibilidad_desde;
             $empleado->disponibilidad_hasta=$request->disponibilidad_hasta;
+
+            if ($request['es_medico']){
+                $empleado->es_medico=true;
+            }else{
+                $empleado->es_medico=false;
+            }
+
             $empleado->save();
-            return redirect()->route('empleado.index');
+
+            if ($empleado -> es_medico){
+                return redirect()->route('medico.index');
+            }else{
+                return redirect()->route('empleado.index');
+            }
+            
             
         } catch (Exception $e) {
              return "Fatal error - ".$e->getMessage();
@@ -123,8 +150,17 @@ class EmpleadoController extends Controller
         $empleado->cargo_id=$request->cargo;
         $empleado->disponibilidad_desde=$request->disponibilidad_desde;
         $empleado->disponibilidad_hasta=$request->disponibilidad_hasta;
+        if ($request['es_medico']){
+            $empleado->es_medico=true;
+        }else{
+            $empleado->es_medico=false;
+        }
         $empleado->save();
-        return redirect()->route('empleado.index'); 
+        if ($empleado -> es_medico){
+                return redirect()->route('medico.index');
+            }else{
+                return redirect()->route('empleado.index');
+        } 
     }
 
     /**
@@ -138,7 +174,11 @@ class EmpleadoController extends Controller
          try{
             $empleado = Empleado::findOrFail($id);
             $empleado->delete();
-            return redirect()->route('empleado.index');
+            if ($empleado -> es_medico){
+                return redirect()->route('medico.index');
+            }else{
+                return redirect()->route('empleado.index');
+            }
         } catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
         }
