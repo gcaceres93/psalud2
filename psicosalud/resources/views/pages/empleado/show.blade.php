@@ -136,9 +136,9 @@
     <div class="input-group">
    <div class="checkbox">
    @if($empleado->es_medico)
-       <label><input type="checkbox" name="es_medico" value="1" checked readonly></label>
+       <label><input type="checkbox" name="es_medico" value="1" checked disabled></label>
    @else
-      <label><input type="checkbox" name="es_medico" value="" readonly></label>
+      <label><input type="checkbox" name="es_medico" value="" disabled></label>
    @endif
     </div>
   </div>

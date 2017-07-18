@@ -129,6 +129,21 @@
 
 
 <!-- Select Basic -->
+@if(Route::currentRouteName() == 'medico.create')
+  @if($cargo)
+  <div class="form-group"> 
+    <label class="col-md-4 control-label">Cargo</label>
+      <div class="col-md-4 selectContainer">
+      <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+      <select name="cargo" class="form-control selectpicker" disabled>
+        <option value="{{ $cargo->id }}" >{{ $cargo->descripcion }}</option>
+      </select>
+    </div>
+  </div>
+  </div>
+  @endif
+@else
 @if($cargos)   
   <div class="form-group"> 
     <label class="col-md-4 control-label">Cargo</label>
@@ -145,19 +160,23 @@
   </div>
   </div>
 @endif
-@if(Request::url()->current() == 'empleado.create')
- sfsafsafsaf
 @endif
+
 <div class="form-group">
   <label class="col-md-4 control-label" >¿Es médico?</label> 
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
    <div class="checkbox">
-  <label><input id="es_medico" type="checkbox" name="es_medico" value="1"></label>
+   @if(Route::currentRouteName() == 'medico.create')
+      <label><input id="es_medico" type="checkbox" name="es_medico" value="1" checked disabled></label>
+   @else
+      <label><input id="es_medico" type="checkbox" name="es_medico" value="1"></label>  
+   @endif
     </div>
   </div>
 </div>
 </div>
+
 {{-- <div class="form-group">
 
   <div class="checkbox">

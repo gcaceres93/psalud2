@@ -13,7 +13,11 @@
 <div class="container table-responsive">
   <div class="row">
     <h1>Lista de empleados</h1>
-    <h4><a class="btn btn-success" href="{{ route('empleado.create') }}">Registrar nuevo empleado</a></h4>
+    @if(Route::currentRouteName() == 'medico.index')
+		<h4><a class="btn btn-success" href="{{ route('medico.create') }}">Registrar nuevo médico</a></h4>
+    @else
+    	<h4><a class="btn btn-success" href="{{ route('empleado.create') }}">Registrar nuevo empleado</a></h4>
+    @endif
     <hr />
   </div>
   <div class="row">

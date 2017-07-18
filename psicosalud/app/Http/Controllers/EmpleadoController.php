@@ -45,6 +45,13 @@ class EmpleadoController extends Controller
         return view('pages.'.$this->path.'.index',compact('data'));
     }
 
+    public function createMedico()
+    {
+        $cargo = Cargo::where('descripcion','=','Psicologo')->first();
+
+        return view('pages.'.$this->path.'.create',compact('cargo'));
+    }
+
     public function store(Request $request)
     {
         try {
