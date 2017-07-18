@@ -39,6 +39,11 @@ class CargoController extends Controller
         try{
             $cargos = new Cargo();
             $cargos->descripcion = $request->descripcion;
+             if ($request['profesional_salud']){
+                 $cargos->profesional_salud=true;
+             }else{
+                 $cargos->profesional_salud=false;
+             }
             $cargos->save();
             return redirect()->route('cargo.index');
         }catch(Exception $e){
@@ -82,6 +87,11 @@ class CargoController extends Controller
     {
         $cargos = Cargo::findOrFail($cargos);
         $cargos->descripcion = $request->descripcion;
+        if ($request['profesional_salud']){
+                 $cargos->profesional_salud=true;
+             }else{
+                 $cargos->profesional_salud=false;
+        }
         $cargos->save();
         return redirect()->route('cargo.index');
     }
