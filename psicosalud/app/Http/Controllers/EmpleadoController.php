@@ -38,6 +38,13 @@ class EmpleadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
+    public function getMedicos()
+    {
+        $data = Empleado::where('es_medico','true')->get();
+        return view('pages.'.$this->path.'.index',compact('data'));
+    }
+
     public function store(Request $request)
     {
         try {
@@ -65,6 +72,13 @@ class EmpleadoController extends Controller
             $empleado->persona_id=$lastInsertedId;
             $empleado->disponibilidad_desde=$request->disponibilidad_desde;
             $empleado->disponibilidad_hasta=$request->disponibilidad_hasta;
+
+            if ($request['es_medico']){
+                $empleado->es_medico=true;
+            }else{
+                $empleado->es_medico=false;
+            }
+
             $empleado->save();
             return redirect()->route('empleado.index');
             
@@ -123,6 +137,11 @@ class EmpleadoController extends Controller
         $empleado->cargo_id=$request->cargo;
         $empleado->disponibilidad_desde=$request->disponibilidad_desde;
         $empleado->disponibilidad_hasta=$request->disponibilidad_hasta;
+        if ($request['es_medico']){
+            $empleado->es_medico=true;
+        }else{
+            $empleado->es_medico=false;
+        }
         $empleado->save();
         return redirect()->route('empleado.index'); 
     }

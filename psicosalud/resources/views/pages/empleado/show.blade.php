@@ -130,6 +130,21 @@
   </div>
   </div>
 
+  <div class="form-group">
+  <label class="col-md-4 control-label" >¿Es médico?</label> 
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+   <div class="checkbox">
+   @if($empleado->es_medico)
+       <label><input type="checkbox" name="es_medico" value="1" checked readonly></label>
+   @else
+      <label><input type="checkbox" name="es_medico" value="" readonly></label>
+   @endif
+    </div>
+  </div>
+</div>
+</div>
+
 
 
 </fieldset>
