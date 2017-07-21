@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Modalidad;
 use Illuminate\Http\Request;
-
+use Exception;
 class ModalidadController extends Controller
 {
     /**

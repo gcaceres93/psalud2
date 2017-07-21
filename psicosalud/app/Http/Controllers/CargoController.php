@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cargo;
 use Illuminate\Http\Request;
-
+use Exception;
 class CargoController extends Controller
 {
     /**
@@ -58,7 +58,7 @@ class CargoController extends Controller
      * @param  \App\Cargos  $cargos
      * @return \Illuminate\Http\Response
      */
-    public function show(Cargos $cargos)
+    public function show( $cargos)
     {
         //
     }

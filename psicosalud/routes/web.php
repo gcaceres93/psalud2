@@ -19,6 +19,7 @@ Route::resource('tipoFamiliar','TipoFamiliarController');
 Route::resource('sucursal','SucursalController');
 Route::resource('impuestos','ImpuestosController');
 Route::resource('facturaconcepto','FacturaConceptoController');
+Route::resource('agendamiento','AgendamientoController');
 
 /*          PERSONAS          */
 Route::resource('persona','PersonaController');

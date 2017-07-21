@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Sucursal;
 use Illuminate\Http\Request;
-
+use Exception;
 class SucursalController extends Controller
 {
     /**

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Impuestos;
 use Illuminate\Http\Request;
-
+use Exception;
 class ImpuestosController extends Controller
 {
     /**

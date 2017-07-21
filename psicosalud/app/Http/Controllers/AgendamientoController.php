@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Exception;
-class PersonaController extends Controller
-{
 
-    private $path = 'persona';
+class AgendamientoController extends Controller
+{
     /**
      * Display a listing of the resource.
      *

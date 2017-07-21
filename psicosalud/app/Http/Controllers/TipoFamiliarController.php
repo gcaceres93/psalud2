@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TipoFamiliar;
+use Exception;
 use Illuminate\Http\Request;
 
 class TipoFamiliarController extends Controller

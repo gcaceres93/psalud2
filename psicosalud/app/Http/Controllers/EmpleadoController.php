@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Exception;
 use App\Empleado;
 use App\Cargo;
 use App\Persona;

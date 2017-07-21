@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\FacturaConcepto;
 use Illuminate\Http\Request;
-
+use Exception;
 class FacturaConceptoController extends Controller
 {
     /**

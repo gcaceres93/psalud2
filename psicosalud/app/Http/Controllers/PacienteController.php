@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Paciente;
 use App\Persona;
-
+use Exception;
 class PacienteController extends Controller
 {
     protected $path = 'paciente';
