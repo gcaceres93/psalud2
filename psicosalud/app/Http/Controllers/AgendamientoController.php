@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Agendamiento;
 
 class AgendamientoController extends Controller
 {
@@ -13,7 +14,7 @@ class AgendamientoController extends Controller
      */
     public function index()
     {
-        //
+        $agendamientos = Agendamiento::all()->sortBy('fecha_programada');
     }
 
     /**
