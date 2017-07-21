@@ -23,6 +23,7 @@ Route::resource('agendamiento','AgendamientoController');
 
 /*          PERSONAS          */
 Route::resource('persona','PersonaController');
+Route::resource('user','Auth\RegisterController');
 Route::resource('paciente','PacienteController');
 Route::resource('empleado','EmpleadoController');
 Route::get('/medico','EmpleadoController@getMedicos')->name('medico.index');
@@ -95,6 +96,10 @@ Route::get('users',function() {
 	return $users;
 */	
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

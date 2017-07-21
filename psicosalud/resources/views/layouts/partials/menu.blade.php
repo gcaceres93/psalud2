@@ -81,7 +81,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuración <span class="glyphicon glyphicon-cog"></span></a>
               <ul class="dropdown-menu">
                   <li class="dropdown-header">ABM USUARIOS</li>
-                  <li><a href="#">Usuarios</a></li>
+                  <li><a href="{{ url('/user') }}">Usuarios</a></li>
                   <li><a href="{{ url('/rol') }}">Roles</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">CONFIGURACION DE TEST Y ANAMNESIS</li>
