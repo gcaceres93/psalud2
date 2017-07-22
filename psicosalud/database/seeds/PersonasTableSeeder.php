@@ -12,8 +12,8 @@ class PersonasTableSeeder extends Seeder
     public function run()
     {
         DB::table('persona')->insert(array(
-            array('nombre'=>'Gabriel','email'=>'gcacerescabriza@gmail.com','apellido'=>'Cáceres','direccion' => 'San Marcos 1582 c/paz del chaco',
-            'telefono'=>'0961949421','cedula'=>'4480040','nacimiento'=>'18/12/1993'),
+            array('nombre'=>'Gabriel','email'=>'gcacerescabriza@gmail.com','apellido'=>'Caceres','direccion' => 'San Marcos 1582 c/paz del chaco',
+            'telefono'=>'0961949421','cedula'=>'4480040','nacimiento'=>'12/18/1993'),
             array('nombre'=>'Lucas','email'=>'lucas@gmail.com','apellido'=>'Candia','direccion' => 'EEUU 1341 entre primera y segunda proyectada',
                 'telefono'=>'0991331431','cedula'=>'4000130','nacimiento'=>'12/12/1993'),
             array('nombre'=>'Leo','email'=>'leo@gmail.com','apellido'=>'Aguero','direccion' => 'Eusebio Ayala 1331 c/ Bruno Guggiari',
@@ -46,6 +46,22 @@ class PersonasTableSeeder extends Seeder
                 'telefono'=>'0982131441','cedula'=>'3800000','nacimiento'=>'04/18/1991'),
             array('nombre'=>'Jorge','email'=>'jperis@gmail.com','apellido'=>'Peris','direccion' => 'Cacique lambare 331 c/ Molas Lopez',
                 'telefono'=>'098451313','cedula'=>'4500131','nacimiento'=>'03/13/1993'),
+            array('nombre'=>'Guillermo','email'=>'guillecandia05@gmail.com','apellido'=>'Candia','direccion' => 'Mcal Lopez 1331 c/ nanawa',
+                'telefono'=>'0981445331','cedula'=>'4800000','nacimiento'=>'05/20/1995'),
+            array('nombre'=>'Alvaro','email'=>'aaponte@gmail.com','apellido'=>'Aponte','direccion' => 'Cacique lambare 331 c/ Molas Lopez',
+                'telefono'=>'098451411','cedula'=>'5100545','nacimiento'=>'05/20/1997'),
+            array('nombre'=>'Genesis','email'=>'genesis.paredes@gmail.com','apellido'=>'Paredes','direccion' => 'Paz del chaco 1331 c/ San Marcos',
+                'telefono'=>'0981332998','cedula'=>'4550322','nacimiento'=>'10/12/1994'),
+            array('nombre'=>'Santiago','email'=>'santi.caceres@gmail.com','apellido'=>'Caceres','direccion' => 'San marcos 1582 c/ paz del chaco',
+                'telefono'=>'0961949421','cedula'=>'5544323','nacimiento'=>'05/22/2015'),
+            array('nombre'=>'Guillermo','email'=>'ancelma@gmail.com','apellido'=>'Aponte','direccion' => 'Herrera 112 c/ berlin',
+                'telefono'=>'0982131441','cedula'=>'3800000','nacimiento'=>'04/18/1991'),
+            array('nombre'=>'Ancelma','email'=>'ancelma.servi@gmail.com','apellido'=>'Servin','direccion' => 'Ita Enramada 331 c/ Pedro Guggiari',
+                'telefono'=>'0991331441','cedula'=>'245877','nacimiento'=>'10/20/1940'),
+            array('nombre'=>'Aracelly','email'=>'aracabriza13@gmail.com','apellido'=>'Cabriza','direccion' => 'Ita Enramada 331 c/ Pedro Guggiari',
+                'telefono'=>'0991444313','cedula'=>'2550554','nacimiento'=>'10/30/1964'),
+            array('nombre'=>'Marco','email'=>'marcoaponte64@gmail.com','apellido'=>'Aponte','direccion' => 'Ita Enramada 331 c/ Pedro Guggiari',
+                'telefono'=>'0985587512','cedula'=>'2420554','nacimiento'=>'08/30/1964'),
             
       ));  
         
@@ -78,7 +94,9 @@ class PersonasTableSeeder extends Seeder
             array('ruc'=> '80012246-1','razon_social'=>'Casa Plomo','persona_id'=>14),
             array('ruc'=> '80011313-1','razon_social'=>'Casa rica','persona_id'=>15),
             array('ruc'=> '80013131-2','razon_social'=>'Todo Hierro','persona_id'=>16),
-            array('ruc'=> '552441-1','razon_social'=>'','persona_id'=>17),     
+            array('ruc'=> '552441-1','razon_social'=>'','persona_id'=>17),
+            array('ruc'=> '80013343-5','razon_social'=>'Guille Candia SA','persona_id'=>17),
+            array('ruc'=> '4484484-1','razon_social'=>'Alvaro Aponte Servicios Personales','persona_id'=>18),   
         )); 
     }
 }
