@@ -112,6 +112,9 @@
     </div>
   </div>
 </div>
+
+@foreach($familiares as $familiar)
+@if($familiar->personas->count() > 0)
 <div class="row">
 	<center><img class="img-responsive" src="/img/family.png" alt="Logo" width="8%" height="8%" class="img-responsive"></center>
 
@@ -135,7 +138,6 @@
  			@endforeach 
 		@endforeach	
 	
-
 </tbody>
 </table>
 </div>
@@ -156,13 +158,14 @@
  				</tr>
  			@endforeach 
 		@endforeach	
-	
 
 </tbody>
 </table>
 </div>
 </div>
-</div>
+@endif
+
+@endforeach	
 
 
 
@@ -170,6 +173,5 @@
 
 </fieldset>
 </form>
-</div>
 
 @endsection
