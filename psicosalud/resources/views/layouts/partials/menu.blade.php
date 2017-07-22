@@ -1,12 +1,31 @@
 <style type="text/css">
-  .navbar-default .navbar-brand {
-    color:#2E64FE;
-}
+  
 .navbar-default .navbar-nav > li > a {
-    color: black;
+    color: #b9fdff;
 }
 .dropdown li a {
   color:black;
+}
+.navbar-default {
+        background: url("/img/menubg2.PNG");
+
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: black;
+    background-color: white;
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: green;
+    background-color: black;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: red;
 }
 
 </style>
