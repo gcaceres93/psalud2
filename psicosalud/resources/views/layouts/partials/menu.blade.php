@@ -28,6 +28,15 @@
     color: red;
 }
 
+ .navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu {
+    background-color: gray;
+    color:#ffffff;
+  }
+  
+  .dropdown-header{
+    color:#6ba6ff;
+  }
+
 </style>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
