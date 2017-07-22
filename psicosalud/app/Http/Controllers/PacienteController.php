@@ -78,7 +78,8 @@ class PacienteController extends Controller
     public function show($id)
     {
         $paciente = Paciente::findOrFail($id);
-        return view('pages.'.$this->path.'.show',compact('paciente'));
+        $familiares= Paciente::with('tipoFamiliares','personas')->where('id', $id)->get();
+        return view('pages.'.$this->path.'.show',compact('paciente','familiares'));
     }
 
     /**

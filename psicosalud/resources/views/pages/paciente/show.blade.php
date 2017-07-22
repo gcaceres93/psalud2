@@ -112,6 +112,57 @@
     </div>
   </div>
 </div>
+<div class="row">
+	<center><img class="img-responsive" src="/img/family.png" alt="Logo" width="8%" height="8%" class="img-responsive"></center>
+
+</div>
+<div class="row">
+<div class="col-xs-6 inputGroupContainer">
+<div>
+<table class="table table-bordered">
+<thead>
+	<tr>
+		<th>Nombre</th>
+	</tr>
+</thead>
+<tbody>
+	
+		@foreach ($familiares as $familiar) 
+ 			@foreach ($familiar->personas as $persona)
+ 				<tr>
+ 				<td>{{ $persona->nombre }} {{ $persona->apellido }}</td>
+ 				</tr>
+ 			@endforeach 
+		@endforeach	
+	
+
+</tbody>
+</table>
+</div>
+</div>
+<div class="col-xs-6 inputGroupContainer">
+<table class="table table-bordered">
+<thead>
+	<tr>
+		<th>Relación</th>
+	</tr>
+</thead>
+<tbody>
+	
+		@foreach ($familiares as $familiar) 
+ 			@foreach ($familiar->tipoFamiliares as $tipo)
+ 				<tr>
+ 				<td>{{ $tipo->nombre }}</td>
+ 				</tr>
+ 			@endforeach 
+		@endforeach	
+	
+
+</tbody>
+</table>
+</div>
+</div>
+</div>
 
 
 

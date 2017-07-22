@@ -15,7 +15,7 @@
         background-color: #EFF8FB;
     }*/
     th{
-    	background-color: #F8E0F7;
+    	background-color: lightblue;
     	text-align: center;
     }
 

@@ -12,9 +12,9 @@ class FamiliarPorPacienteTableSeeder extends Seeder
     public function run()
     {
         DB::table('familiar_por_paciente')->insert(array(
-            array('tipo_familiar_id'=> 1,'persona_id'=>25,'paciente_id'=>10),
-            array('tipo_familiar_id'=> 2,'persona_id'=>24,'paciente_id'=>10),
-            array('tipo_familiar_id'=> 14,'persona_id'=>23,'paciente_id'=>10),
+            array('persona_id'=>25,'paciente_id'=>10,'tipo_familiar_id'=> 1),
+            array('persona_id'=>24,'paciente_id'=>10,'tipo_familiar_id'=> 2),
+            array('persona_id'=>23,'paciente_id'=>10,'tipo_familiar_id'=> 14),
         )); 
     }
 }

@@ -64,7 +64,7 @@ class PersonasTableSeeder extends Seeder
                 'telefono'=>'0985587512','cedula'=>'2420554','nacimiento'=>'08/30/1964'),
             
       ));  
-        
+      
         DB::table('empleado')->insert(array(
             array('es_medico'=> true,'disponibilidad_hasta'=>'17:30:00','disponibilidad_desde'=>'08:00:00','codigo' => 'ES-01',
                 'persona_id'=>1,'cargo_id'=>1),
