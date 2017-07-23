@@ -9,7 +9,7 @@
 
 <div class="container">
   <div class="row">
-    <h1>Registro de Usuarios</h1>
+    <h1>Registro de Usuariosdf</h1>
     <h4><a href="{{ route('user.index') }}">Listar usuarios</a></h4>
     <hr />
   </div>
