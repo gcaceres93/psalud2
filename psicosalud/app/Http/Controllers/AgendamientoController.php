@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Agendamiento;
+use App\Paciente;
+use App\Modalidad;
+use App\Sucursal;
 
 class AgendamientoController extends Controller
 {
@@ -16,7 +20,7 @@ class AgendamientoController extends Controller
     public function index()
     {
         $data = Agendamiento::all()->sortBy('fecha_programada');
-        return view('pages.'.$this->path,compact('data'));
+        return view('pages.'.$this->path.'.index',compact('data'));
     }
 
     /**
@@ -26,7 +30,13 @@ class AgendamientoController extends Controller
      */
     public function create()
     {
-        return view('pages.'.$this->path.'.create');
+        $pacientes=DB::table('paciente')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('paciente.*','persona.nombre','persona.apellido')->orderBy('persona.apellido')
+        ->get();
+        $modalidades=Modalidad::all()->sortBy('descripcion');
+        $sucursales=Sucursal::all()->sortBy('nombre');
+        return view('pages.'.$this->path.'.create',compact('pacientes','modalidades','sucursales'));
     }
 
     /**

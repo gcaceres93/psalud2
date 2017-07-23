@@ -10,7 +10,7 @@
 <div class="container">
   <div class="row">
     <h1>Registro de agendamiento</h1>
-    <h4><a href="{{ route('agendamiento.index') }}">Listar cargos</a></h4>
+    <h4><a href="{{ route('agendamiento.index') }}">Listar agendamientos</a></h4>
     <hr />
   </div>
   <div class="row">
@@ -18,22 +18,23 @@
   	<form method="post" action="/agendamiento">
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-  			
   		<div class="form-group">
-  			<label for="descripci&oacute;n">Descripci&oacute;n</label>
-  			<input type="text" name="descripcion" class="form-control" placeholder="Descripci&oacute;n del cargo"> 	
+  			 <label for="paciente">Paciente</label>
+  			 <br/>
+  			<div class="col-md-5">
+  			<select name="paciente" class="form-control selectpicker">
+                <option value="" >Seleccionar paciente</option>
+                @foreach($pacientes as $paciente)
+                  <option value="{{ $paciente->id }}">{{ $paciente->nombre }}  {{ $paciente->apellido }}</option>
+                @endforeach
+             </select>
+             </div>
+             <div class="col-md-5"><a href="{{ route('paciente.create') }}">Crear nuevo paciente</a></div>
   		</div>
 
-      <div class="form-group">
-      <div class="checkbox">
-        <label><input id="profesional_salud" type="checkbox" name="profesional_salud" value="1">Es profesional de la salud?</label>
-      </div>
-      </div>
-
-  		<button type="submit" class="btn btn-info">Guardar</button>
-  	</form>	
-    </div>
+      
   </div>
+</div>
 </div>
 
 @endsection
