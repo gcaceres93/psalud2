@@ -7,6 +7,7 @@ use App\Agendamiento;
 
 class AgendamientoController extends Controller
 {
+    protected $path = 'agendamiento';
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,8 @@ class AgendamientoController extends Controller
      */
     public function index()
     {
-        $agendamientos = Agendamiento::all()->sortBy('fecha_programada');
+        $data = Agendamiento::all()->sortBy('fecha_programada');
+        return view('pages.'.$this->path,compact('data'));
     }
 
     /**
@@ -24,7 +26,7 @@ class AgendamientoController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.'.$this->path.'.create');
     }
 
     /**

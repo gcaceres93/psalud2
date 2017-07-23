@@ -12,4 +12,12 @@ class Agendamiento extends Model
     public function sucursal(){
         return $this->belongsTo('App\Sucursal');
     }
+    
+    public function modalidad(){
+        return $this->belongsTo('App\Modalidad');
+    }
+    
+    public function paciente(){
+        return $this->belongsTo('App\Paciente');
+    }
 }

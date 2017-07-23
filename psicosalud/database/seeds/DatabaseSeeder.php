@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->command->info("Se han cargado los datos a la tabla familiar_por_paciente :)");
         $this->call('ModalidadTableSeeder');
         $this->command->info("Se han cargado los datos a la tabla modalidad:)");
-        
     }
     
 }

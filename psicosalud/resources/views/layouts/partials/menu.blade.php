@@ -59,7 +59,7 @@
           <ul class="dropdown-menu">
             <li><a href="#">Registrar consultorio</a></li>
             <li><a href="#">Agendar consulta</a></li>
-            <li><a href="#">Listado de consulta de pacientes</a></li>
+            <li><a href="{{ url('/agendamiento') }}">Listado de agendamientos</a></li>
           </ul>
         </li>
           <li class="dropdown">
