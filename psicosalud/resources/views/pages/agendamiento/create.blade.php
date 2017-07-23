@@ -23,13 +23,38 @@
   			 <br/>
   			<div class="col-md-5">
   			<select name="paciente" class="form-control selectpicker">
-                <option value="" >Seleccionar paciente</option>
+                <option value="" >--- Seleccionar paciente ---</option>
                 @foreach($pacientes as $paciente)
                   <option value="{{ $paciente->id }}">{{ $paciente->nombre }}  {{ $paciente->apellido }}</option>
                 @endforeach
              </select>
              </div>
              <div class="col-md-5"><a href="{{ route('paciente.create') }}">Crear nuevo paciente</a></div>
+  		</div>
+  		<br/>
+  		<br/>
+  		<div class="form-group">
+  			 <label for="paciente">Modalidad de consulta</label>
+  			 <br/>
+  			
+  			<select name="paciente" class="form-control selectpicker">
+                <option value="" >--- Seleccionar modalidad ---</option>
+                @foreach($modalidades as $modalidad)
+                  <option value="{{ $modalidad->id }}">{{ $modalidad->descripcion }}</option>
+                @endforeach
+             </select>
+  		</div>
+  		
+  		<div class="form-group">
+  			 <label for="paciente">Sucursal</label>
+  			 <br/>
+  			
+  			<select name="paciente" class="form-control selectpicker">
+                <option value="" >--- Seleccionar sucursal ---</option>
+                @foreach($sucursales as $sucursal)
+                  <option value="{{ $sucursal->id }}">{{ $sucursal->nombre }}</option>
+                @endforeach
+             </select>
   		</div>
 
       
