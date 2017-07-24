@@ -1,6 +1,12 @@
 @extends('layouts.master')
 
 @section('main_content')
+{{-- <style type="text/css">
+   /* body{
+        background-color: #EFF8FB;
+    }*/
+   
+</style> --}}
 
 <div class="container table-responsive">
   <div class="row">
@@ -13,10 +19,11 @@
   		@if($data)
   			<table id="tablaSort" class="table table-hover table-bordered table-condensed">
   				<thead>
-	  				<tr class="table table-info">
+	  				<tr>
 	  					<th>ID</th>
 	  					<th>Nombre</th>
 	  					<th>E-mail</th>
+	  					<th></th>
 	  				</tr>
 	  			</thead>
 	  			<tbody>

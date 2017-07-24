@@ -18,7 +18,13 @@
      <link rel="stylesheet" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
      <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
      <script type="text/javascript" src="http://cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"></script>
-     
+ 
+<!--  Estilos css varios para el sistema (cabeceras de tablas, fondos, etc.)     -->
+	<link rel="stylesheet" href="{{ URL::asset('css/estilos.css') }}"/>  
+	
+<!-- funciones javascript y jquery para el funcionamiento del sistema	 -->
+	<script type="text/javascript" src="/js/funciones.js"></script>
+	   
     
     <script type="text/javascript">
     jQuery(document).ready(function($) {
@@ -44,22 +50,7 @@
     </script>
     
 
-     <style type="text/css">
-  
-/*     Cambio de color de las cabeceras de las tablas   */
-    th{
-    	background-color: #F8E0F7;
-    	text-align: center;
-    }
     
-/*     Cambio de puntero en el hover de las filas de las tablas con la class clickable-row que llevan  */
-/*     al popup de visualizacion de registros */
-
-    .clickable-row{
-        cursor: pointer;    
-    }
-    
-</style>
 </head>
 <body>
 @include('layouts.partials.menu')

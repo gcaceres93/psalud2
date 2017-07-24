@@ -1,5 +1,14 @@
 
 
-.navbar-default .navbar-brand {
-    color:#000;
-}
+/*     Cambio de color de las cabeceras de las tablas   */
+    th{
+    	background-color: #F8E0F7;
+    	text-align: center;
+    }
+    
+/*     Cambio de puntero en el hover de las filas de las tablas con la class clickable-row que llevan  */
+/*     al popup de visualizacion de registros */
+
+    .clickable-row{
+        cursor: pointer;    
+    }
