@@ -1,5 +1,9 @@
 <style type="text/css">
   
+.navbar-default .navbar-brand {
+  color: #ffb3b3;
+}
+
 .navbar-default .navbar-nav > li > a {
     color: #b9fdff;
 }
@@ -25,7 +29,7 @@
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-    color: red;
+    color: white;
 }
 
  .navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu {
