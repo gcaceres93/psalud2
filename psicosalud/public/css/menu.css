@@ -1,40 +1,46 @@
+
+/*Color del texto del titulo principal a la izquierda del menu (nombre de la aplicacion)*/
+
 .navbar-default .navbar-brand {
   color: #ffb3b3;
 }
 
+/*Color del texto de los titulos principales de la barra del menu*/
+
+
 .navbar-default .navbar-nav > li > a {
     color: #b9fdff;
 }
-.dropdown li a {
-  color:black;
-}
+
+
+
+/*fondo de la barra de menu principal*/
 .navbar-default {
         background: url("/img/menubg2.PNG");
 
 }
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-    color: black;
-    background-color: white;
-}
 
+/*Color del fondo y texto para el titulo del menu activo (sobre el que se hace click)*/
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
     color: green;
     background-color: black;
 }
+
+/*Color de texto al pasar encima el mouse en el menu principal*/
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
     color: white;
 }
 
+/*Color de texto y fondo para los submenus*/
  .navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu {
     background-color: gray;
     color:#ffffff;
   }
   
+  /*Color de los subtitulos en los submenus*/
   .dropdown-header{
     color:#6ba6ff;
   }
