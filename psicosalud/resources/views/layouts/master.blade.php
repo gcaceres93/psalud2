@@ -25,32 +25,7 @@
 <!-- funciones javascript y jquery para el funcionamiento del sistema	 -->
 	<script type="text/javascript" src="/js/funciones.js"></script>
 	   
-    
-    <script type="text/javascript">
-    jQuery(document).ready(function($) {
-        $(".clickable-row").click(function() {
-            var left  = ($(window).width()/2)-(900/2),
-            top   = ($(window).height()/2)-(600/2),
-            popup = window.open ($(this).data("href"), "popup", "width=900, height=600, top="+top+", left="+left);
-            // window.open($(this).data("href"),'_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
-        });
-    });
-    </script>
-
-<!-- 	Script para el sort dinámico de las tablas del sistema. -->
-
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $('#tablaSort').DataTable({
-            "language": {
-                "url": "http://cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
-    });
-    </script>
-    
-
-    
+        
 </head>
 <body>
 @include('layouts.partials.menu')
