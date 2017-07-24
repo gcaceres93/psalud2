@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Paciente;
 use App\Persona;
 use Exception;
@@ -16,7 +17,12 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $data = Paciente::all()->sortBy('id');
+        
+        $data=Paciente::select(DB::raw('paciente.*,persona.nombre,persona.apellido'))
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->orderBy('persona.apellido')
+        ->get();
+        
         return view('pages.'.$this->path.'.index',compact('data'));
     }
 

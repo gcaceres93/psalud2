@@ -24,13 +24,14 @@
   <div class="row">
   	<div class="table-responsive">
   		@if($data)
-  			<table class="table table-hover table-bordered table-condensed">
+  			<table id="tablaSort" class="table table-hover table-condensed">
   				<thead>
 	  				<tr>
 	  					<th colspan="5">Datos del empleado</th>
 	  					<th colspan="2">Horario de disponibilidad</th>
 	  					<th rowspan="2" style="vertical-align: middle">Acciones</th>
 	  				</tr>	
+	  				<tr>
 	  					<th>ID</th>
 	  					<th>Nombre</th>
 	  					<th>Apellido</th>
@@ -61,10 +62,9 @@
 							</center>  					
 						</td>
 	  				</tr>	
-	  			</tbody>
 	  			@endforeach	
+	  		</tbody>
   			</table>
-  			{{ $data->links() }}
   		@endif
   	</div>
   </div>

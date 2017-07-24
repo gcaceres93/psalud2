@@ -10,6 +10,8 @@
     }
 </style> --}}
 
+
+
 <div class="container table-responsive">
   <div class="row">
     <h1>Lista de pacientes</h1>
@@ -19,7 +21,7 @@
   <div class="row">
   	<div class="table-responsive">
   		@if($data)
-  			<table class="table table-hover table-bordered table-condensed">
+  			<table id="tablaSort" class="table table-hover table-bordered table-condensed display">
   				<thead>
 	  				<tr>	
 	  					<th>ID</th>
@@ -49,9 +51,10 @@
 							</center>  					
 						</td>
 	  				</tr>	
-	  			</tbody>
 	  			@endforeach	
+	  		</tbody>
   			</table>
+  			
   		@endif
   	</div>
   </div>

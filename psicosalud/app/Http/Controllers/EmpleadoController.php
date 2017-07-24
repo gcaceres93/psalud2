@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 use App\Empleado;
 use App\Cargo;
@@ -17,8 +18,12 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $data = Empleado::paginate(5);
-        return view('pages.'.$this->path.'.index',compact('data'));
+        $data=Empleado::select(DB::raw('empleado.*,persona.nombre,persona.apellido'))
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->orderBy('persona.apellido')
+        ->get();
+        
+        return view('pages.'.$this->path.'.index',compact('data'));  
     }
 
     /**
