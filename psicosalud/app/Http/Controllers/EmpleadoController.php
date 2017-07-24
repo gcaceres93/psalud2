@@ -17,7 +17,7 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $data = Empleado::all()->sortBy('id');
+        $data = Empleado::paginate(5);
         return view('pages.'.$this->path.'.index',compact('data'));
     }
 

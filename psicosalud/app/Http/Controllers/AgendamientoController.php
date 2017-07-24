@@ -19,7 +19,7 @@ class AgendamientoController extends Controller
      */
     public function index()
     {
-        $data = Agendamiento::all()->sortBy('fecha_programada');
+        $data = Agendamiento::paginate(10)->sortBy('fecha_programada');
         return view('pages.'.$this->path.'.index',compact('data'));
     }
 
