@@ -70,9 +70,16 @@ class AgendamientoController extends Controller
         $sucursal = $request->sucursal;
         $medico = $request->medico;
         
+        $agendas = DB::table('agendamiento')->where([
+            ['empleado_id', '=', $medico],
+            ['fecha_programada', '=', $fecha_programada],
+       ])->count();
+        if ($agendas > 0){ /*Si existen agendas para el medico, se calcula fecha y horario mas cercano*/
+            return json_encode($agendas);
+        }else{ /*Si no existen se retorna el mensaje para el ajax*/
+            return "si";
+        }
         
-        
-        return json_encode($data);
        
     }
     

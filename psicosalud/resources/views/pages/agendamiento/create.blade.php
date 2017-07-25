@@ -124,24 +124,25 @@
 			</div>
 		</div>
 		<br/>
+		
 		<div id="sugerenciaContainer" class="hidden">
     		<div class="row">
-    			 <div class="form-group has-error has-feedback">
-                  <label class="col-md-3 control-label" for="inputError">Fecha/horario no disponible</label>
-                  <div class="col-md-3">
-                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                  </div>
-    		     </div>
-    		</div>
-    		<div class="row">
-             <div class="form-group has-warning has-feedback">
-                  <label class="col-sm-3 control-label" for="inputWarning">Sugerencia de horario:</label>
-                  <div class="col-sm-3">
-                    <input type="text" class="form-control" id="inputWarning" value="12/08/2017 18:00:00 ">
-                  </div>
-                </div>
-    		</div>
-    	</div>	
+    			 <div id="error" class="alert alert-danger col-md-6">
+                      
+                 </div>
+            </div>
+            <div class="row">     
+                 <div id="sugerencia" class="alert alert-warning col-md-6">
+                      
+                 </div>
+            </div>     
+    		
+    	</div>
+    	<div class="row">	
+        	<div id="success" class="hidden alert alert-success col-md-6">
+    			   		
+        	</div>
+    	</div>
 	</form>     
   </div>
 </div>
@@ -162,7 +163,14 @@ $(document).ready(function() {
             data:  data,
             async: true,
             success: function(data){
-                console.log(data);
+            	if (data == "si"){
+            		$("#success").removeClass('hidden');
+            		$("#success").html("<strong>Existe disponibilidad para la fecha seleccionada</strong>");
+            	}else{
+            		$("#sugerenciaContainer").removeClass('hidden');
+            		$("#error").html("<strong>Ya existe una agenda para el medico y la fecha seleccionada</strong>");
+            		$("#sugerencia").html("<strong>Aqui ira la sugerencia</strong>");
+            	}
             },
             error: function(data){
                 console.log(data);
