@@ -12,3 +12,7 @@
     .clickable-row{
         cursor: pointer;    
     }
+    
+    #sugerencia{
+    	display:none;
+    }

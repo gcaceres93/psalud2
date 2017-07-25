@@ -20,4 +20,8 @@ class Agendamiento extends Model
     public function paciente(){
         return $this->belongsTo('App\Paciente');
     }
+    
+    public function empleado(){
+        return $this->belongsTo('App\Empleado');
+    }
 }

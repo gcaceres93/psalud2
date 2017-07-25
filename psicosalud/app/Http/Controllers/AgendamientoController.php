@@ -34,9 +34,16 @@ class AgendamientoController extends Controller
         ->join('persona','paciente.persona_id','=','persona.id')
         ->select('paciente.*','persona.nombre','persona.apellido')->orderBy('persona.apellido')
         ->get();
+        $empleados=DB::table('empleado')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->join('cargo','empleado.cargo_id','=','cargo.id')
+        ->select('empleado.*','persona.nombre','persona.apellido','cargo.descripcion')
+        ->where('es_medico','=',true)
+        ->groupBy('cargo.descripcion','persona.apellido','persona.nombre','empleado.id')
+        ->get();
         $modalidades=Modalidad::all()->sortBy('descripcion');
         $sucursales=Sucursal::all()->sortBy('nombre');
-        return view('pages.'.$this->path.'.create',compact('pacientes','modalidades','sucursales'));
+        return view('pages.'.$this->path.'.create',compact('pacientes','modalidades','sucursales','empleados'));
     }
 
     /**
@@ -45,6 +52,15 @@ class AgendamientoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function verificarDisponibilidad(Request $request){
+        $hora_programada = $request->hora_programada;
+        return response()->json([
+           'msg' => 'ejemplo',
+           'success' =>true
+        ]);
+       
+    }
+    
     public function store(Request $request)
     {
         //
