@@ -8,23 +8,7 @@
     }
 </style>
 
-<script type="text/javascript">
-$(document).ready(function() {	
-    $('#disponibilidad').on('click', function (e) {
-        e.preventDefault();
-        var hora_programada = $('#hora_programada').val();
-        $.ajax({
-            type: "POST",
-            url: '/agendamiento/verificarDisponibilidad',
-            data: {hora_programada: hora_programada},
-            success: function( msg ) {
-            	$('#sugerenciaContainer').removeClass('hidden');
-            	alert(msg);
-            }
-        });
-    });
-});
-</script>
+
 
 <div class="container">
   <div class="row">
@@ -59,7 +43,7 @@ $(document).ready(function() {
   			 <label for="medico">Médico</label>
   			 <br/>
   			<div class="col-md-6">
-  			<select name="paciente" class="form-control selectpicker">
+  			<select id="medico" name="medico" class="form-control selectpicker">
                 <option value="" >--- Seleccionar médico ---</option>
                 @foreach($empleados as $empleado)
                   <option value="{{ $empleado->id }}">{{ $empleado->nombre }}  {{ $empleado->apellido }} - {{$empleado->descripcion }}</option>
@@ -91,7 +75,7 @@ $(document).ready(function() {
   			 <label for="sucursal">Sucursal</label>
   			 <br/>
   			
-  			<select name="sucursal" class="form-control selectpicker">
+  			<select id="sucursal" name="sucursal" class="form-control selectpicker">
                 <option value="" >--- Seleccionar sucursal ---</option>
                 @foreach($sucursales as $sucursal)
                   <option value="{{ $sucursal->id }}">{{ $sucursal->nombre }}</option>
@@ -106,7 +90,7 @@ $(document).ready(function() {
                 <div class="col-md-3 inputGroupContainer">
                 <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              <input name="fecha_programada" placeholder="Fecha para la consulta" class="form-control"  type="date">
+              <input id="fecha_programada" name="fecha_programada" placeholder="Fecha para la consulta" class="form-control"  type="date">
                 </div>
               </div>
 		</div>
@@ -156,4 +140,30 @@ $(document).ready(function() {
 </div>
 </div>
 
+
+<script type="text/javascript">
+$(document).ready(function() {	
+    $('#disponibilidad').on('click', function () {
+    	var fecha_programada = $('#fecha_programada').val();
+        var hora_programada = $('#hora_programada').val();
+        var sucursal = $('#sucursal').val();
+        var medico = $('#medico').val();
+        var data = {medico:medico,sucursal:sucursal,fecha_programada:fecha_programada,hora_programada:hora_programada};
+        $.ajax({
+            method: 'get',
+            url: '/verificarDisponibilidad',
+            data:  data,
+            async: true,
+            success: function(data){
+                console.log(data);
+            },
+            error: function(data){
+                console.log(data);
+                alert("fail" + ' ' + this.data)
+            },
+
+        });
+    });
+});
+</script>
 @endsection

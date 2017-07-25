@@ -21,8 +21,7 @@ Route::resource('impuestos','ImpuestosController');
 Route::resource('facturaconcepto','FacturaConceptoController');
 // Agendamiento
 Route::resource('agendamiento','AgendamientoController');
-Route::post('agendamiento/verificarDisponibilidad', 'AgendamientoController@verificarDisponibilidad');
-
+Route::get('/verificarDisponibilidad','AgendamientoController@verificarDisponibilidad' );
 /*          PERSONAS          */
 Route::resource('persona','PersonaController');
 Route::resource('user','Auth\RegisterController');

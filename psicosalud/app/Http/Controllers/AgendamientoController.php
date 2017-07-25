@@ -54,10 +54,12 @@ class AgendamientoController extends Controller
      */
     public function verificarDisponibilidad(Request $request){
         $hora_programada = $request->hora_programada;
-        return response()->json([
-           'msg' => 'ejemplo',
-           'success' =>true
-        ]);
+        $fecha_programada = $request->fecha_programada;
+        $sucursal = $request->sucursal;
+        $medico = $request->medico;
+        
+        
+        return json_encode($data);
        
     }
     
