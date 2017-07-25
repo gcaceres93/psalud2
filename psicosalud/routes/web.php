@@ -19,7 +19,6 @@ Route::resource('tipoFamiliar','TipoFamiliarController');
 Route::resource('sucursal','SucursalController');
 Route::resource('impuestos','ImpuestosController');
 Route::resource('facturaconcepto','FacturaConceptoController');
-Route::asd
 // Agendamiento
 Route::resource('agendamiento','AgendamientoController');
 Route::post('agendamiento/verificarDisponibilidad', 'AgendamientoController@verificarDisponibilidad');
