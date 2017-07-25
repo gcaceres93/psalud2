@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
 use App\Agendamiento;
 use App\Paciente;
 use App\Modalidad;
@@ -19,7 +20,19 @@ class AgendamientoController extends Controller
      */
     public function index()
     {
-        $data = Agendamiento::paginate(10)->sortBy('fecha_programada');
+        $data = DB::table('agendamiento as a')
+        ->join('paciente as p','a.paciente_id','=','p.id')
+        ->join('persona as ppaciente','p.id','=','ppaciente.id')
+        ->join('persona as pempleado','a.empleado_id','pempleado.id')
+        ->join('empleado as e','pempleado.id','e.id')
+        ->join('modalidad as m','a.modalidad_id','m.id')
+        ->join('sucursal as s','a.sucursal_id','s.id')
+        ->select('a.*','ppaciente.nombre as pacienteNombre','ppaciente.apellido as pacienteApellido'
+            ,'pempleado.nombre as medicoNombre','pempleado.apellido as medicoApellido','m.descripcion as modalidad'
+            ,'s.nombre as sucursal')
+        ->orderBy('ppaciente.apellido')
+        ->get();
+        
         return view('pages.'.$this->path.'.index',compact('data'));
     }
 
@@ -59,13 +72,27 @@ class AgendamientoController extends Controller
         $medico = $request->medico;
         
         
+        
         return json_encode($data);
        
     }
     
     public function store(Request $request)
     {
-        //
+        try{
+            $agendamiento = new Agendamiento();
+            $agendamiento->hora_programada = $request->hora_programada;
+            $agendamiento->fecha_programada = $request->fecha_programada;
+            $agendamiento->sucursal_id = $request->sucursal;
+            $agendamiento->empleado_id = $request->medico;
+            $agendamiento->paciente_id = $request->paciente;
+            $agendamiento->modalidad_id = $request->modalidad;
+            
+            $agendamiento->save();
+            return redirect()->route('agendamiento.index');
+        }catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 
     /**

@@ -24,7 +24,7 @@
   			 <label for="paciente">Paciente</label>
   			 <br/>
   			<div class="col-md-6">
-  			<select name="paciente" class="form-control selectpicker">
+  			<select id="paciente" name="paciente" class="form-control selectpicker">
                 <option value="" >--- Seleccionar paciente ---</option>
                 @foreach($pacientes as $paciente)
                   <option value="{{ $paciente->id }}">{{ $paciente->nombre }}  {{ $paciente->apellido }}</option>
@@ -60,7 +60,7 @@
   		<div class="form-group col-md-6">
   			 <label for="modalidad">Modalidad de consulta</label>
   			 <br/> 			
-  			<select name="modalidad" class="form-control selectpicker">
+  			<select id="modalidad" name="modalidad" class="form-control selectpicker">
                 <option value="" >--- Seleccionar modalidad ---</option>
                 @foreach($modalidades as $modalidad)
                   <option value="{{ $modalidad->id }}">{{ $modalidad->descripcion }}</option>
