@@ -110,6 +110,13 @@
 		</div>
 		</div>
 <!-- 		row -->
+		<div class="row">
+      		<div class="form-group col-md-6">
+              <label for="comentario">Comentarios:</label>
+              <textarea name="comentario" class="form-control" rows="5" id="comentario"></textarea>
+            </div>
+		</div>
+<!-- 		row -->
 		<br/>
 		<div class="row">
 			<div class="col-md-12">

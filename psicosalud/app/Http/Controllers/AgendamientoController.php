@@ -87,6 +87,7 @@ class AgendamientoController extends Controller
             $agendamiento->empleado_id = $request->medico;
             $agendamiento->paciente_id = $request->paciente;
             $agendamiento->modalidad_id = $request->modalidad;
+            $agendamiento->comentario = $request->comentario;
             
             $agendamiento->save();
             return redirect()->route('agendamiento.index');
