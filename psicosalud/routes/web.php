@@ -31,7 +31,6 @@ Route::resource('empleado','EmpleadoController');
 Route::get('/medico','EmpleadoController@getMedicos')->name('medico.index');
 Route::get('/medico/create','EmpleadoController@createMedico')->name('medico.create');
 /*			PERSONAS 		  */
-
 Route::get('/', 'HomeController@index')->name('home');
 
 
