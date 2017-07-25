@@ -19,7 +19,6 @@ Route::resource('tipoFamiliar','TipoFamiliarController');
 Route::resource('sucursal','SucursalController');
 Route::resource('impuestos','ImpuestosController');
 Route::resource('facturaconcepto','FacturaConceptoController');
-Route::asd
 // Agendamiento
 Route::resource('agendamiento','AgendamientoController');
 Route::post('agendamiento/verificarDisponibilidad', 'AgendamientoController@verificarDisponibilidad');
@@ -32,7 +31,6 @@ Route::resource('empleado','EmpleadoController');
 Route::get('/medico','EmpleadoController@getMedicos')->name('medico.index');
 Route::get('/medico/create','EmpleadoController@createMedico')->name('medico.create');
 /*			PERSONAS 		  */
-
 Route::get('/', 'HomeController@index')->name('home');
 
 
