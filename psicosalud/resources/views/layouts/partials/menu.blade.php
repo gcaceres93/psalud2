@@ -20,8 +20,9 @@
           <a href="#" class="dropdown-toggle" class="active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consultorio <span class="glyphicon glyphicon-briefcase"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Registrar consultorio</a></li>
-            <li><a href="#">Agendar consulta</a></li>
+            <li><a href="{{ url('/agendamiento/create') }}">Agendar consulta</a></li>
             <li><a href="{{ url('/agendamiento') }}">Listado de agendamientos</a></li>
+            <li><a href="{{ url('/agendas') }}">Consultar agendas</a></li>
           </ul>
         </li>
           <li class="dropdown">

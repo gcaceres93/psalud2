@@ -2,11 +2,6 @@
 
 @section('main_content')
 
-<style>
-    .hidden{
-        display:none;
-    }
-</style>
 
 
 
