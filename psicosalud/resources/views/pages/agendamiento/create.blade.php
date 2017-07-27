@@ -162,17 +162,22 @@ $(document).ready(function() {
             	if (data == "si"){
             		$("#sugerenciaContainer").hide();
             		$("#success").removeClass('hidden');
+            		$("#success").show();
             		$("#success").html("<strong>Existe disponibilidad para la fecha seleccionada</strong>");
+            	    $("body").scrollTop($("#success").offset().top);
             	}else{
-            		$("#sucess").hide();
+            		$("#success").hide();
             		$("#sugerenciaContainer").removeClass('hidden');
+            		$("#sugerenciaContainer").show();
             		$("#error").html("<strong>Ya existe una agenda para el medico y la fecha seleccionada</strong>");
             		$("#sugerencia").html("<strong>Sugerencia de fecha y horario:</strong>:<br/>Fecha:"+data.fecha+"<br/>Horario:"+data.horario);
+            	    $("body").scrollTop($("#sugerenciaContainer").offset().top);
+
             	}
             },
             error: function(data){
             	var errors = data.responseJSON;
-                console.log(errors);
+                alert(errors);
             },
 
         });

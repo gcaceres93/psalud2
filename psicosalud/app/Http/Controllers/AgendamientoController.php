@@ -142,9 +142,8 @@ class AgendamientoController extends Controller
                 return json_encode($fecha_sugerida);
              }
             
-            //return json_encode($agendas);
         }else{ /*Si no existen se retorna el mensaje para el ajax*/
-            return "si";
+            return json_encode("si");
         }
         
        
