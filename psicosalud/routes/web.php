@@ -22,6 +22,9 @@ Route::resource('facturaconcepto','FacturaConceptoController');
 // Agendamiento
 Route::resource('agendamiento','AgendamientoController');
 Route::get('/verificarDisponibilidad','AgendamientoController@verificarDisponibilidad' );
+Route::get('/agendas','AgendamientoController@listarAgendas' );
+Route::get('/mostrarAgenda','AgendamientoController@mostrarAgenda' );
+
 /*          PERSONAS          */
 Route::resource('persona','PersonaController');
 Route::resource('user','Auth\RegisterController');

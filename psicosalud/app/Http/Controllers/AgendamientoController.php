@@ -58,6 +58,18 @@ class AgendamientoController extends Controller
         return view('pages.'.$this->path.'.create',compact('pacientes','modalidades','sucursales','empleados'));
     }
 
+    
+    public function listarAgendas()
+    {
+     
+        return view('pages.'.$this->path.'.calendar');
+    }
+    
+    public function mostrarAgenda()
+    {
+        
+        return view('pages.'.$this->path.'.calendar');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -73,9 +85,47 @@ class AgendamientoController extends Controller
         $agendas = DB::table('agendamiento')->where([
             ['empleado_id', '=', $medico],
             ['fecha_programada', '=', $fecha_programada],
+            ['hora_programada', '=', $hora_programada],
        ])->count();
         if ($agendas > 0){ /*Si existen agendas para el medico, se calcula fecha y horario mas cercano*/
-            return json_encode($agendas);
+            $bandera = true;
+            $fecha = $fecha_programada;
+            $hora = ((int)mb_substr($hora_programada,0,2))+1;
+            $horario_sugerido = $hora.":00:00";
+           // return json_encode($horario_sugerido);
+            //$horario_sugerido = ((string)((int)mb_substr($hora_programado,0,2))+1).":00".":00";
+            while ($bandera == true){
+                if ($hora > 19){
+                    $hora = 8;
+                    $horario_sugerido = $hora.':00'.':00';
+                    $dia = mb_substr($fecha_programada,8,2) + 1;
+                    $fecha = mb_substr($fecha_programada,0,8).$dia;
+                }
+                $fecha_sugerida = array
+                ("fecha" => $fecha,
+                 "horario" => $horario_sugerido
+                );
+                $agenda = DB::table('agendamiento')->where([
+                    ['empleado_id', '=', $medico],
+                    ['fecha_programada', '=', $fecha],
+                    ['hora_programada', '=', $horario_sugerido],
+                ])->count();
+                if ($agenda>0) {
+                    $hora = ((int)mb_substr($horario_sugerido,0,2))+1;
+                    $horario_sugerido = $hora.":00:00";
+                    if ($hora >= 20){
+                        $dia = mb_substr($fecha_programada,8,2) + 1;
+                        $fecha = mb_substr($fecha_programada,0,8).$dia;
+                    }
+                }else{
+                    $bandera = false;
+                }
+            }
+            if ($bandera == false){
+                return json_encode($fecha_sugerida);
+             }
+            
+            //return json_encode($agendas);
         }else{ /*Si no existen se retorna el mensaje para el ajax*/
             return "si";
         }

@@ -120,7 +120,7 @@
 		<br/>
 		<div class="row">
 			<div class="col-md-12">
-				<a href="#" id="disponibilidad" class="btn btn-info col-md-3">Verificar disponibilidad </a>   <button type="submit" class="btn btn-success col-md-3">Guardar</button>
+				<button type="button" id="disponibilidad" class="btn btn-info col-md-3">Verificar disponibilidad </buttom>   <button type="submit" class="btn btn-success col-md-3">Guardar</button>
 			</div>
 		</div>
 		<br/>
@@ -162,19 +162,22 @@ $(document).ready(function() {
             url: '/verificarDisponibilidad',
             data:  data,
             async: true,
+            dataType:"json",
             success: function(data){
             	if (data == "si"){
+            		$("#sugerenciaContainer").hide();
             		$("#success").removeClass('hidden');
             		$("#success").html("<strong>Existe disponibilidad para la fecha seleccionada</strong>");
             	}else{
+            		$("#sucess").hide();
             		$("#sugerenciaContainer").removeClass('hidden');
             		$("#error").html("<strong>Ya existe una agenda para el medico y la fecha seleccionada</strong>");
-            		$("#sugerencia").html("<strong>Aqui ira la sugerencia</strong>");
+            		$("#sugerencia").html("<strong>Sugerencia de fecha y horario:</strong>:<br/>Fecha:"+data.fecha+"<br/>Horario:"+data.horario);
             	}
             },
             error: function(data){
-                console.log(data);
-                alert("fail" + ' ' + this.data)
+            	var errors = data.responseJSON;
+                console.log(errors);
             },
 
         });

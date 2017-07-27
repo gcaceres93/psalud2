@@ -24,6 +24,9 @@
 	
 <!-- funciones javascript y jquery para el funcionamiento del sistema	 -->
 	<script type="text/javascript" src="/js/funciones.js"></script>
+<!--  funciones javascript y css para plugin de agendas  -->	
+	 <script src="/js/dhtmlxscheduler.js" type="text/javascript"></script>
+   <link rel="stylesheet" href="{{ URL::asset('css/dhtmlxscheduler.css') }}" type="text/css">
 	   
         
 </head>
