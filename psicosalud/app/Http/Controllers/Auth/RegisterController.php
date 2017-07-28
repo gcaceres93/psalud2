@@ -6,9 +6,11 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Exception;
-
+use App\Rol;
+use App\Persona;
 class RegisterController extends Controller
 {
     /*
@@ -39,12 +41,36 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+       
         try{
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
+            $user->empleado_id = $request->persona;
+            $roles = $request->roles;
             $user->save();
+            
+            $lastInsertedId=$user->id;
+            
+            foreach ($request->roles as $rol )
+           
+            {
+                
+            //dd($lastInsertedId,$roles);
+                $user->roles()->attach($lastInsertedId,['rol_id' => $rol]);
+            }
+
+         
+//             $user->roles()->attach($lastInsertedId, $roles );
+            
+            
+            
+            
+            $user->save();
+           
+            
+            
             return redirect()->route('user.index');
         }catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
@@ -53,8 +79,24 @@ class RegisterController extends Controller
 
      public function edit( $user)
     {
-         $user = User::findOrFail($user);
-        return view('pages.user.edit',compact('user'));
+//          $user = User::findOrFail($user);
+//         return view('pages.user.edit',compact('user'));
+        $user = User::findOrFail($user);
+        $personas = Persona::all()->sortBy('apellido');
+        
+        //return view('pages.user.create',compact('personas'));
+        $roles = Rol::all()->sortBy('nombre');
+        
+        $roles_list = User::with('roles')->where('id', $user->id)->get();
+        
+//         $emp=DB::table('empleado')
+//         ->join('persona','empleado.persona_id','=','persona.id')
+//         ->select('empleado.*','persona.nombre','persona.apellido')->orderBy('persona.apellido')
+//         ->where('empleado.id','=',$user->empleado_id)
+//         ->first();
+          
+        
+        return view('pages.user.edit',compact('user','roles','personas','roles_list'));
     }
 
     /**
@@ -73,6 +115,10 @@ class RegisterController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $id=$user->id;
+        $rol = $request->lista;
+        $user->roles()->sync($rol,$id);
+        
         $user->save();
         return redirect()->route('user.index');
     }
@@ -87,7 +133,10 @@ class RegisterController extends Controller
     {
          try{
             $user = User::findOrFail($user);
+            $id=$user->id;
+            $user->roles()->detach();
             $user->delete();
+            
             return redirect()->route('user.index');
         } catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
@@ -121,6 +170,11 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]); */
-        return view('pages.user.create');
+        $personas = Persona::all()->sortBy('apellido');
+//         $roles_list = User::with('roles')->where('id', $user->id)->get();
+        
+        //return view('pages.user.create',compact('personas'));
+        $roles = Rol::all()->sortBy('nombre');
+        return view('pages.user.create',compact('roles','personas'));
     }
 }

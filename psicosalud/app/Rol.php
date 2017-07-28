@@ -8,4 +8,9 @@ class Rol extends Model
 {
     protected $table = 'rol';
     public $timestamps = False;
+    
+    
+    public function users(){
+        return $this->belongsToMany('App\User');
+    }
 }
