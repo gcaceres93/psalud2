@@ -90,6 +90,7 @@
                   <li><a href="{{ url('/cargo') }}">Cargos</a></li>
                   <li><a href="{{ url('/tipoTerapia') }}">Tipo terapias</a></li>
                   <li><a href="{{ url('/facturaconcepto') }}">Facturas concepto</a></li>
+                  <li><a href="{{ url('tarifaHora') }}">Registrar Tarifa</a></li>
               </ul>
           </li>
 
