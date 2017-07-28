@@ -18,6 +18,7 @@ Route::resource('cargo','CargoController');
 Route::resource('tipoFamiliar','TipoFamiliarController');
 Route::resource('sucursal','SucursalController');
 Route::resource('impuestos','ImpuestosController');
+Route::resource('tarifaHora','TarifaHoraController');
 Route::resource('facturaconcepto','FacturaConceptoController');
 // Agendamiento
 Route::resource('agendamiento','AgendamientoController');
