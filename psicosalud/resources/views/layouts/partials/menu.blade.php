@@ -38,6 +38,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Médicos <span class="glyphicon glyphicon-eye-open"></span></a>
               <ul class="dropdown-menu">
                   <li><a href="{{ route('medico.create') }}">Registrar médico</a></li>
+                  <li><a href="{{ url('tarifaHora') }}">Registrar Tarifas</a></li>
                   <li><a href="{{ url('/medico') }}">Listar médicos</a></li>
                   <li><a href="#">Consultar agenda de médico</a></li>
               </ul>
@@ -90,7 +91,7 @@
                   <li><a href="{{ url('/cargo') }}">Cargos</a></li>
                   <li><a href="{{ url('/tipoTerapia') }}">Tipo terapias</a></li>
                   <li><a href="{{ url('/facturaconcepto') }}">Facturas concepto</a></li>
-                  <li><a href="{{ url('tarifaHora') }}">Registrar Tarifa</a></li>
+                  
               </ul>
           </li>
 
