@@ -23,8 +23,17 @@
   		<select name="persona" class="form-control selectpicker">
         <option value="" >Seleccionar empleado</option>
         @foreach($personas as $persona)
+        	<?php
+                             $selected = ""
+                            
+                         ?>
+                	@if ($persona->id == $user->empleado_id)
+                    	 <?php
+                             $selected = "selected"
+                         ?>
+         			@endif
         
-          <option     value="{{ $persona->id }}">{{ $persona->apellido }}, {{ $persona->nombre}} </option>
+          <option <?php echo ($selected) ?>     value="{{ $persona->id }}">{{ $persona->apellido }} {{ $persona->nombre}}  </option>
         @endforeach
       </select>
     

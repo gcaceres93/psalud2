@@ -7,10 +7,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Request;
+
 use App\Rol;
 use App\Persona;
+use App\Empleado;
 class RegisterController extends Controller
 {
     /*
@@ -82,8 +84,15 @@ class RegisterController extends Controller
 //          $user = User::findOrFail($user);
 //         return view('pages.user.edit',compact('user'));
         $user = User::findOrFail($user);
-        $personas = Persona::all()->sortBy('apellido');
-        
+//         $personas = Empleado::where('es_medico','true')->get();
+//         $personas = $personas->sortBy('persona_id->nombre');
+        $personas=DB::table('empleado')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->select('empleado.*','persona.nombre','persona.apellido')
+        ->where('es_medico','=',true)
+        ->groupBy('persona.apellido','persona.nombre','empleado.id')
+        ->orderBy('persona.apellido')
+        ->get();
         //return view('pages.user.create',compact('personas'));
         $roles = Rol::all()->sortBy('nombre');
         
@@ -115,6 +124,7 @@ class RegisterController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->empleado_id = $request->persona;
         $id=$user->id;
         $rol = $request->lista;
         $user->roles()->sync($rol,$id);
@@ -170,7 +180,13 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]); */
-        $personas = Persona::all()->sortBy('apellido');
+        $personas=DB::table('empleado')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->select('empleado.*','persona.nombre','persona.apellido')
+        ->where('es_medico','=',true)
+        ->groupBy('persona.apellido','persona.nombre','empleado.id')
+        ->orderBy('persona.apellido')
+        ->get();
 //         $roles_list = User::with('roles')->where('id', $user->id)->get();
         
         //return view('pages.user.create',compact('personas'));
