@@ -9,7 +9,7 @@
 
 <div class="container">
   <div class="row">
-    <h1>Edición de Usuarios</h1>
+    <h1>Edición de Tarifas</h1>
     <h4><a href="{{ route('tarifaHora.index') }}">Listar Tarifas</a></h4>
     <hr />
   </div>
