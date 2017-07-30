@@ -120,7 +120,7 @@
 		    <label for="comentario">Comentarios:</label>
 		    	<br/>
 		       <div class="col-md-6">
-              	 <textarea name="comentario" class="form-control" rows="5" id="comentario"></textarea>
+              	 <textarea name="comentario" class="form-control" rows="5" id="comentario">{{$agendamiento->comentario }}</textarea>
                </div>
             </div>
 		</div>

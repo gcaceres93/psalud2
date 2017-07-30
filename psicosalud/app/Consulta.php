@@ -17,4 +17,8 @@ class Consulta extends Model
         return $this->belongsTo('App\Paciente');
     }
     
+    public function empleado(){
+        return $this->belongsTo('App\Empleado');
+    }
+    
 }
