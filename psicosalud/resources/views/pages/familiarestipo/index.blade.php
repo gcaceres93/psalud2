@@ -4,7 +4,7 @@
 
 <div class="container table-responsive">
   <div class="row">
-    <h1>Lista de Tipos de Familiar</h1>
+    <h1>Lista de Tipos de Familiares</h1>
     <h4><a class="btn btn-success" href="{{ route('tipoFamiliar.create') }}">Registrar nuevo Tipo de Familiar</a></h4>
     <hr />
   </div>
