@@ -29,8 +29,9 @@ class DatabaseSeeder extends Seeder
         $this->command->info("Se han cargado los datos a la tabla rol:)");
         $this->call('AgendamientoTableSeeder');
         $this->command->info("Se han cargado los datos a la tabla agendamiento :)");
-        $this->call('ConsultaTableSeeder');
-        $this->command->info("Se han cargado los datos a la tabla consulta :)");
+       
+		$this->call('OcupacionTableSeeder');
+        $this->command->info("Se han cargado los datos a la tabla ocupacion :)");
     }
     
 }
