@@ -16,7 +16,7 @@ class ImpuestoTableSeeder extends Seeder
             array('nombre'=>'IVA Debito 10','porcentaje'=>'10'),
 			array('nombre'=>'IVA Credito 5','porcentaje'=>'5'),
 			array('nombre'=>'IVA Debito 5','porcentaje'=>'5'),
-			array('nombre'=>'Excenta','porcentaje'=>'0'),
+			array('nombre'=>'Exenta','porcentaje'=>'0'),
         ));  
     }
 }
