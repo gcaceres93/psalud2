@@ -41,6 +41,9 @@ class AgendamientoController extends Controller
             )
             )->execute();
            
+            exec($jasper->output().' 2>&1', $output);
+            print_r($output);
+            
             return response()->download(base_path() . '/resources/jasper/asistio.pdf');
     }
     
