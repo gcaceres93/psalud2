@@ -21,7 +21,9 @@ Route::resource('sucursal','SucursalController');
 Route::resource('impuestos','ImpuestosController');
 Route::resource('tarifaHora','TarifaHoraController');
 Route::resource('facturaconcepto','FacturaConceptoController');
+//Factura
 Route::resource('factura','FacturaController');
+Route::get('/verificarConsulta','FacturaController@verificarConsulta' );
 // Agendamiento
 Route::resource('agendamiento','AgendamientoController');
 Route::get('/verificarDisponibilidad','AgendamientoController@verificarDisponibilidad' );

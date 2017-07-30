@@ -36,8 +36,48 @@ class FacturaController extends Controller
     public function create()
     {
         //
+        $personas=DB::table('paciente')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('paciente.*','persona.nombre','persona.apellido')
+        ->groupBy('persona.apellido','persona.nombre','paciente.id')
+        ->orderBy('persona.apellido')
+        ->get();
+        $empleados=DB::table('empleado')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->select('empleado.*','persona.nombre','persona.apellido')
+        ->where('es_medico','=',true)
+        ->groupBy('persona.apellido','persona.nombre','empleado.id')
+        ->orderBy('persona.apellido')
+        ->get();
+        $factura=Factura::all()->sortBy('id')->first();
+        $ultimo_nro = ((int)mb_substr($factura->nro,9))+1;
+        $cantidad_nro = ((string)strlen($ultimo_nro));
+        $nro='';
+        for ($cant=$cantidad_nro;$cant<6;$cant++) {
+            $nro .='0';
+        };
+        $ultimo_nro = $nro.$ultimo_nro;    
+        $primeros_nros = (mb_substr($factura->nro,0,9));
+        $nro_factura = $primeros_nros.$ultimo_nro;
+//         DB::table('files')->orderBy('upload_time', 'desc')->first();
+//         $cargos = Cargo::all()->sortBy('descripcion');
+        return view('pages.'.$this->path.'.create',compact('personas','factura','nro_factura','empleados'));
     }
 
+    public function verificarConsulta(Request $request){
+        
+        $medico = $request->medico;
+        
+        $consultas = DB::table('consulta')
+        ->join('empleado','consulta.empleado_id','=','empleado.id')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->select('consulta.*','persona.nombre','persona.apellido')
+        ->where([['consulta.empleado_id', '=', $medico],['consulta.estado', '=', 'consulta']])
+        ->get();
+        
+        return json_encode($consultas);
+    
+    }
     /**
      * Store a newly created resource in storage.
      *
