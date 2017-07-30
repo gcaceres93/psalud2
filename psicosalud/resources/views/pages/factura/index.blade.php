@@ -5,8 +5,8 @@
 
 <div class="container table-responsive">
   <div class="row">
-    <h1>Lista de cargos</h1>
-    <h4><a class="btn btn-success" href="{{ route('cargo.create') }}">Registrar nuevo cargo</a></h4>
+    <h1>Lista de Facturas</h1>
+    <h4><a class="btn btn-success" href="{{ route('factura.create') }}">Registrar nueva factura</a></h4>
     <hr />
   </div>
   <div class="row">
@@ -16,15 +16,27 @@
   				<thead>
 	  				<tr class="table table-info">
 	  					<th>ID</th>
-	  					<th>Descripcion</th>
-	  					<th></th>
+	  					<th>Paciente</th>
+	  					<th>Razon Social</th>
+	  					<th>Ruc</th>
+	  					<th>Numero</th>
+	  					<th>Fecha</th>
+	  					<th>Monto Total</th>
+	  					<th>Tipo de Factura</th>
+	  					<th>Acciones</th>
 	  				</tr>
 	  			</thead>
 	  			<tbody>
 	  			@foreach($data as $row)
 	  				<tr>
 	  					<td>{{ $row->id }}</td>
-	  					<td>{{ $row->descripcion }}</td>
+	  					<td>{{ $row->nombre }} {{ $row->apellido }}</td>
+	  					<td>{{ $row->razon_social }}</td>
+	  					<td>{{ $row->ruc }}</td>
+	  					<td>{{ $row->nro }}</td>
+	  					<td>{{ $row->fecha}}</td>
+	  					<td>{{ $row->monto_total}}</td>
+	  					<td>{{ $row->tipo_pago}}</td>
 	  					<td>
 	  					<center>
 	  						<a href="{{ route('cargo.edit', $row->id) }}" class="btn btn-info">Editar</a>

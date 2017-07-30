@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Factura extends Model
 {
-    protected $table = 'empleado';
+    protected $table = 'factura_cabecera';
     public $timestamps = false;
     //
 }
