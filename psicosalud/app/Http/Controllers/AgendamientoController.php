@@ -27,7 +27,7 @@ class AgendamientoController extends Controller
         // Generar el Reporte
         $jasper->process(
             // Ruta y nombre de archivo de entrada del reporte
-            base_path() . '/vendor/cossou/jasperphp/examples/asistio.jasper',
+            base_path() . '/resources/jasper/asistio.jasper',
             false, // Ruta y nombre de archivo de salida del reporte (sin extensión)
             array('pdf'),// Parámetros del reporte
             array(),
@@ -41,7 +41,7 @@ class AgendamientoController extends Controller
             )
             )->execute();
            
-            return response()->download(base_path() . '/vendor/cossou/jasperphp/examples/asistio.pdf');
+            return response()->download(base_path() . '/resources/jasper/asistio.pdf');
     }
     
     public function index()

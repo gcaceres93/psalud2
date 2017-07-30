@@ -25,7 +25,7 @@
             <li><a href="{{ url('/agendas') }}">Consultar agendas</a></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">REPORTES</li>
-            <li><a href="{{ url('/reporteAsistencia') }}">Consultar agendas</a></li>
+            <li><a href="{{ url('/reporteAsistencia') }}">Reporte de asistencias</a></li>
           </ul>
         </li>
           <li class="dropdown">
