@@ -61,7 +61,7 @@ class FacturaController extends Controller
         $nro_factura = $primeros_nros.$ultimo_nro;
 //         DB::table('files')->orderBy('upload_time', 'desc')->first();
 //         $cargos = Cargo::all()->sortBy('descripcion');
-        return view('pages.'.$this->path.'.create',compact('personas','factura','nro_factura','empleados'));
+        return view('pages.'.$this->path.'.create',compact('personas','factura','nro_factura','empleados')); 
     }
 
     public function verificarConsulta(Request $request){

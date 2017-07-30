@@ -127,7 +127,7 @@ $(document).ready(function() {
 });
 function recorrerdata(value,index,ar){
 	
-	$('#consulta').html(' <option   value='+value.id+'>'+value.fecha+' '+value.apellido+', '+value.nombre+'</option>');
+	$('#consulta').html(' <option   value='+value.id+'>'+value.fecha+' '+value.apellido+', '+value.nombre+'</option>'); 
 }
 </script>
 
