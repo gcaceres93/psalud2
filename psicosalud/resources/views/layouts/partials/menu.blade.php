@@ -63,7 +63,7 @@
           <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facturación <span class="glyphicon glyphicon-usd"></span></a>
               <ul class="dropdown-menu">
-                  <li><a href="#">Facturar</a></li>
+                  <li><a href="{{ url('/factura') }}">Facturar</a></li>
                   <li><a href="#">Listar facturas</a></li>
                   <li><a href="#">Listar cobros</a></li>
               </ul>

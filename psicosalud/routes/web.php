@@ -20,6 +20,7 @@ Route::resource('sucursal','SucursalController');
 Route::resource('impuestos','ImpuestosController');
 Route::resource('tarifaHora','TarifaHoraController');
 Route::resource('facturaconcepto','FacturaConceptoController');
+Route::resource('factura','FacturaController');
 // Agendamiento
 Route::resource('agendamiento','AgendamientoController');
 Route::get('/verificarDisponibilidad','AgendamientoController@verificarDisponibilidad' );
@@ -27,12 +28,14 @@ Route::get('/agendas','AgendamientoController@listarAgendas' );
 Route::get('/mostrarAgenda','AgendamientoController@mostrarAgenda' );
 
 /*          PERSONAS          */
+
 Route::resource('persona','PersonaController');
 Route::resource('user','Auth\RegisterController');
 Route::resource('paciente','PacienteController');
 Route::resource('empleado','EmpleadoController');
 Route::get('/medico','EmpleadoController@getMedicos')->name('medico.index');
 Route::get('/medico/create','EmpleadoController@createMedico')->name('medico.create');
+
 /*			PERSONAS 		  */
 Route::get('/', 'HomeController@index')->name('home');
 
