@@ -11,7 +11,7 @@ class ConsultaTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('agendamiento')->insert(array(
+        DB::table('consulta')->insert(array(
             array('empleado_id'=>1,'paciente_id'=>2,'cantidad_horas'=>1,'agendamiento_id'=>2,'fecha'=>'08/01/2017',
                 'observaciones'=>'Se agenda consulta para la semana que viene','estado'=>'consulta'),
             array('empleado_id'=>2,'paciente_id'=>3,'cantidad_horas'=>1,'agendamiento_id'=>1,'fecha'=>'07/30/2017',
