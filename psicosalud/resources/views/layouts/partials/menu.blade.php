@@ -20,9 +20,14 @@
           <a href="#" class="dropdown-toggle" class="active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consultorio <span class="glyphicon glyphicon-briefcase"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Registrar consultorio</a></li>
-            <li><a href="{{ url('/agendamiento/create') }}">Agendar consulta</a></li>
-            <li><a href="{{ url('/agendamiento') }}">Listado de agendamientos</a></li>
+            <li class="dropdown-header">AGENDAS</li>
+            <li><a href="{{ url('/reporteAsistencia') }}">Listado de agendamientos</a></li>
+            <li><a href="{{ url('/agendamiento/create') }}">Registrar agendamiento</a></li>
             <li><a href="{{ url('/agendas') }}">Consultar agendas</a></li>
+            <li role="separator" class="divider"></li>
+            <li class="dropdown-header">CONSULTAS</li>
+            <li><a href="{{ url('/reporteAsistencia') }}">Listado de consultas</a></li>
+            <li><a href="{{ url('/agendamiento/create') }}">Registrar consulta</a></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">REPORTES</li>
             <li><a href="{{ url('/reporteAsistencia') }}">Reporte de asistencias</a></li>
