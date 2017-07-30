@@ -26,7 +26,7 @@ Route::resource('agendamiento','AgendamientoController');
 Route::get('/verificarDisponibilidad','AgendamientoController@verificarDisponibilidad' );
 Route::get('/agendas','AgendamientoController@listarAgendas' );
 Route::get('/mostrarAgenda','AgendamientoController@mostrarAgenda' );
-Route::get('/reporteAsistencia','reporteAsistencia@reporteAsistenciax' );
+Route::get('/reporteAsistencia','reporteAsistencia@reporteAsistencia' );
 
 
 /*          PERSONAS          */
