@@ -9,7 +9,7 @@
 
 <div class="container">
   <div class="row">
-    <h1>Registro de modalides</h1>
+    <h1>Registro de modalidades</h1>
     <h4><a href="{{ route('modalidad.index') }}">Listar modalidades</a></h4>
     <hr />
   </div>
