@@ -25,11 +25,11 @@
 	  			<tbody>
 	  			@foreach($data as $row)
 	  				<tr>
-	  					<td>{{ $row->id }}</td>
-	  					<td>{{ $row->pacienteNombre }} {{ $row->pacienteApellido }} </td>
-	  					<td>{{ $row->medicoNombre }} {{ $row->medicoApellido }}</td>
-	  					<td>{{ $row->fecha }}</td>
-	  					<td>{{ $row->estado }}</td>
+	  					<td class="clickable-row" data-href="{{ route('consulta.show', $row->id)  }}">{{ $row->id }}</td>
+	  					<td class="clickable-row" data-href="{{ route('consulta.show', $row->id)  }}">{{ $row->pacienteNombre }} {{ $row->pacienteApellido }} </td>
+	  					<td class="clickable-row" data-href="{{ route('consulta.show', $row->id)  }}">{{ $row->medicoNombre }} {{ $row->medicoApellido }}</td>
+	  					<td class="clickable-row" data-href="{{ route('consulta.show', $row->id)  }}">{{ $row->fecha }}</td>
+	  					<td class="clickable-row" data-href="{{ route('consulta.show', $row->id)  }}">{{ $row->estado }}</td>
 	  					<td>
 	  						<a href="{{ route('consulta.edit', $row->id) }}" class="btn btn-info">Editar</a>
 							<form action="{{ route('consulta.destroy', $row->id) }}" method="post">

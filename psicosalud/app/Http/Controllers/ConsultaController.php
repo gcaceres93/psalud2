@@ -83,7 +83,21 @@ class ConsultaController extends Controller
      */
     public function show($id)
     {
-        //
+        $consulta=Consulta::findOrFail($id);
+        $pac=DB::table('paciente')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('paciente.*','persona.nombre','persona.apellido')
+        ->orderBy('persona.apellido')
+        ->where('paciente.id','=',$consulta->paciente->id)
+        ->first();
+        $emp=DB::table('empleado')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->select('empleado.*','persona.nombre','persona.apellido')->orderBy('persona.apellido')
+        ->where('empleado.id','=',$consulta->empleado->id)
+        ->first();
+        
+        return view('pages.'.$this->path.'.show',compact('consulta','pac','emp'));
+        
     }
 
     /**
