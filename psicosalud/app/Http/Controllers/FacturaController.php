@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Factura;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 class FacturaController extends Controller
 {
@@ -17,7 +19,12 @@ class FacturaController extends Controller
     {
         
         //
-        $data= Factura::all()->sortBy('id');
+        
+        $data=Factura::select(DB::raw('factura_cabecera.*,persona.nombre as nombre,persona.apellido as apellido,paciente.razon_social,paciente.ruc'))
+        ->join('paciente','paciente.id','=','factura_cabecera.paciente_id')
+        ->join('persona','persona.id','=','paciente.persona_id')
+        ->orderBy('persona.apellido')
+        ->get();
         return view('pages.'.$this->path.'.index',compact('data'));  
     }
 
