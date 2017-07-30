@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
+use App\Consulta;
 
 class ConsultaController extends Controller
 {
@@ -58,7 +60,19 @@ class ConsultaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $consulta = new Consulta();
+            $consulta->fecha = $request->fecha;
+            $consulta->empleado_id = $request->medico;
+            $consulta->paciente_id = $request->paciente;
+            $consulta->cantidad_horas = $request->cantidad_horas;
+            $consulta->observaciones = $request->observaciones;
+            $consulta->estado = "Consulta";           
+            $consulta->save();
+            return redirect()->route('consulta.index');
+        }catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 
     /**
