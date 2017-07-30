@@ -94,7 +94,31 @@ class ConsultaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $consulta=Consulta::findOrFail($id);
+        $pac=DB::table('paciente')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('paciente.*','persona.nombre','persona.apellido')
+        ->orderBy('persona.apellido')
+        ->where('paciente.id','=',$consulta->paciente->id)
+        ->first();
+        $emp=DB::table('empleado')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->select('empleado.*','persona.nombre','persona.apellido')->orderBy('persona.apellido')
+        ->where('empleado.id','=',$consulta->empleado->id)
+        ->first();
+        $pacientes=DB::table('paciente')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('paciente.*','persona.nombre','persona.apellido')->orderBy('persona.apellido')
+        ->get();
+        $empleados=DB::table('empleado')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->join('cargo','empleado.cargo_id','=','cargo.id')
+        ->select('empleado.*','persona.nombre','persona.apellido','cargo.descripcion')
+        ->where('es_medico','=',true)
+        ->groupBy('cargo.descripcion','persona.apellido','persona.nombre','empleado.id')
+        ->get();
+       
+        return view('pages.'.$this->path.'.edit',compact('consulta','pac','emp','pacientes','empleados'));
     }
 
     /**
@@ -106,7 +130,18 @@ class ConsultaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $consulta = Consulta::findOrfail($id);
+            $consulta->fecha = $request->fecha;
+            $consulta->empleado_id = $request->medico;
+            $consulta->paciente_id = $request->paciente;
+            $consulta->observaciones = $request->observaciones;
+            $consulta->cantidad_horas = $request->cantidad_horas;
+            $consulta->save();
+            return redirect()->route('consulta.index');
+        }catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 
     /**
@@ -117,6 +152,12 @@ class ConsultaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $consulta = Consulta::findOrFail($id);
+            $consulta->delete();
+            return redirect()->route('consulta.index');
+        } catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 }
