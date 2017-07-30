@@ -9,6 +9,8 @@ use App\Agendamiento;
 use App\Paciente;
 use App\Modalidad;
 use App\Sucursal;
+use JasperPHP\JasperPHP as JasperPHP;
+
 
 class AgendamientoController extends Controller
 {
@@ -18,6 +20,30 @@ class AgendamientoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function reporteAsistencia(){
+        $jasper = new JasperPHP;
+        
+        // Generar el Reporte
+        $jasper->process(
+            // Ruta y nombre de archivo de entrada del reporte
+            base_path() . '/vendor/cossou/jasperphp/examples/asistio.jasper',
+            false, // Ruta y nombre de archivo de salida del reporte (sin extensión)
+            array('pdf'),// Parámetros del reporte
+            array(),
+            array(
+                'password'=> 'postgres',
+                'driver' => 'postgres',
+                'username' => 'postgres',
+                'host' => 'localhost',
+                'database' => 'psicosalud',
+                'port' => '5432',
+            )
+            )->execute();
+           
+            return response()->download(base_path() . '/vendor/cossou/jasperphp/examples/asistio.pdf');
+    }
+    
     public function index()
     {
         $data = DB::table('agendamiento as a')
@@ -30,6 +56,7 @@ class AgendamientoController extends Controller
         ->select('a.*','ppaciente.nombre as pacienteNombre','ppaciente.apellido as pacienteApellido'
             ,'pempleado.nombre as medicoNombre','pempleado.apellido as medicoApellido','m.descripcion as modalidad'
             ,'s.nombre as sucursal')
+        ->orderBy('a.fecha_programada')    
         ->get();
         
         return view('pages.'.$this->path.'.index',compact('data'));
@@ -250,6 +277,9 @@ class AgendamientoController extends Controller
             $agendamiento->paciente_id = $request->paciente;
             $agendamiento->modalidad_id = $request->modalidad;
             $agendamiento->comentario = $request->comentario;
+            if ($request['asistio']){
+                $agendamiento->asistio=true;
+            }
             $agendamiento->save();
             return redirect()->route('agendamiento.index');
         }catch(Exception $e){

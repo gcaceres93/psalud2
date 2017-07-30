@@ -54,51 +54,58 @@
   </div> 
 <!--   row		 -->
 	<div class="row">
-  		<div class="form-group col-md-6">
+  		<div class="form-group">
   			 <label for="modalidad">Modalidad de consulta</label>
-  			 <br/> 			
-  			<select id="modalidad" name="modalidad" class="form-control selectpicker">
-                <option value="" > {{$agendamiento->modalidad->descripcion}} </option>
-                @foreach($modalidades as $modalidad)
-                  <option value="{{ $modalidad->id }}">{{ $modalidad->descripcion }}</option>
-                @endforeach
-             </select>
+  			 <br/> 	
+  			 <div class="col-md-6">		
+      			<select id="modalidad" name="modalidad" class="form-control selectpicker">
+                    <option value="{{$agendamiento->modalidad->id}}" > {{$agendamiento->modalidad->descripcion}} </option>
+                    @foreach($modalidades as $modalidad)
+                      <option value="{{ $modalidad->id }}">{{ $modalidad->descripcion }}</option>
+                    @endforeach
+                 </select>
+             </div>
   		</div>
   	</div>	
 <!--   	row -->
-
+	<br/>
 	<div class="row">
-  		<div class="form-group col-md-6">
+  		<div class="form-group">
   			 <label for="sucursal">Sucursal</label>
   			 <br/>
-  			
-  			<select id="sucursal" name="sucursal" class="form-control selectpicker">
-                <option value="{{ $agendamiento->sucursal->id}}" >{{ $agendamiento->sucursal->nombre}}</option>
-                @foreach($sucursales as $sucursal)
-                  <option value="{{ $sucursal->id }}">{{ $sucursal->nombre }}</option>
-                @endforeach
-             </select>
+  			<div class="col-md-6">
+      			<select id="sucursal" name="sucursal" class="form-control selectpicker">
+                    <option value="{{ $agendamiento->sucursal->id}}" >{{ $agendamiento->sucursal->nombre}}</option>
+                    @foreach($sucursales as $sucursal)
+                      <option value="{{ $sucursal->id }}">{{ $sucursal->nombre }}</option>
+                    @endforeach
+                 </select>
+             </div>
   		</div>
-     </div>		
+     </div>	
+     <br/>	
 <!--      row	 -->
 		<div class="row">
-  		<div class="form-group">
-              <label class="col-md-3 control-label" >Fecha programada</label> 
-                <div class="col-md-3 inputGroupContainer">
-                <div class="input-group">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              <input id="fecha_programada" value="{{ $agendamiento->fecha_programada }}" name="fecha_programada" placeholder="Fecha para la consulta" class="form-control"  type="date">
-                </div>
-              </div>
-		</div>
-  		</div>
+      		<div class="form-group">
+      		     <label for="fecha_programada" >Fecha programada</label> 
+      		     <br/>
+      			 <div class="col-md-6">
+      			      <div class="input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                          <input id="fecha_programada" value="{{ $agendamiento->fecha_programada }}" name="fecha_programada" placeholder="Fecha para la consulta" class="form-control"  type="date">
+                 	  </div>	
+                 </div>
+           </div>
+        </div>      
+		
 <!--   		row -->
   		<br />
   		
   		<div class="row">
   		<div class="form-group">
-              <label class="col-md-3 control-label" >Hora programada</label> 
-                <div class="col-md-3 inputGroupContainer">
+              <label for="hora_programada" >Hora programada</label> 
+              <br/>
+                <div class="col-md-6">
                 <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               <input value="{{ $agendamiento->hora_programada }}" id="hora_programada" name="hora_programada" placeholder="Fecha para la consulta" class="form-control"  type="time">
@@ -107,38 +114,47 @@
 		</div>
 		</div>
 <!-- 		row -->
+		<br/>
 		<div class="row">
-      		<div class="form-group col-md-6">
-              <label for="comentario">Comentarios:</label>
-              <textarea name="comentario" class="form-control" rows="5" id="comentario"></textarea>
+		     <div class="form-group">
+		    <label for="comentario">Comentarios:</label>
+		    	<br/>
+		       <div class="col-md-6">
+              	 <textarea name="comentario" class="form-control" rows="5" id="comentario"></textarea>
+               </div>
             </div>
 		</div>
 <!-- 		row -->
+
+<br/>
+ 		<div class="row">
+            <div class="col-md-2">
+            
+            <label for="asistio">Asistio</label>
+            <br/>
+            </div>
+                <div class="col-md-3">
+                   	   @if($agendamiento->asistio)
+                      	 	<label><input type="checkbox" name="asistio" value="1" checked></label>
+                   	   @else
+                   	   		<label><input type="checkbox" name="asistio" value="1"></label>
+                   	   @endif
+             </div>
+        <!-- 		row -->
 		<br/>
 		<div class="row">
 			<div class="col-md-12">
-				<a href="#" id="disponibilidad" class="btn btn-info col-md-3">Verificar disponibilidad </a>   <button type="submit" class="btn btn-success col-md-3">Actualizar</button>
+				 <button type="submit" class="btn btn-success col-md-6">Actualizar</button>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-12">
+				 <a href="{{ URL('/agendamientoConsulta/'.$agendamiento->id.'?agenda=true' )}}" class="btn btn-danger col-md-6">Generar consulta</a>
+			</div>
+		</div>
+		
 		<br/>
-		<div id="sugerenciaContainer" class="hidden">
-    		<div class="row">
-    			 <div class="form-group has-error has-feedback">
-                  <label class="col-md-3 control-label" for="inputError">Fecha/horario no disponible</label>
-                  <div class="col-md-3">
-                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                  </div>
-    		     </div>
-    		</div>
-    		<div class="row">
-             <div class="form-group has-warning has-feedback">
-                  <label class="col-sm-3 control-label" for="inputWarning">Sugerencia de horario:</label>
-                  <div class="col-sm-3">
-                    <input type="text" class="form-control" id="inputWarning" value="12/08/2017 18:00:00 ">
-                  </div>
-                </div>
-    		</div>
-    	</div>	
+			
 	</form>     
   </div>
 </div>

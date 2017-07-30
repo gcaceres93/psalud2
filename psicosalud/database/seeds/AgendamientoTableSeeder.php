@@ -54,6 +54,12 @@ class AgendamientoTableSeeder extends Seeder
                 ,'comentario'=>''),
             array('empleado_id'=>1,'paciente_id'=>3,'sucursal_id'=>1,'modalidad_id'=>13,'fecha_programada'=>'03/30/2017','hora_programada'=>'14:00:00'
                 ,'comentario'=>'Solicita consulta por problemas particulares que son de mucha relevancia y por sobre todo personales'),
+            array('empleado_id'=>4,'paciente_id'=>9,'sucursal_id'=>1,'modalidad_id'=>10,'fecha_programada'=>'07/28/2017','hora_programada'=>'08:00:00'
+                ,'comentario'=>'Solicita consulta por problemas particulares que son de mucha relevancia y por sobre todo personales'),
+            array('empleado_id'=>1,'paciente_id'=>2,'sucursal_id'=>1,'modalidad_id'=>7,'fecha_programada'=>'07/28/2017','hora_programada'=>'09:00:00'
+                ,'comentario'=>'Solicita consulta por problemas particulares que son de mucha relevancia y por sobre todo personales'),
+            array('empleado_id'=>1,'paciente_id'=>3,'sucursal_id'=>1,'modalidad_id'=>13,'fecha_programada'=>'07/28/2017','hora_programada'=>'11:00:00'
+                ,'comentario'=>'Solicita consulta por problemas particulares que son de mucha relevancia y por sobre todo personales'),
         )); 
     }
 }

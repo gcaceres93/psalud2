@@ -162,7 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        JasperPHP\JasperPHPServiceProvider::class,
         /*
          * Package Service Providers...
          */
