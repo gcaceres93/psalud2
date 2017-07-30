@@ -12,7 +12,7 @@ class ConceptoFacturaTableSeeder extends Seeder
     public function run()
     {
         DB::table('factura_concepto')->insert(array(
-            array('descripcion'=>'Consulta'),
+            array('descripcion'=>'Honorarios por consulta'),
             array('descripcion'=>'Otros'),
         ));  
     }
