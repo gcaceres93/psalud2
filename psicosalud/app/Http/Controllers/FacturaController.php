@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Factura;
+use App\Impuestos;
+use App\FacturaConcepto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -36,6 +38,7 @@ class FacturaController extends Controller
     public function create()
     {
         //
+        
         $personas=DB::table('paciente')
         ->join('persona','paciente.persona_id','=','persona.id')
         ->select('paciente.*','persona.nombre','persona.apellido')
@@ -59,9 +62,11 @@ class FacturaController extends Controller
         $ultimo_nro = $nro.$ultimo_nro;    
         $primeros_nros = (mb_substr($factura->nro,0,9));
         $nro_factura = $primeros_nros.$ultimo_nro;
+        $factura_concepto = FacturaConcepto::all()->sortBy('descripcion');
+        $impuestos = Impuestos::all()->sortBy('nombre');
 //         DB::table('files')->orderBy('upload_time', 'desc')->first();
 //         $cargos = Cargo::all()->sortBy('descripcion');
-        return view('pages.'.$this->path.'.create',compact('personas','factura','nro_factura','empleados')); 
+        return view('pages.'.$this->path.'.create',compact('personas','factura','nro_factura','empleados','factura_concepto','impuestos')); 
     }
 
     public function verificarConsulta(Request $request){
@@ -72,11 +77,25 @@ class FacturaController extends Controller
         ->join('empleado','consulta.empleado_id','=','empleado.id')
         ->join('persona','empleado.persona_id','=','persona.id')
         ->select('consulta.*','persona.nombre','persona.apellido')
-        ->where([['consulta.empleado_id', '=', $medico],['consulta.estado', '=', 'consulta']])
+        ->where([['consulta.empleado_id', '=', $medico],['consulta.estado', '=', 'Consulta']])
         ->get();
         
         return json_encode($consultas);
     
+    }
+    public function traerConsulta(Request $request){
+        
+        $medico = $request->medico;
+        
+        $consultas = DB::table('consulta')
+        ->join('empleado','consulta.empleado_id','=','empleado.id')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->select('consulta.*','persona.nombre','persona.apellido')
+        ->where([['consulta.empleado_id', '=', $medico],['consulta.estado', '=', 'Consulta']])
+        ->get();
+        
+        return json_encode($consultas);
+        
     }
     /**
      * Store a newly created resource in storage.

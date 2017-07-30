@@ -24,6 +24,7 @@ Route::resource('facturaconcepto','FacturaConceptoController');
 //Factura
 Route::resource('factura','FacturaController');
 Route::get('/verificarConsulta','FacturaController@verificarConsulta' ); 
+Route::get('/traerConsulta','FacturaController@traerConsulta' ); 
 // Agendamiento
 Route::resource('agendamiento','AgendamientoController');
 Route::get('/verificarDisponibilidad','AgendamientoController@verificarDisponibilidad' );
