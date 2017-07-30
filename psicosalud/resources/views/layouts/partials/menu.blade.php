@@ -23,6 +23,9 @@
             <li><a href="{{ url('/agendamiento/create') }}">Agendar consulta</a></li>
             <li><a href="{{ url('/agendamiento') }}">Listado de agendamientos</a></li>
             <li><a href="{{ url('/agendas') }}">Consultar agendas</a></li>
+            <li role="separator" class="divider"></li>
+            <li class="dropdown-header">REPORTES</li>
+            <li><a href="{{ url('/reporteAsistencia') }}">Consultar agendas</a></li>
           </ul>
         </li>
           <li class="dropdown">
