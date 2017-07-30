@@ -21,13 +21,14 @@
           <ul class="dropdown-menu">
             <li><a href="#">Registrar consultorio</a></li>
             <li class="dropdown-header">AGENDAS</li>
-            <li><a href="{{ url('/reporteAsistencia') }}">Listado de agendamientos</a></li>
+            <li><a href="{{ url('/verificarAgenda') }}">Verificar disponibilidad</a></li>
+            <li><a href="{{ url('/agendamiento') }}">Listado de agendamientos</a></li>
             <li><a href="{{ url('/agendamiento/create') }}">Registrar agendamiento</a></li>
             <li><a href="{{ url('/agendas') }}">Consultar agendas</a></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">CONSULTAS</li>
-            <li><a href="{{ url('/reporteAsistencia') }}">Listado de consultas</a></li>
-            <li><a href="{{ url('/agendamiento/create') }}">Registrar consulta</a></li>
+            <li><a href="{{ url('/consulta') }}">Listado de consultas</a></li>
+            <li><a href="{{ url('/consulta/create') }}">Registrar consulta</a></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">REPORTES</li>
             <li><a href="{{ url('/reporteAsistencia') }}">Reporte de asistencias</a></li>

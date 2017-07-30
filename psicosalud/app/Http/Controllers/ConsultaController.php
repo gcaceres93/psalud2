@@ -18,7 +18,7 @@ class ConsultaController extends Controller
         $data = DB::table('consulta as c')
         ->join('paciente as p','c.paciente_id','=','p.id')
         ->join('persona as ppaciente','p.persona_id','=','ppaciente.id')
-        ->join('persona as pempleado','a.empleado_id','pempleado.id')
+        ->join('persona as pempleado','c.empleado_id','pempleado.id')
         ->join('empleado as e','pempleado.id','e.id')
         ->select('c.*','ppaciente.nombre as pacienteNombre','ppaciente.apellido as pacienteApellido'
             ,'pempleado.nombre as medicoNombre','pempleado.apellido as medicoApellido')
@@ -35,7 +35,19 @@ class ConsultaController extends Controller
      */
     public function create()
     {
-        //
+        $pacientes=DB::table('paciente')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('paciente.*','persona.nombre','persona.apellido')->orderBy('persona.apellido')
+        ->get();
+        $empleados=DB::table('empleado')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->join('cargo','empleado.cargo_id','=','cargo.id')
+        ->select('empleado.*','persona.nombre','persona.apellido','cargo.descripcion')
+        ->where('es_medico','=',true)
+        ->groupBy('cargo.descripcion','persona.apellido','persona.nombre','empleado.id')
+        ->get();
+      
+        return view('pages.'.$this->path.'.create',compact('pacientes','empleados'));
     }
 
     /**

@@ -5,7 +5,7 @@
 <div class="container table-responsive">
   <div class="row">
     <h1>Lista de consultas</h1>
-    <h4><a class="btn btn-success" href="{{ route('agendamiento.create') }}">Registrar nueva consulta</a></h4>
+    <h4><a class="btn btn-success" href="{{ route('consulta.create') }}">Registrar nueva consulta</a></h4>
     <hr />
   </div>
   <div class="row">

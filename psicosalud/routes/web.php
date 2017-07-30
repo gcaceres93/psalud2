@@ -27,6 +27,7 @@ Route::get('/verificarConsulta','FacturaController@verificarConsulta' );
 // Agendamiento
 Route::resource('agendamiento','AgendamientoController');
 Route::get('/verificarDisponibilidad','AgendamientoController@verificarDisponibilidad' );
+Route::get('/verificarAgenda','AgendamientoController@verificarAgenda' );
 Route::get('/agendas','AgendamientoController@listarAgendas' );
 Route::get('/mostrarAgenda','AgendamientoController@mostrarAgenda' );
 Route::get('/reporteAsistencia','AgendamientoController@reporteAsistencia' );

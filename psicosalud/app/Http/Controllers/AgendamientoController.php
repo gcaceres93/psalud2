@@ -86,6 +86,25 @@ class AgendamientoController extends Controller
         $sucursales=Sucursal::all()->sortBy('nombre');
         return view('pages.'.$this->path.'.create',compact('pacientes','modalidades','sucursales','empleados'));
     }
+    
+    public function verificarAgenda()
+    {
+        $pacientes=DB::table('paciente')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('paciente.*','persona.nombre','persona.apellido')->orderBy('persona.apellido')
+        ->get();
+        $empleados=DB::table('empleado')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->join('cargo','empleado.cargo_id','=','cargo.id')
+        ->select('empleado.*','persona.nombre','persona.apellido','cargo.descripcion')
+        ->where('es_medico','=',true)
+        ->groupBy('cargo.descripcion','persona.apellido','persona.nombre','empleado.id')
+        ->get();
+        $modalidades=Modalidad::all()->sortBy('descripcion');
+        $sucursales=Sucursal::all()->sortBy('nombre');
+        return view('pages.'.$this->path.'.disponibilidad',compact('pacientes','modalidades','sucursales','empleados'));
+    }
+    
 
     
     public function listarAgendas()
