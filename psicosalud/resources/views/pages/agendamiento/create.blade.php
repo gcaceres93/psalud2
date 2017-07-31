@@ -14,7 +14,8 @@
   <div class="row">
   	<form method="post" action="/agendamiento">
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+		<img class="img-responsive" src="/img/calendar.png" alt="Logo" width="11%" height="11%" class="img-responsive">
+		
   		<div class="form-group">
   			 <label for="paciente">Paciente</label>
   			 <br/>
