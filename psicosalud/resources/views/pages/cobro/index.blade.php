@@ -5,8 +5,8 @@
 
 <div class="container table-responsive">
   <div class="row">
-    <h1>Lista de cargos</h1>
-    <h4><a class="btn btn-success" href="{{ route('cargo.create') }}">Registrar nuevo cargo</a></h4>
+    <h1>Lista de cobros</h1>
+<!--     <h4><a class="btn btn-success" href="{{ route('cobro.create') }}">Registrar nuevo cargo</a></h4> -->
     <hr />
   </div>
   <div class="row">
@@ -16,19 +16,25 @@
   				<thead>
 	  				<tr class="table table-info">
 	  					<th>ID</th>
-	  					<th>Descripcion</th>
-	  					<th></th>
+	  					<th>Factura</th>
+	  					<th>Monto</th>
+	  					<th>Tipo de Pago</th>
+	  					<th>Observaciones</th>
+	  					<th>Acciones</th>
 	  				</tr>
 	  			</thead>
 	  			<tbody>
 	  			@foreach($data as $row)
 	  				<tr>
 	  					<td>{{ $row->id }}</td>
-	  					<td>{{ $row->descripcion }}</td>
+	  					<td>{{ $row->factura_id }}</td>
+	  					<td>{{ $row->monto }}</td>
+	  					<td>{{ $row->tipo_pago }}</td>
+	  					<td>{{ $row->observacion }}</td>
 	  					<td>
 	  					<center>
-	  						<a href="{{ route('cargo.edit', $row->id) }}" class="btn btn-info">Editar</a>
-							<form action="{{ route('cargo.destroy', $row->id) }}" method="post">
+	  						<a href="{{ route('cobro.edit', $row->id) }}" class="btn btn-info">Editar</a>
+							<form action="{{ route('cobro.destroy', $row->id) }}" method="post">
 								<input type="hidden" name="_method" value="DELETE">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<button type="submit" class="btn btn-danger">Eliminar</button>

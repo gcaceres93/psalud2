@@ -14,18 +14,7 @@
     <hr />
   </div>
     
- <div id="Facturas" class="container">	
-<ul  class="nav nav-pills">
-			<li class="active" >
-        	<a  href="#Factura" data-toggle="tab">Factura</a>
-			</li>
-			<li ><a href="#Cobro" data-toggle="tab">Cobro</a>
-			</li>
-			
-		</ul>
 
-			<div class="tab-content clearfix">
-			  <div class="tab-pane active" id="Factura">
   <div class="row">
     <div class="col-md-6">
   	<form method="post" action="/factura/{{ $facturas->id }}">
@@ -225,8 +214,7 @@
 
   		<button type="button" name="guardar" id="guardar" class="btn btn-info">Guardar</button>
   	</form>	
-    </div>
-  </div>
+    
 </div>
 
 <script type="text/javascript">
@@ -384,6 +372,39 @@ $(document).ready(function() {
             error: function(data){
             	var errors = data.responseJSON;
                 alert(errors);
+            },
+
+        });
+        
+    });
+});
+
+$(document).ready(function() {	
+	$('#cobrar').on('click', function () {
+
+    	var tipo_pago = $('#tipo_pago').val();
+    	var monto = $('#monto_a_cobrar').val();
+    	var id = $('#id').val();
+    	var observacion = $('#observacion_cobro').val();
+        
+        var data = {tipo_pago:tipo_pago,monto:monto,observacion:observacion,id:id};
+        
+        $.ajax({
+            method: 'get',
+            url: '/cobrar',
+            data:  data ,
+            async: true,
+            dataType:"json",
+            success: function(data){
+            	alert('aaa');
+
+                
+            	
+            },
+            error: function(data){
+            	var errors = data.responseJSON;
+//                 alert(errors);
+					alert('asd');
             },
 
         });

@@ -14,4 +14,8 @@ class Factura extends Model
         return $this->hasMany('App\FacturaDetalle','factura_cabecera_id'); 
         
     }
+    public function cobro(){
+        return $this->hasOne('App\Cobro','factura_id');
+        
+    }
 }

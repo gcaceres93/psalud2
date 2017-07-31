@@ -11,7 +11,7 @@ class Cobro extends Model
     
     public $timestamps = false;
     public function factura(){
-    return $this->belongsTo('App\Factura');
+        return $this->belongsTo('App\Factura');
     
         }
 }

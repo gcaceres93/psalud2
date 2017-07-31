@@ -40,7 +40,8 @@
 	  					<td>
 	  					<center>
 	  						<a href="{{ route('factura.edit', $row->id) }}" class="btn btn-info">Editar</a></br>
-	  						<a href="{{ route('factura.edit', $row->id) }}" class="btn btn-success">Cobrar</a>
+<!-- 	  						<a class="btn btn-success" href="{{ URL('/factura/'.$row->id.'/edit#Cobro') }}"> Cobrar </a> -->
+	  						<a href="{{ route('cobro.create', $row->id) }}" class="btn btn-success">Cobrar</a>
 							<form action="{{ route('factura.destroy', $row->id) }}" method="post">
 								<input type="hidden" name="_method" value="DELETE">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
