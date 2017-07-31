@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-      /*  $this->call('UsersTableSeeder');
+        $this->call('UsersTableSeeder');
         $this->command->info("Se han cargado los datos a la tabla usuarios :)");
         $this->call('TipoFamiliarTableSeeder');
         $this->command->info("Se han cargado los datos a la tabla tipo_familiares :)");
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
 		$this->call('OcupacionTableSeeder');
         $this->command->info("Se han cargado los datos a la tabla ocupacion :)");
 		$this->call('ImpuestoTableSeeder');
-        $this->command->info("Se han cargado los datos a la tabla impuesto :)");*/
+        $this->command->info("Se han cargado los datos a la tabla impuesto :)");
 		$this->call('ConceptoFacturaTableSeeder');
         $this->command->info("Se han cargado los datos a la tabla factura_concepto :)");
     }

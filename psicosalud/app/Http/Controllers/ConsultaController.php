@@ -69,7 +69,8 @@ class ConsultaController extends Controller
             $consulta->observaciones = $request->observaciones;
             $consulta->estado = "Consulta";           
             $consulta->save();
-            return redirect()->route('consulta.index');
+            return "si";
+        
         }catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
         }

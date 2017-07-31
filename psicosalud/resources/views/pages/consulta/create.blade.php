@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="row">
-  	<form method="post" action="/consulta">
+  	<form method="post" id="formulario" action="/consulta">
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
   		<div class="form-group">
@@ -104,7 +104,7 @@
 			</div>
 		</div>
 		<br/>
-		
+		<div id='success' class='hidden alert alert-success col-md-6'> Registro guardado correctamente </div>
 	</form>     
   </div>
 </div>
@@ -113,34 +113,27 @@
 
 <script type="text/javascript">
 $(document).ready(function() {	
-    $('#disponibilidad').on('click', function () {
-    	var fecha_programada = $('#fecha_programada').val();
-        var hora_programada = $('#hora_programada').val();
-        var sucursal = $('#sucursal').val();
+	$( '#formulario' ).on( 'submit', function(e) {
+	    e.preventDefault();
+        var observaciones = $('#observaciones').val();
+        var fecha = $('#fecha').val();
+        var cantidad_horas = $('#sucursal').val();
         var medico = $('#medico').val();
-        var data = {medico:medico,sucursal:sucursal,fecha_programada:fecha_programada,hora_programada:hora_programada};
-        $.ajax({
-            method: 'get',
-            url: '/verificarDisponibilidad',
-            data:  data,
-            async: true,
-            dataType:"json",
-            success: function(data){
-            	if (data == "si"){
-            		$("#sugerenciaContainer").hide();
-            		$("#success").removeClass('hidden');
-            		$("#success").show();
-            		$("#success").html("<strong>Existe disponibilidad para la fecha seleccionada</strong>");
-            	    $("body").scrollTop($("#success").offset().top);
-            	}else{
-            		$("#success").hide();
-            		$("#sugerenciaContainer").removeClass('hidden');
-            		$("#sugerenciaContainer").show();
-            		$("#error").html("<strong>Ya existe una agenda para el medico y la fecha seleccionada</strong>");
-            		$("#sugerencia").html("<strong>Sugerencia de fecha y horario:</strong>:<br/>Fecha:"+data.fecha+"<br/>Horario:"+data.horario);
-            	    $("body").scrollTop($("#sugerenciaContainer").offset().top);
+        var paciente = $('#paciente').val();
 
-            	}
+        var data = {medico:medico,paciente:paciente,cantidad_horas:cantidad_horas,fecha:fecha,observaciones:observaciones, _token: "{{ csrf_token() }}"};
+        $.ajax({
+            method: 'post',
+            url: 'store',
+            data:  data,
+            success: function(example){
+            		console.log(example);
+            		$("#success").removeClass("hidden");       			   		
+            	    $("body").scrollTop($("#success").offset().top);
+            	    $(".container :input").attr("disabled", true);
+            	    $(".well-lg :input").attr("disabled", false);
+
+            	
             },
             error: function(data){
             	var errors = data.responseJSON;

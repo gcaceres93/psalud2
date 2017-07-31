@@ -15,7 +15,12 @@ Route::resource('modalidad','ModalidadController');
 Route::resource('tipoTerapia','TipoTerapiaController');
 Route::resource('rol','RolController');
 Route::resource('cargo','CargoController');
+
+/* CONSULTAS*/
 Route::resource('consulta','ConsultaController');
+Route::post('/consulta/store','ConsultaController@store');
+
+
 Route::resource('tipoFamiliar','TipoFamiliarController');
 Route::resource('sucursal','SucursalController');
 Route::resource('impuestos','ImpuestosController');
