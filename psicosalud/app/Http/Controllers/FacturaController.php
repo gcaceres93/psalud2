@@ -54,7 +54,7 @@ class FacturaController extends Controller
         ->groupBy('persona.apellido','persona.nombre','empleado.id')
         ->orderBy('persona.apellido')
         ->get();
-        $factura=Factura::all()->sortBy('id')->first();
+        $factura=Factura::all()->sortByDesc('id')->first();
         if (count($factura)>0){
             $ultimo_nro = ((int)mb_substr($factura->nro,9))+1;
             $cantidad_nro = ((string)strlen($ultimo_nro));
@@ -65,6 +65,9 @@ class FacturaController extends Controller
             $ultimo_nro = $nro.$ultimo_nro;    
             $primeros_nros = (mb_substr($factura->nro,0,9));
             $nro_factura = $primeros_nros.$ultimo_nro;
+        }
+        else {
+            $nro_factura = '001-001-0000001';
         }
         
         $factura_conceptos = FacturaConcepto::all()->sortBy('descripcion');
@@ -286,6 +289,45 @@ class FacturaController extends Controller
         $factura = Factura::findOrFail($factura_id);
        
         return $this->update($request , $factura);
+        
+    }
+    
+    public function cobro(){
+        
+       
+        $facturas = Factura::findOrFail();
+        $personas=DB::table('paciente')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('paciente.*','persona.nombre','persona.apellido')
+        ->groupBy('persona.apellido','persona.nombre','paciente.id')
+        ->orderBy('persona.apellido')
+        ->get();
+        $empleados=DB::table('empleado')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->select('empleado.*','persona.nombre','persona.apellido')
+        ->where('es_medico','=',true)
+        ->groupBy('persona.apellido','persona.nombre','empleado.id')
+        ->orderBy('persona.apellido')
+        ->get();
+        $consultas = DB::table('consulta')
+        ->join('empleado','consulta.empleado_id','=','empleado.id')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->select('consulta.*','persona.nombre','persona.apellido')
+        ->where([['consulta.empleado_id', '=',$facturas->empleado_id],['consulta.estado', '=', 'Consulta']])
+        ->get();
+        $factura_detalle =   DB::table('factura_detalle')
+        ->select('factura_detalle.*')
+        ->where('factura_cabecera_id', '=',$facturas->id)
+        ->get();
+        $factura_conceptos = FacturaConcepto::all()->sortBy('descripcion');
+        $impuestos = Impuestos::all()->sortBy('nombre');
+        //         DB::table('files')->orderBy('upload_time', 'desc')->first();
+        //         $cargos = Cargo::all()->sortBy('descripcion');
+        return view('pages.'.$this->path.'.edit',compact('personas','facturas','empleados','factura_conceptos','impuestos','consultas','factura_detalle')); 
+        
+//         return view('pages.'.$this->path.'.index',compact('data'));  
+        
+        
         
     }
     public function update($request,  $factura)
