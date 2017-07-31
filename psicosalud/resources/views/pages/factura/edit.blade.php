@@ -31,7 +31,7 @@
   	<form method="post" action="/factura/{{ $facturas->id }}">
       {{ method_field('PUT') }}
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+			<input type="hidden" name="id" id="id" value="{{ $facturas->id }}">
   		
   		<div class="form-group"> 
               <label>Paciente</label>
@@ -254,6 +254,7 @@ $(document).ready(function() {
 		var monto_total=[];
 		var persona=  $('#persona').val();
 		var consulta=  $('#consulta').val();
+		var id=  $('#id').val();
 		var medico=  $('#medico').val();
 		var monto=  $('#monto').val();
 		var observacion=  $('#observacion').val();
@@ -293,17 +294,17 @@ $(document).ready(function() {
         	   }  
         	   
         	}
-        var data = {consulta:consulta,concepto:concepto,cantidad:cantidad,impuesto:impuesto,monto_total:monto_total,persona:persona,medico:medico,monto:monto,observacion:observacion,tipo_pago:tipo_pago,nro:nro,fecha:fecha,timbrado:timbrado,estado:estado,vigencia_timbrado:vigencia_timbrado};
+        var data = {id:id,consulta:consulta,concepto:concepto,cantidad:cantidad,impuesto:impuesto,monto_total:monto_total,persona:persona,medico:medico,monto:monto,observacion:observacion,tipo_pago:tipo_pago,nro:nro,fecha:fecha,timbrado:timbrado,estado:estado,vigencia_timbrado:vigencia_timbrado};
 
         $.ajax({
             method: 'get',
-            url: '/tablaDinamica',
+            url: '/tablaDinamicaupdate',
             data:  data,
             async: true,
             dataType:"json",
             success: function(data){
-            	console.log(data);
-            	window.location.replace("/factura");
+//             	console.log(data);
+           	window.location.replace("/factura");
 		
 
                 
@@ -311,8 +312,9 @@ $(document).ready(function() {
             },
             error: function(data){
             	var errors = data.responseJSON;
-//                 alert(errors);
-                console.log(data);
+                 alert('Se ha encontrado un error en la carga. Verifique Datos');
+//                 console.log(data);
+                
             },
           
         });

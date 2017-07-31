@@ -112,6 +112,10 @@ class FacturaController extends Controller
         return $this->store($request);
         
     }
+    
+
+    
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -271,9 +275,113 @@ class FacturaController extends Controller
      * @param  \App\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Factura $factura)
+    
+    public function tablaDinamicaupdate(Request $request){
+        
+        //         dd($request->cantidad);
+        //dd($facturat);
+        // $factura->store($request);
+        
+        $factura_id=$request->id;
+        $factura = Factura::findOrFail($factura_id);
+       
+        return $this->update($request , $factura);
+        
+    }
+    public function update($request,  $factura)
     {
         //
+        
+        try {
+            /* Primero instanciamos el modelo Factura */
+            
+            $factura->paciente_id=$request->persona;
+            $factura->empleado_id=$request->medico;
+            $factura->consulta_id=$request->consulta;
+            $factura->monto_total=$request->monto;
+            $factura->observacion=$request->observacion;
+            $factura->tipo_pago=$request->tipo_pago;
+            $factura->nro=$request->nro;
+            $factura->fecha=$request->fecha;
+            $factura->timbrado=$request->timbrado;
+            $factura->estado=$request->estado;
+            $factura->vigencia_timbrado=$request->vigencia_timbrado;
+            
+            
+            // $detalle =$request->all();
+            
+            $factura->save();
+            
+            /* Guardamos el valor del ID generado para la persona */
+            
+            $lastInsertedId=$factura->id;
+            
+            /* Creamos el detalle*/
+            
+            
+            $factura->facturadetalle()->delete();
+            $canti=count($request->concepto);
+            //          return json_encode($canti);
+            $vari='';
+            for ($i = 0; $i < $canti; $i++) {
+                $factura_detalle = new FacturaDetalle();
+                $factura_detalle->factura_cabecera_id=$lastInsertedId;
+                foreach ($request->cantidad as $key=>$cantidad)
+                {
+                    if ($key == $i )
+                    {
+                        $cant = $cantidad;
+                    }
+                    
+                }
+                
+                foreach ($request->concepto as $key=>$concepto)
+                {
+                    if ($key == $i )
+                    {
+                        $concep = $concepto;
+                    }
+                    
+                }
+                foreach ($request->impuesto as $key=>$impuesto)
+                {
+                    if ($key == $i )
+                    {
+                        $imp = $impuesto;
+                    }
+                    
+                }
+                foreach ($request->monto_total as $key=>$mont)
+                {
+                    if ($key == $i )
+                    {
+                        $mon = $mont;
+                    }
+                    
+                }
+                $factura_detalle->factura_concepto_id=$concep;
+                $factura_detalle->monto=$mon;
+                $factura_detalle->cantidad=$cant;
+                $factura_detalle->impuesto_id=$impuesto;
+                //dd($lastInsertedId,$roles);
+                $factura_detalle->save();
+                
+                
+                
+                
+            }
+            return json_encode($factura_detalle);
+            
+            
+            
+            
+            
+        } catch (Exception $e) {
+            return "Fatal error - ".$e->getMessage();
+        }
+        
+
+      
     }
 
     /**
