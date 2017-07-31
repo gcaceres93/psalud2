@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Factura extends Model
 {
-    protected $table = 'factura_cabecera';
+    public $table = 'factura_cabecera';
     public $timestamps = false;
+    public $attributes;
+//     public $items;
+//     public $primaryKey;
+//     public $original;
     //
     
     public function facturadetalle(){

@@ -7,35 +7,50 @@
     }
 </style> --}}
 
-<div class="container-fluid">
+<div class="container">
   <div class="row">
-    <h1>Edición de cargos</h1>
-    <h4><a href="{{ route('cargo.index') }}">Listar cargos</a></h4>
+    <h1>Edición de cobros</h1>
+    <h4><a href="{{ route('cobro.index') }}">Listar cobros</a></h4>
     <hr />
   </div>
   <div class="row">
     <div class="col-md-6">
-  	<form method="post" action="/cargo/{{ $cargos->id }}">
+    
+  	<form method="post" action="/cobro/{{$cobros->id}}">
       {{ method_field('PUT') }}
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+<div class="form-group">
+          			<label for="factura">Factura</label>
+          			
+            	
+                <select  name="factura_id" id="factura_id"    value ="" class="form-control selectpicker">
+                 <option selected  value ="{{$cobros->factura_id}}">{{$cobros->nro}}</option> 
 
-  		
-  		<div class="form-group">
-  			<label for="descripci&oacute;n">Descripci&oacute;n</label>
-  			<input type="text" name="descripcion" class="form-control" placeholder="Descripci&oacute;n del cargo" value="{{ $cargos->descripcion }}"> 	
-  		</div>
-
-      <div class="form-group">
-      <div class="checkbox">
-         @if($cargos->profesional_salud)
-            <label><input type="checkbox" name="profesional_salud" value="1" checked>Es profesional de la salud?</label>
-         @else
-            <label><input type="checkbox" name="profesional_salud" value="1" >Es profesional de la salud?</label>
-         @endif
-      </div>
-      </div>
-
-  		<button type="submit" class="btn btn-success">Actualizar</button>
+              	</select>
+          	</div>
+          	
+          	
+		
+  			
+  	<div class="form-group">
+          			<label for="tipo_pago">Tipo de Pago:</label>
+          			<select  name="tipo_pago" id="tipo_pago"  class="form-control selectpicker">
+                	<option value="" >Seleccionar Tipo de Pago</option>
+                      <option <?php if ($cobros->tipo_pago == 1) {echo ('selected');}  ?>   value="1">Efectivo </option>
+                      <option <?php if ($cobros->tipo_pago == 2) {echo ('selected');}  ?>  value="2">Tarjeta de Credito </option>
+                      <option  <?php if ($cobros->tipo_pago == 3) {echo ('selected');}  ?> value="3">Tarjeta de Debito </option>
+                      <option  <?php if ($cobros->tipo_pago == 4) {echo ('selected');}  ?> value="4">Cheque </option>
+              	</select>
+          	</div>
+          	<div class="form-group">
+          			<label for="monto_a_cobrar">Monto a Cobrar:</label>
+          			<input type="number" name="monto_a_cobrar"  id="monto_a_cobrar"  class="form-control" value="{{$cobros->monto}}"placeholder="Monto" > 	
+          	</div>
+          	<div class="form-group">
+          			<label for="observacion">Observacion:</label>
+          			<input type="test" name="observacion" id="observacion"  value="{{$cobros->observacion}}" class="form-control" required placeholder="Observacion" > 	
+          	</div>
+          	<button type="submit" name="cobrar" id="cobrar"  class="btn btn-success">Actualizar</button>
   	</form>	
     </div>
   </div>

@@ -66,7 +66,7 @@ class FacturaController extends Controller
         ->orderBy('persona.apellido')
         ->get();
         $factura=Factura::all()->sortByDesc('id')->first();
-        if (count($factura)>5){
+        if (count($factura)>0){
             $ultimo_nro = ((int)mb_substr($factura->nro,9))+1;
             $cantidad_nro = ((string)strlen($ultimo_nro));
             $nro='';
@@ -145,7 +145,7 @@ class FacturaController extends Controller
 //        
         try {
             /* Primero instanciamos el modelo Factura */
-            
+            $estado="Pendiente";
             $factura = new Factura();
             $factura->paciente_id=$request->persona;
             $factura->empleado_id=$request->medico;
@@ -156,14 +156,16 @@ class FacturaController extends Controller
             $factura->nro=$request->nro;
             $factura->fecha=$request->fecha;
             $factura->timbrado=$request->timbrado;
-            $factura->estado=$request->estado;
+            $factura->estado=$estado;
             $factura->vigencia_timbrado=$request->vigencia_timbrado;
 
             
            // $detalle =$request->all();
             
             $factura->save();
-            
+           $update_consulta = DB::table('consulta')
+            ->where('id', $request->consulta)
+            ->update(['estado' =>'Facturado' ]);
             /* Guardamos el valor del ID generado para la persona */
             
             $lastInsertedId=$factura->id;
@@ -215,7 +217,7 @@ class FacturaController extends Controller
                 $factura_detalle->monto=$mon;
                 $factura_detalle->cantidad=$cant;
                 $factura_detalle->impuesto_id=$impuesto;
-                //dd($lastInsertedId,$roles);
+//                 dd($lastInsertedId,$roles);
                 $factura_detalle->save();
                 
                 
@@ -255,6 +257,7 @@ class FacturaController extends Controller
     public function edit( $factura)
     {
         $facturas = Factura::findOrFail($factura);
+       
         $personas=DB::table('paciente')
         ->join('persona','paciente.persona_id','=','persona.id')
         ->select('paciente.*','persona.nombre','persona.apellido')
@@ -272,7 +275,9 @@ class FacturaController extends Controller
         ->join('empleado','consulta.empleado_id','=','empleado.id')
         ->join('persona','empleado.persona_id','=','persona.id')
         ->select('consulta.*','persona.nombre','persona.apellido')
-        ->where([['consulta.empleado_id', '=',$facturas->empleado_id],['consulta.estado', '=', 'Consulta']])
+        ->where('consulta.empleado_id', '=',$facturas->empleado_id)
+        ->where('consulta.estado' , '=', 'Consulta')
+        ->orWhere('consulta.id', '=', $facturas->consulta_id)
         ->get();
         $factura_detalle =   DB::table('factura_detalle')
         ->select('factura_detalle.*')
@@ -316,7 +321,7 @@ class FacturaController extends Controller
         
         try {
             /* Primero instanciamos el modelo Factura */
-            
+            $factura->estado="Pendiente";
             $factura->paciente_id=$request->persona;
             $factura->empleado_id=$request->medico;
             $factura->consulta_id=$request->consulta;
@@ -326,7 +331,7 @@ class FacturaController extends Controller
             $factura->nro=$request->nro;
             $factura->fecha=$request->fecha;
             $factura->timbrado=$request->timbrado;
-            $factura->estado=$request->estado;
+            
             $factura->vigencia_timbrado=$request->vigencia_timbrado;
             
             
@@ -420,6 +425,7 @@ class FacturaController extends Controller
             $id=$factura->id;
 //             $factura_detalle = FacturaDetalle::where('factura_cabecera_id', '=', $id);
             $factura->facturadetalle()->delete();
+            $factura->cobro()->delete();
             $factura->delete();
             
             return redirect()->route('factura.index');

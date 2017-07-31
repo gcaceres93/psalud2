@@ -25,11 +25,28 @@
 	  			</thead>
 	  			<tbody>
 	  			@foreach($data as $row)
+	  				@if($row->tipo_pago ==1)
+	  					<?php 
+	  					        $pago=	'Efectivo';
+	  					?>
+	  				@elseif( $row->tipo_pago ==2)
+	  						<?php 
+	  					        $pago =	'Tarjeta de Credito';
+	  					       ?>
+	  				@elseif( $row->tipo_pago ==3)
+	  						<?php 
+	  					        $pago =	'Tarjeta de Debito';
+	  					       ?>
+	  				@elseif( $row->tipo_pago ==4)
+	  						<?php 
+	  					        $pago =	'Cheque';
+	  					       ?>
+	  				@endif
 	  				<tr>
 	  					<td>{{ $row->id }}</td>
-	  					<td>{{ $row->factura_id }}</td>
+	  					<td>{{ $row->nro }}</td>
 	  					<td>{{ $row->monto }}</td>
-	  					<td>{{ $row->tipo_pago }}</td>
+	  					<td><?php echo ($pago) ?></td>
 	  					<td>{{ $row->observacion }}</td>
 	  					<td>
 	  					<center>

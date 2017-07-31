@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Cobro;
 use Illuminate\Http\Request;
 use App\Factura;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 class CobroController extends Controller
 {
@@ -17,6 +19,12 @@ class CobroController extends Controller
     {
         //
         $data= Cobro::all()->sortBy('id');
+        
+        $data = DB::table('cobro as c')
+        ->join('factura_cabecera as f','f.id','=','c.factura_id')
+        ->select('c.*','f.nro')
+            ->get();
+        
         return view('pages.cobro.index',compact('data'));
     }
 
@@ -30,11 +38,26 @@ class CobroController extends Controller
         //
 //         $Factura = New Factura();
 //         $roles_list = User::with('roles')->where('id', $user->id)->get();
+//         $facturass = Factura::with('cobro')->get();
 //         $id=$Factura->asaniu($factura)->get();
 //         $facturas = Factura::findOrFail($factura);
+//         $facturas = $factura->all();
+//         $facturass = Factura::findOrFail($factura->all());
+        $facturass = ($factura->all());
         
+        foreach ($facturass as $factur){
+             $asd = $factur->attributes;
+           
+        }
+//         dd($asd->id);
+//          $asd = $asd->all();
+//         foreach ($asd as $fact){
+//             $asa = $fact->id;
+           
+            
+//         }
         
-        return view('pages.cobro.create');
+        return view('pages.cobro.create',compact('asd'));
     }
 
     /**
@@ -49,8 +72,12 @@ class CobroController extends Controller
             $cobros = new Cobro();
             $cobros->tipo_pago = $request->tipo_pago;
             $cobros->monto = $request->monto_a_cobrar;
+            $cobros->factura_id = $request->factura;
             $cobros->observacion = $request->observacion;
             $cobros->save();
+            $update_factura = DB::table('factura_cabecera')
+            ->where('id', $request->factura)
+            ->update(['estado' =>'Cobrado' ]);
             return redirect()->route('cobro.index');
         }catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
@@ -76,7 +103,20 @@ class CobroController extends Controller
      */
     public function edit( $cobro)
     {
-        $cobros = Cobro::findOrFail($cobro);
+//         $cob = Cobro::findOrFail($cobro);
+//         dd($cobro);
+//         $cobros = Cobro::findOrFail($cobro);
+        $cob = DB::table('cobro')
+        ->join('factura_cabecera','cobro.factura_id','=','factura_cabecera.id')
+        ->select('cobro.*','factura_cabecera.nro')
+        ->where('cobro.id','=',$cobro)
+        ->get();
+        
+        foreach ($cob as $cobro){
+            $cobros=$cobro;
+            
+        }
+//         dd($cobros->all());
         return view('pages.cobro.edit',compact('cobros'));
     
     }
@@ -88,9 +128,20 @@ class CobroController extends Controller
      * @param  \App\Cobro  $cobro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $cobro)
+    public function update(Request $request,  $id)
     {
         //
+        try{
+        $cobro = Cobro::findOrfail($id);
+        $cobro->factura_id=$request->factura_id;
+        $cobro->tipo_pago=$request->tipo_pago;
+        $cobro->monto=$request->monto_a_cobrar;
+        $cobro->observacion=$request->observacion;
+        $cobro->save();
+        return redirect()->route('cobro.index');
+        }catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 
     /**

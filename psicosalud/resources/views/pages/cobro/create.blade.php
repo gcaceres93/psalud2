@@ -17,16 +17,28 @@
     <div class="col-md-6">
   	<form method="post" action="/cobro">
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-  		
+  		@if($asd)
   		<div class="form-group">
           			<label for="factura">Factura</label>
-          			<select  name="factura" id="factura"  class="form-control selectpicker">
-          			
+          			@foreach($asd as $key=>$asaniu)
+       						@if ($key=='id')
+          						<input type="hidden" name="id_f" id="id_f" value="{{$id=$asaniu }}"> 
+          					@endif	
+          					@if ($key=='nro')
+          					<input type="hidden" name="id_nro" id="id_nro" value="{{$nro=$asaniu }}"> 
+          						
+          					@endif	
+          						
+          			@endforeach
+            	
+                <select  name="factura" id="factura"    value ="{{$id}}" class="form-control selectpicker">
+                 <option selected  value ="{{$id}}">{{$nro}}</option>
 
-                   
               	</select>
           	</div>
-
+          	
+          	
+		@endif
   			
   	<div class="form-group">
           			<label for="tipo_pago">Tipo de Pago:</label>

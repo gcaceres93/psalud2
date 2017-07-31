@@ -23,11 +23,12 @@
 	  					<th>Fecha</th>
 	  					<th>Monto Total</th>
 	  					<th>Tipo de Factura</th>
+	  					<th>Estado</th>
 	  					<th>Acciones</th>
 	  				</tr>
 	  			</thead>
 	  			<tbody>
-	  			@foreach($data as $row)
+	  			@foreach($data as  $row)
 	  				<tr>
 	  					<td>{{ $row->id }}</td>
 	  					<td>{{ $row->nombre }} {{ $row->apellido }}</td>
@@ -37,6 +38,7 @@
 	  					<td>{{ $row->fecha}}</td>
 	  					<td>{{ $row->monto_total}}</td>
 	  					<td>{{ $row->tipo_pago}}</td>
+	  					<td>{{ $row->estado}}</td>
 	  					<td>
 	  					<center>
 	  						<a href="{{ route('factura.edit', $row->id) }}" class="btn btn-info">Editar</a></br>
