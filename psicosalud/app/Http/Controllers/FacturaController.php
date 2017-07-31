@@ -68,6 +68,8 @@ class FacturaController extends Controller
         }
         else {
             $nro_factura = '001-001-0000001';
+            $factura->timbrado = '';
+            $factura->vigencia_timbrado='';
         }
         
         $factura_conceptos = FacturaConcepto::all()->sortBy('descripcion');
