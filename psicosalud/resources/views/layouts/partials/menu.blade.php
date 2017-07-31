@@ -86,7 +86,7 @@
                   <li><a href="{{ url('/rol') }}">Roles</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">CONFIGURACION DE TEST Y ANAMNESIS</li>
-                  <li><a href="#">Cuestionario anamnesis</a></li>
+                  <li><a href="/cuestionarioAnamnesis">Cuestionario anamnesis</a></li>
                   <li><a href="#">Preguntas por Test</a></li>
                   <li><a href="#">Respuestas por preguntas</a></li>
                   <li role="separator" class="divider"></li>
