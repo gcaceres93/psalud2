@@ -30,6 +30,7 @@ Route::resource('facturaconcepto','FacturaConceptoController');
 Route::resource('factura','FacturaController');
 Route::get('/verificarConsulta','FacturaController@verificarConsulta' ); 
 Route::get('/traerConsulta','FacturaController@traerConsulta' );  
+
 Route::get('/tablaDinamica','FacturaController@tablaDinamica' );  
 Route::get('/tablaDinamicaupdate','FacturaController@tablaDinamicaupdate');
 // Agendamiento

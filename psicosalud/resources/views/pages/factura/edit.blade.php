@@ -16,10 +16,10 @@
     
  <div id="Facturas" class="container">	
 <ul  class="nav nav-pills">
-			<li class="active">
+			<li class="active" >
         	<a  href="#Factura" data-toggle="tab">Factura</a>
 			</li>
-			<li><a href="#Cobro" data-toggle="tab">Cobro</a>
+			<li ><a href="#Cobro" data-toggle="tab">Cobro</a>
 			</li>
 			
 		</ul>
