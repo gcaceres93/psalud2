@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Exception;
-use app\Persona;
+use App\Persona;
+use App\Ocupacion;
 
 class PersonaController extends Controller
 {
@@ -18,7 +19,6 @@ class PersonaController extends Controller
     public function index()
     {
         $data=Persona::all()->sortBy('apellido');
-        
         return view('pages.'.$this->path.'.index',compact('data'));
     }
 
@@ -29,7 +29,8 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        
+        $ocupaciones=Ocupacion::all()->sortBy('nombre');
+        return view('pages.'.$this->path.'.create',compact('ocupaciones'));
     }
 
     /**
@@ -40,7 +41,27 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            /* Primero instanciamos el modelo persona */
+            
+            $persona = new Persona();
+            $persona->nombre=$request->nombre;
+            $persona->apellido=$request->apellido;
+            $persona->nacimiento=$request->nacimiento;
+            $persona->email=$request->email;
+            $persona->telefono=$request->telefono;
+            $persona->cedula=$request->cedula;
+            $persona->direccion=$request->direccion;
+            $persona->colegio=$request->colegio;
+            $persona->grado=$request->grado;
+            $persona->lugar_nacimiento=$request->lugar_nacimiento;
+            $persona->ocupacion_id=$request->ocupacion;
+            
+            $persona->save();
+            return redirect()->route('persona.index');
+        } catch (Exception $e) {
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 
     /**
@@ -51,7 +72,9 @@ class PersonaController extends Controller
      */
     public function show($id)
     {
-        //
+        $persona = Persona::findOrFail($id);
+        
+        return view('pages.'.$this->path.'.show',compact('persona'));
     }
 
     /**
@@ -62,7 +85,9 @@ class PersonaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ocupaciones=Ocupacion::all()->sortBy('nombre');
+        $persona = Persona::findOrFail($id);
+        return view('pages.'.$this->path.'.edit',compact('persona','ocupaciones'));
     }
 
     /**
@@ -74,7 +99,21 @@ class PersonaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $persona = Persona::findOrFail($id);
+        $persona->nombre=$request->nombre;
+        $persona->apellido=$request->apellido;
+        $persona->nacimiento=$request->nacimiento;
+        $persona->email=$request->email;
+        $persona->telefono=$request->telefono;
+        $persona->cedula=$request->cedula;
+        $persona->direccion=$request->direccion;
+        $persona->colegio=$request->colegio;
+        $persona->grado=$request->grado;
+        $persona->lugar_nacimiento=$request->lugar_nacimiento;
+        $persona->ocupacion_id=$request->ocupacion;
+        
+        $persona->save();
+        return redirect()->route('persona.index');
     }
 
     /**
@@ -85,6 +124,12 @@ class PersonaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $persona = Persona::findOrFail($id);
+            $persona->delete();
+            return redirect()->route($this->path.'.index');
+        } catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 }

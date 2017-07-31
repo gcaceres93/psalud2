@@ -25,7 +25,7 @@ class PacienteController extends Controller
         
         return view('pages.'.$this->path.'.index',compact('data'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +35,7 @@ class PacienteController extends Controller
     {
         return view('pages.'.$this->path.'.create');
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -46,7 +46,7 @@ class PacienteController extends Controller
     {
         try {
             /* Primero instanciamos el modelo persona */
-
+            
             $persona = new Persona();
             $persona->nombre=$request->nombre;
             $persona->apellido=$request->apellido;
@@ -56,13 +56,13 @@ class PacienteController extends Controller
             $persona->cedula=$request->cedula;
             $persona->direccion=$request->direccion;
             $persona->save();
-
+            
             /* Guardamos el valor del ID generado para la persona */
-
+            
             $lastInsertedId=$persona->id;
-
+            
             /* Creamos el empleado */
-
+            
             $paciente = new Paciente();
             $paciente->ruc=$request->ruc;
             $paciente->razon_social=$request->razon_social;
@@ -71,10 +71,10 @@ class PacienteController extends Controller
             return redirect()->route('paciente.index');
             
         } catch (Exception $e) {
-             return "Fatal error - ".$e->getMessage();
+            return "Fatal error - ".$e->getMessage();
         }
     }
-
+    
     /**
      * Display the specified resource.
      *
@@ -87,7 +87,7 @@ class PacienteController extends Controller
         $familiares= Paciente::with('tipoFamiliares','personas')->where('id', $id)->get();
         return view('pages.'.$this->path.'.show',compact('paciente','familiares'));
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -99,7 +99,7 @@ class PacienteController extends Controller
         $paciente = Paciente::findOrFail($id);
         return view('pages.'.$this->path.'.edit',compact('paciente'));
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -123,21 +123,21 @@ class PacienteController extends Controller
         $paciente->razon_social=$request->razon_social;
         $paciente->save();
         return redirect()->route($this->path.'.index');     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-         try{
-            $paciente = Paciente::findOrFail($id);
-            $paciente->delete();
-            return redirect()->route($this->path.'.index');
-        } catch(Exception $e){
-            return "Fatal error - ".$e->getMessage();
+        
+        /**
+         * Remove the specified resource from storage.
+         *
+         * @param  int  $id
+         * @return \Illuminate\Http\Response
+         */
+        public function destroy($id)
+        {
+            try{
+                $paciente = Paciente::findOrFail($id);
+                $paciente->delete();
+                return redirect()->route($this->path.'.index');
+            } catch(Exception $e){
+                return "Fatal error - ".$e->getMessage();
+            }
         }
-    }
 }

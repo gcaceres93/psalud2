@@ -21,6 +21,11 @@ class Persona extends Model
         return $this->hasOne('app\Empleado');
     }
     
+    public function ocupacion()
+    {
+        return $this->belongsTo('App\Ocupacion');
+    }
+    
     public function pacientes()
     {
         return $this->belongsToMany('App\Paciente','familiar_por_paciente')->withPivot('tipo_familiar_id');
