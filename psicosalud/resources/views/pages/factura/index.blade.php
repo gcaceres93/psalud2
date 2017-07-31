@@ -39,8 +39,8 @@
 	  					<td>{{ $row->tipo_pago}}</td>
 	  					<td>
 	  					<center>
-	  						<a href="{{ route('cargo.edit', $row->id) }}" class="btn btn-info">Editar</a>
-							<form action="{{ route('cargo.destroy', $row->id) }}" method="post">
+	  						<a href="{{ route('factura.edit', $row->id) }}" class="btn btn-info">Editar</a>
+							<form action="{{ route('factura.destroy', $row->id) }}" method="post">
 								<input type="hidden" name="_method" value="DELETE">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<button type="submit" class="btn btn-danger">Eliminar</button>

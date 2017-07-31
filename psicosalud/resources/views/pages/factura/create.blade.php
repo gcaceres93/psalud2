@@ -61,12 +61,12 @@
           	</div>
           	
           	<div class="form-group">
-          			<label for="nro">Monto Total:</label>
-          			<input type="number" name="monto" class="form-control" placeholder="Monto" > 	
+          			<label for="monto">Monto Total:</label>
+          			<input type="number" name="monto" id="monto" class="form-control" placeholder="Monto" > 	
           	</div>
           	<div class="form-group">
           			<label for="observacion">Observaciones:</label>
-          			<input type="text" name="observacion" required class="form-control" placeholder="Observaciones" > 	
+          			<input type="text" name="observacion" id="observacion" required class="form-control" placeholder="Observaciones" > 	
           		</div>
   		</div>
   
@@ -85,27 +85,27 @@
               
               <div class="form-group">
           			<label for="nro">Numero de Factura:</label>
-          			<input type="text" name="nro" class="form-control" placeholder="Numero de Factura" value="{{ $nro_factura }}"> 	
+          			<input type="text" name="nro" id="nro" class="form-control" placeholder="Numero de Factura" value="{{ $nro_factura }}"> 	
           		</div>
          
                <div class="form-group">
           			<label for="fecha">Fecha de Factura:</label>
-          			<input type="date" name="fecha" class="form-control"  > 	
+          			<input type="date" name="fecha" id="fecha" class="form-control"  > 	
           		</div>
               
           
           		
           		
           		<div class="form-group">
-          			<label for="nro">Timbrado:</label>
-          			<input type="text" name="timbrado" class="form-control" placeholder="Numero de Timbrado" value="{{ $factura->timbrado }}"> 	
+          			<label for="timbrado">Timbrado:</label>
+          			<input type="text" name="timbrado" id="timbrado" class="form-control" placeholder="Numero de Timbrado" value="{{ $factura->timbrado }}"> 	
           		</div>
           		<div class="form-group">
-          			<label for="fecha_timbrado">Fecha Validez Timbrado:</label>
-          			<input type="date" name="vigencia_timbrado" class="form-control"  value="{{ $factura->vigencia_timbrado }}"> 	
+          			<label for="vigencia_timbrado">Fecha Validez Timbrado:</label>
+          			<input type="date" name="vigencia_timbrado" id="vigencia_timbrado" class="form-control"  value="{{ $factura->vigencia_timbrado }}"> 	
           		</div>
   			</div>
-  		
+  		<input type="text" name="estado" value="Abierto" hidden> 	
   		<div class="col-md-12">
   		<table id="tabla" name="tabla" class="table table-hover table-bordered table-condensed">
   				<thead>
@@ -117,8 +117,9 @@
 	  					<th>Precio Total</th>
 	  				</tr>
 	  			</thead>
-	  			<tbody id="detalle">
+	  			<tbody id="detalle"  class="detalle" name="detalle">
 	  				
+											          		
 	  		</tbody>
   			</table>
     <button type="button" name="agregar" id="agregar" class="btn btn-success">Agregar Fila</button>  <button type="button" name="borrar_fila" id="borrar_fila" class="btn btn-danger">Borrar Uiltima Fila</button>
@@ -132,7 +133,7 @@
 <!--       </div> -->
 <!--       </div> -->
 
-  		<button type="submit" class="btn btn-info">Guardar</button>
+  		<button type="button" name="guardar" id="guardar" class="btn btn-info">Guardar</button>
   	</form>	
     </div>
     <div class="tab-pane" id="Cobro">
@@ -149,11 +150,11 @@
           	</div>
           	<div class="form-group">
           			<label for="monto_a_cobrar">Monto a Cobrar:</label>
-          			<input type="number" name="monto_a_cobrar"  class="form-control" placeholder="Monto" > 	
+          			<input type="number" name="monto_a_cobrar"  id="monto_a_cobrar"  class="form-control" placeholder="Monto" > 	
           	</div>
           	<div class="form-group">
           			<label for="observacion_cobro">Observacion:</label>
-          			<input type="test" name="observacion_cobro"  class="form-control" required placeholder="Observacion" > 	
+          			<input type="test" name="observacion_cobro" id="observacion_cobro"  class="form-control" required placeholder="Observacion" > 	
           	</div>
           	<button type="button" name="cobrar" id="cobrar"  class="btn btn-success">Cobrar</button>
 			</div>
@@ -172,9 +173,125 @@ $(document).ready(function() {
         
     });
 });
+
+// $('#timbrado').on('click', function() {
+//     $("#tr.detalle").each(function() {
+//         var quantity1 = $(this).find("input.name").val(),
+//             quantity2 = $(this).find("input.id").val();
+//         console.log(quantity1);
+//         console.log(quantity2);
+//     });
+// });
+$(document).ready(function() {	
+    $('#guardar').on('click', function () {
+		var monto;
+		var concepto = [];
+		var cantidad=[];
+		var impuesto=[];
+		var monto_total=[];
+		var persona=  $('#persona').val();
+		var consulta=  $('#consulta').val();
+		var medico=  $('#medico').val();
+		var monto=  $('#monto').val();
+		var observacion=  $('#observacion').val();
+		var tipo_pago=  $('#tipo_pago').val();
+		var nro=  $('#nro').val();
+		var fecha=  $('#fecha').val();
+		var timbrado=  $('#timbrado').val();
+		var estado=  $('#estado').val();
+		var vigencia_timbrado=  $('#vigencia_timbrado').val();
+        var table = document.getElementById("detalle");
+        for (var i = 0, row; row = table.rows[i]; i++) {
+             
+        	   //iterate through rows
+        	   //rows would be accessed using the "row" variable assigned in the for loop
+        	   for (var j = 0, col; col = row.cells[j]; j++) {
+        		  	
+        		   valor= col.childNodes.item(0).value;
+        		   nombre= col.childNodes.item(0).name;
+
+        		   if (j==0){
+
+        			   concepto.push(valor);
+        		   }
+        		   if (j==1){
+
+        			   cantidad.push(valor);
+            		   }
+        		   if (j==2){
+
+        			   impuesto.push(valor);
+            		   }
+        		   if (j==4){
+
+        			   monto_total.push(valor);
+            		   }
+ 					
+        	   }  
+        	   
+        	}
+        var data = {consulta:consulta,concepto:concepto,cantidad:cantidad,impuesto:impuesto,monto_total:monto_total,persona:persona,medico:medico,monto:monto,observacion:observacion,tipo_pago:tipo_pago,nro:nro,fecha:fecha,timbrado:timbrado,estado:estado,vigencia_timbrado:vigencia_timbrado};
+
+        $.ajax({
+            method: 'get',
+            url: '/tablaDinamica',
+            data:  data,
+            async: true,
+            dataType:"json",
+            success: function(data){
+            	console.log(data);
+            	window.location.replace("/factura");
+		
+
+                
+            	
+            },
+            error: function(data){
+            	var errors = data.responseJSON;
+//                 alert(errors);
+                console.log(data);
+            },
+          
+        });
+    	
+        
+    });
+});
+
+
+
+function recorrerTabla(value,index,ar){
+	console.log(value);
+	
+}
+
 $(document).ready(function() {	
     $('#borrar_fila').on('click', function () {
     	borrarfila('detalle');
+        
+    });
+});
+
+
+$(document).ready(function() {	
+    $('#monto').on('click', function () {
+//      	  $('#monto').val($('#monto_detalle').val())
+//     var table = document.getElementById("detalle");
+    var monto = 0;
+    var table = document.getElementById("detalle");
+    for (var i = 0, row; row = table.rows[i]; i++) {
+         
+    	   //iterate through rows
+    	   //rows would be accessed using the "row" variable assigned in the for loop
+    	   for (var j = 0, col; col = row.cells[j]; j++) {
+    		  	if (j==4){
+    		   monto = Number(monto) + Number( col.childNodes.item(0).value);
+    		   
+    		  	}
+    	   }  
+    	}
+
+	  $('#monto').val(monto);
         
     });
 });
@@ -192,6 +309,7 @@ $(document).ready(function() {
             dataType:"json",
             success: function(data){
             	$('#consulta').html('	');
+            	$('#consulta').append(' <option  </option>'); 
 			 data.forEach(recorrerdata);
 		
 
@@ -221,7 +339,12 @@ $(document).ready(function() {
             dataType:"json",
             success: function(data){
 //             	$('#consulta').html('	');
-			 data.forEach(recorrerdata);
+// 			 data.forEach(recorrerdata);
+				borrarfila('detalle');
+				agregarfila();
+// 				$('#factura_concepto').value(1);
+				 data.forEach(recorrerconsulta);
+				
 		
 
                 
@@ -237,6 +360,15 @@ $(document).ready(function() {
     });
 });
 
+function recorrerconsulta(value,index,ar){
+	$('#factura_concepto').val(1);
+	$('#cantidad').val(value.cantidad_horas);
+	$('#precio_unitario').val(value.tarifa);
+	var total = value.cantidad_horas * value.tarifa;
+	$('#monto_detalle').val(total);
+	
+}
+
 
 
 function agregarfila(){
@@ -246,21 +378,21 @@ function agregarfila(){
     											               
     											              "<select  name='factura_concepto' id='factura_concepto' class='form-control selectpicker'>"+
     											               " <option value='' >Seleccionar Concepto</option>"+
-    											                "@foreach($factura_concepto as $concepto)"+
-    											                  "<option   value='{{ $concepto->id }}'>{{ $concepto->descripcion }} </option>"+
+    											                "@foreach($factura_conceptos as $factura_concepto)"+
+    											                  "<option   value='{{ $factura_concepto->id }}'>{{ $factura_concepto->descripcion }} </option>"+
     											                "@endforeach"+
     											              "</select>"+
 											          			
 											          		" </td>" +
-														'<td><input type="number" name="cantidad" class="form-control" placeholder="Cantidad" > 	</td>'+
+														'<td><input type="number" name="cantidad" id="cantidad" class="form-control" placeholder="Cantidad" > 	</td>'+
 														'<td><select  name="impuesto" id="impuesto" class="form-control selectpicker>'+
 										                '<option value="" >Seleccionar Impuesto</option>'+
 										               '@foreach($impuestos as $impuesto)'+
 										                '  <option   value="{{ $impuesto->id }}">{{ $impuesto->nombre }} </option>'+
 										                '@endforeach'+
 										              '</select></td>'+
-														 '<td><input type="number" name="precio_unitario" class="form-control" placeholder="Precio unitario" ></td>'+
-														 '<td><input type="number" name="monto_detalle" class="form-control" placeholder="Precio Total" ></td>'+
+														 '<td><input type="number" name="precio_unitario"  id="precio_unitario" class="form-control" placeholder="Precio unitario" ></td>'+
+														 '<td><input type="number" name="monto_detalle"  id="monto_detalle" class="form-control" placeholder="Precio Total" ></td>'+
 											"</tr>");
 }
 function borrarfila(tableID){

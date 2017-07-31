@@ -11,6 +11,7 @@ class Factura extends Model
     //
     
     public function facturadetalle(){
-        return $this->belongsToMany('App\FacturaDetalle','factura_detalle')->withPivot('factura_cabecera_id'); 
+        return $this->hasMany('App\FacturaDetalle','factura_cabecera_id'); 
+        
     }
 }
