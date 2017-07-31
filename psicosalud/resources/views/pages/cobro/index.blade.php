@@ -16,7 +16,9 @@
   				<thead>
 	  				<tr class="table table-info">
 	  					<th>ID</th>
-	  					<th>Factura</th>
+	  					<th>Factura Nro</th>
+	  					<th>Razon Social</th>
+	  					<th>Ruc</th>
 	  					<th>Monto</th>
 	  					<th>Tipo de Pago</th>
 	  					<th>Observaciones</th>
@@ -45,6 +47,8 @@
 	  				<tr>
 	  					<td>{{ $row->id }}</td>
 	  					<td>{{ $row->nro }}</td>
+	  					<td>{{ $row->razon_social }}</td>
+	  					<td>{{ $row->ruc }}</td>
 	  					<td>{{ $row->monto }}</td>
 	  					<td><?php echo ($pago) ?></td>
 	  					<td>{{ $row->observacion }}</td>

@@ -263,8 +263,8 @@ $(document).ready(function() {
 $(document).ready(function() {	
     $('#medico').on('click', function () {
     	var medico = $('#medico').val();
-        
-        var data = {medico:medico};
+        var paciente = $('#persona').val();
+        var data = {medico:medico,paciente:paciente};
         $.ajax({
             method: 'get',
             url: '/verificarConsulta',

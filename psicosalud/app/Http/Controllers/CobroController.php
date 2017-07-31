@@ -18,11 +18,12 @@ class CobroController extends Controller
     public function index()
     {
         //
-        $data= Cobro::all()->sortBy('id');
+//         $data= Cobro::all()->sortBy('id');
         
         $data = DB::table('cobro as c')
         ->join('factura_cabecera as f','f.id','=','c.factura_id')
-        ->select('c.*','f.nro')
+        ->join('paciente as p','p.id','=','f.paciente_id')
+        ->select('c.*','f.nro','p.razon_social','p.ruc')
             ->get();
         
         return view('pages.cobro.index',compact('data'));
@@ -155,7 +156,11 @@ class CobroController extends Controller
         //
         try{
             $cobros = Cobro::findOrFail($cobro);
+            $id_factura =$cobros->factura_id;
             $cobros->delete();
+            $update_factura = DB::table('factura_cabecera')
+            ->where('id', $id_factura)
+            ->update(['estado' =>'Pendiente' ]);
             return redirect()->route('cobro.index');
         } catch(Exception $e){
             return "Fatal error - ".$e->getMessage();

@@ -94,12 +94,12 @@ class FacturaController extends Controller
     public function verificarConsulta(Request $request){
         
         $medico = $request->medico;
-        
+        $paciente = $request->paciente;
         $consultas = DB::table('consulta')
         ->join('empleado','consulta.empleado_id','=','empleado.id')
         ->join('persona','empleado.persona_id','=','persona.id')
         ->select('consulta.*','persona.nombre','persona.apellido')
-        ->where([['consulta.empleado_id', '=', $medico],['consulta.estado', '=', 'Consulta']])
+        ->where([['consulta.empleado_id', '=', $medico],['consulta.estado', '=', 'Consulta'],['consulta.paciente_id', '=', $paciente]])
         ->get();
         
         return json_encode($consultas);
@@ -276,6 +276,7 @@ class FacturaController extends Controller
         ->join('persona','empleado.persona_id','=','persona.id')
         ->select('consulta.*','persona.nombre','persona.apellido')
         ->where('consulta.empleado_id', '=',$facturas->empleado_id)
+        ->where('consulta.paciente_id', '=',$facturas->paciente_id)
         ->where('consulta.estado' , '=', 'Consulta')
         ->orWhere('consulta.id', '=', $facturas->consulta_id)
         ->get();
@@ -422,11 +423,15 @@ class FacturaController extends Controller
         //
         try{
             $factura = Factura::findOrFail($factura);
+            $consulta= $factura->consulta_id;
             $id=$factura->id;
 //             $factura_detalle = FacturaDetalle::where('factura_cabecera_id', '=', $id);
             $factura->facturadetalle()->delete();
             $factura->cobro()->delete();
             $factura->delete();
+            $update_consulta = DB::table('consulta')
+            ->where('id', $consulta)
+            ->update(['estado' =>'Consulta' ]);
             
             return redirect()->route('factura.index');
         } catch(Exception $e){
