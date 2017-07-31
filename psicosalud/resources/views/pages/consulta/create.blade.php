@@ -132,6 +132,8 @@ $(document).ready(function() {
             	    $("body").scrollTop($("#success").offset().top);
             	    $(".container :input").attr("disabled", true);
             	    $(".well-lg :input").attr("disabled", false);
+            	    $("#success").attr("disabled", false);
+            	    $("#success").fadeOut(1800);
 
             	
             },
