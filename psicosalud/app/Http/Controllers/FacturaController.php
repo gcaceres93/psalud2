@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Factura;
+use App\Cobro;
 use App\Consulta;
 use App\Impuestos;
 use App\FacturaConcepto;
@@ -19,6 +20,16 @@ class FacturaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    
+        public function asaniu($factura) {
+            
+            $id=$factura->id;
+            dd($id);
+            return $id;
+            
+        }
+    
     public function index()
     {
         
@@ -272,6 +283,7 @@ class FacturaController extends Controller
         //         DB::table('files')->orderBy('upload_time', 'desc')->first();
         //         $cargos = Cargo::all()->sortBy('descripcion');
         return view('pages.'.$this->path.'.edit',compact('personas','facturas','empleados','factura_conceptos','impuestos','consultas','factura_detalle')); 
+       
     }
 
     /**
@@ -295,44 +307,9 @@ class FacturaController extends Controller
         
     }
     
-    public function cobro(){
-        
-       
-        $facturas = Factura::findOrFail();
-        $personas=DB::table('paciente')
-        ->join('persona','paciente.persona_id','=','persona.id')
-        ->select('paciente.*','persona.nombre','persona.apellido')
-        ->groupBy('persona.apellido','persona.nombre','paciente.id')
-        ->orderBy('persona.apellido')
-        ->get();
-        $empleados=DB::table('empleado')
-        ->join('persona','empleado.persona_id','=','persona.id')
-        ->select('empleado.*','persona.nombre','persona.apellido')
-        ->where('es_medico','=',true)
-        ->groupBy('persona.apellido','persona.nombre','empleado.id')
-        ->orderBy('persona.apellido')
-        ->get();
-        $consultas = DB::table('consulta')
-        ->join('empleado','consulta.empleado_id','=','empleado.id')
-        ->join('persona','empleado.persona_id','=','persona.id')
-        ->select('consulta.*','persona.nombre','persona.apellido')
-        ->where([['consulta.empleado_id', '=',$facturas->empleado_id],['consulta.estado', '=', 'Consulta']])
-        ->get();
-        $factura_detalle =   DB::table('factura_detalle')
-        ->select('factura_detalle.*')
-        ->where('factura_cabecera_id', '=',$facturas->id)
-        ->get();
-        $factura_conceptos = FacturaConcepto::all()->sortBy('descripcion');
-        $impuestos = Impuestos::all()->sortBy('nombre');
-        //         DB::table('files')->orderBy('upload_time', 'desc')->first();
-        //         $cargos = Cargo::all()->sortBy('descripcion');
-        return view('pages.'.$this->path.'.edit',compact('personas','facturas','empleados','factura_conceptos','impuestos','consultas','factura_detalle')); 
-        
-//         return view('pages.'.$this->path.'.index',compact('data'));  
-        
-        
-        
-    }
+    
+    
+  
     public function update($request,  $factura)
     {
         //
