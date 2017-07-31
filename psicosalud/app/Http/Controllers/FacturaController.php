@@ -55,7 +55,7 @@ class FacturaController extends Controller
         ->orderBy('persona.apellido')
         ->get();
         $factura=Factura::all()->sortByDesc('id')->first();
-        if (count($factura)>0){
+        if (count($factura)>5){
             $ultimo_nro = ((int)mb_substr($factura->nro,9))+1;
             $cantidad_nro = ((string)strlen($ultimo_nro));
             $nro='';
@@ -68,6 +68,7 @@ class FacturaController extends Controller
         }
         else {
             $nro_factura = '001-001-0000001';
+            $factura= New Factura();
             $factura->timbrado = '';
             $factura->vigencia_timbrado='';
         }
