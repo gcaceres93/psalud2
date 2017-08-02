@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Exception;
+use App\CuestionarioAnamnesis;
 
 class CuestionarioAnamnesisController extends Controller
 {
@@ -11,9 +14,12 @@ class CuestionarioAnamnesisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    protected $path = 'cuestionarioAnamnesis';
     public function index()
     {
-        //
+        $data = CuestionarioAnamnesis::all()->sortBy('orden');
+        return view('pages.'.$this->path.'.index', compact('data'));
     }
 
     /**
@@ -23,7 +29,9 @@ class CuestionarioAnamnesisController extends Controller
      */
     public function create()
     {
-        //
+        $ultimo = DB::table('cuestionario_anamnesis')->max('orden');     
+        return view('pages.'.$this->path.'.create',compact('ultimo'));
+        
     }
 
     /**
@@ -34,7 +42,25 @@ class CuestionarioAnamnesisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $cuestionario = new CuestionarioAnamnesis();
+            $cuestionario->pregunta = $request->pregunta;
+            $cuestionario->aclaracion_pregunta = $request->aclaracion_pregunta;
+            if ($request->orden){
+                $cuestionario->orden = $request->orden;
+            }else{
+                $cuestionario->orden = (DB::table('cuestionario_anamnesis')->max('orden')+1);
+            }
+            $cuestionario->grupo = $request->grupo;
+            $cuestionario->save();
+            return redirect()->route('cuestionarioAnamnesis.index');
+        }catch (Exception $e){
+            return "Fatal error - ".$e->getMessage();
+            
+        }
+        
+        
+        
     }
 
     /**
@@ -56,7 +82,10 @@ class CuestionarioAnamnesisController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ultimo = DB::table('cuestionario_anamnesis')->max('orden');
+        $cuestionario = CuestionarioAnamnesis::findOrFail($id);
+        return view('pages.'.$this->path.'.edit',compact('cuestionario','ultimo'));
+        
     }
 
     /**
@@ -68,10 +97,25 @@ class CuestionarioAnamnesisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $cuestionario = CuestionarioAnamnesis::findOrFail($id);
+            $cuestionario->pregunta = $request->pregunta;
+            $cuestionario->aclaracion_pregunta = $request->aclaracion_pregunta;
+            if ($request->orden){
+                $cuestionario->orden = $request->orden;
+            }else{
+                $cuestionario->orden = (DB::table('cuestionario_anamnesis')->max('orden')+1);
+            }
+            $cuestionario->grupo = $request->grupo;
+            $cuestionario->save();
+            return redirect()->route('cuestionarioAnamnesis.index');
+        }catch (Exception $e){
+            return "Fatal error - ".$e->getMessage();
+            
+        }
     }
 
-    /**
+    /**c
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -79,6 +123,12 @@ class CuestionarioAnamnesisController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $cuestionario = CuestionarioAnamnesis::findOrFail($id);
+            $cuestionario->delete();
+            return redirect()->route('cuestionarioAnamnesis.index');
+        } catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 }
