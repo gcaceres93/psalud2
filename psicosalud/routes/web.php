@@ -11,7 +11,11 @@
 |
 */
 
+/* ANAMNESIS */
 Route::resource('cuestionarioAnamnesis','CuestionarioAnamnesisController');
+Route::resource('anamnesis','AnamnesisController');
+
+
 Route::resource('ocupacion', 'OcupacionController');
 Route::resource('modalidad','ModalidadController');
 Route::resource('tipoTerapia','TipoTerapiaController');
