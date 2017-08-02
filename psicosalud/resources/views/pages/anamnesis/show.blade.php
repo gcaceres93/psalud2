@@ -61,38 +61,6 @@
     </div>
   </div>
 </div>
-
-<div class="form-group">
-  <label class="col-md-4 control-label">Lugar de nacimiento</label>  
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="lugar_nacimiento" placeholder="Lugar de nacimiento" class="form-control" type="text" value="{{$paciente->persona->lugar_nacimiento}}">
-    </div>
-  </div>
-</div>
-
-
-<div class="form-group">
-  <label class="col-md-4 control-label">Colegio</label>  
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="colegio" placeholder="Colegio donde se realizaron los estudios primarios/secundarios" class="form-control" type="text" value="{{$paciente->persona->colegio}}">
-    </div>
-  </div>
-</div>
-
-<div class="form-group">
-  <label class="col-md-4 control-label">Grado</label>  
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="grado" placeholder="Grado" class="form-control" type="text" value="{{$paciente->persona->grado}}">
-    </div>
-  </div>
-</div>
-
 <div class="form-group">
   <label class="col-md-4 control-label" >RUC</label> 
     <div class="col-md-4 inputGroupContainer">

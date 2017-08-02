@@ -14,7 +14,8 @@
 /* ANAMNESIS */
 Route::resource('cuestionarioAnamnesis','CuestionarioAnamnesisController');
 Route::resource('anamnesis','AnamnesisController');
-
+Route::get('/existeAnamnesis/{id}','AnamnesisController@existeAnamnesis');
+Route::get('/anamnesisPaciente/{id}','AnamnesisController@anamnesisPaciente');
 
 Route::resource('ocupacion', 'OcupacionController');
 Route::resource('modalidad','ModalidadController');
@@ -55,6 +56,7 @@ Route::get('/reporteAsistencia','AgendamientoController@reporteAsistencia' );
 Route::resource('persona','PersonaController');
 Route::resource('user','Auth\RegisterController');
 Route::resource('paciente','PacienteController');
+Route::post('/guardarPaciente','PacienteController@store' );
 Route::resource('empleado','EmpleadoController');
 Route::get('/medico','EmpleadoController@getMedicos')->name('medico.index');
 Route::get('/medico/create','EmpleadoController@createMedico')->name('medico.create');

@@ -22,6 +22,7 @@ class TipoFamiliarTableSeeder extends Seeder
             array('nombre'=>'Prima'),
             array('nombre'=>'Tio'),
             array('nombre'=>'Tia'),
+            array('nombre'=>'Tutor'),
             array('nombre'=>'Sobrino'),
             array('nombre'=>'Sobrina'),
             array('nombre'=>'Abuelo'),

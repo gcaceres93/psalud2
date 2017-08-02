@@ -1,4 +1,4 @@
-@extends('layouts.popup')
+@extends('layouts.master')
 
 @section('main_content')
 

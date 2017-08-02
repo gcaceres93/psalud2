@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Anamnesis;
 use App\Paciente;
 use App\Persona;
 use Exception;
+use App\TipoFamiliar;
 class PacienteController extends Controller
 {
     protected $path = 'paciente';
@@ -33,7 +35,9 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        return view('pages.'.$this->path.'.create');
+        $personas = Persona::all()->sortBy('apellido');
+        $tipos = TipoFamiliar::all()->sortBy('nombre');
+        return view('pages.'.$this->path.'.create',compact('personas','tipos'));
     }
     
     /**
@@ -55,20 +59,53 @@ class PacienteController extends Controller
             $persona->telefono=$request->telefono;
             $persona->cedula=$request->cedula;
             $persona->direccion=$request->direccion;
+            $persona->colegio=$request->colegio;
+            $persona->grado=$request->grado;
+            $persona->lugar_nacimiento=$request->lugar_nacimiento;
             $persona->save();
             
             /* Guardamos el valor del ID generado para la persona */
             
-            $lastInsertedId=$persona->id;
+            $personaId=$persona->id;
             
             /* Creamos el empleado */
             
             $paciente = new Paciente();
             $paciente->ruc=$request->ruc;
             $paciente->razon_social=$request->razon_social;
-            $paciente->persona_id=$lastInsertedId;
+            $paciente->persona_id=$personaId;
             $paciente->save();
-            return redirect()->route('paciente.index');
+            
+            $pacienteId=$paciente->id;
+            $canti=count($request->personas);
+//             return json_encode($canti);
+            $vari='';
+            for ($i = 0; $i < $canti; $i++) {
+               
+                foreach ($request->personas as $key=>$persona)
+                {
+                    if ($key == $i )
+                    {
+                        $per = $persona;
+                    }
+                    
+                }
+                
+                foreach ($request->tipos as $key=>$tipo)
+                {
+                    if ($key == $i )
+                    {
+                        $tip = $tipo;
+                    }
+                    
+                }
+                $paciente->tipoFamiliares()->attach($pacienteId,['persona_id' => $per,'tipo_familiar_id'=>$tip]);
+                
+            } 
+            
+            
+            return json_encode($paciente);
+            //return redirect()->route('paciente.index');
             
         } catch (Exception $e) {
             return "Fatal error - ".$e->getMessage();
@@ -84,8 +121,17 @@ class PacienteController extends Controller
     public function show($id)
     {
         $paciente = Paciente::findOrFail($id);
-        $familiares= Paciente::with('tipoFamiliares','personas')->where('id', $id)->get();
-        return view('pages.'.$this->path.'.show',compact('paciente','familiares'));
+        $familiares = DB::table('familiar_por_paciente as fp')
+        ->join('paciente as p','fp.paciente_id','=','p.id')
+        ->join('persona as ppaciente','p.persona_id','=','ppaciente.id')
+        ->join('persona as familiar','fp.persona_id','familiar.id')
+        ->join('tipo_familiar as t','fp.tipo_familiar_id','t.id')
+        ->select('familiar.nombre as nombre','familiar.apellido as apellido','t.nombre as tipo')
+        ->where('p.id','=',$id)
+            ->orderBy('nombre')
+            ->get();
+        $anamnesis = Anamnesis::where('paciente_id',$id)->first();
+        return view('pages.'.$this->path.'.show',compact('paciente','familiares','anamnesis'));
     }
     
     /**
@@ -118,6 +164,9 @@ class PacienteController extends Controller
         $persona->telefono=$request->telefono;
         $persona->cedula=$request->cedula;
         $persona->direccion=$request->direccion;
+        $persona->colegio=$request->colegio;
+        $persona->grado=$request->grado;
+        $persona->lugar_nacimiento=$request->lugar_nacimiento;
         $persona->save();
         $paciente->ruc=$request->ruc;
         $paciente->razon_social=$request->razon_social;

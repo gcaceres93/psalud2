@@ -32,9 +32,9 @@
 </head>
 <body>
 @include('layouts.partials.menu')
-
+<div class="container">
 @yield('main_content')
 
-
+</div>
 </body>
 </html>
