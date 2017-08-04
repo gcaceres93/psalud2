@@ -104,7 +104,7 @@ $aux = 'asd';
 	<div class="col-md-12">
 		<div class="form-group"> 
 			<label for="observacion">Observaciones del entrevistador</label>
-			<textarea disabled class="form-control" name="observacion" id="observacion" rows="5">$anamnesis->observacion</textarea>
+			<textarea disabled class="form-control" name="observacion" id="observacion" rows="5">{{$anamnesis->observacion}}</textarea>
 		</div>
 	</div>
 </div>
