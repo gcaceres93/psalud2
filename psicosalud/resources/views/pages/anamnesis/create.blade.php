@@ -20,6 +20,7 @@
 		<div class="form-group"> 
 			<label for="paciente">Paciente:</label>
 			<a href="{{url('/paciente/'.$paciente->id.'/edit') }}" >{{$paciente->id }} - {{$paciente->nombre}}  {{$paciente->apellido}} </a>
+			<input type="hidden" name="paciente_id" value="{{ $paciente->id }}"/>
 		</div>
 	</div>
 </div>
@@ -43,13 +44,13 @@
 	<div class="col-md-6">
 		<div class="form-group"> 
 			<label for="nombre">Fecha de nacimiento</label>
-			<input type="text" class="form-control" value="{{ $paciente->nacimiento }}" id="nacimiento" disabled>
+			<input type="text" class="form-control"  name="nacimiento" value="{{ $paciente->nacimiento }}" id="nacimiento" disabled>
 		</div>
 	</div>
 	<div class="col-md-6">
 		<div class="form-group"> 
 			<label for="apellido">Lugar de nacimiento</label>
-			<input type="text" class="form-control" value="{{ $paciente->lugar_nacimiento }}" id="lugar_nacimiento" disabled>
+			<input type="text" class="form-control" name="lugar_nacimiento" value="{{ $paciente->lugar_nacimiento }}" id="lugar_nacimiento" disabled>
 		</div>
 	</div>
 </div>
@@ -58,7 +59,7 @@
 	<div class="col-md-12">
 		<div class="form-group"> 
 			<label for="informantes">Informantes</label>
-			<textarea class="form-control"  id="motivo_consulta" rows="4"></textarea>
+			<textarea class="form-control"  name="informantes" id="informantes" rows="4"></textarea>
 		</div>
 	</div>
 </div>
@@ -67,27 +68,44 @@
 	<div class="col-md-12">
 		<div class="form-group"> 
 			<label for="motivo_consulta">Motivo de consulta</label>
-			<textarea class="form-control"  id="motivo_consulta" rows="5"></textarea>
+			<textarea class="form-control"  name="motivo_consulta" id="motivo_consulta" rows="5"></textarea>
 		</div>
 	</div>
 </div>
-<?php $aux = 'asd'; ?>
+@php 
+$aux = 'asd'; 
+@endphp
 
 @foreach($cuestionario as $c)
-	<?php echo $aux;?>
 	<div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-			
+			@unless($c->grupo == $aux)
 				<h3>{{ $c->grupo }} </h3>
-			
-			
-			<label for="{{ $c->pregunta }}">{{ $c->pregunta}}</label>
-			<textarea class="form-control"  id="cuestionario{{ $c->id}}" rows="5"></textarea>
+				<hr/>
+				@php
+					$aux = $c->grupo;
+				@endphp
+			@endunless			
+			<label for="{{ $c->pregunta }}">{{ $c->pregunta}} </label> 
+			@if(!empty($c->aclaracion_pregunta))
+						({{ $c->aclaracion_pregunta }})
+			@endif
+			<textarea class="form-control"  name="cuestionario{{ $c->id}}" id="cuestionario{{ $c->id}}" rows="5"></textarea>
 		</div>
 	</div>
 </div>
 @endforeach
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group"> 
+			<label for="observacion">Observaciones del entrevistador</label>
+			<textarea class="form-control" name="observacion" id="observacion" rows="5"></textarea>
+		</div>
+	</div>
+</div>
+
 <!-- Button -->
 <div class="form-group">
     <center><button type="submit" class="btn btn-success" >Guardar <span class="glyphicon glyphicon-send"></span></button></center>

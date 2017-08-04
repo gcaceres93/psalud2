@@ -8,6 +8,8 @@ use App\Anamnesis;
 use App\Persona;
 use App\Paciente;
 use App\CuestionarioAnamnesis;
+use App\Consulta;
+use App\RespuestaCuestionario;
 
 class AnamnesisController extends Controller
 {
@@ -33,6 +35,10 @@ class AnamnesisController extends Controller
         
     }
     
+    public function imprimirAnamnesis($id){
+        return $id;
+    }
+    
     public function anamnesisPaciente($id){
         $paciente = DB::table('paciente as p')
         ->join('persona as pe','p.persona_id','=','pe.id')
@@ -41,6 +47,7 @@ class AnamnesisController extends Controller
         ->orderBy('pe.nombre')
         ->first();
         $cuestionario = CuestionarioAnamnesis::all()->sortBy('orden');
+       // $consulta = Consulta::where('paciente_id',)
         return view('pages.'.$this->path.'.create',compact('paciente','cuestionario'));
     }
 
@@ -49,6 +56,8 @@ class AnamnesisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    
     public function create()
     {
         
@@ -62,7 +71,26 @@ class AnamnesisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $anamnesis = new Anamnesis();
+        $anamnesis->paciente_id=$request->paciente_id;
+        $anamnesis->observacion=$request->observacion;
+        $anamnesis->motivo=$request->motivo_consulta;
+        $anamnesis->informantes=$request->informantes;
+        $anamnesis->save();
+        
+        $i = 0;
+        $cuestionarios = CuestionarioAnamnesis::all()->sortBy('orden');
+        foreach ($cuestionarios as $cuestionario){
+            $i++;
+            $respuesta = 'cuestionario'.(string)$i;
+            $respuestaCuestionario = new RespuestaCuestionario();
+            $respuestaCuestionario->anamnesis_id = $anamnesis->id;
+            $respuestaCuestionario->cuestionario_anamnesis_id = $cuestionario->id;
+            $respuestaCuestionario->respuesta = $request->$respuesta;
+            $respuestaCuestionario->save();
+        }
+        return redirect()->route('anamnesis.show',$anamnesis->id);
+        
     }
 
     /**
@@ -73,7 +101,23 @@ class AnamnesisController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        $anamnesis = Anamnesis::findOrFail($id);
+        $paciente = DB::table('paciente as p')
+        ->join('persona as pe','p.persona_id','=','pe.id')
+        ->select('pe.*','p.*')
+        ->where('p.id','=',$anamnesis->paciente_id)
+        ->orderBy('pe.nombre')
+        ->first();
+        $respuestas = DB::table('respuesta_cuestionario as rc')
+        ->join('cuestionario_anamnesis as ca','rc.cuestionario_anamnesis_id','=','ca.id')
+        ->join('anamnesis as a','rc.anamnesis_id','=','a.id')
+        ->select('rc.*','ca.*')
+        ->where('a.id','=',$id)
+        ->orderBy('ca.orden')
+        ->get();
+        return view('pages.'.$this->path.'.show',compact('anamnesis','paciente','respuestas'));
+        
     }
 
     /**

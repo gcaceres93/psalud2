@@ -24,7 +24,7 @@
     <div class="col-md-8">
        <div class="btn-group well well-lg">
        	  <h1>Acciones desde consulta</h1> 	
-          <button type="button" class="btn btn-primary">Generar anamnesis</button>
+          <a href="{{ url('/anamnesisConsulta/'.$consulta->id) }}" class="btn btn-primary">Generar anamnesis</a>
           <button type="button" class="btn btn-danger">Generar diagnóstico</button>
           <button type="button" class="btn btn-info">Generar plan de tratamiento</button>
           <hr />

@@ -15,8 +15,8 @@
 Route::resource('cuestionarioAnamnesis','CuestionarioAnamnesisController');
 Route::resource('anamnesis','AnamnesisController');
 Route::get('/existeAnamnesis/{id}','AnamnesisController@existeAnamnesis');
-Route::get('/anamnesisPaciente/{id}','AnamnesisController@anamnesisPaciente');
-
+Route::get('/anamnesisPaciente/{id}','AnamnesisController@anamnesisPaciente')->name('anamnesis.anamnecisPaciente');
+Route::get('/imprimirAnamnesis/{id}','AnamnesisController@imprimirAnamnesis')->name('anamnesis.imprimirAnamnesis');
 Route::resource('ocupacion', 'OcupacionController');
 Route::resource('modalidad','ModalidadController');
 Route::resource('tipoTerapia','TipoTerapiaController');

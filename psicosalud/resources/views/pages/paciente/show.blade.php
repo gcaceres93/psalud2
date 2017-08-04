@@ -13,12 +13,14 @@
 <fieldset>
 
 @if($anamnesis)
-<a href="{{ url('/anamnesis/$anmanesis->id') }}" class="btn btn-info">Consultar Anamnesis</a>
+<a href="{{ route('anamnesis.show',$anamnesis->id) }}" class="btn btn-info">Consultar Anamnesis</a>
 @else
 <a href="{{ url('/anamnesisPaciente/'.$paciente->id) }}" class="btn btn-info">Registrar Anamnesis</a>
 @endif
 
 <!-- Text input-->
+
+
 
 <div class="form-group">
   <label class="col-md-4 control-label">Nombre</label>  
