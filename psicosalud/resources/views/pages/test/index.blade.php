@@ -5,8 +5,8 @@
 
 <div class="container">
   <div class="row">
-    <h1>Lista de ocupaciones</h1>
-    <h4><a class="btn btn-success" href="{{ route('tipoTerapia.create') }}">Registrar nuevo tipo de terapia</a></h4>
+    <h1>Lista de test</h1>
+    <h4><a class="btn btn-success" href="{{ route('test.create') }}">Registrar nuevo test</a></h4>
     <hr />
   </div>
   <div class="row">
@@ -17,18 +17,29 @@
 	  				<tr class="table table-info">
 	  					<th>ID</th>
 	  					<th>Nombre</th>
-	  					<th></th>
+	  					<th>Abstracto</th>
+	  					<th>Acciones</th>
 	  				</tr>
 	  			</thead>
 	  			<tbody>
 	  			@foreach($data as $row)
 	  				<tr>
+					@php 
+						if   ($row->abstracto == True){
+								$abst='SI';		
+						} 
+						else{
+							$abst='NO';
+							
+							}
+					@endphp	  				
 	  					<td>{{ $row->id }}</td>
 	  					<td>{{ $row->nombre }}</td>
+	  					<td>{{ $abst }}</td>
 	  					<td>
 	  						<center>
-	  						<a href="{{ route('tipoTerapia.edit', $row->id) }}" class="btn btn-info">Editar</a>
-							<form action="{{ route('tipoTerapia.destroy', $row->id) }}" method="post">
+	  						<a href="{{ route('test.edit', $row->id) }}" class="btn btn-info">Editar</a>
+							<form action="{{ route('test.destroy', $row->id) }}" method="post">
 								<input type="hidden" name="_method" value="DELETE">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<button type="submit" class="btn btn-danger">Eliminar</button>

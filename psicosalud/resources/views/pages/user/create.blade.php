@@ -49,7 +49,7 @@
        
 		<br/>
         @foreach($roles as $rol)
-         <input type="checkbox" name="roles[]" value="{{ $rol->id }}" />{{ $rol->nombre }}<br />
+         <input type="checkbox" name="roles[]" id = "roles" value="{{ $rol->id }}" />{{ $rol->nombre }}<br />
           
         @endforeach
     
@@ -63,11 +63,13 @@
   </div>
 </div>
 <script type="text/javascript">
-$('#persona').on('change',function(){
-     var price = $(this).children('option:selected').data('id');
-    //var price = this.nombre
-     $('#name').val(price);
-	
-});
+// $(document).ready(function() {	
+//     $('#name').on('click', function () {
+//     	var rol=[]
+//         	rol= $('#roles').val();
+//     	console.log (rol); 
+        
+//     });
+// });
 </script>
 @endsection

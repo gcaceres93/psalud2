@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
+    private $path = 'test';
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +16,10 @@ class TestController extends Controller
     public function index()
     {
         //
+        
+        $data = Test::all()->sortBy('id');
+        return view('pages.'.$this->path.'.index',compact('data'));
+    
     }
 
     /**
@@ -25,6 +30,10 @@ class TestController extends Controller
     public function create()
     {
         //
+       # $data = Empleado::where('es_medico','true')->get();
+        #$modalidades = Modalidad::all();
+        return view('pages.'.$this->path.'.create');
+        
     }
 
     /**
@@ -36,6 +45,22 @@ class TestController extends Controller
     public function store(Request $request)
     {
         //
+        
+        if ($request->abstracto == True){
+            $abst=True;
+        }
+        else {
+            $abst=False;
+        }
+        try{
+            $test = new Test();
+            $test->nombre = $request->nombre;
+            $test->abstracto =$abst;
+            $test->save();
+            return redirect()->route('test.index');
+        }catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 
     /**
@@ -55,9 +80,15 @@ class TestController extends Controller
      * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function edit(Test $test)
+    public function edit( $test)
     {
         //
+        
+       
+        $test = Test::findOrFail($test);
+       
+        
+        return view('pages.'.$this->path.'.edit',compact('test'));
     }
 
     /**
@@ -67,9 +98,22 @@ class TestController extends Controller
      * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Test $test)
+    public function update(Request $request,  $test)
     {
         //
+        if ($request->abstracto == True){
+            $abst=True;
+        }
+        else {
+            $abst=False;
+        }
+        $test = Test::findOrFail($test);
+        $test->nombre = $request->nombre;
+        $test->abstracto = $abst;
+        
+        $test->save();
+        
+        return redirect()->route('test.index');
     }
 
     /**
@@ -78,8 +122,15 @@ class TestController extends Controller
      * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Test $test)
+    public function destroy( $test)
     {
         //
+        try{
+            $test = Test::findOrFail($test);
+            $test->delete();
+            return redirect()->route('test.index');
+        } catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 }
