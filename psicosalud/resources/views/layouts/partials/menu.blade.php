@@ -60,7 +60,7 @@
                   <li><a href="#">Registrar diagnóstico</a></li>
                   <li><a href="#">Registrar plan de tratamiento</a></li>
                   <li><a href="#">Registrar seguimiento</a></li>
-                  <li><a href="#">Registrar test</a></li>
+                  <li><a href="{{ url('/test') }}">Registrar test</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">APLICACION DE TESTS Y RESULTADOSt</li>
                   <li><a href="#">Aplicar test</a></li>
