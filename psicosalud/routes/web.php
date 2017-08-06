@@ -28,6 +28,7 @@ Route::resource('consulta','ConsultaController');
 Route::post('/consulta/store','ConsultaController@store');
 
 
+
 Route::resource('tipoFamiliar','TipoFamiliarController');
 Route::resource('sucursal','SucursalController');
 Route::resource('impuestos','ImpuestosController');
@@ -52,8 +53,9 @@ Route::get('/reporteAsistencia','AgendamientoController@reporteAsistencia' );
 
 // Test
 Route::resource('test','TestController');
-Route::get('/guardarPregunta','TestController@guardarPregunta');
-
+Route::post('/guardarPregunta','TestController@guardarPregunta');
+Route::resource('respuestaPregunta','RespuestaPreguntaController');
+Route::post('/guardarRespuesta','RespuestaPreguntaController@guardarRespuesta');
 /*          PERSONAS          */
 
 Route::resource('persona','PersonaController');

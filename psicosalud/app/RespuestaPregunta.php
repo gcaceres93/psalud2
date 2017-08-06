@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Test extends Model
+class RespuestaPregunta extends Model
 {
     //
-    protected $table = 'test';
+    protected $table = 'respuesta_por_pregunta';
     public $timestamps = false;
     
     
     public function pregunta()
     {
-        return $this->hasMany('App\PreguntaTest','pregunta_por_test')->withPivot('test_id');
+        return $this->belongsTo('App\PreguntaTest');
     }
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Test;
 use Illuminate\Http\Request;
+use App\PreguntaTest;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 class TestController extends Controller
 {
@@ -42,10 +45,26 @@ class TestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
+    
+    public function guardarPregunta(Request $request){
+        
+        //         dd($request->cantidad);
+        //dd($facturat);
+        // $factura->store($request);
+        $id=$request->ids;
+        if ($id > 0){
+            $test= $request->ids;
+            
+            return $this->update($request,$test);
+        }else{
+            return $this->store($request);
+        }
+    }
     public function store(Request $request)
     {
         //
-        
+       
         if ($request->abstracto == True){
             $abst=True;
         }
@@ -57,7 +76,48 @@ class TestController extends Controller
             $test->nombre = $request->nombre;
             $test->abstracto =$abst;
             $test->save();
-            return redirect()->route('test.index');
+            
+            $lastInsertedId=$test->id;
+            
+            
+            $canti=count($request->pregunta);
+                   
+            $vari='';
+            for ($i = 0; $i < $canti; $i++) {
+                
+                $pregunta = new PreguntaTest();
+                $pregunta->test_id=$lastInsertedId;
+                
+                foreach ($request->pregunta as $key=>$nombre)
+                {
+                    if ($key == $i )
+                    {
+                        $preg = $nombre;
+                    }
+                    
+                }
+                
+                foreach ($request->descripcion as $key=>$descripcion)
+                {
+                    if ($key == $i )
+                    {
+                        $descr = $descripcion;
+                    }
+                    
+                }
+                
+                $pregunta->nombre=$preg;
+                $pregunta->descripcion=$descr;
+                $pregunta->save();
+           }         
+              
+                $preg = DB::table('pregunta_por_test')
+                ->select('id','test_id')
+                ->where('test_id', '=', $lastInsertedId)
+                ->get();
+                
+                return json_encode($preg);
+//             return redirect()->route('test.index');
         }catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
         }
@@ -80,15 +140,18 @@ class TestController extends Controller
      * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function edit( $test)
+    public function edit( $tests)
     {
         //
         
        
-        $test = Test::findOrFail($test);
-       
+        $test = Test::findOrFail($tests);
+        $preguntas =  DB::table('pregunta_por_test')
+        ->select('pregunta_por_test.*')
+        ->where('test_id', '=', $test->id)
+        ->get();
         
-        return view('pages.'.$this->path.'.edit',compact('test'));
+        return view('pages.'.$this->path.'.edit',compact('test','preguntas'));
     }
 
     /**
@@ -107,13 +170,69 @@ class TestController extends Controller
         else {
             $abst=False;
         }
+        
         $test = Test::findOrFail($test);
+            
         $test->nombre = $request->nombre;
         $test->abstracto = $abst;
         
         $test->save();
         
-        return redirect()->route('test.index');
+        $lastInsertedId=$test->id;
+        
+        $canti=count($request->idp);
+       
+        
+        $vari='';
+        for ($i = 0; $i < $canti; $i++) {
+            
+            foreach ($request->idp as $key=>$id_pregunta)
+            {
+                if ($key == $i )
+                {
+                    if ($id_pregunta > 0){
+                        $pregunta = PreguntaTest::findOrFail($id_pregunta);
+                        $pregunta->test_id=$lastInsertedId;}
+                    else{
+                        $pregunta = new PreguntaTest();
+                        $pregunta->test_id=$lastInsertedId;
+                    }
+                }
+                
+            }
+           
+            foreach ($request->pregunta as $key=>$nombre)
+            {
+                if ($key == $i )
+                {
+                    $preg = $nombre;
+                }
+                
+            }
+            
+            foreach ($request->descripcion as $key=>$descripcion)
+            {
+                if ($key == $i )
+                {
+                    $descr = $descripcion;
+                }
+                
+            }
+            
+            $pregunta->nombre=$preg;
+            $pregunta->descripcion=$descr;
+            $pregunta->save();
+        }         
+        
+        
+        $preg = DB::table('pregunta_por_test')
+        ->select('id','test_id')
+        ->where('test_id', '=', $lastInsertedId)
+        ->get();
+        
+        return json_encode($preg);
+        
+        
     }
 
     /**
