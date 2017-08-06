@@ -57,7 +57,7 @@ Route::post('/guardarPregunta','TestController@guardarPregunta');
 Route::resource('respuestaPregunta','RespuestaPreguntaController');
 Route::post('/guardarRespuesta','RespuestaPreguntaController@guardarRespuesta');
 Route::resource('aplicarTest','AplicarTestController');
-Route::resource('/traerTest','AplicarTestController@traerTest');
+Route::resource('/traerTest','AplicarTestController@traerTest' );
 /*          PERSONAS          */
 
 Route::resource('persona','PersonaController');

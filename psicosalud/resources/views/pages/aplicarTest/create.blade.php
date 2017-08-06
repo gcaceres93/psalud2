@@ -9,26 +9,58 @@
 
 <div class="container-fluid">
   <div class="row">
-    <h1>Registro de ocupaciones</h1>
-    <h4><a href="{{ route('ocupacion.index') }}">Listar ocupaciones</a></h4>
+    <h1>Aplicacion de Test</h1>
+    <h4><a href="{{ route('aplicarTest.index') }}">Listar test aplicado</a></h4>
     <hr />
   </div>
   <div class="row">
-    <div class="col-md-6">
-  	<form method="post" action="/ocupacion">
+   
+  	<form method="post" action="/aplicarTest">
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-  		<div class="form-group">
-  			<label for="nombre">Nombre</label>
-  			<input type="text" name="nombre" class="form-control" placeholder="Nombre de la ocupaci&oacute;n">		 	
-  		<div class="form-group">
-  			<label for="descripci&oacute;n">Descripci&oacute;n</label>
-  			<input type="text" name="descripcion" class="form-control" placeholder="Descripci&oacute;n de la ocupaci&oacute;n"> 	
-  		</div>
-
+ 	<div class="col-md-6">
+  		<div class="form-group"> 
+              <label>Paciente</label>
+               
+              <select  name="paciente" id="paciente" class="form-control selectpicker">
+                <option value="" >Seleccionar paciente</option>
+                @foreach($personas as $paciente)
+                  <option   value="{{ $paciente->id }}">{{ $paciente->apellido }}, {{ $paciente->nombre}} </option>
+                @endforeach
+              </select>
+    
+  
+  			</div>
+  			<div class="form-group"> 
+              <label>Test</label>
+               
+              <select  name="test" id="test" class="form-control selectpicker">
+                <option value="" >Seleccionar test</option>
+                @foreach($test as $tes)
+                  <option   value="{{ $tes->id }}">{{ $tes->nombre }} </option>
+                @endforeach
+              </select>
+    
+  
+  			</div>
+			</div>
+			<div class="col-md-6">
+        			<div class="form-group">
+          			<label for="Fecha">Fecha</label>
+          			<input type="date" name="fecha" id="fecha" class="form-control" > 	
+          		</div>
+          		<div class="form-group">
+          			<label for="tipo_aplicacion">Tipo de Aplicacion</label>
+          			<select  name="tipo_aplicacion" id="tipo_aplicacion" class="form-control selectpicker">
+                          <option selected  value="1">Diagnostico</option>
+                          <option   value="2">Tratamiento</option>
+                        
+             		 </select> 	
+          		</div>
+			
+			</div>
   		<button type="submit" class="btn btn-info">Guardar</button>
   	</form>	
-    </div>
+    
   </div>
 </div>
 

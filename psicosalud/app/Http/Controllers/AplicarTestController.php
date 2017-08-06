@@ -19,7 +19,15 @@ class AplicarTestController extends Controller
     public function index()
     {
         //
-        $data= AplicarTest::all()->sortBy('id');
+//         $data= AplicarTest::all()->sortBy('id');
+        $data=DB::table('test_aplicado')
+        ->join('test','test_aplicado.test_id','=','test.id')
+        ->join('paciente','test_aplicado.paciente_id','=','paciente.id')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('test_aplicado.*','persona.nombre as pnombre','persona.apellido as papellido','test.nombre as tnombre')
+//         ->groupBy('persona.apellido','persona.nombre','paciente.id')
+        ->orderBy('test_aplicado.id')
+        ->get();
         return view('pages.'.$this->path.'.index',compact('data'));
     }
 
@@ -43,7 +51,7 @@ class AplicarTestController extends Controller
         ->get();
         
         
-        return view('pages.'.$this->path.'.index',compact('personas,test'));
+        return view('pages.'.$this->path.'.create',compact('personas','test'));
     }
 
     /**
@@ -55,6 +63,20 @@ class AplicarTestController extends Controller
     public function store(Request $request)
     {
         //
+        try{
+            $respuesta = new AplicarTest();
+            $respuesta->paciente_id = $request->paciente;
+            $respuesta->test_id = $request->test;
+            $respuesta->fecha = $request->fecha;
+            $respuesta->tipo_aplicacion = $request->tipo_aplicacion;
+           
+            $respuesta->save();
+            return redirect()->route('aplicarTest.index');
+        }catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
+        
+        
     }
 
     /**
@@ -74,9 +96,24 @@ class AplicarTestController extends Controller
      * @param  \App\AplicarTest  $aplicarTest
      * @return \Illuminate\Http\Response
      */
-    public function edit(AplicarTest $aplicarTest)
+    public function edit( $aplicarTest)
     {
         //
+        $aplicar = AplicarTest::findOrFail($aplicarTest);
+        
+        $personas=DB::table('paciente')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('paciente.*','persona.nombre','persona.apellido')
+        ->groupBy('persona.apellido','persona.nombre','paciente.id')
+        ->orderBy('persona.apellido')
+        ->get();
+        
+        $test=DB::table('test')
+        ->select('test.*')
+        ->get();
+        
+        return view('pages.'.$this->path.'.edit',compact('personas','test','aplicar'));
+        
     }
 
     /**
