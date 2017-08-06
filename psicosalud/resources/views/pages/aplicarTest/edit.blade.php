@@ -100,7 +100,7 @@ $(document).ready(function() {
             success: function(data){
 
                 alert('trajo');
-                console.log(data);
+                console.log(data); 
 //             	$('#consulta').html('	');
 // 			 data.forEach(recorrerdata);
 // 				borrarfila('detalle');
