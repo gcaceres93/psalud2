@@ -23,13 +23,13 @@ class AgendamientoController extends Controller
     
     public function reporteAsistencia(){
         $jasper = new JasperPHP;
+        $dir_jasper = base_path() . '/resources/jasper/asistio.jasper';
+        $dir_pdf = base_path() . '/resources/jasper/asistio.pdf';
         
-        // Generar el Reporte
         $jasper->process(
-            // Ruta y nombre de archivo de entrada del reporte
-            base_path() . '/resources/jasper/asistio.jasper',
-            false, // Ruta y nombre de archivo de salida del reporte (sin extensión)
-            array('pdf'),// Parámetros del reporte
+            $dir_jasper,
+            false,
+            array("pdf"),
             array(),
             array(
                 'password'=> 'postgres',
@@ -40,10 +40,8 @@ class AgendamientoController extends Controller
                 'port' => '5432',
             )
             )->execute();
-           
-          
             
-            return response()->download(base_path() . '/resources/jasper/asistio.pdf');
+           return response()->download($dir_pdf);
     }
     
     public function index()

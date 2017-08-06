@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use JasperPHP\JasperPHP as JasperPHP;
 use App\Anamnesis;
 use App\Persona;
 use App\Paciente;
@@ -36,7 +37,27 @@ class AnamnesisController extends Controller
     }
     
     public function imprimirAnamnesis($id){
-        return $id;
+        $jasper = new JasperPHP;
+        $dir_jasper = base_path() . '/resources/jasper/anamnesis.jasper';
+        $dir_pdf = base_path() . '/resources/jasper/anamnesis.pdf';
+        
+        $jasper->process(
+            $dir_jasper,
+            false,
+            array("pdf"),
+            array("id"=>$id),
+            array(
+                'password'=> 'postgres',
+                'driver' => 'postgres',
+                'username' => 'postgres',
+                'host' => 'localhost',
+                'database' => 'psicosalud',
+                'port' => '5432',
+            )
+            )->execute();
+            
+            
+            return response()->download($dir_pdf);
     }
     
     public function anamnesisPaciente($id){

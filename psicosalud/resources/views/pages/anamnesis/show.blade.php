@@ -11,7 +11,7 @@
 <br />
 <div class="row">
     <div class="col-md-12">
-    	<a href="{{ url('/imprimirAnamnesis/'.$anamnesis->id) }}" class="btn btn-danger">Imprimir anamnesis</a>
+    	<a href="{{ url('/imprimirAnamnesis/'.$anamnesis->id) }}" class="btn btn-danger"><span class="glyphicon glyphicon-download-alt"></span> Imprimir anamnesis</a>
     </div>
 </div>
 <fieldset>
