@@ -56,13 +56,17 @@
           <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consultas y seguimientos <span class="glyphicon glyphicon-file"></span></a>
               <ul class="dropdown-menu">
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">ANAMNESIS</li>
                   <li><a href="#">Registrar anamnesis</a></li>
-                  <li><a href="#">Registrar diagnóstico</a></li>
+                  <li><a href="#">Listar anamnesis</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">TRATAMIENTO Y SEGUIMIENTO</li>
                   <li><a href="#">Registrar plan de tratamiento</a></li>
                   <li><a href="#">Registrar seguimiento</a></li>
-                  <li><a href="{{ url('/test') }}">Registrar test</a></li>
                   <li role="separator" class="divider"></li>
-                  <li class="dropdown-header">APLICACION DE TESTS Y RESULTADOSt</li>
+                  <li class="dropdown-header">APLICACION DE TESTS Y RESULTADOS</li>
+                  <li><a href="{{ url('/test') }}">Registrar test</a></li>
                   <li><a href="#">Aplicar test</a></li>
                   <li><a href="#">Listar tests aplicados</a></li>
               </ul>
