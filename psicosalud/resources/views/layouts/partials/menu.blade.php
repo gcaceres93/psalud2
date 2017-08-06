@@ -67,7 +67,7 @@
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">APLICACION DE TESTS Y RESULTADOS</li>
                   <li><a href="{{ url('/test') }}">Registrar test</a></li>
-                  <li><a href="#">Aplicar test</a></li>
+                  <li><a href="{{ url('/aplicarTest') }}">Aplicar test</a></li>
                   <li><a href="#">Listar tests aplicados</a></li>
               </ul>
           </li>
