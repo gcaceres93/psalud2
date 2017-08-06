@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
 use JasperPHP\JasperPHP as JasperPHP;
 use App\Anamnesis;
 use App\Persona;
@@ -190,7 +191,30 @@ class AnamnesisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $anamnesis = Anamnesis::findOrFail($id);
+            $anamnesis->paciente_id=$request->paciente_id;
+            $anamnesis->observacion=$request->observacion;
+            $anamnesis->motivo=$request->motivo_consulta;
+            $anamnesis->informantes=$request->informantes;
+            $anamnesis->save();
+            
+            $i = 0;
+            $cuestionarios = CuestionarioAnamnesis::all()->sortBy('orden');
+            foreach ($cuestionarios as $cuestionario){
+                $i++;
+                $respuesta = 'cuestionario'.(string)$i;
+                $respuestaCuestionario = new RespuestaCuestionario();
+                $respuestaCuestionario->anamnesis_id = $anamnesis->id;
+                $respuestaCuestionario->cuestionario_anamnesis_id = $cuestionario->id;
+                $respuestaCuestionario->respuesta = $request->$respuesta;
+                $respuestaCuestionario->save();
+            }
+           return redirect()->route('anamnesis.show',$anamnesis->id);
+        }catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
+        
     }
 
     /**
@@ -201,6 +225,12 @@ class AnamnesisController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $anamnesis = Anamnesis::findOrFail($id);
+            $anamnesis->delete();
+            return redirect()->route('anamnesis.index');
+        } catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 }
