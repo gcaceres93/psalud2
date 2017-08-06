@@ -14,22 +14,45 @@
 <fieldset>
 <h2>Identificaci&oacute;n del paciente</h2>
 <hr>
-@if($pacientes)
+@if($paciente)
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group"> 
 			<label for="paciente">Paciente:</label>
-			<select class="form-control" id="paciente" name="paciente_id">
-			<option>--- Seleccionar Paciente ---</option>
-			@foreach($pacientes as $paciente)
-			<option value="{{ $paciente->id }}">{{$paciente->nombre }} {{ $paciente->apellido }} - {{ $paciente->cedula }} </option>
-			@endforeach			
-			</select>
+			<a href="{{url('/paciente/'.$paciente->id.'/edit') }}" >{{$paciente->id }} - {{$paciente->nombre}}  {{$paciente->apellido}} </a>
 			<input type="hidden" name="paciente_id" value="{{ $paciente->id }}"/>
 		</div>
 	</div>
 </div>
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group"> 
+			<label for="nombre">Nombre</label>
+			<input type="text" class="form-control" value="{{ $paciente->nombre }}" id="nombre" disabled>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group"> 
+			<label for="apellido">Apellido</label>
+			<input type="text" class="form-control" value="{{ $paciente->apellido }}" id="apellido" disabled>
+		</div>
+	</div>
+</div>
 
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group"> 
+			<label for="nombre">Fecha de nacimiento</label>
+			<input type="text" class="form-control"  name="nacimiento" value="{{ $paciente->nacimiento }}" id="nacimiento" disabled>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group"> 
+			<label for="apellido">Lugar de nacimiento</label>
+			<input type="text" class="form-control" name="lugar_nacimiento" value="{{ $paciente->lugar_nacimiento }}" id="lugar_nacimiento" disabled>
+		</div>
+	</div>
+</div>
 @endif
 
 <div class="row">
