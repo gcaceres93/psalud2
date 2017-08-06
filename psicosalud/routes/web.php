@@ -52,6 +52,7 @@ Route::get('/reporteAsistencia','AgendamientoController@reporteAsistencia' );
 
 // Test
 Route::resource('test','TestController');
+Route::get('/guardarPregunta','TestController@guardarPregunta');
 
 /*          PERSONAS          */
 
