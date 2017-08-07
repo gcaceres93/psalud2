@@ -89,6 +89,22 @@ class AplicarTestController extends Controller
     {
         //
     }
+    
+    public function traerTest(Request $request)
+    {
+        //
+       
+        $test=$request->test;
+        
+
+        $pregunta=DB::table('pregunta_por_test')
+        ->join('respuesta_por_pregunta','pregunta_por_test.id','=','respuesta_por_pregunta.pregunta_id')
+        ->select('pregunta_por_test.nombre as pnombre','pregunta_por_test.descripcion','pregunta_por_test.id as pid','respuesta_por_pregunta.nombre as rnombre','respuesta_por_pregunta.valor','respuesta_por_pregunta.id as rid')
+        ->where('pregunta_por_test.test_id','=',$test)
+        ->get();
+        return json_encode($pregunta);
+        
+    }
 
     /**
      * Show the form for editing the specified resource.

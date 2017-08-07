@@ -79,7 +79,18 @@
           		</div>
 			
 			</div>
+			
 			<button type="button" id="aplicarT" name="aplicarT" class="btn btn-success">Comenzar Test</button>
+			
+			<table id="tabla" name="tabla" class="table table-hover table-bordered table-condensed">
+  				<thead id="cabecera" name="cabecera">
+	  				
+	  			</thead>
+	  			<tbody id="detalle"   name="detalle" >
+	  				
+											          		
+	  			</tbody>
+  			</table>
 <!--   		<button type="submit" class="btn btn-success">Actualizar</button> -->
   	</form>	
   
@@ -89,7 +100,7 @@
 $(document).ready(function() {	
     $('#aplicarT').on('click', function () {
     	var test = $('#test').val();
-        
+//     	$('#aplicarT').type="hidden";
         var data = {test:test};
         $.ajax({
             method: 'get',
@@ -98,9 +109,11 @@ $(document).ready(function() {
             async: true,
             dataType:"json",   
             success: function(data){
-
-                alert('trajo');
+            	 document.getElementById('aplicarT').style.visibility = 'hidden';
                 console.log(data);  
+                var nombre = data[0].pid;
+                data.forEach(recorrerdata.bind(null,nombre));
+            	
 //             	$('#consulta').html('	');
 // 			 data.forEach(recorrerdata);
 // 				borrarfila('detalle');
@@ -116,13 +129,40 @@ $(document).ready(function() {
             error: function(data){
             	var errors = data.responseJSON;
                 alert(errors);
+                console.log(errors);
             },
 
         });
         
     });
 });
+function recorrerdata(nom,value,index,ar){
+	if (index==0){
+		
+		$('#cabecera').append("<tr id='cabe' name='cabe'> <th>Pregunta </th>  </tr>");
+		
+		pid=0;
+	}else{
+		
+ 		pid=ar[index-1].pid;
+ 		if (pid !=value.pid){
+ 			$('#detalle').append(" </fieldset></tr> ");
+ 				
+		}
+ 		}
+		if(nom == value.pid){
+    		$('#cabe').append(	
+    				"<th class='col-md-1'>"+   value.rnombre  +" </th>" );
+		}
 
+		if (pid !=value.pid){
+ 			$('#detalle').append("<tr > <fieldset id="+value.pid+"'>");
+ 				$('#detalle').append("<td >"+   "<b>"+  value.pnombre +"</b>" +" </br> "+value.descripcion  +" </td>" );
+		}
+ 		$('#detalle').append("<td > <center> <input type='radio' id='valores' name='"+value.pid+"' value='"+   value.valor  +"' </center>  </td>" );
+ 	
+// 	$('#consulta').append(' <option   value='+value.id+'>'+value.fecha+' '+value.apellido+', '+value.nombre+'</option>'); 
+}
 
 </script>
 @endsection
