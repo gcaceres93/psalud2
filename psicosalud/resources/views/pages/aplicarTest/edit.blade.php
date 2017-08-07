@@ -94,7 +94,7 @@ $(document).ready(function() {
         $.ajax({
             method: 'get',
             url: '/traerTest', 
-            data:  data,
+            data:  data, 
             async: true,
             dataType:"json",   
             success: function(data){
