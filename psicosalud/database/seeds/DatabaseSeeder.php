@@ -39,6 +39,9 @@ class DatabaseSeeder extends Seeder
         $this->command->info("Se han cargado los datos a la tabla factura_concepto :)");
         $this->call('CuestionarioAnamnesisTableSeeder');
         $this->command->info("Se han cargado los datos a la tabla cuestionario_anamnesis :)");
+        $this->call('AnamnesisTableSeeder');
+        $this->command->info("Se han cargado los datos a la tabla anamnesis :)");
+    
     }
     
 }

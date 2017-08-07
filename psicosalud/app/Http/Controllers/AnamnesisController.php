@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
 use JasperPHP\JasperPHP as JasperPHP;
 use App\Anamnesis;
 use App\Persona;
@@ -22,7 +23,13 @@ class AnamnesisController extends Controller
      */
     public function index()
     {
-        $data = Anamnesis::all();
+        $data = DB::table('anamnesis as a')
+        ->join('paciente as p','a.paciente_id','=','p.id')
+        ->join('persona as pe','p.persona_id','=','pe.id')
+        ->select('pe.*','a.*')
+        ->orderBy('pe.nombre')
+        ->get();
+        
         return view('pages.'.$this->path.'.index',compact('data'));
     }
     
@@ -69,7 +76,7 @@ class AnamnesisController extends Controller
         ->first();
         $cuestionario = CuestionarioAnamnesis::all()->sortBy('orden');
        // $consulta = Consulta::where('paciente_id',)
-        return view('pages.'.$this->path.'.create',compact('paciente','cuestionario'));
+        return view('pages.'.$this->path.'.create_paciente',compact('paciente','cuestionario'));
     }
 
     /**
@@ -81,9 +88,18 @@ class AnamnesisController extends Controller
     
     public function create()
     {
-        
+        $cuestionario = CuestionarioAnamnesis::all()->sortBy('orden');
+        $pacientes = DB::table('paciente as p')
+        ->join('persona as pe','p.persona_id','=','pe.id')
+        ->select('pe.*','p.*')
+        ->orderBy('pe.nombre')
+        ->get();
+        // $consulta = Consulta::where('paciente_id',)
+        return view('pages.'.$this->path.'.create',compact('cuestionario','pacientes'));
     }
 
+    
+   
     /**
      * Store a newly created resource in storage.
      *
@@ -149,7 +165,21 @@ class AnamnesisController extends Controller
      */
     public function edit($id)
     {
-        //
+        $anamnesis = Anamnesis::findOrFail($id);
+        $paciente = DB::table('paciente as p')
+        ->join('persona as pe','p.persona_id','=','pe.id')
+        ->select('pe.*','p.*')
+        ->where('p.id','=',$anamnesis->paciente_id)
+        ->orderBy('pe.nombre')
+        ->first();
+        $respuestas = DB::table('respuesta_cuestionario as rc')
+        ->join('cuestionario_anamnesis as ca','rc.cuestionario_anamnesis_id','=','ca.id')
+        ->join('anamnesis as a','rc.anamnesis_id','=','a.id')
+        ->select('rc.*','ca.*')
+        ->where('a.id','=',$id)
+        ->orderBy('ca.orden')
+        ->get();
+        return view('pages.'.$this->path.'.edit',compact('anamnesis','paciente','respuestas'));
     }
 
     /**
@@ -161,7 +191,30 @@ class AnamnesisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $anamnesis = Anamnesis::findOrFail($id);
+            $anamnesis->paciente_id=$request->paciente_id;
+            $anamnesis->observacion=$request->observacion;
+            $anamnesis->motivo=$request->motivo_consulta;
+            $anamnesis->informantes=$request->informantes;
+            $anamnesis->save();
+            
+            $i = 0;
+            $cuestionarios = CuestionarioAnamnesis::all()->sortBy('orden');
+            foreach ($cuestionarios as $cuestionario){
+                $i++;
+                $respuesta = 'cuestionario'.(string)$i;
+                $respuestaCuestionario = new RespuestaCuestionario();
+                $respuestaCuestionario->anamnesis_id = $anamnesis->id;
+                $respuestaCuestionario->cuestionario_anamnesis_id = $cuestionario->id;
+                $respuestaCuestionario->respuesta = $request->$respuesta;
+                $respuestaCuestionario->save();
+            }
+           return redirect()->route('anamnesis.show',$anamnesis->id);
+        }catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
+        
     }
 
     /**
@@ -172,6 +225,12 @@ class AnamnesisController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $anamnesis = Anamnesis::findOrFail($id);
+            $anamnesis->delete();
+            return redirect()->route('anamnesis.index');
+        } catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 }

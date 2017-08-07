@@ -58,8 +58,8 @@
               <ul class="dropdown-menu">
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">ANAMNESIS</li>
-                  <li><a href="#">Registrar anamnesis</a></li>
-                  <li><a href="#">Listar anamnesis</a></li>
+                  <li><a href="{{route('anamnesis.create') }}">Registrar anamnesis</a></li>
+                  <li><a href="{{ url('/anamnesis') }}">Listar anamnesis</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">TRATAMIENTO Y SEGUIMIENTO</li>
                   <li><a href="#">Registrar plan de tratamiento</a></li>

@@ -6,12 +6,11 @@
         background-color: #CEE3F6;
     }
 </style> --}}
+<form class="form-horizontal" id="form" action="/anamnesis" method="post" userd="contact_form">
 <center><img class="img-responsive" src="/img/ficha.png" alt="Logo" width="8%" height="8%" class="img-responsive"></center>
-<center><h2 >Edición de Anamnesis</h2></center>
+<center><h2 >Anamnesis clínica</h2></center>
 <br />
-<form method="post" action="/anamnesis/{{ $anamnesis->id }}">
-      {{ method_field('PUT') }}
-  		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <fieldset>
 <h2>Identificaci&oacute;n del paciente</h2>
 <hr>
@@ -25,18 +24,17 @@
 		</div>
 	</div>
 </div>
-@endif
 <div class="row">
 	<div class="col-md-6">
 		<div class="form-group"> 
 			<label for="nombre">Nombre</label>
-			<input disabled type="text" class="form-control" value="{{ $paciente->nombre }}" id="nombre" >
+			<input type="text" class="form-control" value="{{ $paciente->nombre }}" id="nombre" disabled>
 		</div>
 	</div>
 	<div class="col-md-6">
 		<div class="form-group"> 
 			<label for="apellido">Apellido</label>
-			<input disabled type="text" class="form-control" value="{{ $paciente->apellido }}" id="apellido" >
+			<input type="text" class="form-control" value="{{ $paciente->apellido }}" id="apellido" disabled>
 		</div>
 	</div>
 </div>
@@ -45,22 +43,23 @@
 	<div class="col-md-6">
 		<div class="form-group"> 
 			<label for="nombre">Fecha de nacimiento</label>
-			<input disabled type="text" class="form-control"  name="nacimiento" value="{{ $paciente->nacimiento }}" id="nacimiento" >
+			<input type="text" class="form-control"  name="nacimiento" value="{{ $paciente->nacimiento }}" id="nacimiento" disabled>
 		</div>
 	</div>
 	<div class="col-md-6">
 		<div class="form-group"> 
 			<label for="apellido">Lugar de nacimiento</label>
-			<input disabled type="text" class="form-control" name="lugar_nacimiento" value="{{ $paciente->lugar_nacimiento }}" id="lugar_nacimiento" >
+			<input type="text" class="form-control" name="lugar_nacimiento" value="{{ $paciente->lugar_nacimiento }}" id="lugar_nacimiento" disabled>
 		</div>
 	</div>
 </div>
+@endif
 
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group"> 
 			<label for="informantes">Informantes</label>
-			<textarea  class="form-control"  name="informantes" id="informantes" rows="4">{{ $anamnesis->informantes }}</textarea>
+			<textarea class="form-control"  name="informantes" id="informantes" rows="4"></textarea>
 		</div>
 	</div>
 </div>
@@ -69,7 +68,7 @@
 	<div class="col-md-12">
 		<div class="form-group"> 
 			<label for="motivo_consulta">Motivo de consulta</label>
-			<textarea  class="form-control"  name="motivo_consulta" id="motivo_consulta" rows="5">{{$anamnesis->motivo }}</textarea>
+			<textarea class="form-control"  name="motivo_consulta" id="motivo_consulta" rows="5"></textarea>
 		</div>
 	</div>
 </div>
@@ -77,22 +76,22 @@
 $aux = 'asd'; 
 @endphp
 
-@foreach($respuestas as $r)
+@foreach($cuestionario as $c)
 	<div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-			@unless($r->grupo == $aux)
-				<h3>{{ $r->grupo }} </h3>
+			@unless($c->grupo == $aux)
+				<h3>{{ $c->grupo }} </h3>
 				<hr/>
 				@php
-					$aux = $r->grupo;
+					$aux = $c->grupo;
 				@endphp
 			@endunless			
-			<label for="{{ $r->pregunta }}">{{ $r->pregunta}} </label> 
-			@if(!empty($r->aclaracion_pregunta))
-						({{ $r->aclaracion_pregunta }})
+			<label for="{{ $c->pregunta }}">{{ $c->pregunta}} </label> 
+			@if(!empty($c->aclaracion_pregunta))
+						({{ $c->aclaracion_pregunta }})
 			@endif
-			<textarea  class="form-control"   rows="5">{{$r->respuesta }}</textarea>
+			<textarea class="form-control"  name="cuestionario{{ $c->id}}" id="cuestionario{{ $c->id}}" rows="5"></textarea>
 		</div>
 	</div>
 </div>
@@ -102,16 +101,20 @@ $aux = 'asd';
 	<div class="col-md-12">
 		<div class="form-group"> 
 			<label for="observacion">Observaciones del entrevistador</label>
-			<textarea  class="form-control" name="observacion" id="observacion" rows="5">{{$anamnesis->observacion}}</textarea>
+			<textarea class="form-control" name="observacion" id="observacion" rows="5"></textarea>
 		</div>
 	</div>
 </div>
 
-
+<!-- Button -->
+<div class="form-group">
+    <center><button type="submit" class="btn btn-success" >Guardar <span class="glyphicon glyphicon-send"></span></button></center>
+  </div>
+</div>
 
 </fieldset>
-<button type="submit" class="btn btn-success">Actualizar</button>
-  	</form>	</div>
+</form>
+</div>
 
 <script type="text/javascript">
 
