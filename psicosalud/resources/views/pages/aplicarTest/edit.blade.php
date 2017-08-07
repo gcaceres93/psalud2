@@ -96,7 +96,7 @@ $(document).ready(function() {
             url: '/traerTest', 
             data:  data,
             async: true,
-            dataType:"json",
+            dataType:"json",  
             success: function(data){
 
                 alert('trajo');
