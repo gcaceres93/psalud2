@@ -18,6 +18,7 @@
   	<form method="post" action="/aplicarTest/{{ $aplicar->id }}">
       {{ method_field('PUT') }}
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+  			<input type="hidden" id="ids" name="ids"value="{{ $aplicar->id }}">
 
   		<div class="col-md-6">
   		<div class="form-group"> 
@@ -91,12 +92,81 @@
 											          		
 	  			</tbody>
   			</table>
-<!--   		<button type="submit" class="btn btn-success">Actualizar</button> -->
+  		<button type="button" style="visibility: hidden;"  id= "finalizar"class="btn btn-success">Finalizar</button> 
   	</form>	
   
   </div>
 </div>
 <script type="text/javascript">
+$(document).ready(function() {	
+    $('#finalizar').on('click', function () {
+        var respuesta=[];
+        var pregunta=[];
+    	var paciente = $('#paciente').val();
+    	var test = $('#test').val();
+    	var ids = $('#ids').val();
+    	var fecha = $('#fecha').val();
+    	var tipo_aplicacion = $('#tipo_plicacion').val();
+    	var _token= "{{ csrf_token() }}";
+    	var table = document.getElementById("detalle");
+        for (var i = 0, row; row = table.rows[i]; i++) {
+             
+        	   //iterate through rows
+        	   //rows would be accessed using the "row" variable assigned in the for loop
+        	   for (var j = 0, col; col = row.cells[j]; j++) {
+        		  	
+        		   valor= col.childNodes.item(0).childNodes.item(0).value;
+        		   nombre=  col.childNodes.item(0).childNodes.item(0).checked;
+        		   preg= col.childNodes.item(0).childNodes.item(0).name;
+
+        		   if (j==0){
+
+        			   pregunta.push(preg);
+        		   }
+        		   if (nombre==true){
+
+        			   respuesta.push(valor);
+            		   }
+//         		  	respuesta.push(nombre);
+ 					
+        	   }  
+        	   
+        	}
+    	
+        var data = {test:test,_token:_token,pregunta:pregunta,respuesta:respuesta,paciente:paciente,fecha:fecha,tipo_aplicacion:tipo_aplicacion,ids:ids};
+    	$.ajax({
+            method: 'post',
+            url: '/guardarRespuestaTest',
+            data:  data,
+            async: true,
+            dataType:"json",
+            success: function(data){
+//             	 document.getElementById('aplicarT').style.visibility = 'hidden';
+//             	 document.getElementById('finalizar').style.visibility = 'visible';
+				alert('Test Guardado');
+                console.log(data);  
+//                 var nombre = data[0].pid;
+//                 data.forEach(recorrerdata.bind(null,nombre));
+
+				
+		
+
+                
+            	
+            },
+            error: function(data){
+            	var errors = data.responseJSON;
+                alert('Debe responder todas las preguntas');
+                console.log(errors);
+            },
+
+        });
+        
+    });
+});
+
+
+
 $(document).ready(function() {	
     $('#aplicarT').on('click', function () {
     	var test = $('#test').val();
@@ -110,6 +180,7 @@ $(document).ready(function() {
             dataType:"json",   
             success: function(data){
             	 document.getElementById('aplicarT').style.visibility = 'hidden';
+            	 document.getElementById('finalizar').style.visibility = 'visible';
                 console.log(data);  
                 var nombre = data[0].pid;
                 data.forEach(recorrerdata.bind(null,nombre));
@@ -128,7 +199,7 @@ $(document).ready(function() {
             },
             error: function(data){
             	var errors = data.responseJSON;
-                alert(errors);
+               
                 console.log(errors);
             },
 
@@ -145,10 +216,7 @@ function recorrerdata(nom,value,index,ar){
 	}else{
 		
  		pid=ar[index-1].pid;
- 		if (pid !=value.pid){
- 			$('#detalle').append(" </fieldset></tr> ");
- 				
-		}
+ 		
  		}
 		if(nom == value.pid){
     		$('#cabe').append(	
@@ -156,11 +224,57 @@ function recorrerdata(nom,value,index,ar){
 		}
 
 		if (pid !=value.pid){
- 			$('#detalle').append("<tr > <fieldset id="+value.pid+"'>");
- 				$('#detalle').append("<td >"+   "<b>"+  value.pnombre +"</b>" +" </br> "+value.descripcion  +" </td>" );
+					var tr=document.createElement("TR");
+					tr.id=value.pid;
+// 			 			$('#detalle').append("<tr >   ");
+ 					var td=document.createElement("TD");
+ 					var b=document.createElement("B");
+ 					var br=document.createElement("BR");
+ 					var pnombre = document.createTextNode(  value.pnombre );
+ 					pnombre.name=value.pid;
+ 					b.name='pregunta'
+ 					b.appendChild(pnombre);
+ 					var pdescripcion = document.createTextNode(' ('+ value.descripcion+') ');
+ 					
+ 					var det = document.getElementById("detalle");
+ 					td.appendChild(b);
+ 					td.appendChild(pdescripcion);
+ 					tr.appendChild(td);
+ 					
+//  				$('#detalle').append(   " <td> <b>"+  value.pnombre +"</b>" +" </br> "+value.descripcion+" </br> "  );
+ 			
 		}
- 		$('#detalle').append("<td > <center> <input type='radio' id='valores' name='"+value.pid+"' value='"+   value.valor  +"' </center>  </td>" );
- 	
+			var td2=document.createElement("TD");
+			var center=document.createElement("center");
+			var radio=document.createElement("input");
+			center.name='center';
+			radio.type='radio';
+			radio.id='valores';
+			radio.name=value.pid;
+			radio.value=value.rid;
+			
+			center.appendChild(radio);
+			var text2 = document.createTextNode(value.valor);
+				td2.appendChild(center);
+			if (tr){
+				tr.appendChild(td2);
+				
+				det.appendChild(tr);}
+			else	{
+				 var la =	$('#tabla tr:last').attr('id');
+				
+				 var det = document.getElementById("detalle");
+				 var fil = document.getElementById(la);
+					 fil.appendChild(td2);
+					
+					det.appendChild(fil);
+			}
+//  		$('#detalle').append("<td > <center> <input type='radio' id='valores' name='"+value.pid+"' value='"+   value.valor  +"' </center>  </td>" );
+		
+ 		if (pid !=value.pid){
+ 			det.appendChild(tr);
+ 				
+		}
 // 	$('#consulta').append(' <option   value='+value.id+'>'+value.fecha+' '+value.apellido+', '+value.nombre+'</option>'); 
 }
 

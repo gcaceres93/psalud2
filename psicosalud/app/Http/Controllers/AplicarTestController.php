@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AplicarTest;
+use App\TestAplicadoDetalle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -29,6 +30,20 @@ class AplicarTestController extends Controller
         ->orderBy('test_aplicado.id')
         ->get();
         return view('pages.'.$this->path.'.index',compact('data'));
+    }
+    public function editt()
+    {
+        //
+        //         $data= AplicarTest::all()->sortBy('id');
+        $data=DB::table('test_aplicado')
+        ->join('test','test_aplicado.test_id','=','test.id')
+        ->join('paciente','test_aplicado.paciente_id','=','paciente.id')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('test_aplicado.*','persona.nombre as pnombre','persona.apellido as papellido','test.nombre as tnombre')
+        //         ->groupBy('persona.apellido','persona.nombre','paciente.id')
+        ->orderBy('test_aplicado.id')
+        ->get();
+        return view('pages.'.$this->path.'.editt',compact('data'));
     }
 
     /**
@@ -105,6 +120,23 @@ class AplicarTestController extends Controller
         return json_encode($pregunta);
         
     }
+    
+    public function guardarRespuestaTest(Request $request)
+    {
+        //
+        
+        $test=$request->test;
+        $id=$request->ids;
+        
+        return $this->update($request,$id);
+        
+        
+        
+        
+        
+   
+        
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -131,6 +163,7 @@ class AplicarTestController extends Controller
         return view('pages.'.$this->path.'.edit',compact('personas','test','aplicar'));
         
     }
+   
 
     /**
      * Update the specified resource in storage.
@@ -139,9 +172,37 @@ class AplicarTestController extends Controller
      * @param  \App\AplicarTest  $aplicarTest
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AplicarTest $aplicarTest)
+    public function update(Request $request,  $aplicarTest)
     {
         //
+        $aplicar = AplicarTest::findOrFail($aplicarTest);
+        
+        
+        try{
+            
+            $aplicar->paciente_id = $request->paciente;
+            $aplicar->test_id = $request->test;
+            $aplicar->fecha = $request->fecha;
+            $aplicar->tipo_aplicacion = $request->tipo_aplicacion;
+            
+            $aplicar->save();
+            
+            $preguntas=$request->pregunta;
+            $respuestas=$request->respuesta;
+            $cantp=count($preguntas);
+            $cantr=count($respuestas);
+            if ($cant != $cantr){
+                return json_encode(False);
+            }
+            
+            
+            
+            return redirect()->route('aplicarTest.index');
+        }catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
+        
+        
     }
 
     /**

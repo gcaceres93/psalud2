@@ -11,7 +11,11 @@ class AplicarTest extends Model
     public $timestamps = False;
     
     
-    
+    public function detalle(){
+            
+        return $this->hasMany('App\TestAplicadoDetalle','test_aplicado_id'); 
+        
+    }
     
     
 }
