@@ -31,6 +31,11 @@ Route::post('/consulta/store','ConsultaController@store');
 Route::resource('diagnostico','DiagnosticoController');
 Route::get('diagnosticoAnamnesis/{id}','DiagnosticoController@diagnosticoAnamnesis');
 
+/*PLAN TRATAMIENTO*/
+Route::resource('planTratamiento','PlanTratamientoController');
+
+
+
 Route::resource('tipoFamiliar','TipoFamiliarController');
 Route::resource('sucursal','SucursalController');
 Route::resource('impuestos','ImpuestosController');
