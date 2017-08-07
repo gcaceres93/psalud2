@@ -27,6 +27,8 @@ Route::resource('cargo','CargoController');
 Route::resource('consulta','ConsultaController');
 Route::post('/consulta/store','ConsultaController@store');
 
+/*DIAGNOSTICO*/
+Route::resource('diagnostico','DiagnosticoController');
 
 
 Route::resource('tipoFamiliar','TipoFamiliarController');
