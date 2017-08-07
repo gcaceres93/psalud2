@@ -60,6 +60,8 @@ Route::resource('respuestaPregunta','RespuestaPreguntaController');
 Route::post('/guardarRespuesta','RespuestaPreguntaController@guardarRespuesta');
 Route::resource('aplicarTest','AplicarTestController');
 Route::get('/traerTest','AplicarTestController@traerTest' );
+Route::post('/guardarRespuestaTest','AplicarTestController@guardarRespuestaTest');
+
 /*          PERSONAS          */
 
 Route::resource('persona','PersonaController');
