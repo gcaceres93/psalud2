@@ -93,7 +93,7 @@ $(document).ready(function() {
         var data = {test:test};
         $.ajax({
             method: 'get',
-            url: '/traerTest',
+            url: '/traerTest', 
             data:  data,
             async: true,
             dataType:"json",
