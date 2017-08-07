@@ -29,7 +29,7 @@ Route::post('/consulta/store','ConsultaController@store');
 
 /*DIAGNOSTICO*/
 Route::resource('diagnostico','DiagnosticoController');
-
+Route::get('diagnosticoAnamnesis/{id}','DiagnosticoController@diagnosticoAnamnesis');
 
 Route::resource('tipoFamiliar','TipoFamiliarController');
 Route::resource('sucursal','SucursalController');
