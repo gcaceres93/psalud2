@@ -11,7 +11,15 @@
 <br />
 <div class="row">
     <div class="col-md-12">
-    	<a href="{{ url('/imprimirAnamnesis/'.$anamnesis->id) }}" class="btn btn-danger"><span class="glyphicon glyphicon-download-alt"></span> Imprimir anamnesis</a>
+    	<div class="btn-group">
+    		<a href="{{ url('/imprimirAnamnesis/'.$anamnesis->id) }}" class="btn btn-danger btn-group"><span class="glyphicon glyphicon-download-alt"></span> Imprimir anamnesis</a>
+   			@if(count($diagnostico)>0)
+   			<a href="{{ url('/diagnostico/'.$diagnostico->id) }}" class="btn btn-warning btn-group"><span class="glyphicon glyphicon-file"></span> Ver diagnóstico</a>
+   			<a href="{{ url('/diagnostico/'.$diagnostico->id.'/edit') }}" class="btn btn-info btn-group"><span class="glyphicon glyphicon-file"></span> Editar diagnóstico</a>
+   			@else
+   			<a href="{{ url('/diagnostico/'.$anamnesis->id) }}" class="btn btn-warning btn-group"><span class="glyphicon glyphicon-file"></span> Registrar diagnóstico</a>
+   			@endif
+   		</div>
     </div>
 </div>
 <fieldset>

@@ -57,9 +57,10 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consultas y seguimientos <span class="glyphicon glyphicon-file"></span></a>
               <ul class="dropdown-menu">
                   <li role="separator" class="divider"></li>
-                  <li class="dropdown-header">ANAMNESIS</li>
+                  <li class="dropdown-header">ANAMNESIS y DIAGNÓSTICOS</li>
                   <li><a href="{{route('anamnesis.create') }}">Registrar anamnesis</a></li>
                   <li><a href="{{ url('/anamnesis') }}">Listar anamnesis</a></li>
+                  <li><a href="{{ url('/diagnostico') }}">Listar diagnósticos</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">TRATAMIENTO Y SEGUIMIENTO</li>
                   <li><a href="#">Registrar plan de tratamiento</a></li>

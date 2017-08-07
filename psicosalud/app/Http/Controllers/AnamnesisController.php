@@ -153,7 +153,12 @@ class AnamnesisController extends Controller
         ->where('a.id','=',$id)
         ->orderBy('ca.orden')
         ->get();
-        return view('pages.'.$this->path.'.show',compact('anamnesis','paciente','respuestas'));
+        $diagnostico=DB::table('diagnostico as d')
+        ->select('d.id')
+        ->where('d.anamnesis_id','=',$id)
+        ->first();
+        
+        return view('pages.'.$this->path.'.show',compact('anamnesis','paciente','respuestas','diagnostico'));
         
     }
 
