@@ -100,9 +100,30 @@ class AplicarTestController extends Controller
      * @param  \App\AplicarTest  $aplicarTest
      * @return \Illuminate\Http\Response
      */
-    public function show(AplicarTest $aplicarTest)
+    public function show($aplicarTest)
     {
         //
+        $aplicar = AplicarTest::findOrFail($aplicarTest);
+        
+        $personas=DB::table('paciente')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('paciente.*','persona.nombre','persona.apellido')
+        ->groupBy('persona.apellido','persona.nombre','paciente.id')
+        ->orderBy('persona.apellido')
+        ->get();
+        
+        $test=DB::table('test')
+        ->select('test.*')
+        ->get();
+        
+        $detalle = DB::table('test_aplicado_detalle')
+        ->select('test_aplicado_detalle.*')
+        ->where('test_aplicado_id','=',$aplicarTest)
+        ->get();
+        
+        
+//         dd($detalle);
+        return view('pages.'.$this->path.'.show',compact('personas','test','aplicar','detalle'));
     }
     
     public function traerTest(Request $request)
@@ -160,6 +181,8 @@ class AplicarTestController extends Controller
         ->select('test.*')
         ->get();
         
+        
+        
         return view('pages.'.$this->path.'.edit',compact('personas','test','aplicar'));
         
     }
@@ -187,17 +210,51 @@ class AplicarTestController extends Controller
             
             $aplicar->save();
             
-            $preguntas=$request->pregunta;
-            $respuestas=$request->respuesta;
-            $cantp=count($preguntas);
-            $cantr=count($respuestas);
-            if ($cant != $cantr){
+            $preguntas= $request->pregunta;
+            $respuestas= $request->respuesta;
+            $cantp = count($preguntas);
+            $cantr = count($respuestas);
+            if ($cantp != $cantr){
                 return json_encode(False);
             }
+            $aplicar->detalle()->delete();
+            for($i=0;$i<$cantp; $i++){
+                
+                $aplicar_detalle = New TestAplicadoDetalle();
+                $aplicar_detalle->test_aplicado_id=$aplicarTest;
+                
+                
+                foreach ($preguntas as $key=>$pregu)
+                {
+                    if ($key == $i )
+                    {
+                        
+                        $preg = $pregu;
+                    }
+                    
+                }
+               
+                foreach ($respuestas as $key=>$respu)
+                {
+                    if ($key == $i )
+                    {
+                       
+                        $resp = $respu;
+                    }
+                    
+                }
+                
+                $aplicar_detalle->pregunta_id=$preg;
+                $aplicar_detalle->respuesta_id=$resp;
+                $aplicar_detalle->save();
+              
+                
+                
+            }
             
+            return json_encode($aplicar_detalle);
             
-            
-            return redirect()->route('aplicarTest.index');
+            //return redirect()->route('aplicarTest.index');
         }catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
         }

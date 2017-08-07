@@ -19,8 +19,11 @@
       {{ method_field('PUT') }}
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
   			<input type="hidden" id="ids" name="ids"value="{{ $aplicar->id }}">
+  		
+  			
 
   		<div class="col-md-6">
+  		
   		<div class="form-group"> 
               <label>Paciente</label>
                
@@ -94,12 +97,10 @@
   			</table>
   		<button type="button" style="visibility: hidden;"  id= "finalizar"class="btn btn-success">Finalizar</button> 
   	</form>	
-  
-  </div>
+ 
 </div>
 <script type="text/javascript">
 $(document).ready(function() {	
-	
     $('#finalizar').on('click', function () {
         var respuesta=[];
         var pregunta=[];
@@ -169,8 +170,9 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {	
-    $('#aplicarT').on('click', function () {
     	var test = $('#test').val();
+    	
+    	
 //     	$('#aplicarT').type="hidden";
         var data = {test:test};
         $.ajax({
@@ -183,6 +185,7 @@ $(document).ready(function() {
             	 document.getElementById('aplicarT').style.visibility = 'hidden';
             	 document.getElementById('finalizar').style.visibility = 'visible';
                 console.log(data);  
+               
                 var nombre = data[0].pid;
                 data.forEach(recorrerdata.bind(null,nombre));
             	
@@ -192,8 +195,8 @@ $(document).ready(function() {
 // 				agregarfila();
 // // 				$('#factura_concepto').value(1);
 // 				 data.forEach(recorrerconsulta);
-				
-		
+			
+                
 
                 
             	
@@ -206,8 +209,12 @@ $(document).ready(function() {
 
         });
         
-    });
+   
 });
+
+function asaniu (ar,value,index){
+	alert(value.pregunta_id);
+}
 function recorrerdata(nom,value,index,ar){
 	if (index==0){
 		
@@ -251,6 +258,16 @@ function recorrerdata(nom,value,index,ar){
 			center.name='center';
 			radio.type='radio';
 			radio.id='valores';
+			
+				 
+             var js_array =<?php $arr=[]; foreach ($detalle as $det ){ array_push($arr,$det->respuesta_id);   }  echo json_encode($arr);        ;?>;
+             			
+			 var aa=$.inArray(value.rid, js_array);
+            if (aa>-1){
+				radio.checked = 'True';
+            }else{
+            	radio.checked ='';
+            }
 			radio.name=value.pid;
 			radio.value=value.rid;
 			
