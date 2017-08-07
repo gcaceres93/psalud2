@@ -17,7 +17,7 @@
    			<a href="{{ url('/diagnostico/'.$diagnostico->id) }}" class="btn btn-warning btn-group"><span class="glyphicon glyphicon-file"></span> Ver diagnóstico</a>
    			<a href="{{ url('/diagnostico/'.$diagnostico->id.'/edit') }}" class="btn btn-info btn-group"><span class="glyphicon glyphicon-file"></span> Editar diagnóstico</a>
    			@else
-   			<a href="{{ url('/diagnostico/'.$anamnesis->id) }}" class="btn btn-warning btn-group"><span class="glyphicon glyphicon-file"></span> Registrar diagnóstico</a>
+   			<a href="{{ url('/diagnosticoAnamnesis/'.$anamnesis->id) }}" class="btn btn-warning btn-group"><span class="glyphicon glyphicon-file"></span> Registrar diagnóstico</a>
    			@endif
    		</div>
     </div>
