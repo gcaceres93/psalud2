@@ -143,7 +143,12 @@ class PacienteController extends Controller
     public function edit($id)
     {
         $paciente = Paciente::findOrFail($id);
-        return view('pages.'.$this->path.'.edit',compact('paciente'));
+        $familiares = DB::table('familiar_por_paciente as fp')->join('persona as pe','fp.persona_id','=','pe.id')->join('tipo_familiar as tf','fp.tipo_familiar_id','=','tf.id')->select('pe.*','tf.nombre as tipo','tf.id as tipoId')->where('fp.paciente_id','=',$id)
+        ->orderBy('pe.nombre')
+        ->get();
+        $personas = Persona::all()->sortBy('apellido');
+        $tipos = TipoFamiliar::all()->sortBy('nombre');
+        return view('pages.'.$this->path.'.edit',compact('paciente','familiares','personas','tipos'));
     }
     
     /**
@@ -153,9 +158,15 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function actualizarPaciente(Request $request){
+        $paciente_id=$request->id;
+        $paciente = Paciente::findOrFail($paciente_id);
+        
+        return $this->update($request , $paciente);
+    }
+    
+    public function update($request, $paciente)
     {
-        $paciente = Paciente::findOrFail($id);
         $persona = Persona::findOrFail($paciente->persona->id);
         $persona->nombre=$request->nombre;
         $persona->apellido=$request->apellido;
@@ -171,7 +182,40 @@ class PacienteController extends Controller
         $paciente->ruc=$request->ruc;
         $paciente->razon_social=$request->razon_social;
         $paciente->save();
-        return redirect()->route($this->path.'.index');     }
+        
+       
+        $pacienteId=$paciente->id;
+        $canti=count($request->personas);
+        //             return json_encode($canti);
+        $vari='';
+        for ($i = 0; $i < $canti; $i++) {
+            
+            foreach ($request->personas as $key=>$persona)
+            {
+                if ($key == $i )
+                {
+                    $per = $persona;
+                }
+                
+            }
+            
+            foreach ($request->tipos as $key=>$tipo)
+            {
+                if ($key == $i )
+                {
+                    $tip = $tipo;
+                }
+                
+            }
+            $paciente->tipoFamiliares()->sync([$pacienteId,$tip,$per]);
+            
+        }
+        
+        
+        return json_encode($paciente);
+        //return redirect()->route('paciente.index');
+        
+    }
         
         /**
          * Remove the specified resource from storage.
