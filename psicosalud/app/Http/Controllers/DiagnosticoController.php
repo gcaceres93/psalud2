@@ -98,7 +98,12 @@ class DiagnosticoController extends Controller
         ->where('d.id','=',$id)
         ->first();
         
-        return view('pages.'.$this->path.'.show',compact('diagnostico'));
+        $plan_tratamiento = DB::table('plan_tratamiento as pt')
+        ->select('*')
+        ->where('diagnostico_id','=',$id)
+        ->first();
+        
+        return view('pages.'.$this->path.'.show',compact('diagnostico','plan_tratamiento'));
     }
 
     /**

@@ -23,7 +23,12 @@ class PlanTratamientoController extends Controller
      */
     public function create()
     {
-        //
+        
+    }
+    
+    public function planDiagnostico($id)
+    {
+        return $id;
     }
 
     /**

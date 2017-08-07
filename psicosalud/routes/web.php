@@ -33,6 +33,7 @@ Route::get('diagnosticoAnamnesis/{id}','DiagnosticoController@diagnosticoAnamnes
 
 /*PLAN TRATAMIENTO*/
 Route::resource('planTratamiento','PlanTratamientoController');
+Route::get('planTratamientoDiagnostico/{id}','PlanTratamientoController@planDiagnostico');
 
 
 
