@@ -8,6 +8,9 @@
   <div class="row">
     <h1>Lista de pacientes</h1>
     <h4><a class="btn btn-success" href="{{ route('paciente.create') }}">Registrar nuevo paciente</a></h4>
+    <div class="alert alert-info">
+ 		 Para ver detalle del registro, hacer click encima de la fila.
+	</div>
     <hr />
   </div>
   <div class="row">

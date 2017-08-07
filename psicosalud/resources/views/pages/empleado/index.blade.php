@@ -12,6 +12,9 @@
     	<h1>Lista de empleados</h1>
     	<h4><a class="btn btn-success" href="{{ route('empleado.create') }}">Registrar nuevo empleado</a></h4>
     @endif
+    <div class="alert alert-info">
+ 		 Para ver detalle del registro, hacer click encima de la fila.
+	</div>
     <hr />
   </div>
   <div class="row">
