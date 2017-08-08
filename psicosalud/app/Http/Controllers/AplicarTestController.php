@@ -223,6 +223,7 @@ class AplicarTestController extends Controller
             $aplicar->test_id = $request->test;
             $aplicar->fecha = $request->fecha;
             $aplicar->tipo_aplicacion = $request->tipo_aplicacion;
+            $aplicar->resultado=$request->resultado_psi;
             
             $aplicar->save();
             

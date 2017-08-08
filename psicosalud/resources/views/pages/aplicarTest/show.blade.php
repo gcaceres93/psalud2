@@ -27,7 +27,7 @@
   		<div class="form-group"> 
               <label>Paciente</label>
                
-              <select  name="paciente" id="paciente" class="form-control selectpicker">
+              <select readonly disabled  name="paciente" id="paciente" class="form-control selectpicker">
                 <option value="" >Seleccionar paciente</option>
                 @foreach($personas as $paciente)
                
@@ -40,7 +40,7 @@
                                      $selected = "selected"
                                  ?>
                  			@endif
-                  <option @php echo($selected); @endphp  value="{{ $paciente->id }}">{{ $paciente->apellido }}, {{ $paciente->nombre}} </option>
+                  <option @php echo($selected); @endphp    value="{{ $paciente->id }}">{{ $paciente->apellido }}, {{ $paciente->nombre}} </option>
                 @endforeach
               </select>
     
@@ -49,7 +49,7 @@
   			<div class="form-group"> 
               <label>Test</label>
                
-              <select  name="test" id="test" class="form-control selectpicker">
+              <select  readonly  disabled name="test" id="test" class="form-control selectpicker">
                 <option value="" >Seleccionar test</option>
                 @foreach($test as $tes)
                 <?php
@@ -61,7 +61,7 @@
                                      $selected = "selected"
                                  ?>
                  			@endif
-                  <option  @php echo($selected); @endphp   value="{{ $tes->id }}">{{ $tes->nombre }} </option>
+                  <option  @php echo($selected); @endphp    value="{{ $tes->id }}">{{ $tes->nombre }} </option>
                 @endforeach
               </select>
     
@@ -84,9 +84,9 @@
 			
 			</div>
 			
-			<button type="button" id="aplicarT" name="aplicarT" class="btn btn-success">Comenzar Test</button>
+			<button type="button" id="aplicarT" name="aplicarT" class="btn btn-success">Ver Respuestas</button>
 			
-			<table id="tabla" name="tabla" class="table table-hover table-bordered table-condensed">
+			<table id="tabla"  name="tabla" class="table table-hover table-bordered table-condensed">
   				<thead id="cabecera" name="cabecera">
 	  				
 	  			</thead>
@@ -97,15 +97,19 @@
   			</table>
   			<div class="col-md-12">
   				<div class="form-group">
-          			<label for="resultado">Resultado</label>
-          			<textarea class="form-control"  name="resultado" id="resultado" rows="5" >{{$nombre_resultado}}</textarea>
+          			<label for="resultado">Resultado del test</label>
+          			<input class="form-control" type="text"  readonly name="resultado_test" id="resultado_test" value="{{$nombre_resultado}}" >
+          		</div>
+          		<div class="form-group">
+          			<label for="resultado">Observaciones del Medico</label>
+          			<textarea class="form-control"  name="resultado" id="resultado" rows="5" >{{$aplicar->resultado}}</textarea>
           		</div>
   			
   			</div>
   			
   			
   			
-  		<button type="button" style="visibility: hidden;"  id= "finalizar"class="btn btn-success">Finalizar</button> 
+  		<button type="button" style="visibility: hidden;"  id= "finalizar"class="btn btn-success">Guardar</button> 
   	</form>	
  
 </div>
@@ -117,6 +121,7 @@ $(document).ready(function() {
     	var paciente = $('#paciente').val();
     	var test = $('#test').val();
     	var ids = $('#ids').val();
+    	var resultado_psi = $('#resultado').val();
     	var fecha = $('#fecha').val();
     	var tipo_aplicacion = $('#tipo_plicacion').val();
     	var _token= "{{ csrf_token() }}";
@@ -145,7 +150,7 @@ $(document).ready(function() {
         	   
         	}
     	
-        var data = {test:test,_token:_token,pregunta:pregunta,respuesta:respuesta,paciente:paciente,fecha:fecha,tipo_aplicacion:tipo_aplicacion,ids:ids};
+        var data = {test:test,_token:_token,pregunta:pregunta,respuesta:respuesta,paciente:paciente,fecha:fecha,tipo_aplicacion:tipo_aplicacion,ids:ids,resultado_psi:resultado_psi};
     	$.ajax({
             method: 'post',
             url: '/guardarRespuestaTest',
@@ -180,6 +185,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {	
+	 $('#aplicarT').on('click', function () {
     	var test = $('#test').val();
     	
     	
@@ -194,7 +200,7 @@ $(document).ready(function() {
             dataType:"json",   
             success: function(data){
             	 document.getElementById('aplicarT').style.visibility = 'hidden';
-            	 //document.getElementById('finalizar').style.visibility = 'visible';
+            	 document.getElementById('finalizar').style.visibility = 'visible';
                 console.log(data);  
                
                 var nombre = data[0].pid;
@@ -220,7 +226,7 @@ $(document).ready(function() {
 
         });
         
-   
+	 });
 });
 
 function asaniu (ar,value,index){
@@ -281,6 +287,7 @@ function recorrerdata(nom,value,index,ar){
             }
 			radio.name=value.pid;
 			radio.value=value.rid;
+			radio.disabled= 'True' ;
 			
 			center.appendChild(radio);
 			var text2 = document.createTextNode(value.valor);
