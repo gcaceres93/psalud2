@@ -22,7 +22,7 @@
         		<div class="form-group"> 
               <label>Paciente</label>
                
-              <select  name="persona" id="persona" class="form-control selectpicker">
+              <select  name="persona" required id="persona" class="form-control selectpicker">
                 <option value="" >Seleccionar Paciente</option>
                 @foreach($personas as $persona)
                   <option   value="{{ $persona->id }}">{{ $persona->apellido }}, {{ $persona->nombre}} </option>
@@ -33,7 +33,7 @@
           		<div class="form-group"> 
               <label>Medico</label>
                
-              <select  name="medico" id="medico" class="form-control selectpicker">
+              <select  name="medico" required id="medico" class="form-control selectpicker">
                 <option value="" >Seleccionar Medico</option>
                 @foreach($empleados as $medico)
                   <option   value="{{ $medico->id }}">{{ $medico->apellido }}, {{ $medico->nombre}} </option>
@@ -51,7 +51,7 @@
           	
           	<div class="form-group">
           			<label for="monto">Monto Total:</label>
-          			<input type="number" name="monto" id="monto" class="form-control" placeholder="Monto" > 	
+          			<input type="number" required name="monto" id="monto" class="form-control" placeholder="Monto" > 	
           	</div>
           	<div class="form-group">
           			<label for="observacion">Observaciones:</label>
@@ -65,7 +65,7 @@
   	
           	<div class="form-group"> 
               <label>Tipo de Factura</label>
-              <select  name="tipo_pago" id="tipo_pago" class="form-control selectpicker">
+              <select required  name="tipo_pago" id="tipo_pago" class="form-control selectpicker">
                 	<option value="" >Seleccionar Tipo de Factura</option>
                       <option   value="Contado">Contado </option>
                       <option   value="Credito">Credito </option>
@@ -74,12 +74,12 @@
               
               <div class="form-group">
           			<label for="nro">Numero de Factura:</label>
-          			<input type="text" name="nro" id="nro" class="form-control" placeholder="Numero de Factura" value="{{ $nro_factura }}"> 	
+          			<input type="text" name="nro" id="nro" required class="form-control" placeholder="Numero de Factura" value="{{ $nro_factura }}"> 	
           		</div>
          
                <div class="form-group">
           			<label for="fecha">Fecha de Factura:</label>
-          			<input type="date" name="fecha" id="fecha" class="form-control"  > 	
+          			<input type="date" name="fecha" required id="fecha" class="form-control"  > 	
           		</div>
               
           
@@ -87,11 +87,11 @@
           		
           		<div class="form-group">
           			<label for="timbrado">Timbrado:</label>
-          			<input type="text" name="timbrado" id="timbrado" class="form-control" placeholder="Numero de Timbrado" value="{{ $factura->timbrado }}"> 	
+          			<input type="text" name="timbrado" id="timbrado" required class="form-control" placeholder="Numero de Timbrado" value="{{ $factura->timbrado }}"> 	
           		</div>
           		<div class="form-group">
           			<label for="vigencia_timbrado">Fecha Validez Timbrado:</label>
-          			<input type="date" name="vigencia_timbrado" id="vigencia_timbrado" class="form-control"  value="{{ $factura->vigencia_timbrado }}"> 	
+          			<input type="date" name="vigencia_timbrado" required id="vigencia_timbrado" class="form-control"  value="{{ $factura->vigencia_timbrado }}"> 	
           		</div>
   			</div>
   		<input type="text" name="estado" value="Abierto" hidden> 	
@@ -122,7 +122,7 @@
 <!--       </div> -->
 <!--       </div> -->
 
-  		<button type="button" name="guardar" id="guardar" class="btn btn-info">Guardar</button>
+  		<button type="submit" name="guardar" id="guardar" class="btn btn-info">Guardar</button>
   	</form>	
     </div>
   
@@ -204,6 +204,7 @@ $(document).ready(function() {
 		var observacion=  $('#observacion').val();
 		var tipo_pago=  $('#tipo_pago').val();
 		var nro=  $('#nro').val();
+		var _token= "{{ csrf_token() }}";
 		var fecha=  $('#fecha').val();
 		var timbrado=  $('#timbrado').val();
 		var estado=  $('#estado').val();
@@ -238,7 +239,7 @@ $(document).ready(function() {
         	   }  
         	   
         	}
-        var data = {consulta:consulta,concepto:concepto,cantidad:cantidad,impuesto:impuesto,monto_total:monto_total,persona:persona,medico:medico,monto:monto,observacion:observacion,tipo_pago:tipo_pago,nro:nro,fecha:fecha,timbrado:timbrado,estado:estado,vigencia_timbrado:vigencia_timbrado};
+        var data = {consulta:consulta,_token:_token,concepto:concepto,cantidad:cantidad,impuesto:impuesto,monto_total:monto_total,persona:persona,medico:medico,monto:monto,observacion:observacion,tipo_pago:tipo_pago,nro:nro,fecha:fecha,timbrado:timbrado,estado:estado,vigencia_timbrado:vigencia_timbrado};
 
         $.ajax({
             method: 'get',
