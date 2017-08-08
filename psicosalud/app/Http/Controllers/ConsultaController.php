@@ -17,6 +17,7 @@ class ConsultaController extends Controller
      */
     public function index()
     {
+        $fec=date("Y-m-d");
         $data = DB::table('consulta as c')
         ->join('paciente as p','c.paciente_id','=','p.id')
         ->join('persona as ppaciente','p.persona_id','=','ppaciente.id')
@@ -25,6 +26,7 @@ class ConsultaController extends Controller
         ->select('c.*','ppaciente.nombre as pacienteNombre','ppaciente.apellido as pacienteApellido'
             ,'pempleado.nombre as medicoNombre','pempleado.apellido as medicoApellido')
             ->orderBy('c.fecha')
+            ->where('c.fecha','>=',$fec)
             ->get();
             
         return view('pages.'.$this->path.'.index',compact('data'));

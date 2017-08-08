@@ -20,7 +20,7 @@
   			 <label for="paciente">Paciente</label>
   			 <br/>
   			<div class="col-md-6">
-  			<select id="paciente" name="paciente" class="form-control selectpicker">
+  			<select id="paciente" required name="paciente" class="form-control selectpicker">
                 <option value="" >--- Seleccionar paciente ---</option>
                 @foreach($pacientes as $paciente)
                   <option value="{{ $paciente->id }}">{{ $paciente->nombre }}  {{ $paciente->apellido }}</option>
@@ -39,7 +39,7 @@
   			 <label for="medico">Médico</label>
   			 <br/>
   			<div class="col-md-6">
-  			<select id="medico" name="medico" class="form-control selectpicker">
+  			<select id="medico" required  name="medico" class="form-control selectpicker">
                 <option value="" >--- Seleccionar médico ---</option>
                 @foreach($empleados as $empleado)
                   <option value="{{ $empleado->id }}">{{ $empleado->nombre }}  {{ $empleado->apellido }} - {{$empleado->descripcion }}</option>
@@ -56,7 +56,7 @@
   		<div class="form-group col-md-6">
   			 <label for="modalidad">Modalidad de consulta</label>
   			 <br/> 			
-  			<select id="modalidad" name="modalidad" class="form-control selectpicker">
+  			<select id="modalidad" required  name="modalidad" class="form-control selectpicker">
                 <option value="" >--- Seleccionar modalidad ---</option>
                 @foreach($modalidades as $modalidad)
                   <option value="{{ $modalidad->id }}">{{ $modalidad->descripcion }}</option>
@@ -71,7 +71,7 @@
   			 <label for="sucursal">Sucursal</label>
   			 <br/>
   			
-  			<select id="sucursal" name="sucursal" class="form-control selectpicker">
+  			<select id="sucursal" required name="sucursal" class="form-control selectpicker">
                 <option value="" >--- Seleccionar sucursal ---</option>
                 @foreach($sucursales as $sucursal)
                   <option value="{{ $sucursal->id }}">{{ $sucursal->nombre }}</option>
@@ -86,7 +86,7 @@
                 <div class="col-md-3 inputGroupContainer">
                 <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              <input id="fecha_programada" name="fecha_programada" placeholder="Fecha para la consulta" class="form-control"  type="date">
+              <input id="fecha_programada"  required name="fecha_programada" placeholder="Fecha para la consulta" class="form-control"  type="date">
                 </div>
               </div>
 		</div>
@@ -100,7 +100,7 @@
                 <div class="col-md-3 inputGroupContainer">
                 <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              <input id="hora_programada" name="hora_programada" placeholder="Fecha para la consulta" class="form-control"  type="time">
+              <input id="hora_programada" required name="hora_programada" placeholder="Fecha para la consulta" class="form-control"  type="time">
                 </div>
               </div>
 		</div>
@@ -150,8 +150,25 @@ $(document).ready(function() {
     $('#disponibilidad').on('click', function () {
     	var fecha_programada = $('#fecha_programada').val();
         var hora_programada = $('#hora_programada').val();
+        var fecha_prog= new Date(fecha_programada);
+        var dia_prog= fecha_prog.getDay();
+       if (hora_programada > '20:00:00' || hora_programada < '07:59:00'){
+           
+				return alert('El consultorio se encuentra cerrado en ese horario');
+           }
+       if (Date() > Date(fecha_programada) ){
+           
+			return alert('No se pueden programar fechas anteriores al dia de hoy');
+      } else if  (dia_prog == 5 || dia_prog == 6) {
+    	  return alert('No se pueden programar turnos sabados ni domingos');
+          }
         var sucursal = $('#sucursal').val();
         var medico = $('#medico').val();
+        if ( medico){
+				console.log('ok');}
+		else{ return alert('Debe seleccionar Medico'); 		
+            }
+       
         var data = {medico:medico,sucursal:sucursal,fecha_programada:fecha_programada,hora_programada:hora_programada};
         $.ajax({
             method: 'get',

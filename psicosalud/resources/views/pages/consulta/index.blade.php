@@ -17,10 +17,10 @@
   			<table id="tablaSort" class="table table-hover table-bordered table-condensed">
   				<thead>
 	  				<tr class="table table-info">
-	  					<th>ID</th>
+	  					<th>Fecha</th>
 	  					<th>Paciente</th>
 	  					<th>Médico</th>
-	  					<th>Fecha</th>
+	  					
 	  					<th>estado</th>
 	  					<th></th>
 	  				</tr>
@@ -28,10 +28,10 @@
 	  			<tbody>
 	  			@foreach($data as $row)
 	  				<tr>
-	  					<td class="clickable-row" data-href="{{ route('consulta.show', $row->id)  }}">{{ $row->id }}</td>
+	  					<td class="clickable-row" data-href="{{ route('consulta.show', $row->id)  }}">{{ $row->fecha }}</td>
 	  					<td class="clickable-row" data-href="{{ route('consulta.show', $row->id)  }}">{{ $row->pacienteNombre }} {{ $row->pacienteApellido }} </td>
 	  					<td class="clickable-row" data-href="{{ route('consulta.show', $row->id)  }}">{{ $row->medicoNombre }} {{ $row->medicoApellido }}</td>
-	  					<td class="clickable-row" data-href="{{ route('consulta.show', $row->id)  }}">{{ $row->fecha }}</td>
+	  					
 	  					<td class="clickable-row" data-href="{{ route('consulta.show', $row->id)  }}">{{ $row->estado }}</td>
 	  					<td>
 	  						<a href="{{ route('consulta.edit', $row->id) }}" class="btn btn-info">Editar</a>

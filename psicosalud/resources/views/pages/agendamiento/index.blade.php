@@ -14,26 +14,28 @@
   			<table id="tablaSort" class="table table-hover table-bordered table-condensed">
   				<thead>
 	  				<tr class="table table-info">
-	  					<th>ID</th>
+	  					<th>Fecha</th>
+	  					<th>Hora</th>
 	  					<th>Paciente</th>
 	  					<th>Médico</th>
 	  					<th>Modalidad</th>
 	  					<th>Sucursal</th>
-	  					<th>Fecha</th>
-	  					<th>Hora</th>
+	  					
+	  					
 	  					<th></th>
 	  				</tr>
 	  			</thead>
 	  			<tbody>
 	  			@foreach($data as $row)
 	  				<tr>
-	  					<td>{{ $row->id }}</td>
+	  					<td>{{ $row->fecha_programada }}</td>
+	  					<td>{{ $row->hora_programada }}</td>
 	  					<td>{{ $row->pacienteNombre }} {{ $row->pacienteApellido }} </td>
 	  					<td>{{ $row->medicoNombre }} {{ $row->medicoApellido }}</td>
 	  					<td>{{ $row->modalidad}}</td>
 	  					<td>{{ $row->sucursal }}</td>
-	  					<td>{{ $row->fecha_programada }}</td>
-	  					<td>{{ $row->hora_programada }}</td>
+	  					
+	  					
 	  					<td>
 	  						<a href="{{ route('agendamiento.edit', $row->id) }}" class="btn btn-info">Editar</a>
 							<form action="{{ route('agendamiento.destroy', $row->id) }}" method="post">

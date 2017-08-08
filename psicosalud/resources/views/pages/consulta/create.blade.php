@@ -25,13 +25,13 @@
   </div>
   <div class="row">
   	<form method="post" id="formulario" action="/consulta">
-  		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+  		<input type="hidden"  name="_token" value="{{ csrf_token() }}">
 
   		<div class="form-group">
   			 <label for="paciente">Paciente</label>
   			 <br/>
   			<div class="col-md-6">
-  			<select id="paciente" name="paciente" class="form-control selectpicker">
+  			<select required id="paciente" name="paciente" class="form-control selectpicker">
                 <option value="" >--- Seleccionar paciente ---</option>
                 @foreach($pacientes as $paciente)
                   <option value="{{ $paciente->id }}">{{ $paciente->nombre }}  {{ $paciente->apellido }}</option>
@@ -50,7 +50,7 @@
   			 <label for="medico">Médico</label>
   			 <br/>
   			<div class="col-md-6">
-  			<select id="medico" name="medico" class="form-control selectpicker">
+  			<select required id="medico" name="medico" class="form-control selectpicker">
                 <option value="" >--- Seleccionar médico ---</option>
                 @foreach($empleados as $empleado)
                   <option value="{{ $empleado->id }}">{{ $empleado->nombre }}  {{ $empleado->apellido }} - {{$empleado->descripcion }}</option>
@@ -68,7 +68,7 @@
   			 <label for="cantidad_horas">Cantidad de horas</label>
   			 <br/>
   			<div class="col-md-6">
-              <input id="cantidad_horas" name="cantidad_horas" placeholder="Cantidad de horas" class="form-control"  type="number">
+              <input required id="cantidad_horas" name="cantidad_horas" placeholder="Cantidad de horas" class="form-control"  type="number">
              </div>
   		</div>
   		<br/>
@@ -81,7 +81,7 @@
                 <div class="col-md-3 inputGroupContainer">
                 <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              <input id="fecha" name="fecha" placeholder="Fecha de la consulta" class="form-control"  type="date">
+              <input id="fecha" required name="fecha" placeholder="Fecha de la consulta" class="form-control"  type="date">
                 </div>
               </div>
 		</div>

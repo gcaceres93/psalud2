@@ -47,6 +47,9 @@ class AgendamientoController extends Controller
     
     public function index()
     {
+        $fec=date("Y-m-d");
+        
+        
         $data = DB::table('agendamiento as a')
         ->join('paciente as p','a.paciente_id','=','p.id')
         ->join('persona as ppaciente','p.persona_id','=','ppaciente.id')
@@ -57,7 +60,8 @@ class AgendamientoController extends Controller
         ->select('a.*','ppaciente.nombre as pacienteNombre','ppaciente.apellido as pacienteApellido'
             ,'pempleado.nombre as medicoNombre','pempleado.apellido as medicoApellido','m.descripcion as modalidad'
             ,'s.nombre as sucursal')
-        ->orderBy('a.fecha_programada')    
+        ->orderBy('a.fecha_programada')   
+        ->where('a.fecha_programada','>=',$fec)
         ->get();
         
         return view('pages.'.$this->path.'.index',compact('data'));
@@ -70,6 +74,8 @@ class AgendamientoController extends Controller
      */
     public function create()
     {
+        
+      
         $pacientes=DB::table('paciente')
         ->join('persona','paciente.persona_id','=','persona.id')
         ->select('paciente.*','persona.nombre','persona.apellido')->orderBy('persona.apellido')
@@ -202,6 +208,27 @@ class AgendamientoController extends Controller
     
     public function store(Request $request)
     {
+        
+        $fec=date("Y-m-d");
+        $hora=date("H-i");
+        
+        
+        $fecha_request=$request->fecha_programada;
+        $hora_request= $request->hora_programada;
+        $numero_dia=date('w', strtotime($fecha_request));
+        if ($fec >$fecha_request ){
+            $var = '<script language="javascript">alert("No se pueden programar fechas anteriores al dia de hoy"); window.history.go(-1);</script>';
+            return ("$var ");
+        }
+        if ($hora_request < '07:00:00' or $hora_request > '20:00:00' ){
+            $var = '<script language="javascript">alert("El consultorio se encuentra cerrado en ese horario"); window.history.go(-1);</script>';
+            return ("$var ");
+        }
+        if ($numero_dia==0 or $numero_dia==6 ){
+            $var = '<script language="javascript">alert("No se pueden programar turnos sabados ni domingos"); window.history.go(-1);</script>';
+            return ("$var ");
+        }
+        
         try{
             $agendamiento = new Agendamiento();
             $agendamiento->hora_programada = $request->hora_programada;
@@ -292,6 +319,27 @@ class AgendamientoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        $fec=date("Y-m-d");
+        $hora=date("H-i");
+        
+        
+        $fecha_request=$request->fecha_programada;
+        $hora_request= $request->hora_programada;
+        $numero_dia=date('w', strtotime($fecha_request));
+        if ($fec >$fecha_request ){
+            $var = '<script language="javascript">alert("No se pueden programar fechas anteriores al dia de hoy"); window.history.go(-1);</script>';
+            return ("$var ");
+        }
+        if ($hora_request < '07:00:00' or $hora_request > '20:00:00' ){
+            $var = '<script language="javascript">alert("El consultorio se encuentra cerrado en ese horario"); window.history.go(-1);</script>';
+            return ("$var ");
+        }
+        if ($numero_dia==0 or $numero_dia==6 ){
+            $var = '<script language="javascript">alert("No se pueden programar turnos sabados ni domingos"); window.history.go(-1);</script>';
+            return ("$var ");
+        }
+        
         try{
             $agendamiento = Agendamiento::findOrfail($id);
             $agendamiento->hora_programada = $request->hora_programada;
