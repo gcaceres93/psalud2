@@ -35,6 +35,12 @@ Route::get('diagnosticoAnamnesis/{id}','DiagnosticoController@diagnosticoAnamnes
 Route::resource('planTratamiento','PlanTratamientoController');
 Route::get('planTratamientoDiagnostico/{id}','PlanTratamientoController@planDiagnostico');
 
+/*SEGUIMIENTO*/
+Route::resource('seguimiento','SeguimientoController');
+Route::get('crearSeguimientoTratamiento/{id}','SeguimientoController@seguimientoTratamiento');
+Route::get('listarSeguimientoTratamiento/{id}','SeguimientoController@listarSeguimientoTratamiento')->name('seguimiento.listarSeguimientoTratamiento');
+
+
 
 
 Route::resource('tipoFamiliar','TipoFamiliarController');
