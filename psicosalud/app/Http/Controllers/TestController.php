@@ -349,6 +349,8 @@ class TestController extends Controller
         //
         try{
             $test = Test::findOrFail($test);
+            $test->pregunta()->delete();
+            $test->resultado()->delete();
             $test->delete();
             return redirect()->route('test.index');
         } catch(Exception $e){

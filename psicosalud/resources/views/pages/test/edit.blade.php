@@ -477,8 +477,8 @@ $(document).ready(function() {
 					
 // 					var id_preg=4;
 					
-					 console.log(data);
-					//window.location.replace("/test");
+					 //console.log(data);
+					window.location.replace("/test");
 					
 //			     		});
 					

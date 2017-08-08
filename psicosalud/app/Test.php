@@ -13,11 +13,11 @@ class Test extends Model
     
     public function pregunta()
     {
-        return $this->hasMany('App\PreguntaTest','pregunta_por_test')->withPivot('test_id');
+        return $this->hasMany('App\PreguntaTest','test_id');
     }
     
     public function resultado()
     {
-        return $this->hasMany('App\ResultadoTest','resultado_por_test')->withPivot('test_id');
+        return $this->hasMany('App\ResultadoTest','test_id');
     }
 }

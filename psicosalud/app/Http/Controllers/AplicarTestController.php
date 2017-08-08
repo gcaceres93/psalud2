@@ -121,23 +121,39 @@ class AplicarTestController extends Controller
         ->where('test_aplicado_id','=',$aplicarTest)
         ->get();
         
+        $resultado_valor = DB::table('respuesta_por_pregunta as rpp')
+        ->join('pregunta_por_test as ppt','rpp.pregunta_id','=','ppt.id')
+        ->join('test_aplicado as ta','ppt.test_id','=','ta.test_id')
+        ->join('test_aplicado_detalle as tad', function ($join) {$join->on('ta.id', '=', 'tad.test_aplicado_id')->On('tad.pregunta_id', '=', 'ppt.id')->On('tad.respuesta_id', '=', 'rpp.id');})
+        ->select(DB::raw('sum(rpp.valor)'))
+        ->where('ta.id','=',$aplicar->id)
+        ->get();
+
+        $suma=$resultado_valor[0]->sum;
+        
+//         $resultado=DB::table('resultado_por_test')
+//         ->select('resultado_por_test.nombre')
+//         ->whereBetween($suma, ['valor_ini', 'valor_fin'])->get();
+        $resultado=DB::select(DB::raw("SELECT rpt.nombre FROM  resultado_por_test as rpt WHERE test_id = '$aplicar->test_id' and '$suma' between valor_ini and valor_fin"));
+        $nombre_resultado=$resultado[0]->nombre;
         
 //         dd($detalle);
-        return view('pages.'.$this->path.'.show',compact('personas','test','aplicar','detalle'));
+        return view('pages.'.$this->path.'.show',compact('personas','test','aplicar','detalle','nombre_resultado'));
     }
     
     public function traerTest(Request $request)
     {
         //
-       
+        
         $test=$request->test;
         
-
+        
         $pregunta=DB::table('pregunta_por_test')
         ->join('respuesta_por_pregunta','pregunta_por_test.id','=','respuesta_por_pregunta.pregunta_id')
         ->select('pregunta_por_test.nombre as pnombre','pregunta_por_test.descripcion','pregunta_por_test.id as pid','respuesta_por_pregunta.nombre as rnombre','respuesta_por_pregunta.valor','respuesta_por_pregunta.id as rid')
         ->where('pregunta_por_test.test_id','=',$test)
         ->get();
+       
         return json_encode($pregunta);
         
     }

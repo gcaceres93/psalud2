@@ -95,6 +95,16 @@
 											          		
 	  			</tbody>
   			</table>
+  			<div class="col-md-12">
+  				<div class="form-group">
+          			<label for="resultado">Resultado</label>
+          			<textarea class="form-control"  name="resultado" id="resultado" rows="5" >{{$nombre_resultado}}</textarea>
+          		</div>
+  			
+  			</div>
+  			
+  			
+  			
   		<button type="button" style="visibility: hidden;"  id= "finalizar"class="btn btn-success">Finalizar</button> 
   	</form>	
  
@@ -175,6 +185,7 @@ $(document).ready(function() {
     	
 //     	$('#aplicarT').type="hidden";
         var data = {test:test};
+        console.log(test);
         $.ajax({
             method: 'get',
             url: '/traerTest', 
@@ -183,7 +194,7 @@ $(document).ready(function() {
             dataType:"json",   
             success: function(data){
             	 document.getElementById('aplicarT').style.visibility = 'hidden';
-            	 document.getElementById('finalizar').style.visibility = 'visible';
+            	 //document.getElementById('finalizar').style.visibility = 'visible';
                 console.log(data);  
                
                 var nombre = data[0].pid;
