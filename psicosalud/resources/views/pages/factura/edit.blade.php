@@ -223,7 +223,69 @@ $(document).ready(function() {
     	agregarfila();
         
     });
+
+    $(document).on('change','#precio_unitario', function () {
+		asignartotal();
+		total();
+    });
+    $(document).on('change','#cantidad', function () {	
+    asignartotal();
+    total();
+    
+    });
+    
 });
+function asignartotal(){
+	var table = document.getElementById("detalle");
+for (var i = 0, row; row = table.rows[i]; i++) {
+     
+	   //iterate through rows
+	   //rows would be accessed using the "row" variable assigned in the for loop
+	   for (var j = 0, col; col = row.cells[j]; j++) {
+		  	
+		   valor= col.childNodes.item(0).value;
+
+			if (j==1)
+			{
+				cant=valor;
+			}
+
+			 if (j==3){
+				 
+				 pu=valor;
+        		   }
+			   
+			   if (j==4){
+				 
+				   col.childNodes.item(0).value = pu*cant;
+        		   }
+			  
+		   
+		 
+		  
+	   }  
+	   
+	}
+
+}
+function total(){
+	var monto = 0;
+    var table = document.getElementById("detalle");
+    for (var i = 0, row; row = table.rows[i]; i++) {
+         
+    	   //iterate through rows
+    	   //rows would be accessed using the "row" variable assigned in the for loop
+    	   for (var j = 0, col; col = row.cells[j]; j++) {
+    		  	if (j==4){
+    		   monto = Number(monto) + Number( col.childNodes.item(0).value);
+    		   
+    		  	}
+    	   }  
+    	}
+
+	  $('#monto').val(monto);
+	
+}
 
 // $('#timbrado').on('click', function() {
 //     $("#tr.detalle").each(function() {
@@ -327,7 +389,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {	
-    $('#monto').on('click', function () {
+	 $(document).on('change','#monto_detalle', function () {
 //      	  $('#monto').val($('#monto_detalle').val())
 //     var table = document.getElementById("detalle");
     var monto = 0;
