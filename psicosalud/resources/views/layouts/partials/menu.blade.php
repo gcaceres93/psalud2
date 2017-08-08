@@ -64,6 +64,7 @@
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">TRATAMIENTO Y SEGUIMIENTO</li>
                   <li><a href="#">Registrar plan de tratamiento</a></li>
+                  <li><a href="{{ route('planTratamiento.index') }}">Listar planes de tratamiento</a></li>
                   <li><a href="#">Registrar seguimiento</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">APLICACION DE TESTS Y RESULTADOS</li>

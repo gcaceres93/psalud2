@@ -73,6 +73,8 @@ class DiagnosticoController extends Controller
             
             $diagnostico->acepta_tratamiento= $request->acepta_tratamiento;
             $diagnostico->save();
+            return redirect()->route('diagnostico.show',$diagnostico->id);
+            
         }catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
         }

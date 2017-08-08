@@ -19,8 +19,8 @@
     <div class="col-md-12">
     	<div class="btn-group">
    			@if(count($plan_tratamiento)>0)
-   			<a href="{{ url('/diagnostico/'.$plan_tratamiento->id) }}" class="btn btn-warning btn-group"><span class="glyphicon glyphicon-file"></span> Ver plan de tratamiento</a>
-   			<a href="{{ url('/diagnostico/'.$plan_tratamiento->id.'/edit') }}" class="btn btn-info btn-group"><span class="glyphicon glyphicon-file"></span> Editar plan de tratamiento</a>
+   			<a href="{{ url('/planTratamiento/'.$plan_tratamiento->id) }}" class="btn btn-warning btn-group"><span class="glyphicon glyphicon-file"></span> Ver plan de tratamiento</a>
+   			<a href="{{ url('/planTratamiento/'.$plan_tratamiento->id.'/edit') }}" class="btn btn-info btn-group"><span class="glyphicon glyphicon-file"></span> Editar plan de tratamiento</a>
    			@else
    			<a href="{{ url('/planTratamientoDiagnostico/'.$diagnostico->id) }}" class="btn btn-warning btn-group"><span class="glyphicon glyphicon-file"></span> Registrar plan de tratamiento</a>
    			@endif

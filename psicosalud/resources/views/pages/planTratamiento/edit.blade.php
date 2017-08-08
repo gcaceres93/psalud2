@@ -6,28 +6,27 @@
 
 
 <div class="container">
- 	<form method="post" action="/diagnostico/{{ $diagnostico->id }}">
-      {{ method_field('PUT') }}
-  		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
   <div class="row">
   	<div class="col-md-6">
-        <h1>Diagnóstico N° {{ $diagnostico->id }}</h1>
+        <h1>Plan de tratamiento N° {{ $plan->id }}</h1>
         <hr />
     </div>
-   <center><img class="img-responsive" src="/img/lupa.png" alt="Logo" width="8%" height="8%" class="img-responsive"></center>
+      <center><img class="img-responsive" src="/img/plan.png" alt="Logo" width="8%" height="8%" class="img-responsive"></center>
    
   </div>
   <div class="row">
-  	<form method="post" id="formulario" action="/diagnostico">
+  <form method="post" action="/planTratamiento/{{ $plan->id }}">
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-		<input type="hidden" name="anamnesis" value="{{ $diagnostico->aid }}"/>
-        <input type="hidden" name="paciente" value="{{ $diagnostico->pid }}"/>
+		{{ method_field('PUT') }}
+
         	<div class="col-md-12">
         		<div class="form-group"> 
         			<label for="paciente">Paciente:</label>
-        			<a href="{{ route('paciente.show', $diagnostico->pid)  }}" > {{ $diagnostico->pid }} - {{$diagnostico->pnombre}}  {{$diagnostico->papellido}} </a>
-        			
+        			<a href="{{ route('paciente.show', $plan->pid)  }}" > {{ $plan->pid }} - {{$plan->pnombre}}  {{$plan->papellido}} </a>
+        			<input type="hidden" name="id" />
+        			<input type="hidden" name="diagnostico" value="{{ $plan->did }}"/>
+        			<input type="hidden" name="paciente" value="{{ $plan->pid }}"/>
         		</div>
         	</div>
  </div>	
@@ -38,23 +37,23 @@
 
         	<div class="col-md-12">
         		<div class="form-group"> 
-        			<label for="paciente">Anamnesis:</label>
-        			<a href="{{ route('anamnesis.show', $diagnostico->aid)  }}" >{{$diagnostico->aid }}</a>
+        			<label for="paciente">Diagnóstico:</label>
+        			<a href="{{ route('diagnostico.show', $plan->did)  }}" >{{$plan->did }}</a>
         		</div>
         	</div>
  		</div>
   		
-  		@if($diagnostico->fecha)
+  		@if($tipoTerapias)
   		<div class="row">
 
         	<div class="col-md-12">
         		<div class="form-group"> 
-        			<label for="consulta">Consulta asociada:</label>
-				<select  id="consulta" name="consulta" class="form-control selectpicker">
-                    <option value="{{$diagnostico->cid}}" >{{ $diagnostico->fecha }}</option>
-                   	@foreach($consultas as $consulta)
-                   	   <option value="{{ $consulta->id }}" >{{ $consulta->fecha }}</option>
-                   	@endforeach
+        			<label for="consulta">Tipo de terapia:</label>
+				<select id="tipoTerapia" name="tipoTerapia" class="form-control selectpicker">
+                    <option value="{{ $plan->tid }}" >{{ $plan->tnombre }}</option>
+                    @foreach($tipoTerapias as $tp)
+                      <option value="{{ $tp->id }}">{{ $tp->nombre }} </option>
+                    @endforeach
              	</select>        		
              	</div>
         	</div>
@@ -64,58 +63,46 @@
   			
   
   		<div class="row">
-      		<div class="form-group col-md-12">
-              <label for="comentario">Diagnóstico presuntivo:</label>
-              <textarea  name="diagnostico_presuntivo" class="form-control" rows="5" id="diagnostico_presuntivo">{{ $diagnostico->diagnostico_presuntivo }}</textarea>
+      		<div class="form-group col-md-4">
+              <label for="fecha_inicio">Fecha de inicio:</label>
+              <input type="date" name="fecha_inicio" class="form-control" id="fecha_inicio" value="{{ $plan->fecha_inicio }}">
             </div>
-		</div>
-		
-		<div class="row">
-      		<div class="form-group col-md-12">
-              <label for="comentario">Diagnóstico final:</label>
-              <textarea name="diagnostico_final"  class="form-control" rows="5" id="diagnostico_final">{{ $diagnostico->diagnostico_final }}</textarea>
+            <div class="form-group col-md-4">
+              <label for="fecha_inicio">Fecha final:</label>
+              <input type="date" name="fecha_final" class="form-control"  id="fecha_inicio" value="{{ $plan->fecha_final }}">
             </div>
-		</div>
-		
-		
-		<div class="row">
-      		<div class="form-group col-md-12">
-              <label for="comentario">Observaciones:</label>
-              <textarea name="observaciones"  class="form-control" rows="5" id="observaciones">{{ $diagnostico->observaciones }}</textarea>
-            </div>
-		</div>
-		
-		<div class="row">
-      		<div class="form-group col-md-12">
-              <label for="comentario">Resultado obtenido:</label>
-              <textarea name="resultado_obtenido"  class="form-control" rows="5" id="resultado_obtenido">{{ $diagnostico->resultado_obtenido }}</textarea>
-            </div>
-		</div>
-		
-		<div class="row">
-      		<div class="form-group col-md-12">
-              <label for="comentario">Recomendaciones:</label>
-              <textarea name="recomendaciones"  class="form-control" rows="5" id="recomendaciones">{{ $diagnostico->recomendaciones }}</textarea>
+            <div class="form-group col-md-4">
+              <label for="cantidad_sesiones">Cantidad de sesiones:</label>
+              <input type="number" name="cantidad_sesiones" class="form-control"  id="cantidad_sesiones" value="{{ $plan->cantidad_sesiones }}">
             </div>
 		</div>
 		
 	
-		
-		<div class="form-group">
-              <label for="acepta_tratamiento">¿Acepta tratamiento?</label> 
-                 @if($diagnostico->acepta_tratamiento)
-                 <input id="acepta_tratamiento"  type="checkbox" name="acepta_tratamiento" value="1" checked>
-                 @else
-                 <input id="acepta_tratamiento"  type="checkbox" name="acepta_tratamiento" value="1">   
-                 @endif              
+		<div class="row">
+      		<div class="form-group col-md-12">
+              <label for="alcance">Alcance:</label>
+              <textarea name="alcance" class="form-control" rows="5" id="alcance">{{ $plan->alcance }}</textarea>
+            </div>
 		</div>
-			  		<center><button type="submit" class="btn btn-success">Actualizar</button></center>
+		
+		<div class="row">
+      		<div class="form-group col-md-12">
+              <label for="resultados_esperados">Resultados esperados:</label>
+              <textarea name="resultados_esperados" class="form-control" rows="5" id="resultados_esperados"> {{ $plan->resultados_esperados }} </textarea>
+            </div>
+		</div>
+		
+		
 		
 		<br/>
 		
-		
-	</form> 
-	    
+		<div class="row">
+			<div class="col-md-12">
+				<center><button type="submit" class="btn btn-success">Actualizar</button></center>
+			</div>
+		</div>
+		<br/>
+	</form>     
   </div>
 </div>
 </div>
