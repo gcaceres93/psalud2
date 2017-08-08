@@ -76,8 +76,39 @@
   			</table>
     <button type="button" name="agregar" id="agregar" class="btn btn-success">Agregar Fila</button>  <button type="button" name="borrar_fila" id="borrar_fila" class="btn btn-danger">Borrar Uiltima Fila</button>
   	</div>
+  	
   	<div class="col-md-12	">
-  	</br>
+  	</br></br>
+      	<label for="preguntas">Resultado Test</label>
+      	 <table id="tablar" name="tablar" class="table table-hover table-bordered table-condensed">
+      		
+      				<thead>
+    	  				<tr class="table table-info">
+    	  				<th class="col-md-1">ID</th>
+    	  					<th class="col-md-6">Descripcion</th>
+    	  					<th class="col-md-1">Valor Desde</th>
+    	  					<th class="col-md-1">Valor Hasta</th>
+    	  					
+    	  				</tr>
+    	  			</thead>
+    	  			<tbody id="detaller"   name="detaller">
+    	  				@if($resultado)
+            	  			@foreach ($resultado as $resul)
+            	  				<tr>
+            						<td ><input type="number" name="idres"  id="idres" class="form-control"  placeholder="ID res." readonly value="{{$resul->id}}"  > </td>
+                					 <td><input type="text" name="resultado" id="resultado" class="form-control" placeholder=" Descripcion" value="{{$resul->nombre}}" > 	</td>    				
+                					 <td><input type="number" min="0" name="valor_ini"  id="valor_ini" class="form-control"  value="{{$resul->valor_ini}}" ></td>
+                					 <td><input type="number" min="1" name="valor_fin"  id="valor_fin" class="form-control" value="{{$resul->valor_fin}}"  ></td>
+             														
+            														
+            					</tr>
+            				@endforeach
+						@endif
+    											          		
+    	  		</tbody>
+      			</table>
+        <button type="button" name="agregarr" id="agregarr" class="btn btn-success">Agregar Fila</button>  <button type="button" name="borrar_filar" id="borrar_filar" class="btn btn-danger">Borrar Uiltima Fila</button>
+  	</br></br>
   	 <button type="button" id="guardar" name="guardar" class="btn btn-info">Guardar Test</button>
   	 </br>
   	 </div> 
@@ -93,6 +124,26 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function() {	
+    $('#agregarr').on('click', function () {
+    	$('#detaller').append("<tr> "+
+
+    			 '<td ><input type="number" name="idres"  id="idres" class="form-control"  placeholder="ID res." readonly  > </td>'+
+					
+					'<td><input type="text" name="resultado" id="resultado" class="form-control" placeholder=" Descripcion" > 	</td>'+
+				
+				
+					 '<td><input type="number" min="0" name="valor_ini"  id="valor_ini" class="form-control"  ></td>'+
+					 '<td><input type="number" min="1" name="valor_fin"  id="valor_fin" class="form-control"  ></td>'+
+
+					
+						
+					
+					
+		"</tr>");
+        
+    });
+});
 
 function agregarfila(){
 
@@ -117,6 +168,9 @@ function agregarfila(){
 $(document).ready(function() {	
     $('#borrar_fila').on('click', function () {
     	borrarfila('detalle');
+    });
+    	 $('#borrar_filar').on('click', function () {
+    	    	borrarfila('detaller');
     	
     	
     	
@@ -152,11 +206,18 @@ $(document).ready(function() {
 	    var pregunta = [];
 	    var idp = [];
 		var descripcion=[];
+		var resultado=[];
+		var val_min=[];
+		var val_max = [];
+		var idre = [];
 		var ids=  $('#ids').val(); 
 		var nombre=  $('#nombre').val();
-		var abstracto=  $('#abstracto').val();
+		if ($('#abstracto').checked){
+			var abstracto=  "True" ;}
+			else	{ 	var abstracto=  "False"; }
 		var _token= "{{ csrf_token() }}";
         var table = document.getElementById("detalle");
+        var tabler = document.getElementById("detaller");
         for (var i = 0, row; row = table.rows[i]; i++) {
              
         	   //iterate through rows
@@ -182,7 +243,38 @@ $(document).ready(function() {
         	   }  
         	   
         	}
-        var data = {nombre:nombre,abstracto:abstracto,pregunta:pregunta,descripcion:descripcion,_token:_token,ids:ids,idp:idp};
+    //  Iterar la tabla de respuestas
+        for (var i = 0, row; row = tabler.rows[i]; i++) {
+            
+     	   //iterate through rows
+     	   //rows would be accessed using the "row" variable assigned in the for loop
+     	   for (var j = 0, col; col = row.cells[j]; j++) {
+     		  	
+     		   valor= col.childNodes.item(0).value;
+
+     		  if (j==0){
+
+     			  idre.push(valor);
+     		   }
+
+     		   if (j==1){
+
+     			  resultado.push(valor);
+     		   }
+
+     		   if (j==2){
+
+     			  val_min.push(valor);
+     		   }
+     		   if (j==3){
+
+     			  val_max.push(valor);
+         		   }
+     		  
+     	   }  
+     	   
+     	}
+        var data = {nombre:nombre,abstracto:abstracto,pregunta:pregunta,descripcion:descripcion,_token:_token,ids:ids,idp:idp,resultado:resultado,val_min:val_min,val_max:val_max,idre:idre};
         desea = confirm('Para cargar respuestas a esta pregunta, primero se debe guardar el Test con sus respectivas preguntas, ¿Desea guardar el test ahora  ?');
         if (desea == 1){
         	$.ajax({
@@ -267,12 +359,18 @@ $(document).ready(function() {
 	    var pregunta = [];
 	    var idp = [];
 		var descripcion=[];
+		var resultado=[];
+		var idre = [] ;
+		var val_min=[];
+		var val_max = [];
 		var ids=  $('#ids').val();
 		var nombre=  $('#nombre').val();
-		var abstracto=  $('#abstracto').val();
+		if ( $('#abstracto').checked ) {
+			var abstracto =  "True" }
+			else	{ 	var abstracto =  "False"  }
 		var _token= "{{ csrf_token() }}";
         var table = document.getElementById("detalle");
-        
+        var tabler = document.getElementById("detaller");
         for (var i = 0, row; row = table.rows[i]; i++) {
              
         	   //iterate through rows
@@ -298,7 +396,40 @@ $(document).ready(function() {
         	   }  
         	   
         	}
-        var data = {nombre:nombre,abstracto:abstracto,pregunta:pregunta,descripcion:descripcion,_token:_token,ids:ids,idp:idp};
+        //  Iterar la tabla de respuestas
+            for (var i = 0, row; row = tabler.rows[i]; i++) {
+                
+         	   //iterate through rows
+         	   //rows would be accessed using the "row" variable assigned in the for loop
+         	   for (var j = 0, col; col = row.cells[j]; j++) {
+         		  	
+         		   valor= col.childNodes.item(0).value;
+
+         		  if (j==0){
+         			    
+         			  idre.push(valor);
+         			 
+         		   }
+    
+         		   if (j==1){
+    
+         			  resultado.push(valor);
+         		   }
+    
+         		   if (j==2){
+    
+         			  val_min.push(valor);
+         		   }
+         		   if (j==3){
+    
+         			  val_max.push(valor);
+             		   }
+         		  
+         	   }  
+         	   
+         	}
+         	
+        var data = {nombre:nombre,abstracto:abstracto,pregunta:pregunta,descripcion:descripcion,_token:_token,ids:ids,idp:idp,resultado:resultado,val_min:val_min,val_max:val_max,idre:idre};
         
         	$.ajax({
                 method: 'post',
@@ -308,7 +439,7 @@ $(document).ready(function() {
                 dataType:"json",
                 success: function(data){
                 	
-                	console.log(data);
+                	
                 	var ids = document.getElementById('ids');
                     ids.value = data[0].test_id;
                 	
@@ -346,8 +477,8 @@ $(document).ready(function() {
 					
 // 					var id_preg=4;
 					
-					 
-					window.location.replace("/test");
+					 console.log(data);
+					//window.location.replace("/test");
 					
 //			     		});
 					

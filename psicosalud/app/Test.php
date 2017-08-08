@@ -15,4 +15,9 @@ class Test extends Model
     {
         return $this->hasMany('App\PreguntaTest','pregunta_por_test')->withPivot('test_id');
     }
+    
+    public function resultado()
+    {
+        return $this->hasMany('App\ResultadoTest','resultado_por_test')->withPivot('test_id');
+    }
 }
