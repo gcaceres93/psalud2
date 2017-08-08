@@ -19,10 +19,10 @@
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 	<div class="form-group"> 
-      <label>Empleado</label>
+      <label>Persona</label>
        
       <select  name="persona" id="persona" class="form-control selectpicker">
-        <option value="" >Seleccionar empleado</option>
+        <option value="" >Seleccionar persona</option>
         @foreach($personas as $persona)
           <option   value="{{ $persona->id }}">{{ $persona->apellido }}, {{ $persona->nombre}} </option>
         @endforeach
@@ -37,7 +37,7 @@
   		</div>
       <div class="form-group">
         <label for="E-mai">E-mail</label>
-        <input type="text" name="email" class="form-control" placeholder="E-mail del Usuario">   
+        <input type="text" name="email" id="email" class="form-control" placeholder="E-mail del Usuario">   
       </div>
       <div class="form-group">
         <label for="Contraseña">Contraseña</label>
@@ -63,13 +63,49 @@
   </div>
 </div>
 <script type="text/javascript">
-// $(document).ready(function() {	
-//     $('#name').on('click', function () {
-//     	var rol=[]
-//         	rol= $('#roles').val();
-//     	console.log (rol); 
+$(document).ready(function() {	
+    $('#persona').on('change', function () {
+    	var persona = $('#persona').val();
+//     	$('#aplicarT').type="hidden";
+        var data = {persona:persona};
+        $.ajax({
+            method: 'get',
+            url: '/traerDatos', 
+            data:  data, 
+            async: true,
+            dataType:"json",   
+            success: function(data){
+            	
+            	
+//             	$('#consulta').html('	');
+ 			 data.forEach(recorrerdata);
+// 				borrarfila('detalle');
+// 				agregarfila();
+// // 				$('#factura_concepto').value(1);
+// 				 data.forEach(recorrerconsulta);
+				
+		
+
+                
+            	
+            },
+            error: function(data){
+            	var errors = data.responseJSON;
+               
+                console.log(errors);
+            },
+
+        });
         
-//     });
-// });
+    });
+});
+function recorrerdata(ar,value,index){
+	
+	var nombre = ar.nombre + ' ' + ar.apellido; 
+	var email = ar.email;
+	
+	$('#name').val(nombre);
+	$('#email').val(email);
+}
 </script>
 @endsection

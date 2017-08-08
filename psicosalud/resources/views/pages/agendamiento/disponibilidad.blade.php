@@ -55,7 +55,7 @@
                 <div class="col-md-3 inputGroupContainer">
                 <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              <input id="fecha_programada" name="fecha_programada" placeholder="Fecha para la consulta" class="form-control"  type="date">
+              <input id="fecha_programada" name="fecha_programada" placeholder="Fecha para la consulta" class="form-control" value="{{$fecha}}"  type="date">
                 </div>
               </div>
 		</div>
@@ -69,7 +69,7 @@
                 <div class="col-md-3 inputGroupContainer">
                 <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              <input id="hora_programada" name="hora_programada" placeholder="Fecha para la consulta" class="form-control"  type="time">
+              <input id="hora_programada" name="hora_programada" placeholder="Fecha para la consulta" class="form-control" value="{{$hora}}"  type="time">
                 </div>
               </div>
 		</div>

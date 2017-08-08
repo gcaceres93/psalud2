@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Carbon\Carbon;
 use App\Agendamiento;
 use App\Paciente;
 use App\Modalidad;
@@ -98,9 +99,13 @@ class AgendamientoController extends Controller
         ->where('es_medico','=',true)
         ->groupBy('cargo.descripcion','persona.apellido','persona.nombre','empleado.id')
         ->get();
+        $fechahora=Carbon::now();
+        $fecha=$fechahora->toDateString();
+        $hora=$fechahora->toTimeString();
+        
         $modalidades=Modalidad::all()->sortBy('descripcion');
         $sucursales=Sucursal::all()->sortBy('nombre');
-        return view('pages.'.$this->path.'.disponibilidad',compact('pacientes','modalidades','sucursales','empleados'));
+        return view('pages.'.$this->path.'.disponibilidad',compact('pacientes','modalidades','sucursales','empleados','fecha','hora'));
     }
     
 

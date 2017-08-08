@@ -72,6 +72,7 @@ Route::post('/guardarRespuestaTest','AplicarTestController@guardarRespuestaTest'
 
 Route::resource('persona','PersonaController');
 Route::resource('user','Auth\RegisterController');
+Route::get('/traerDatos','Auth\RegisterController@traerDatos' );
 Route::resource('paciente','PacienteController');
 Route::post('/guardarPaciente','PacienteController@store' );
 Route::resource('empleado','EmpleadoController');
@@ -80,6 +81,10 @@ Route::get('/medico/create','EmpleadoController@createMedico')->name('medico.cre
 
 /*			PERSONAS 		  */
 Route::get('/', 'HomeController@index')->name('home');
+
+
+
+
 
 
 // Route::get('tipo_terapia','TipoTerapiaController@index');

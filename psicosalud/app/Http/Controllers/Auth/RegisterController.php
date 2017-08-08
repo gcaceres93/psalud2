@@ -33,6 +33,17 @@ class RegisterController extends Controller
         $data= User::all()->sortBy('id');
         return view('pages.user.index',compact('data'));
     }
+    
+    
+    public function traerDatos(Request $request)
+    {
+        $persona=DB::table('persona')
+        ->select('persona.*')
+        ->where('persona.id','=',$request->persona)
+        ->get();
+        
+        return json_encode($persona);
+    }
 
     /**
      * Where to redirect users after registration.
@@ -45,6 +56,17 @@ class RegisterController extends Controller
     {
        
         try{
+            
+            $usuarios=DB::table('users')
+            ->select('users.*')
+            ->where('users.email','=',$request->email)
+            ->get();
+            $usu=count($usuarios);
+            if ($usu>0){
+                $var = '<script language="javascript">alert("El email ya cuenta con usuario"); window.history.go(-1);</script>'; 
+                return ("$var ");
+            }
+            
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;

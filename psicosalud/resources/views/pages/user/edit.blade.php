@@ -20,8 +20,8 @@
       {{ method_field('PUT') }}
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
   		<div class="form-group">
-  		<select name="persona" class="form-control selectpicker">
-        <option value="" >Seleccionar empleado</option>
+  		<select name="persona" readonly class="form-control selectpicker">
+       
         @foreach($personas as $persona)
         	<?php
                              $selected = ""
@@ -30,10 +30,12 @@
                 	@if ($persona->id == $user->empleado_id)
                     	 <?php
                              $selected = "selected"
+                       
                          ?>
+                          <option <?php echo ($selected) ?>     value="{{ $persona->id }}">{{ $persona->apellido }} {{ $persona->nombre}}  </option>
          			@endif
         
-          <option <?php echo ($selected) ?>     value="{{ $persona->id }}">{{ $persona->apellido }} {{ $persona->nombre}}  </option>
+         
         @endforeach
       </select>
     
@@ -43,11 +45,11 @@
 
   		<div class="form-group">
         <label for="descripci&oacute;n">Nombre</label>
-        <input type="text" name="name" class="form-control" placeholder="Nombre del Usuario" value="{{ $user->name }}">   
+        <input type="text" name="name" id="name" class="form-control"  readonly placeholder="Nombre del Usuario" value="{{ $user->name }}">   
       </div>
       <div class="form-group">
         <label for="E-mai">E-mail</label>
-        <input type="text" name="email" class="form-control" placeholder="E-mail del Usuario" value="{{ $user->email }}">   
+        <input type="text" name="email" id="email" class="form-control" placeholder="E-mail del Usuario" value="{{ $user->email }}">   
       </div>
       <div class="form-group">
         <label for="Contraseña">Contraseña</label>

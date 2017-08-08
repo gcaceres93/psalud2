@@ -128,14 +128,17 @@ class AplicarTestController extends Controller
         ->select(DB::raw('sum(rpp.valor)'))
         ->where('ta.id','=',$aplicar->id)
         ->get();
-
         $suma=$resultado_valor[0]->sum;
-        
-//         $resultado=DB::table('resultado_por_test')
-//         ->select('resultado_por_test.nombre')
-//         ->whereBetween($suma, ['valor_ini', 'valor_fin'])->get();
         $resultado=DB::select(DB::raw("SELECT rpt.nombre FROM  resultado_por_test as rpt WHERE test_id = '$aplicar->test_id' and '$suma' between valor_ini and valor_fin"));
-        $nombre_resultado=$resultado[0]->nombre;
+        $crv=count($resultado);
+        
+        if ($crv>0){
+           
+                $nombre_resultado=$resultado[0]->nombre;
+        }else {
+            $nombre_resultado='Test abstracto';
+            
+        }
         
 //         dd($detalle);
         return view('pages.'.$this->path.'.show',compact('personas','test','aplicar','detalle','nombre_resultado'));
@@ -285,8 +288,15 @@ class AplicarTestController extends Controller
      * @param  \App\AplicarTest  $aplicarTest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AplicarTest $aplicarTest)
+    public function destroy( $aplicarTest)
     {
         //
+        try{
+            $testAplicado = AplicarTest::findOrFail($aplicarTest);
+            $testAplicado->delete();
+            return redirect()->route('cargo.index');
+        } catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 }
