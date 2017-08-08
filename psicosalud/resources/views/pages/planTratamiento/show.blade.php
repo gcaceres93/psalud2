@@ -15,6 +15,16 @@
       <center><img class="img-responsive" src="/img/plan.png" alt="Logo" width="8%" height="8%" class="img-responsive"></center>
    
   </div>
+   <div class="row">
+    <div class="col-md-12">
+    	<div class="btn-group">
+   		<a href="{{ url('/crearSeguimientoTratamiento/'.$plan->id) }}" class="btn btn-warning btn-group"><span class="glyphicon glyphicon-search"></span> Registrar seguimiento</a>
+   		<a href="{{ url('/listarSeguimientoTratamiento/'.$plan->id) }}" class="btn btn-info btn-group"><span class="glyphicon glyphicon-list"></span> Listar seguimientos</a>
+
+   		</div>
+    </div>
+   </div> 
+    <hr />
   <div class="row">
   	<form method="post" id="formulario" action="/planTratamiento">
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
