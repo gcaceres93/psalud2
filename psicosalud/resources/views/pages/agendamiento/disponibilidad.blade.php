@@ -114,6 +114,19 @@ $(document).ready(function() {
     $('#disponibilidad').on('click', function () {
     	var fecha_programada = $('#fecha_programada').val();
         var hora_programada = $('#hora_programada').val();
+        var fecha_prog= new Date(fecha_programada);
+        var dia_prog= fecha_prog.getDay();
+       if (hora_programada > '20:00:00' || hora_programada < '08:00:00'){
+           
+				return alert('El consultorio se encuentra cerrado en ese horario');
+           }
+       if (Date() > Date(fecha_programada) ){
+           
+			return alert('No se pueden programar fechas anteriores al dia de hoy');
+      } else if  (dia_prog == 5 || dia_prog == 6) {
+    	  return alert('No se pueden programar turnos sabados ni domingos');
+          }
+       
         var sucursal = $('#sucursal').val();
         var medico = $('#medico').val();
         var data = {medico:medico,sucursal:sucursal,fecha_programada:fecha_programada,hora_programada:hora_programada};
