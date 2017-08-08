@@ -68,9 +68,10 @@
                   <li><a href="#">Registrar seguimiento</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">APLICACION DE TESTS Y RESULTADOS</li>
-                  <li><a href="{{ url('/test') }}">Registrar test</a></li>
-                  <li><a href="{{ url('/aplicarTest') }}">Aplicar test</a></li>
-                  <li><a href="#">Listar tests aplicados</a></li>
+                  <li><a href="{{route('test.create') }}">Registrar test</a></li>
+                  <li><a href="{{ url('/test') }}">Listar Tests</a></li>
+                  <li><a href="{{route('aplicarTest.create') }}">Aplicar test</a></li>
+                  <li><a href="{{ url('/aplicarTest') }}">Listar tests aplicados</a></li>
               </ul>
           </li>
 
