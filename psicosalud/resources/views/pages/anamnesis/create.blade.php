@@ -19,7 +19,7 @@
 	<div class="col-md-12">
 		<div class="form-group"> 
 			<label for="paciente">Paciente:</label>
-			<select class="form-control" id="paciente" name="paciente_id">
+			<select class="form-control" id="paciente" name="paciente">
 			<option>--- Seleccionar Paciente ---</option>
 			@foreach($pacientes as $paciente)
 			<option value="{{ $paciente->id }}">{{$paciente->nombre }} {{ $paciente->apellido }} - {{ $paciente->cedula }} </option>

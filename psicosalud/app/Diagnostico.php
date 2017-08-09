@@ -13,6 +13,10 @@ class Diagnostico extends Model
         return $this->belongsTo('App\Anamnesis');
     }
     
+    public function test(){
+        return $this->hasMany('App\TestDiagnostico','diagnostico_id');
+    }
+    
     public function consulta(){
         return $this->belongsTo('App\Consulta');
     }

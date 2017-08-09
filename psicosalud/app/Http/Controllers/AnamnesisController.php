@@ -109,7 +109,7 @@ class AnamnesisController extends Controller
     public function store(Request $request)
     {
         $anamnesis = new Anamnesis();
-        $anamnesis->paciente_id=$request->paciente_id;
+        $anamnesis->paciente_id=$request->paciente;
         $anamnesis->observacion=$request->observacion;
         $anamnesis->motivo=$request->motivo_consulta;
         $anamnesis->informantes=$request->informantes;

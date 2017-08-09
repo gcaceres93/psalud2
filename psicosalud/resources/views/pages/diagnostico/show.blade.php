@@ -68,6 +68,46 @@
  		</div>
   		<br/>
   		@endif
+  		
+  		<div class="row">
+  		<div class="col-md-12">
+  		<label for="tabla">Tests Aplicados:</label>
+  		<table id="tabla" name="tabla" class="table table-hover table-bordered table-condensed">
+  				<thead>
+	  				<tr class="table table-info">
+	  					<th>Test</th>
+	  				</tr>
+	  			</thead>
+	  			<tbody id="detalle"  class="detalle" name="detalle">
+	  				@foreach($test_diagnosticado as $test)
+                   	   <tr> 
+														<td>
+    											              <select  disabled name='test' id='test' class='form-control selectpicker'>
+    											                <option value='' >Seleccionar Test</option>
+    											                @foreach($test_aplicados  as $testa)
+    											                   <?php
+                                                                                 $selected = ""
+                                                                                
+                                                                             ?>
+    											                	@if ($test->test_id == $testa->id)
+    											                	<?php
+                                                                                 $selected = "selected"
+                                                                             ?>
+    											                	@endif 
+    											                  <option <?php echo ($selected) ?>   value='{{ $testa->id }}'>{{ $testa->fecha }} / {{ $testa->nombre }} / {{ $testa->resultado }} </option>
+    											                  
+    											                @endforeach
+    											              </select>
+											          			
+											          		
+											</tr>
+                   	@endforeach
+											          		
+	  		</tbody>
+  			</table>
+    
+  	</div>
+  	</div>
   			
   
   		<div class="row">

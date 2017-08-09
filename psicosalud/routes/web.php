@@ -32,7 +32,7 @@ Route::get('/traerFechaAgendamiento','ConsultaController@traerFechaAgendamiento'
 /*DIAGNOSTICO*/
 Route::resource('diagnostico','DiagnosticoController');
 Route::get('diagnosticoAnamnesis/{id}','DiagnosticoController@diagnosticoAnamnesis');
-
+Route::post('/diagnosticoGuardar','DiagnosticoController@diagnosticoGuardar');
 /*PLAN TRATAMIENTO*/
 Route::resource('planTratamiento','PlanTratamientoController');
 Route::get('planTratamientoDiagnostico/{id}','PlanTratamientoController@planDiagnostico');
