@@ -32,7 +32,7 @@
               				$var='checked';
               			}
               @endphp
-  			<label for="abstracto">Es abstracto?</label>
+  			<label for="abstracto"> &iquest Es abstracto?</label>
   			<input type="checkbox" @php echo($var) @endphp name="abstracto" id="abstracto"   value="{{ $test->abstracto }}">		
       <br/>
    </div>   
@@ -79,7 +79,7 @@
   	
   	<div class="col-md-12	">
   	</br></br>
-      	<label for="preguntas">Resultado Test</label>
+      	<label for="preguntas">Resultado Test </label>
       	 <table id="tablar" name="tablar" class="table table-hover table-bordered table-condensed">
       		
       				<thead>
@@ -275,7 +275,7 @@ $(document).ready(function() {
      	   
      	}
         var data = {nombre:nombre,abstracto:abstracto,pregunta:pregunta,descripcion:descripcion,_token:_token,ids:ids,idp:idp,resultado:resultado,val_min:val_min,val_max:val_max,idre:idre};
-        desea = confirm('Para cargar respuestas a esta pregunta, primero se debe guardar el Test con sus respectivas preguntas, ¿Desea guardar el test ahora  ?');
+        desea = confirm('Para cargar respuestas a esta pregunta, primero se debe guardar el Test con sus respectivas preguntas,  Desea guardar el test ahora  ?');
         if (desea == 1){
         	$.ajax({
                 method: 'post',
