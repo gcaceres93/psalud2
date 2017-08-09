@@ -97,13 +97,15 @@ class DiagnosticoController extends Controller
             $diagnostico->acepta_tratamiento= $request->acepta_tratamiento;
             $diagnostico->save();
             
-            foreach ($request->test as $tests){
-                $test_diag = new TestDiagnostico();
-                $test_diag ->diagnostico_id = $diagnostico->id;
-                $test_diag->test_id = $tests;
-                
-                $test_diag->save();
-                
+            if($request->test){
+                foreach ($request->test as $tests){
+                    $test_diag = new TestDiagnostico();
+                    $test_diag ->diagnostico_id = $diagnostico->id;
+                    $test_diag->test_id = $tests;
+                    
+                    $test_diag->save();
+                    
+                }
             }
             return json_encode($diagnostico->id);
           
@@ -201,21 +203,26 @@ class DiagnosticoController extends Controller
             
             $diagnostico->acepta_tratamiento= $request->acepta_tratamiento;
             $diagnostico->save();
-            $tes=$request->test;
-           
-            $canti=count($tes);
             
-            $diagnostico->test()->delete();
-            //return json_encode($tes);
-            foreach ($request->test as $tests){
+            if ($request->test){
+                $tes=$request->test;
                 
-                $test_diag = new TestDiagnostico();
-                $test_diag ->diagnostico_id = $diagnostico->id;
-                $test_diag->test_id = $tests;
+                $canti=count($tes);
                 
-                $test_diag->save();
+                $diagnostico->test()->delete();
+                //return json_encode($tes);
                 
+                foreach ($request->test as $tests){
+                    
+                    $test_diag = new TestDiagnostico();
+                    $test_diag ->diagnostico_id = $diagnostico->id;
+                    $test_diag->test_id = $tests;
+                    
+                    $test_diag->save();
+                    
+                }
             }
+            
             return json_encode($diagnostico->id);
             
             
