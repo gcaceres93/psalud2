@@ -44,7 +44,7 @@ class ConsultaController extends Controller
         $paciente = $request->paciente;
         $agendamientos = DB::table('agendamiento')
         ->select('agendamiento.*')
-        ->where('agendamiento.paciente_id', '=', $paciente)
+        ->where([['agendamiento.paciente_id', '=', $paciente],['asistio','=',true]])
         ->get();
         
         return json_encode($agendamientos);
