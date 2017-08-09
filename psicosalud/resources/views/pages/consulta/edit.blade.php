@@ -14,6 +14,7 @@
  
   <div class="row">
   	<form method="post" action="/consulta/{{ $consulta->id }}">
+  	{{ method_field('PUT') }}
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		
 		<h1>Edición de consultas</h1>
@@ -33,8 +34,36 @@
              </div>
   		</div>
  </div>	
+ <br/>
 <!--  row	 -->
+ <div class="row">		
+  		<div class="form-group">
+  			 <label for="agendamiento">Agendamiento</label>
+  			 <br/>
+  			<div class="col-md-6">
+  			<select  name="agendamiento" id="agendamiento" class="form-control selectpicker">
+                <option value="" >Seleccionar Agendamiento</option>
+                 @foreach($agendamientos as $agendamiento)
+                 <?php
+                                 $selected = ""
+                                
+                             ?>
+                    	@if ($agendamiento->id == $consulta->agendamiento_id)
+                        	 <?php
+                                 $selected = "selected"
+                             ?>
+             			@endif
+                  <option  <?php echo ($selected) ?> value="{{ $agendamiento->id }}">{{ $agendamiento->fecha_programada }}  {{ $agendamiento->hora_programada }} </option>
+                @endforeach
+              </select>
+             </div>
+<!--              <div class="col-md-6"><a href="{{ route('medico.create') }}">Crear nuevo médico</a></div> -->
+  		</div>
   		<br/>
+  		<br/>
+  </div> 
+  		
+ 
   		
   	
   <div class="row">		
@@ -59,7 +88,7 @@
   			 <label for="cantidad_horas">Cantidad de horas</label>
   			 <br/>
   			<div class="col-md-6">
-              <input id="cantidad_horas" value="{{ $consulta->cantidad_horas }}"  name="cantidad_horas" placeholder="Cantidad de horas" class="form-control"  type="number">
+              <input id="cantidad_horas" value="{{ $consulta->cantidad_horas }}"  name="cantidad_horas"  placeholder="Cantidad de horas" class="form-control"  type="number">
              </div>
   		</div>
   		<br/>
@@ -120,6 +149,7 @@ $(document).ready(function() {
         var hora_programada = $('#hora_programada').val();
         var sucursal = $('#sucursal').val();
         var medico = $('#medico').val();
+        
         var data = {medico:medico,sucursal:sucursal,fecha_programada:fecha_programada,hora_programada:hora_programada};
         $.ajax({
             method: 'get',

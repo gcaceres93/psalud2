@@ -108,13 +108,13 @@ class FacturaController extends Controller
     public function traerConsulta(Request $request){
         
         $consulta = $request->consulta;
-        
+     
         $consultas = DB::table('consulta')
         ->join('agendamiento','consulta.agendamiento_id','=','agendamiento.id')
         ->join('modalidad','agendamiento.modalidad_id','=','modalidad.id')
         ->join('tarifa_hora','tarifa_hora.modalidad_id','=','modalidad.id')
         ->select('consulta.cantidad_horas','tarifa_hora.tarifa as tarifa')
-        ->where([['consulta.id', '=', $consulta],['consulta.estado', '=', 'Consulta']])
+        ->where('consulta.id', '=', $consulta)
         ->get();
         
         return json_encode($consultas);

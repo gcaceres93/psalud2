@@ -13,15 +13,15 @@
         <h4><a class="btn btn-warning" href="{{ route('consulta.index') }}">Listar consultas</a></h4>
         <hr />
     </div>
-    <div class="col-md-6">
-       <div class="btn-group well well-lg">
-       	  <h1>Acciones desde consulta</h1> 	
-          <button type="button" class="btn btn-primary">Generar anamnesis</button>
-          <button type="button" class="btn btn-danger">Generar diagnóstico</button>
-          <button type="button" class="btn btn-info">Generar plan de tratamiento</button>
-          <hr />
-		</div>
-    </div>
+<!--     <div class="col-md-6"> -->
+<!--        <div class="btn-group well well-lg"> -->
+<!--        	  <h1>Acciones desde consulta</h1> 	 -->
+<!--           <button type="button" class="btn btn-primary">Generar anamnesis</button> -->
+<!--           <button type="button" class="btn btn-danger">Generar diagnóstico</button> -->
+<!--           <button type="button" class="btn btn-info">Generar plan de tratamiento</button> -->
+<!--           <hr /> -->
+<!-- 		</div> -->
+<!--     </div> -->
   </div>
   <div class="row">
   	<form method="post" id="formulario" action="/consulta">
@@ -38,7 +38,7 @@
                 @endforeach
              </select>
              </div>
-             <div class="col-md-6"><a href="{{ route('paciente.create') }}"> Crear nuevo paciente</a></div>
+<!--              <div class="col-md-6"><a href="{{ route('paciente.create') }}"> Crear nuevo paciente</a></div> -->
   		</div>
  </div>	
 <!--  row	 -->
@@ -57,12 +57,27 @@
                 @endforeach
              </select>
              </div>
-             <div class="col-md-6"><a href="{{ route('medico.create') }}">Crear nuevo médico</a></div>
+<!--              <div class="col-md-6"><a href="{{ route('medico.create') }}">Crear nuevo médico</a></div> -->
   		</div>
   		<br/>
   		<br/>
   </div> 
 
+  <div class="row">		
+  		<div class="form-group">
+  			 <label for="agendamiento">Agendamiento</label>
+  			 <br/>
+  			<div class="col-md-6">
+  			<select  name="agendamiento" id="agendamiento" class="form-control selectpicker">
+                <option value="" >Seleccionar Agendamiento</option>
+              </select>
+             </div>
+<!--              <div class="col-md-6"><a href="{{ route('medico.create') }}">Crear nuevo médico</a></div> -->
+  		</div>
+  		<br/>
+  		<br/>
+  </div> 
+  
   <div class="row">		
   		<div class="form-group">
   			 <label for="cantidad_horas">Cantidad de horas</label>
@@ -81,7 +96,7 @@
                 <div class="col-md-3 inputGroupContainer">
                 <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              <input id="fecha" required name="fecha" placeholder="Fecha de la consulta" class="form-control"  type="date">
+              <input id="fecha" required readonly name="fecha" placeholder="Fecha de la consulta" class="form-control"  type="date">
                 </div>
               </div>
 		</div>
@@ -117,7 +132,7 @@ $(document).ready(function() {
 	    e.preventDefault();
         var observaciones = $('#observaciones').val();
         var fecha = $('#fecha').val();
-        var cantidad_horas = $('#sucursal').val();
+        var cantidad_horas = $('#cantidad_horas').val();
         var medico = $('#medico').val();
         var paciente = $('#paciente').val();
 
@@ -145,5 +160,71 @@ $(document).ready(function() {
         });
     });
 });
+
+$(document).ready(function() {	
+	$( '#paciente' ).on( 'change', function(e) {
+	   
+        var paciente = $('#paciente').val();
+
+        var data = {paciente:paciente};
+        $.ajax({
+            method: 'get',
+            url: '/traerAgendamiento',
+            dataType:"json",
+            async: true,
+            data:  data,
+            success: function(data){
+            		console.log(data);
+            		$('#agendamiento').html('	');
+                	$('#agendamiento').append(' <option  </option>');
+                	data.forEach(recorrerdata);
+            	    
+
+            	
+            },
+            error: function(data){
+            	var errors = data.responseJSON;
+            	console.log(data);
+            },
+
+        });
+    });
+});
+function recorrerdata(value,index,ar){
+	
+	$('#agendamiento').append(' <option   value='+value.id+'>'+value.fecha_programada+' '+value.hora_programada+'</option>'); 
+}
+
+$(document).ready(function() {	
+	$( '#agendamiento' ).on( 'change', function(e) {
+	   
+        var agendamiento = $('#agendamiento').val();
+
+        var data = {agendamiento:agendamiento};
+        $.ajax({
+            method: 'get',
+            url: '/traerFechaAgendamiento',
+            dataType:"json",
+            async: true,
+            data:  data,
+            success: function(data){
+            		console.log(data);
+            		var fec=data[0].fecha_programada;
+                	$('#fecha').val(fec);
+                	
+            	    
+
+            	
+            },
+            error: function(data){
+            	var errors = data.responseJSON;
+            	console.log(data);
+            },
+
+        });
+    });
+});
+
+
 </script>
 @endsection

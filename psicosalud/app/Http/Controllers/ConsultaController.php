@@ -37,6 +37,33 @@ class ConsultaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function traerAgendamiento(Request $request){
+        
+        
+        $paciente = $request->paciente;
+        $agendamientos = DB::table('agendamiento')
+        ->select('agendamiento.*')
+        ->where('agendamiento.paciente_id', '=', $paciente)
+        ->get();
+        
+        return json_encode($agendamientos);
+        
+    }
+    
+    public function traerFechaAgendamiento(Request $request){
+        
+        
+        $agendamiento = $request->agendamiento;
+        $agendamientos = DB::table('agendamiento')
+        ->select('agendamiento.*')
+        ->where('agendamiento.id', '=', $agendamiento)
+        ->get();
+        
+        return json_encode($agendamientos);
+        
+    }
+    
     public function create()
     {
         $pacientes=DB::table('paciente')
@@ -66,6 +93,7 @@ class ConsultaController extends Controller
             $consulta = new Consulta();
             $consulta->fecha = $request->fecha;
             $consulta->empleado_id = $request->medico;
+            $consulta->agendamiento_id = $request->agendamiento;
             $consulta->paciente_id = $request->paciente;
             $consulta->cantidad_horas = $request->cantidad_horas;
             $consulta->observaciones = $request->observaciones;
@@ -134,8 +162,15 @@ class ConsultaController extends Controller
         ->where('es_medico','=',true)
         ->groupBy('cargo.descripcion','persona.apellido','persona.nombre','empleado.id')
         ->get();
+        
+        $paciente = $consulta->paciente_id;
+        $agendamientos = DB::table('agendamiento')
+        ->select('agendamiento.*')
+        ->where('agendamiento.paciente_id', '=', $paciente)
+        ->get();
+        
        
-        return view('pages.'.$this->path.'.edit',compact('consulta','pac','emp','pacientes','empleados'));
+        return view('pages.'.$this->path.'.edit',compact('consulta','pac','emp','pacientes','empleados','agendamientos'));
     }
 
     /**
@@ -148,10 +183,13 @@ class ConsultaController extends Controller
     public function update(Request $request, $id)
     {
         try{
+            
             $consulta = Consulta::findOrfail($id);
+            
             $consulta->fecha = $request->fecha;
             $consulta->empleado_id = $request->medico;
             $consulta->paciente_id = $request->paciente;
+            $consulta->agendamiento_id = $request->agendamiento;
             $consulta->observaciones = $request->observaciones;
             $consulta->cantidad_horas = $request->cantidad_horas;
             $consulta->save();

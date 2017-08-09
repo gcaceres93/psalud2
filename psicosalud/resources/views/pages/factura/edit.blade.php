@@ -514,6 +514,22 @@ function recorrerconsulta(value,index,ar){
 	$('#precio_unitario').val(value.tarifa);
 	var total = value.cantidad_horas * value.tarifa;
 	$('#monto_detalle').val(total);
+
+	var monto = 0;
+    var table = document.getElementById("detalle");
+    for (var i = 0, row; row = table.rows[i]; i++) {
+         
+    	   //iterate through rows
+    	   //rows would be accessed using the "row" variable assigned in the for loop
+    	   for (var j = 0, col; col = row.cells[j]; j++) {
+    		  	if (j==4){
+    		   monto = Number(monto) + Number( col.childNodes.item(0).value);
+    		   
+    		  	}
+    	   }  
+    	}
+
+	  $('#monto').val(monto);
 	
 }
 
