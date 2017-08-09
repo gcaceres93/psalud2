@@ -16,7 +16,7 @@
    
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12"> 
     	<div class="btn-group">
    			@if(count($plan_tratamiento)>0)
    			<a href="{{ url('/planTratamiento/'.$plan_tratamiento->id) }}" class="btn btn-warning btn-group"><span class="glyphicon glyphicon-file"></span> Ver plan de tratamiento</a>
