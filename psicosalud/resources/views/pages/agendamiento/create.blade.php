@@ -157,7 +157,7 @@ $(document).ready(function() {
            
 				return alert('El consultorio se encuentra cerrado en ese horario');
            }
-       if (fechas >fecha_prog ){
+       if (fechas >fecha_prog ){ 
            
 			return alert('No se pueden programar fechas anteriores al dia de hoy');
       } else if  (dia_prog == 5 || dia_prog == 6) {
