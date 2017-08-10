@@ -131,12 +131,13 @@ $(document).ready(function() {
 	$( '#formulario' ).on( 'submit', function(e) {
 	    e.preventDefault();
         var observaciones = $('#observaciones').val();
+        var agendamiento = $('#agendamiento').val();
         var fecha = $('#fecha').val();
         var cantidad_horas = $('#cantidad_horas').val();
         var medico = $('#medico').val();
         var paciente = $('#paciente').val();
 
-        var data = {medico:medico,paciente:paciente,cantidad_horas:cantidad_horas,fecha:fecha,observaciones:observaciones, _token: "{{ csrf_token() }}"};
+        var data = {agendamiento:agendamiento,medico:medico,paciente:paciente,cantidad_horas:cantidad_horas,fecha:fecha,observaciones:observaciones, _token: "{{ csrf_token() }}"};
         $.ajax({
             method: 'post',
             url: 'store',
