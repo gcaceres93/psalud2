@@ -11,6 +11,7 @@ use Exception;
 
 class TestController extends Controller
 {
+    
     private $path = 'test';
     /**
      * Display a listing of the resource.

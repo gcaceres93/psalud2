@@ -13,6 +13,7 @@
     <h4><a href="{{ route('test.index') }}">Listar test</a></h4>
     <hr />
   </div>
+  
   <div class="row">
     <div class="col-md-6">
   	<form method="post" action="/test">
