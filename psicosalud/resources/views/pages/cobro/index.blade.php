@@ -45,13 +45,13 @@
 	  					       ?>
 	  				@endif
 	  				<tr>
-	  					<td>{{ $row->id }}</td>
-	  					<td>{{ $row->nro }}</td>
-	  					<td>{{ $row->razon_social }}</td>
-	  					<td>{{ $row->ruc }}</td>
-	  					<td>{{ $row->monto }}</td>
-	  					<td><?php echo ($pago) ?></td>
-	  					<td>{{ $row->observacion }}</td>
+	  					<td class="clickable-row" data-href="{{ route('cobro.show', $row->id)  }}">{{ $row->id }}</td>
+	  					<td class="clickable-row" data-href="{{ route('cobro.show', $row->id)  }}">{{ $row->nro }}</td>
+	  					<td class="clickable-row" data-href="{{ route('cobro.show', $row->id)  }}">{{ $row->razon_social }}</td>
+	  					<td class="clickable-row" data-href="{{ route('cobro.show', $row->id)  }}">{{ $row->ruc }}</td>
+	  					<td class="clickable-row" data-href="{{ route('cobro.show', $row->id)  }}">{{ $row->monto }}</td>
+	  					<td class="clickable-row" data-href="{{ route('cobro.show', $row->id)  }}"><?php echo ($pago) ?></td>
+	  					<td class="clickable-row" data-href="{{ route('cobro.show', $row->id)  }}">{{ $row->observacion }}</td>
 	  					<td>
 	  					<center>
 	  						<a href="{{ route('cobro.edit', $row->id) }}" class="btn btn-info">Editar</a>

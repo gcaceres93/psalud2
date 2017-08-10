@@ -40,8 +40,9 @@
 	  					<td>{{ $tipo }}</td>
 	  					<td>{{ $row->fecha }}</td>
 	  					<td>
-	  						<a href="{{ route('aplicarTest.edit', $row->id) }}" class="btn btn-info">Editar</a>
-	  						<a href="{{ route('aplicarTest.show', $row->id) }}" class="btn btn-warning">Ver</a>
+	  						<a href="{{ route('aplicarTest.edit', $row->id) }}" class="btn btn-info">Aplicar</a></br>
+	  						<a href="{{ route('aplicarTest.show', $row->id) }}" class="btn btn-warning">Ver Resultados</a>
+	  						
 							<form action="{{ route('aplicarTest.destroy', $row->id) }}" method="post">
 								<input type="hidden" name="_method" value="DELETE">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
