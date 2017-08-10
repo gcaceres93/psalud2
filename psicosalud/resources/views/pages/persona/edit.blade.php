@@ -21,7 +21,7 @@
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  name="nombre" placeholder="Nombres" class="form-control"  type="text" value="{{$persona->nombre}}">
+  <input required  name="nombre" placeholder="Nombres" class="form-control"  type="text" value="{{$persona->nombre}}">
     </div>
   </div>
 </div>
@@ -33,7 +33,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="apellido" placeholder="Apellidos" class="form-control"  type="text" value="{{$persona->apellido}}">
+  <input required name="apellido" placeholder="Apellidos" class="form-control"  type="text" value="{{$persona->apellido}}">
     </div>
   </div>
 </div>
@@ -43,7 +43,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="cedula" placeholder="Cédula de identidad" class="form-control"  type="text" value="{{$persona->cedula}}">
+  <input required name="cedula" placeholder="Cédula de identidad" class="form-control"  type="text" value="{{$persona->cedula}}">
     </div>
   </div>
 </div>
@@ -53,7 +53,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-  <input name="nacimiento" placeholder="Fecha y año de nacimiento" class="form-control"  type="date" value="{{$persona->nacimiento}}">
+  <input required name="nacimiento" placeholder="Fecha y año de nacimiento" class="form-control"  type="date" value="{{$persona->nacimiento}}">
     </div>
   </div>
 </div>
@@ -63,7 +63,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="lugar_nacimiento" placeholder="Lugar de nacimiento" class="form-control" type="text" value="{{$persona->lugar_nacimiento}}">
+  <input required name="lugar_nacimiento" placeholder="Lugar de nacimiento" class="form-control" type="text" value="{{$persona->lugar_nacimiento}}">
     </div>
   </div>
 </div>
@@ -74,7 +74,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="email" placeholder="Dirección de correo" class="form-control"  type="text" value="{{$persona->email}}">
+  <input required name="email" placeholder="Dirección de correo" class="form-control"  type="text" value="{{$persona->email}}">
     </div>
   </div>
 </div>
@@ -87,7 +87,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-  <input name="telefono" placeholder="Ej.:(0961)555-1212" class="form-control" type="text" value="{{$persona->telefono}}">
+  <input required name="telefono" placeholder="Ej.:(0961)555-1212" class="form-control" type="text" value="{{$persona->telefono}}">
     </div>
   </div>
 </div>
@@ -99,7 +99,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="direccion" placeholder="Dirección particular y/o profesional" class="form-control" type="text" value="{{$persona->direccion}}">
+  <input  required name="direccion" placeholder="Dirección particular y/o profesional" class="form-control" type="text" value="{{$persona->direccion}}">
     </div>
   </div>
 </div>

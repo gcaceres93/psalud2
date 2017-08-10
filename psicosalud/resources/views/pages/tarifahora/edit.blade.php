@@ -22,7 +22,7 @@
   		
   		<div class="form-group">
   		 <label for="medico">Medico</label>
-      		<select name="empleado" class="form-control selectpicker">
+      		<select required name="empleado" class="form-control selectpicker">
                 <option value="" >Seleccionar empleado</option>
                 @foreach($empleado as $empleados)	
                 	<?php
@@ -44,7 +44,7 @@
  		 </div>
  		 <div class="form-group">
  		  <label for="modalidad">Modalidad</label>
-      		<select name="modalidad" class="form-control selectpicker">
+      		<select required name="modalidad" class="form-control selectpicker">
                 <option value="" >Seleccionar modalidad</option>
                 @foreach($modalidades as $modalidad)
                 	<?php
@@ -66,11 +66,11 @@
 
   		<div class="form-group">
         <label for="Codigo">Codigo</label>
-        <input type="text" name="codigo" class="form-control" placeholder="Codigo" value="{{ $tarifa->codigo }}" >   
+        <input type="text" required name="codigo" class="form-control" placeholder="Codigo" value="{{ $tarifa->codigo }}" >   
       </div>
       <div class="form-group">
         <label for="Tarifa">Tarifa por hora</label>
-        <input type="text" name="tarifa" class="form-control" placeholder="Tarifa por Hora"  value="{{ $tarifa->tarifa }}">   
+        <input type="text" required name="tarifa" class="form-control" placeholder="Tarifa por Hora"  value="{{ $tarifa->tarifa }}">   
       </div>
      
   		 

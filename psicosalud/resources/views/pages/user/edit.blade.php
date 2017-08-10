@@ -20,7 +20,7 @@
       {{ method_field('PUT') }}
   		<input type="hidden" name="_token" value="{{ csrf_token() }}">
   		<div class="form-group">
-  		<select name="persona" readonly class="form-control selectpicker">
+  		<select required name="persona" readonly class="form-control selectpicker">
        
         @foreach($personas as $persona)
         	<?php
@@ -45,18 +45,18 @@
 
   		<div class="form-group">
         <label for="descripci&oacute;n">Nombre</label>
-        <input type="text" name="name" id="name" class="form-control"  readonly placeholder="Nombre del Usuario" value="{{ $user->name }}">   
+        <input type="text" required name="name" id="name" class="form-control"  readonly placeholder="Nombre del Usuario" value="{{ $user->name }}">   
       </div>
       <div class="form-group">
         <label for="E-mai">E-mail</label>
-        <input type="text" name="email" id="email" class="form-control" placeholder="E-mail del Usuario" value="{{ $user->email }}">   
+        <input type="text" required name="email" id="email" class="form-control" placeholder="E-mail del Usuario" value="{{ $user->email }}">   
       </div>
       <div class="form-group">
         <label for="Contraseña">Contraseña</label>
-        <input type="password" " name="password" class="form-control" placeholder="Contraseña del Usuario" value="{{ $user->password }}">   
+        <input type="password" required name="password" class="form-control" placeholder="Contraseña del Usuario" value="{{ $user->password }}">   
       </div>
   		 <div class="form-group"> 
-      <label >Roles</label>
+      <label >Roles </label>
        
 <br />
 
@@ -87,7 +87,7 @@
          	
          @endforeach
           
-     	<input type="checkbox" name="lista[]" <?php echo ($checked) ?>  value="{{ $role->id }}" />{{ $role->nombre }}<br />
+     	<input type="checkbox" name="lista[]"  <?php echo ($checked) ?>  value="{{ $role->id }}" />{{ $role->nombre }}<br />
       @endforeach 
 
     

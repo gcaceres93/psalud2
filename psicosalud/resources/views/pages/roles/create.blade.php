@@ -21,7 +21,7 @@
   		
   		<div class="form-group">
   			<label for="nombre">Nombre</label>
-  			<input type="text" name="nombre" class="form-control" placeholder="Nombre del Rol"> 	
+  			<input type="text" required name="nombre" class="form-control" placeholder="Nombre del Rol"> 	
   		</div>
 
   		<button type="submit" class="btn btn-info">Guardar</button>

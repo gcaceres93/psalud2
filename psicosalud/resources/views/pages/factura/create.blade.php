@@ -55,7 +55,7 @@
           	</div>
           	<div class="form-group">
           			<label for="observacion">Observaciones:</label>
-          			<input type="text" name="observacion" id="observacion" required class="form-control" placeholder="Observaciones" > 	
+          			<input type="text" name="observacion" id="observacion"  class="form-control" placeholder="Observaciones" > 	
           		</div>
   		</div>
   
@@ -192,7 +192,7 @@ function asignartotal(){
 // });
 $(document).ready(function() {	
     $('#guardar').on('click', function () {
-		var monto;
+    	var monto;
 		var concepto = [];
 		var cantidad=[];
 		var impuesto=[];
@@ -211,36 +211,106 @@ $(document).ready(function() {
 		var vigencia_timbrado=  $('#vigencia_timbrado').val();
         var table = document.getElementById("detalle");
         for (var i = 0, row; row = table.rows[i]; i++) {
+        	 //iterate through rows
+     	   //rows would be accessed using the "row" variable assigned in the for loop
+     	   for (var j = 0, col; col = row.cells[j]; j++) {
+     		  	
+     		   valor= col.childNodes.item(0).value;
+     		   nombre= col.childNodes.item(0).name;
+
+     		   if (valor==''){
+					return alert('Debe completar todos los datos del detalle de la factura')
+         		   }
+
+     		   if (j==0){
+
+     			   concepto.push(valor);
+     		   }
+     		   if (j==1){
+
+     			   cantidad.push(valor);
+         		   }
+     		   if (j==2){
+
+     			   impuesto.push(valor);
+         		   }
+     		   if (j==4){
+
+     			   monto_total.push(valor);
+         		   }
+					
+     	   }  
+     	   
+     	}
+
+			if (consulta =='' || persona =='' || medico =='' || monto =='' || tipo_pago =='' || nro =='' || fecha =='' || timbrado =='' || vigencia_timbrado == ''  ){
+				return alert ('Debe completar todos los datos en la cabecera de la factura');
+
+			}
+
+
+		     var data = {consulta:consulta,_token:_token,concepto:concepto,cantidad:cantidad,impuesto:impuesto,monto_total:monto_total,persona:persona,medico:medico,monto:monto,observacion:observacion,tipo_pago:tipo_pago,nro:nro,fecha:fecha,timbrado:timbrado,estado:estado,vigencia_timbrado:vigencia_timbrado};
+
+			guardar(data);
+
+            
+
+        
+
+
+    });
+});
+
+function guardar(data){
+// 		var monto;
+// 		var concepto = [];
+// 		var cantidad=[];
+// 		var impuesto=[];
+// 		var monto_total=[];
+// 		var persona=  $('#persona').val();
+// 		var consulta=  $('#consulta').val();
+// 		var medico=  $('#medico').val();
+// 		var monto=  $('#monto').val();
+// 		var observacion=  $('#observacion').val();
+// 		var tipo_pago=  $('#tipo_pago').val();
+// 		var nro=  $('#nro').val();
+// 		var _token= "{{ csrf_token() }}";
+// 		var fecha=  $('#fecha').val();
+// 		var timbrado=  $('#timbrado').val();
+// 		var estado=  $('#estado').val();
+// 		var vigencia_timbrado=  $('#vigencia_timbrado').val();
+//         var table = document.getElementById("detalle");
+//         for (var i = 0, row; row = table.rows[i]; i++) {
              
-        	   //iterate through rows
-        	   //rows would be accessed using the "row" variable assigned in the for loop
-        	   for (var j = 0, col; col = row.cells[j]; j++) {
+//         	   //iterate through rows
+//         	   //rows would be accessed using the "row" variable assigned in the for loop
+//         	   for (var j = 0, col; col = row.cells[j]; j++) {
         		  	
-        		   valor= col.childNodes.item(0).value;
-        		   nombre= col.childNodes.item(0).name;
+//         		   valor= col.childNodes.item(0).value;
+//         		   nombre= col.childNodes.item(0).name;
 
-        		   if (j==0){
+//         		   if (j==0){
 
-        			   concepto.push(valor);
-        		   }
-        		   if (j==1){
+//         			   concepto.push(valor);
+//         		   }
+//         		   if (j==1){
 
-        			   cantidad.push(valor);
-            		   }
-        		   if (j==2){
+//         			   cantidad.push(valor);
+//             		   }
+//         		   if (j==2){
 
-        			   impuesto.push(valor);
-            		   }
-        		   if (j==4){
+//         			   impuesto.push(valor);
+//             		   }
+//         		   if (j==4){
 
-        			   monto_total.push(valor);
-            		   }
+//         			   monto_total.push(valor);
+//             		   }
  					
-        	   }  
+//         	   }  
         	   
-        	}
-        var data = {consulta:consulta,_token:_token,concepto:concepto,cantidad:cantidad,impuesto:impuesto,monto_total:monto_total,persona:persona,medico:medico,monto:monto,observacion:observacion,tipo_pago:tipo_pago,nro:nro,fecha:fecha,timbrado:timbrado,estado:estado,vigencia_timbrado:vigencia_timbrado};
-
+//         	}
+//         var data = {consulta:consulta,_token:_token,concepto:concepto,cantidad:cantidad,impuesto:impuesto,monto_total:monto_total,persona:persona,medico:medico,monto:monto,observacion:observacion,tipo_pago:tipo_pago,nro:nro,fecha:fecha,timbrado:timbrado,estado:estado,vigencia_timbrado:vigencia_timbrado};
+		
         $.ajax({
             method: 'get',
             url: '/tablaDinamica',
@@ -262,10 +332,9 @@ $(document).ready(function() {
             },
           
         });
-    	
+}
         
-    });
-});
+  
 
 
 

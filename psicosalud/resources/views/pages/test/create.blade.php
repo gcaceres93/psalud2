@@ -56,6 +56,7 @@
   		
   				<thead>
 	  				<tr class="table table-info">
+	  				<th class="col-md-1">ID</th>
 	  					<th class="col-md-6">Descripcion</th>
 	  					<th class="col-md-1">Valor Desde</th>
 	  					<th class="col-md-1">Valor Hasta</th>
@@ -93,7 +94,7 @@ $(document).ready(function() {
     	$('#detaller').append("<tr> "+
 
 				 
-					
+    			'<td><input type="text" readonly name="resid" id="resid" class="form-control" placeholder=" ID" > 	</td>'+
 					'<td><input type="text" name="resultado" id="resultado" class="form-control" placeholder=" Descripcion" > 	</td>'+
 				
 				
@@ -174,6 +175,7 @@ $(document).ready(function() {
 		var descripcion=[];
 		var resultado=[];
 		var val_min=[];
+		var idre=[];
 		var val_max = [];
 		var ids=  $('#ids').val();
 		var nombre=  $('#nombre').val();
@@ -197,7 +199,9 @@ $(document).ready(function() {
         		   }
 
         		   if (j==1){
-
+        			   if (valor==''){
+							return alert('El campo titulo de pregunta no puede quedar vacio');
+						}
         			   pregunta.push(valor);
         		   }
         		   if (j==2){
@@ -209,6 +213,8 @@ $(document).ready(function() {
         	   
         	}
     	//  Iterar la tabla de respuestas
+    	var	valor_min=0;
+        var     valor_max=1;
         for (var i = 0, row; row = tabler.rows[i]; i++) {
             
      	   //iterate through rows
@@ -216,27 +222,50 @@ $(document).ready(function() {
      	   for (var j = 0, col; col = row.cells[j]; j++) {
      		  	
      		   valor= col.childNodes.item(0).value;
+     		  if (j==0){
+      			 
+     			  idre.push(valor);
+     		   }else{
 
-     		   if (j==0){
-
+     		  if (valor==''  && abstracto=='False'){
+					return alert('Debe completar todos los datos de los posibles resultados! Si el test es abstracto y no tiene resultados medibles en rango de valores debe seleccionar el campo de abstracto o puede borrar la ultima fila de resultado si todavia no quiere cargarlo.');
+				}
+			}
+     		   
+     		   if (j==1){
+     			 
      			  resultado.push(valor);
      		   }
 
-     		   if (j==1){
-
-     			  val_min.push(valor);
-     		   }
      		   if (j==2){
+     			  if (i>0){
+						if (valor_max>valor){
+							return alert ('El valor minimo debe ser mayor al  valor maximo anterior');
+							}
+           		   }
+     			  val_min.push(valor);
+     			 valor_min=valor;
+     		   }
+     		   if (j==3){
 
-     			  val_max.push(valor);
+             			  if (valor_min >= valor){
+        									return alert('El valor maximo no puede ser menor que el valor minimo para este resultado');
+        						}
+       			  val_max.push(valor);
+       			  valor_max=valor;
          		   }
      		  
      	   }  
      	   
      	}
-        var data = {nombre:nombre,abstracto:abstracto,pregunta:pregunta,descripcion:descripcion,_token:_token,ids:ids,idp:idp,resultado:resultado,val_min:val_min,val_max:val_max};
+        var data = {nombre:nombre,abstracto:abstracto,pregunta:pregunta,descripcion:descripcion,_token:_token,ids:ids,idp:idp,resultado:resultado,val_min:val_min,val_max:val_max,idre:idre};
         desea = confirm('Para cargar respuestas a esta pregunta, primero se debe guardar el Test con sus respectivas preguntas, ¿Desea guardar el test ahora  ?');
         if (desea == 1){
+			if (nombre == '' ){
+				return alert ('Debe cargar el nombre del test')
+			}
+
+
         	$.ajax({
                 method: 'post',
                 url: '/guardarPregunta',
@@ -278,12 +307,45 @@ $(document).ready(function() {
 					        	   
 					        	}
 					}
+// 					var ar=data.length;
+//     				var a = 0;
+//     				var table = document.getElementById("tablar");
+    				
+//     				if (typeof(table)  === "undefined"){
+//     					console.log(table.length);}
+//     				else{
+//             					for (a;a< ar; a++)
+//             					{
+            						 
+//             					        for (var i = 0, row; row = table.rows[i]; i++) {
+            					             
+//             					        	   //iterate through rows
+//             					        	   //rows would be accessed using the "row" variable assigned in the for loop
+//             					        	   for (var j = 0, col; col = row.cells[j]; j++) {
+            					        		  	
+//             					        		   valor= col.childNodes.item(0).value;
+            
+//             					        		   if (i==a){
+            					        			   
+//             					        			   if (j==0){
+            					        				 
+//             					        				   col.childNodes.item(0).value = data[a].rid;
+//             						            		   }
+            					        			  
+//             					        		   }
+            					        		 
+            					        		  
+//             					        	   }  
+            					        	   
+//             					        	}
+//             					}
+//             		}
 					
 				
 					
 // 					var id_preg=4;
 					
-					 
+					 var table = document.getElementById("detalle");
 					 var id_preg = table.rows[fila].cells[0].childNodes.item(0).value;
 					 
 //			     		  alert('You clicked row '+ ($(this).index()+1) );
@@ -318,6 +380,7 @@ $(document).ready(function() {
 		var fila = $(this).closest('tr').index();
 	    var pregunta = [];
 	    var idp = [];
+	    var idre=[];
 		var descripcion=[];
 		var resultado=[];
 		var val_min=[];
@@ -333,6 +396,9 @@ $(document).ready(function() {
         var table = document.getElementById("detalle");
         var tabler = document.getElementById("detaller");
         
+        if (table.rows.length == 0){
+				return alert('Debe cargar por lo menos una pregunta');
+            }
         for (var i = 0, row; row = table.rows[i]; i++) {
              
         	   //iterate through rows
@@ -347,7 +413,9 @@ $(document).ready(function() {
         		   }
 
         		   if (j==1){
-
+						if (valor==''){
+							return alert('El campo pregunta no puede quedar vacio');
+						}
         			   pregunta.push(valor);
         		   }
         		   if (j==2){
@@ -359,33 +427,62 @@ $(document).ready(function() {
         	   
         	}
     //  Iterar la tabla de respuestas
+     	var	valor_min=0;
+        var     valor_max=1;
+        if (tabler.rows.length == 0  && abstracto=='False'){
+            return alert('Si el test es abstracto y no tiene resultados medibles en rango de valores debe seleccionar el campo de abstracto');}
         for (var i = 0, row; row = tabler.rows[i]; i++) {
-            
+
+           
      	   //iterate through rows
      	   //rows would be accessed using the "row" variable assigned in the for loop
      	   for (var j = 0, col; col = row.cells[j]; j++) {
      		  	
      		   valor= col.childNodes.item(0).value;
 
-     		   if (j==0){
+
+     		  if (j==0){
+       			 
+     			  idre.push(valor);
+     		   }else{
+
+     		  if (valor==''  && abstracto=='False'){
+					return alert('Debe completar todos los datos de los posibles resultados! Si el test es abstracto y no tiene resultados medibles en rango de valores debe seleccionar el campo de abstracto');
+				}
+			}
+
+
+     		  
+     		   if (j==1){
 
      			  resultado.push(valor);
      		   }
 
-     		   if (j==1){
+     		   if (j==2){
+         		   if (i>0){
+						if (valor_max>=valor){
+							return alert ('El valor minimo debe ser mayor al  valor maximo anterior');
+							}
+             		   }
 
      			  val_min.push(valor);
+     			  valor_min=valor;
      		   }
-     		   if (j==2){
-
+     		   if (j==3){
+					if (valor_min >= valor){
+						return alert('El valor maximo no puede ser menor o igual que el valor minimo para este resultado');
+						}
      			  val_max.push(valor);
+     			  valor_max=valor;
          		   }
      		  
      	   }  
      	   
      	}
-        var data = {nombre:nombre,abstracto:abstracto,pregunta:pregunta,descripcion:descripcion,_token:_token,ids:ids,idp:idp,resultado:resultado,val_min:val_min,val_max:val_max};
-        
+        var data = {nombre:nombre,abstracto:abstracto,pregunta:pregunta,descripcion:descripcion,_token:_token,ids:ids,idp:idp,resultado:resultado,val_min:val_min,val_max:val_max,idre:idre};
+        if (nombre == '' ){
+			return alert ('Debe cargar el nombre del test')
+		}
         	$.ajax({
                 method: 'post',
                 url: '/guardarPregunta',
@@ -432,7 +529,7 @@ $(document).ready(function() {
 					
 // 					var id_preg=4;
 					
-					 
+					// console.log(data);
 					window.location.replace("/test");
 					
 //			     		});

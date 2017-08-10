@@ -232,7 +232,9 @@ $(document).ready(function() {
         		   }
 
         		   if (j==1){
-
+        			   if (valor==''){
+							return alert('El campo titulo de pregunta no puede quedar vacio');
+						}
         			   pregunta.push(valor);
         		   }
         		   if (j==2){
@@ -244,6 +246,8 @@ $(document).ready(function() {
         	   
         	}
     //  Iterar la tabla de respuestas
+    	var	valor_min=0;
+        var     valor_max=1;
         for (var i = 0, row; row = tabler.rows[i]; i++) {
             
      	   //iterate through rows
@@ -252,9 +256,15 @@ $(document).ready(function() {
      		  	
      		   valor= col.childNodes.item(0).value;
 
+			
+     		   
      		  if (j==0){
 
      			  idre.push(valor);
+     		   }else{
+     			  if (valor==''  && abstracto=='False'){
+  					return alert('Debe completar todos los datos de los posibles resultados! Si el test es abstracto y no tiene resultados medibles en rango de valores debe seleccionar el campo de abstracto');
+  				}
      		   }
 
      		   if (j==1){
@@ -262,14 +272,23 @@ $(document).ready(function() {
      			  resultado.push(valor);
      		   }
 
-     		   if (j==2){
-
+     		  if (j==2){
+     			  if (i>0){
+						if (valor_max>valor){
+							return alert ('El valor minimo debe ser mayor al  valor maximo anterior');
+							}
+           		   }
      			  val_min.push(valor);
+     			 valor_min=valor;
      		   }
-     		   if (j==3){
+     		 if (j==3){
 
-     			  val_max.push(valor);
-         		   }
+    			  if (valor_min >= valor){
+									return alert('El valor maximo no puede ser menor que el valor minimo para este resultado');
+						}
+			  val_max.push(valor);
+			  valor_max=valor;
+		   }
      		  
      	   }  
      	   
@@ -277,6 +296,9 @@ $(document).ready(function() {
         var data = {nombre:nombre,abstracto:abstracto,pregunta:pregunta,descripcion:descripcion,_token:_token,ids:ids,idp:idp,resultado:resultado,val_min:val_min,val_max:val_max,idre:idre};
         desea = confirm('Para cargar respuestas a esta pregunta, primero se debe guardar el Test con sus respectivas preguntas,  Desea guardar el test ahora  ?');
         if (desea == 1){
+        	if (nombre == '' ){
+				return alert ('Debe cargar el nombre del test')
+			}
         	$.ajax({
                 method: 'post',
                 url: '/guardarPregunta',
@@ -293,6 +315,7 @@ $(document).ready(function() {
 //                 	window.location.replace("/paciente");
     				var ar=data.length;
     				var a = 0;
+    				var preg=0;
 					for (a;a< ar; a++)
 					{
 						 var table = document.getElementById("detalle");
@@ -304,11 +327,12 @@ $(document).ready(function() {
 					        		  	
 					        		   valor= col.childNodes.item(0).value;
 
-					        		   if (i==a){
+					        		    if (i==a){
 					        			   
 					        			   if (j==0){
-					        				 
+					        				 	if (preg!=data[a].id){ 
 					        				   col.childNodes.item(0).value = data[a].id;
+					        				   preg=data[a].id }
 						            		   }
 					        			  
 					        		   }
@@ -371,6 +395,10 @@ $(document).ready(function() {
 		var _token= "{{ csrf_token() }}";
         var table = document.getElementById("detalle");
         var tabler = document.getElementById("detaller");
+
+        if (table.rows.length == 0){
+			return alert('Debe cargar por lo menos una pregunta');
+        }
         for (var i = 0, row; row = table.rows[i]; i++) {
              
         	   //iterate through rows
@@ -385,18 +413,24 @@ $(document).ready(function() {
         		   }
 
         		   if (j==1){
+						if (valor==''){
+							return alert('El campo pregunta no puede quedar vacio');
+						}
+       			   pregunta.push(valor);
+       		   }
+       		   if (j==2){
 
-        			   pregunta.push(valor);
-        		   }
-        		   if (j==2){
-
-        			   descripcion.push(valor);
-            		   }
+       			   descripcion.push(valor);
+           		   }
         		  
         	   }  
         	   
         	}
         //  Iterar la tabla de respuestas
+        var	valor_min=0;
+        var     valor_max=1;
+        if (tabler.rows.length == 0  && abstracto=='False'){
+            return alert('Si el test es abstracto y no tiene resultados medibles en rango de valores debe seleccionar el campo de abstracto');}
             for (var i = 0, row; row = tabler.rows[i]; i++) {
                 
          	   //iterate through rows
@@ -409,28 +443,44 @@ $(document).ready(function() {
          			    
          			  idre.push(valor);
          			 
-         		   }
+         		   }else{
+
+              		  if (valor==''  && abstracto=='False'){
+         					return alert('Debe completar todos los datos de los posibles resultados! Si el test es abstracto y no tiene resultados medibles en rango de valores debe seleccionar el campo de abstracto');
+         				}
+         			}
     
          		   if (j==1){
     
          			  resultado.push(valor);
          		   }
     
-         		   if (j==2){
-    
-         			  val_min.push(valor);
-         		   }
-         		   if (j==3){
-    
-         			  val_max.push(valor);
-             		   }
+         		  if (j==2){
+            		   if (i>0){
+   						if (valor_max >=valor){
+   							return alert ('El valor minimo debe ser mayor al  valor maximo anterior');
+   							}
+                		   }
+
+        			  val_min.push(valor);
+        			  valor_min=valor;
+        		   }
+         		 if (j==3){
+ 					if (valor_min >= valor){
+ 						return alert('El valor maximo no puede ser menor o igual que el valor minimo para este resultado');
+ 						}
+      			  val_max.push(valor);
+      			  valor_max=valor;
+          		   }
          		  
          	   }  
          	   
          	}
          	
         var data = {nombre:nombre,abstracto:abstracto,pregunta:pregunta,descripcion:descripcion,_token:_token,ids:ids,idp:idp,resultado:resultado,val_min:val_min,val_max:val_max,idre:idre};
-        
+        if (nombre == '' ){
+			return alert ('Debe cargar el nombre del test')
+		}
         	$.ajax({
                 method: 'post',
                 url: '/guardarPregunta',
@@ -447,6 +497,7 @@ $(document).ready(function() {
 //                 	window.location.replace("/paciente");
     				var ar=data.length;
     				var a = 0;
+    				var preg=0;
 					for (a;a< ar; a++)
 					{
 						 var table = document.getElementById("detalle");
@@ -461,8 +512,9 @@ $(document).ready(function() {
 					        		   if (i==a){
 					        			   
 					        			   if (j==0){
-					        				 
+					        				 	if (preg!=data[a].id){ 
 					        				   col.childNodes.item(0).value = data[a].id;
+					        				   preg=data[a].id }
 						            		   }
 					        			  
 					        		   }
@@ -472,6 +524,7 @@ $(document).ready(function() {
 					        	   
 					        	}
 					}
+					
 					
 				
 					

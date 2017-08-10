@@ -324,6 +324,10 @@ $(document).ready(function() {
         		   valor= col.childNodes.item(0).value;
         		   nombre= col.childNodes.item(0).name;
 
+        		   if (valor==''){
+   					return alert('Debe completar todos los datos del detalle de la factura')
+            		   }
+
         		   if (j==0){
 
         			   concepto.push(valor);
@@ -344,6 +348,12 @@ $(document).ready(function() {
         	   }  
         	   
         	}
+
+    	if (consulta =='' || persona =='' || medico =='' || monto =='' || tipo_pago =='' || nro =='' || fecha =='' || timbrado =='' || vigencia_timbrado == ''  ){
+			return alert ('Debe completar todos los datos en la cabecera de la factura');
+
+		}
+    	
         var data = {id:id,consulta:consulta,concepto:concepto,cantidad:cantidad,impuesto:impuesto,monto_total:monto_total,persona:persona,medico:medico,monto:monto,observacion:observacion,tipo_pago:tipo_pago,nro:nro,fecha:fecha,timbrado:timbrado,estado:estado,vigencia_timbrado:vigencia_timbrado};
 
         $.ajax({

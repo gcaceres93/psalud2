@@ -20,7 +20,7 @@
 
   		<div class="form-group">
   			<label for="nombre">Nombre</label>
-  			<input type="text" name="nombre" class="form-control" placeholder="Nombre del tipo de terapia">		 	
+  			<input type="text" required name="nombre" class="form-control" placeholder="Nombre del tipo de terapia">		 	
       <br /> 
   		<button type="submit" class="btn btn-info">Guardar</button>
   	</form>	

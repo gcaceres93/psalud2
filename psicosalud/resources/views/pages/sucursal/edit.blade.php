@@ -21,16 +21,16 @@
 
   		<div class="form-group">
   			<label for="nombre">Nombre</label>
-  			<input type="text" name="nombre" class="form-control" placeholder="Nombre de la sucursal" value="{{ $sucursal->nombre }}">		
+  			<input type="text" name="nombre" required class="form-control" placeholder="Nombre de la sucursal" value="{{ $sucursal->nombre }}">		
 
   		<div class="form-group">
   			<label for="dirección">Dirección</label>
-  			<input type="text" name="direccion" class="form-control" placeholder="Dirección de la Sucursal" value="{{ $sucursal->direccion }}"> 	
+  			<input type="text" name="direccion" required class="form-control" placeholder="Dirección de la Sucursal" value="{{ $sucursal->direccion }}"> 	
   		</div>
 
       <div class="form-group">
         <label for="teléfono">Teléfono</label>
-        <input type="text" name="telefono" class="form-control" placeholder="Número de teléfono de la Sucursal" value="{{ $sucursal->telefono }}">   
+        <input type="text" name="telefono" required class="form-control" placeholder="Número de teléfono de la Sucursal" value="{{ $sucursal->telefono }}">   
       </div>
 
   		<button type="submit" class="btn btn-success">Actualizar</button>

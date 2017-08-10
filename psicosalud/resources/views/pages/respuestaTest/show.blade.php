@@ -75,11 +75,11 @@ foreach($preg as $key=>$asaniu){
 	  				@foreach ($pregrep as $respuestas)
 	  				<tr>
 
-													 <td class="col-md-1	"><input type="text" name="asaniu"  id="asaniu" class="form-control" placeholder="ID Pregunta" readonly value="{{$respuestas->id}}" ></td>
+													 <td class="col-md-1	"><input type="text" disabled name="asaniu"  id="asaniu" class="form-control" placeholder="ID Pregunta" readonly value="{{$respuestas->id}}" ></td>
 														
-														<td><input type="text" name="nombre" id="nombre" class="form-control" placeholder=" Respuesta" value="{{$respuestas->nombre}}" > 	</td>
+														<td><input type="text" name="nombre" disabled id="nombre" class="form-control" placeholder=" Respuesta" value="{{$respuestas->nombre}}" > 	</td>
 													
-														 <td><input type="number" name="valor"  id="valor" class="form-control" placeholder="Valor de la Respuesta" value="{{$respuestas->valor}}"></td>
+														 <td><input type="number" name="valor" disabled  id="valor" class="form-control" placeholder="Valor de la Respuesta" value="{{$respuestas->valor}}"></td>
  														
 														
 											</tr>
@@ -87,11 +87,11 @@ foreach($preg as $key=>$asaniu){
 				@endif	
 	  		</tbody>
   			</table>
-    <button type="button" name="agregar" id="agregar" class="btn btn-success">Agregar Fila</button>  <button type="button" name="borrar_fila" id="borrar_fila" class="btn btn-danger">Borrar Uiltima Fila</button>
+<!--     <button type="button" name="agregar" id="agregar" class="btn btn-success">Agregar Fila</button>  <button type="button" name="borrar_fila" id="borrar_fila" class="btn btn-danger">Borrar Uiltima Fila</button> -->
   	</div>
   	<div class="col-md-12	">
   	</br>
-  	 <button type="submit" id="guardar" name="guardar" class="btn btn-info">Guardar Respuestas y Cerrar</button>
+<!--   	 <button type="submit" id="guardar" name="guardar" class="btn btn-info">Guardar Respuestas</button> -->
   	 </br>
   	 </div> 
   	</div> 
@@ -117,9 +117,9 @@ function agregarfila(){
 
 													 '<td class="col-md-1	"><input type="text" name="asaniu"  id="asaniu" class="form-control" placeholder="ID Pregunta" readonly ></td>'+
 														
-														'<td><input type="text" name="nombre" required id="nombre" class="form-control" placeholder=" Respuesta" > 	</td>'+
+														'<td><input type="text" name="nombre" id="nombre" class="form-control" placeholder=" Respuesta" > 	</td>'+
 													
-														 '<td><input type="number" name="valor" required  id="valor" class="form-control" placeholder="Valor de la Respuesta" ></td>'+
+														 '<td><input type="number" name="valor"  id="valor" class="form-control" placeholder="Valor de la Respuesta" ></td>'+
  														
 														
 											"</tr>");
@@ -168,17 +168,11 @@ $(document).ready(function() {
         			   idr.push(value);
         		   }
         		   if (j==1){
-        			   if (value=="")
-            		   {
-							return alert('Debe completar el campo respuesta ');
-            		   }
+
         			   nombre.push(value);
         		   }
         		   if (j==2){
-        			   if (value=="")
-            		   {
-							return alert('Debe darle un valor a esa respuesta');
-            		   }
+
         			   valor.push(value);
             		   }
         		  
@@ -236,7 +230,7 @@ $(document).ready(function() {
 					 
 //			     		  alert('You clicked row '+ ($(this).index()+1) );
     					alert ('Las respuestas se han guardado correctamente');
-    				window.close();
+    				
 					
 //			     		});
 					

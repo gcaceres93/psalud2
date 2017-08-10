@@ -20,14 +20,14 @@
 
   		<div class="form-group">
   			<label for="nombre">Nombre</label>
-  			<input type="text" name="nombre" class="form-control" placeholder="Nombre de la sucursal">		 	
+  			<input type="text" name="nombre" required class="form-control" placeholder="Nombre de la sucursal">		 	
   		<div class="form-group">
   			<label for="direcci&oacute;n">Direcci&oacute;n</label>
-  			<input type="text" name="direccion" class="form-control" placeholder="Direcci&oacute;n de la sucursal"> 	
+  			<input type="text" name="direccion" required class="form-control" placeholder="Direcci&oacute;n de la sucursal"> 	
   		</div>
       <div class="form-group">
         <label for="telefono">Teléfono</label>
-        <input type="text" name="telefono" class="form-control" placeholder="Número de teléfono de la sucursal">   
+        <input type="text" name="telefono" required class="form-control" placeholder="Número de teléfono de la sucursal">   
       </div>
 
   		<button type="submit" class="btn btn-info">Guardar</button>

@@ -55,11 +55,13 @@ class TestController extends Controller
         //dd($facturat);
         // $factura->store($request);
         $id=$request->ids;
+       
         if ($id > 0){
             $test= $request->ids;
             
             return $this->update($request,$test);
         }else{
+         
             return $this->store($request);
         }
     }
@@ -75,6 +77,7 @@ class TestController extends Controller
             
             $abst=False;
         }
+        
         try{
             $test = new Test();
             $test->nombre = $request->nombre;
@@ -86,7 +89,7 @@ class TestController extends Controller
             
             $canti=count($request->pregunta);
             $cantir=count($request->resultado);
-                   
+            
             $vari='';
             for ($i = 0; $i < $canti; $i++) {
                 
@@ -114,7 +117,7 @@ class TestController extends Controller
                 $pregunta->nombre=$preg;
                 $pregunta->descripcion=$descr;
                 $pregunta->save();
-           } 
+            } 
            for ($i = 0; $i < $cantir; $i++) {
                
                $resultado = new ResultadoTest();
@@ -152,11 +155,18 @@ class TestController extends Controller
                $resultado->valor_fin=$max;
                $resultado->save();
            } 
-              
-                $preg = DB::table('pregunta_por_test')
-                ->select('id','test_id')
-                ->where('test_id', '=', $lastInsertedId)
-                ->get();
+          if($cantir>0){
+           $preg = DB::table('pregunta_por_test as ppt')
+           ->join('resultado_por_test as rpt','ppt.test_id','=','rpt.test_id')
+           ->select('ppt.id as id','ppt.test_id as test_id','rpt.id as rid')
+           ->where('ppt.test_id', '=', $lastInsertedId)
+           ->get();}
+           else{
+               $preg = DB::table('pregunta_por_test as ppt')
+               ->select('ppt.id as id','ppt.test_id as test_id')
+               ->where('ppt.test_id', '=', $lastInsertedId)
+               ->get();}
+           
                 
                 return json_encode($preg);
 //             return redirect()->route('test.index');
@@ -220,7 +230,7 @@ class TestController extends Controller
     public function update(Request $request,  $test)
     {
         //
-       
+        
         if ($request->abstracto == 'True'){
             $abst=True;
         }
@@ -229,7 +239,7 @@ class TestController extends Controller
         }
         
         $test = Test::findOrFail($test);
-            
+        
         $test->nombre = $request->nombre;
         $test->abstracto = $abst;
         
@@ -260,7 +270,7 @@ class TestController extends Controller
                 }
                 
             }
-           
+            
             foreach ($request->pregunta as $key=>$nombre)
             {
                 if ($key == $i )
@@ -287,12 +297,13 @@ class TestController extends Controller
         for ($i = 0; $i < $cantir; $i++) {
             
             
+            if($request->idre)  {
             foreach ($request->idre as $key=>$id_resultado)
             {
                 
                 if ($key == $i )
                 {
-                 
+                    
                     if ($id_resultado > 0){
                         
                         $resultado = ResultadoTest::findOrFail($id_resultado);
@@ -303,7 +314,8 @@ class TestController extends Controller
                         }
                 }
                 
-            }
+            }}else { $resultado = new ResultadoTest();
+            $resultado->test_id=$lastInsertedId;}
             
             foreach ($request->resultado as $key=>$nombre)
             {
@@ -339,10 +351,11 @@ class TestController extends Controller
         } 
         
         
-        $preg = DB::table('pregunta_por_test')
-        ->select('id','test_id')
-        ->where('test_id', '=', $lastInsertedId)
+        $preg = DB::table('pregunta_por_test as ppt')
+        ->select('ppt.id as id','ppt.test_id as test_id')
+        ->where('ppt.test_id', '=', $lastInsertedId)
         ->get();
+        
         
         return json_encode($preg);
         

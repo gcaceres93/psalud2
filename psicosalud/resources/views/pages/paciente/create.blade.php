@@ -22,7 +22,7 @@
   <div class="col-md-6 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  id="nombre"   name="nombre" placeholder="Nombres" class="form-control"  type="text">
+  <input required  id="nombre"   name="nombre" placeholder="Nombres" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -34,7 +34,7 @@
     <div class="col-md-6 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input id="apellido"  name="apellido" placeholder="Apellidos" class="form-control"  type="text">
+  <input id="apellido" required  name="apellido" placeholder="Apellidos" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -44,7 +44,7 @@
     <div class="col-md-6 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input id="cedula"  name="cedula" placeholder="Cédula de identidad" class="form-control"  type="text">
+  <input id="cedula"  required name="cedula" placeholder="Cédula de identidad" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -54,7 +54,7 @@
     <div class="col-md-6 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-  <input id="nacimiento"  name="nacimiento" placeholder="Fecha y año de nacimiento" class="form-control"  type="date">
+  <input id="nacimiento" required  name="nacimiento" placeholder="Fecha y año de nacimiento" class="form-control"  type="date">
     </div>
   </div>
 </div>
@@ -64,7 +64,7 @@
     <div class="col-md-6 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="lugar_nacimiento" placeholder="Lugar de nacimiento" class="form-control" type="text" >
+  <input name="lugar_nacimiento" required placeholder="Lugar de nacimiento" class="form-control" type="text" >
     </div>
   </div>
 </div>
@@ -95,7 +95,7 @@
     <div class="col-md-6 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i></span>
-  <input  id="ruc"  name="ruc" placeholder="RUC del paciente" class="form-control"  type="text">
+  <input  id="ruc"  name="ruc" required placeholder="RUC del paciente" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -105,7 +105,7 @@
     <div class="col-md-6 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i></span>
-  <input id="razon_social"  name="razon_social" placeholder="Razón social del paciente" class="form-control"  type="text">
+  <input id="razon_social" required name="razon_social" placeholder="Razón social del paciente" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -116,7 +116,7 @@
     <div class="col-md-6 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input id="email"  name="email" placeholder="Dirección de correo" class="form-control"  type="text">
+  <input id="email" required name="email" placeholder="Dirección de correo" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -129,7 +129,7 @@
     <div class="col-md-6 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-  <input id="telefono"  name="telefono" placeholder="Ej.:(0961)555-1212" class="form-control" type="text">
+  <input id="telefono" required  name="telefono" placeholder="Ej.:(0961)555-1212" class="form-control" type="text">
     </div>
   </div>
 </div>
@@ -141,7 +141,7 @@
     <div class="col-md-6 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input  id="direccion"  name="direccion" placeholder="Dirección particular y/o profesional" class="form-control" type="text">
+  <input  id="direccion" required  name="direccion" placeholder="Dirección particular y/o profesional" class="form-control" type="text">
     </div>
   </div>
 </div>

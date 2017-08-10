@@ -22,7 +22,7 @@
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  name="nombre" id="nombre" placeholder="Nombres" class="form-control" type="text" value="{{ $paciente->persona->nombre }}">
+  <input  name="nombre"  required id="nombre" placeholder="Nombres" class="form-control" type="text" value="{{ $paciente->persona->nombre }}">
     </div>
   </div>
 </div>
@@ -34,7 +34,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="apellido" placeholder="Apellido" id="apellido" class="form-control"  type="text" value="{{ $paciente->persona->apellido }}">
+  <input name="apellido" required placeholder="Apellido" id="apellido" class="form-control"  type="text" value="{{ $paciente->persona->apellido }}">
     </div>
   </div>
 </div>
@@ -44,7 +44,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="cedula" placeholder="Cédula de identidad" id="cedula" class="form-control"  type="text" value="{{ $paciente->persona->cedula }}">
+  <input name="cedula" required placeholder="Cédula de identidad" id="cedula" class="form-control"  type="text" value="{{ $paciente->persona->cedula }}">
     </div>
   </div>
 </div>
@@ -54,7 +54,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-  <input name="nacimiento" placeholder="Fecha y año de nacimiento" id="nacimiento" class="form-control"  type="date" value="{{ $paciente->persona->nacimiento }}">
+  <input name="nacimiento" required placeholder="Fecha y año de nacimiento" id="nacimiento" class="form-control"  type="date" value="{{ $paciente->persona->nacimiento }}">
     </div>
   </div>
 </div>
@@ -64,7 +64,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="lugar_nacimiento" placeholder="Lugar de nacimiento" id="lugar_nacimiento" class="form-control" type="text" value="{{$paciente->persona->lugar_nacimiento}}">
+  <input name="lugar_nacimiento" required placeholder="Lugar de nacimiento" id="lugar_nacimiento" class="form-control" type="text" value="{{$paciente->persona->lugar_nacimiento}}">
     </div>
   </div>
 </div>
@@ -75,7 +75,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="colegio" placeholder="Colegio donde se realizaron los estudios primarios/secundarios" id="colegio" class="form-control" type="text" value="{{$paciente->persona->colegio}}">
+  <input name="colegio"  placeholder="Colegio donde se realizaron los estudios primarios/secundarios" id="colegio" class="form-control" type="text" value="{{$paciente->persona->colegio}}">
     </div>
   </div>
 </div>
@@ -95,7 +95,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i></span>
-  <input name="ruc" placeholder="RUC del paciente" class="form-control" id="ruc" type="text" value="{{$paciente->ruc }}">
+  <input name="ruc"  required placeholder="RUC del paciente" class="form-control" id="ruc" type="text" value="{{$paciente->ruc }}">
     </div>
   </div>
 </div>
@@ -105,7 +105,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i></span>
-  <input name="razon_social" placeholder="Razón social del paciente" id="razon_social" class="form-control"  type="text" value="{{$paciente->razon_social}}">
+  <input name="razon_social" required placeholder="Razón social del paciente" id="razon_social" class="form-control"  type="text" value="{{$paciente->razon_social}}">
     </div>
   </div>
 </div>
@@ -116,7 +116,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="email" id="email" placeholder="Dirección de correo" class="form-control"  type="text" value="{{ $paciente->persona->email }}">
+  <input name="email" id="email"  required placeholder="Dirección de correo" class="form-control"  type="text" value="{{ $paciente->persona->email }}">
     </div>
   </div>
 </div>
@@ -129,7 +129,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-  <input id="telefono" name="telefono" placeholder="Ej.:(0961)555-1212" class="form-control" type="text" value="{{ $paciente->persona->telefono }}">
+  <input id="telefono" name="telefono" required placeholder="Ej.:(0961)555-1212" class="form-control" type="text" value="{{ $paciente->persona->telefono }}">
     </div>
   </div>
 </div>
@@ -141,7 +141,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input id="direccion" name="direccion" placeholder="Dirección particular y/o profesional" class="form-control" type="text" value="{{ $paciente->persona->direccion }}">
+  <input id="direccion" name="direccion" required placeholder="Dirección particular y/o profesional" class="form-control" type="text" value="{{ $paciente->persona->direccion }}">
     </div>
   </div>
 </div>

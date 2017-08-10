@@ -21,7 +21,7 @@
   		
   		<div class="form-group">
   			<label for="Tipo de Familiar">Tipo de Familiar</label>
-  			<input type="text" name="nombre" class="form-control" placeholder="Tipo de Familiar"> 	
+  			<input type="text"  required name="nombre" class="form-control" placeholder="Tipo de Familiar"> 	
   		</div>
 
   		<button type="submit" class="btn btn-info">Guardar</button>

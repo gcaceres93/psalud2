@@ -20,20 +20,20 @@
 
   		<div class="form-group">
   			<label for="pregunta">Nombre de la pregunta</label>
-  			<input type="text" name="pregunta" class="form-control" placeholder="Nombre de la pregunta a ser mostrada en el cuestionario de anamnesis">		 	
+  			<input type="text" required name="pregunta" class="form-control" placeholder="Nombre de la pregunta a ser mostrada en el cuestionario de anamnesis">		 	
   	    </div>
   	    <div class="form-group">
   			<label for="nombre">Aclaración de la pregunta</label>
-  			<textarea name="aclaracion_pregunta" class="form-control" placeholder="Nombre de la pregunta a ser mostrada en el cuestionario de anamnesis" rows="5"> </textarea>		 	
+  			<textarea name="aclaracion_pregunta"  class="form-control" placeholder="Nombre de la pregunta a ser mostrada en el cuestionario de anamnesis" rows="5"> </textarea>		 	
   	    </div>
   	    <div class="form-group">
   			<label for="grupo">Grupo</label>
-  			<input type="text" name="grupo" class="form-control" placeholder="Ejemplo: ANTECEDENTES FAMILIARES, DESARROLLO, ETC.">		 	
+  			<input type="text" name="grupo" required class="form-control" placeholder="Ejemplo: ANTECEDENTES FAMILIARES, DESARROLLO, ETC.">		 	
   	    </div>
   	    <div class="form-group">
   			<label for="orden">Orden de aparición</label>
   			<span class="help-block">Por defecto se guardará como último en el orden de aparición. <strong>Último utilizado:</strong> {{ $ultimo }}</span>
-  			<input type="number" name="orden" class="form-control" placeholder="Orden de aparición en cuestionario de Anamnesis">		 	
+  			<input type="number" name="orden" required class="form-control" placeholder="Orden de aparición en cuestionario de Anamnesis">		 	
   	    </div>
       <br /> 
       

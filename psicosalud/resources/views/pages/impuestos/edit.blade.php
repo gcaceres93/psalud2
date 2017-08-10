@@ -21,11 +21,11 @@
 
   		<div class="form-group">
   			<label for="nombre">Nombre</label>
-  			<input type="text" name="nombre" class="form-control" placeholder="Nombre del impuesto" value="{{ $impuestos->nombre }}">		
+  			<input type="text" required name="nombre" class="form-control" placeholder="Nombre del impuesto" value="{{ $impuestos->nombre }}">		
 
   		<div class="form-group">
   			<label for="porcentaje">Porcentaje</label>
-  			<input type="text" name="porcentaje" class="form-control" placeholder="Porcentaje del impuesto" value="{{ $impuestos->porcentaje }}"> 	
+  			<input type="text" required name="porcentaje" class="form-control" placeholder="Porcentaje del impuesto" value="{{ $impuestos->porcentaje }}"> 	
   		</div>
 
 

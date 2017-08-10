@@ -108,7 +108,7 @@
 		<div class="row">
       		<div class="form-group col-md-6">
               <label for="comentario">Observaciones:</label>
-              <textarea name="observaciones" class="form-control" rows="5" id="observaciones"></textarea>
+              <textarea required name="observaciones" class="form-control" rows="5" id="observaciones"></textarea>
             </div>
 		</div>
 <!-- 		row -->

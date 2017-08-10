@@ -108,9 +108,23 @@ class RespuestaPreguntaController extends Controller
      * @param  \App\RespuestaPregunta  $respuestaPregunta
      * @return \Illuminate\Http\Response
      */
-    public function show(RespuestaPregunta $respuestaPregunta)
+    public function show( $respuestaPregunta)
     {
         //
+        $pregrep = DB::table('respuesta_por_pregunta')
+        ->select('respuesta_por_pregunta.*')
+        ->where('pregunta_id', '=', $respuestaPregunta)
+        ->get();
+        
+        $preg =DB::table('pregunta_por_test')
+        ->select('nombre as nombre','descripcion as descripcion','test_id','id')
+        ->where('id', '=', $respuestaPregunta)
+        ->get();
+        
+        
+        
+        
+        return view('pages.'.$this->path.'.show',compact('preg','respuestaPregunta','pregrep'));
     }
 
     /**

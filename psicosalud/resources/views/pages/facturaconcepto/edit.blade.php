@@ -22,7 +22,7 @@
 
   		<div class="form-group">
   			<label for="descripci&oacute;n">Descripci&oacute;n</label>
-  			<input type="text" name="descripcion" class="form-control" placeholder="Descripci&oacute;n del concepto" value="{{ $facturaconcepto->descripcion }}"> 	
+  			<input type="text" required name="descripcion" class="form-control" placeholder="Descripci&oacute;n del concepto" value="{{ $facturaconcepto->descripcion }}"> 	
   		</div>
 
   		<button type="submit" class="btn btn-success">Actualizar</button>

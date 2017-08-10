@@ -25,7 +25,7 @@
   			 <label for="paciente">Paciente</label>
   			 <br/>
   			<div class="col-md-6">
-  			<select id="paciente" name="paciente" class="form-control selectpicker">
+  			<select  required id="paciente" name="paciente" class="form-control selectpicker">
                 <option value="{{ $pac->id }}" >{{ $pac->nombre }} {{ $pac->apellido }} </option>
                 @foreach($pacientes as $paciente)
                   <option value="{{ $paciente->id }}">{{ $paciente->nombre }}  {{ $paciente->apellido }} </option>
@@ -41,7 +41,7 @@
   			 <label for="agendamiento">Agendamiento</label>
   			 <br/>
   			<div class="col-md-6">
-  			<select  name="agendamiento" id="agendamiento" class="form-control selectpicker">
+  			<select required  name="agendamiento" id="agendamiento" class="form-control selectpicker">
                 <option value="" >Seleccionar Agendamiento</option>
                  @foreach($agendamientos as $agendamiento)
                  <?php
@@ -71,7 +71,7 @@
   			 <label for="medico">Médico</label>
   			 <br/>
   			<div class="col-md-6">
-  			<select id="medico" name="medico" class="form-control selectpicker">
+  			<select required id="medico" name="medico" class="form-control selectpicker">
                 <option value="{{ $emp->id }}" >{{ $emp->nombre }} {{ $emp->apellido }} </option>
                 @foreach($empleados as $empleado)
                   <option value="{{ $empleado->id }}">{{ $empleado->nombre }}  {{ $empleado->apellido }} - {{$empleado->descripcion }}</option>
@@ -88,7 +88,7 @@
   			 <label for="cantidad_horas">Cantidad de horas</label>
   			 <br/>
   			<div class="col-md-6">
-              <input id="cantidad_horas" value="{{ $consulta->cantidad_horas }}"  name="cantidad_horas"  placeholder="Cantidad de horas" class="form-control"  type="number">
+              <input required id="cantidad_horas" value="{{ $consulta->cantidad_horas }}"  name="cantidad_horas"  placeholder="Cantidad de horas" class="form-control"  type="number">
              </div>
   		</div>
   		<br/>
@@ -101,7 +101,7 @@
                 <div class="col-md-3 inputGroupContainer">
                 <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              <input id="fecha" value="{{ $consulta->fecha }}" name="fecha" placeholder="Fecha de la consulta" class="form-control"  type="date">
+              <input required id="fecha" value="{{ $consulta->fecha }}" name="fecha" placeholder="Fecha de la consulta" class="form-control"  type="date">
                 </div>
               </div>
 		</div>
@@ -113,7 +113,7 @@
 		<div class="row">
       		<div class="form-group col-md-6">
               <label for="comentario">Observaciones:</label>
-              <textarea name="observaciones" class="form-control" rows="5" id="observaciones"> {{ $consulta->observaciones }} </textarea>
+              <textarea required name="observaciones" class="form-control" rows="5" id="observaciones"> {{ $consulta->observaciones }} </textarea>
             </div>
 		</div>
 <!-- 		row -->

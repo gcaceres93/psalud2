@@ -65,7 +65,7 @@
 													
 														 <td  class="col-md-6	"><input type="text" disabled name="decripcion"  id="descripcion" class="form-control" placeholder="Descripcion Pregunta" value="{{$pregu->descripcion}}" ></td>											
 														
- 														 <td  class="col-md-2	"> <center> <button type="button" disabled name="respuesta" class="btn btn-warning"    id="respuesta" class="form-control"> Cargar Respuestas <center> </td>
+ 														 <td  class="col-md-2	"> <center> <button type="button"  name="respuesta" class="btn btn-warning"    id="respuesta" class="form-control"> Ver Respuestas <center> </td>
  														
 														
 					</tr>
@@ -168,9 +168,14 @@ $(document).ready(function() {
     $('#borrar_fila').on('click', function () {
     	borrarfila('detalle');
     });
+    $(document).on('click', $('#respuesta'),function () {
+    	var asd =  $('#asaniu').val();
+    	window.location.replace("/respuestaPregunta/"+asd);
+    });
+    
     	 $('#borrar_filar').on('click', function () {
     	    	borrarfila('detaller');
-    	
+    	    	
     	
     	
         
@@ -199,7 +204,7 @@ function borrarfila(tableID){
 
 
 $(document).ready(function() {	
-    $(document).on('click','#respuesta', function (e) {
+    $(document).on('click','#agregar', function (e) {
 	    e.preventDefault();
 		var fila = $(this).closest('tr').index();
 	    var pregunta = [];

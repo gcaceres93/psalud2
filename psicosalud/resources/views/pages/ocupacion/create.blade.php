@@ -20,10 +20,10 @@
 
   		<div class="form-group">
   			<label for="nombre">Nombre</label>
-  			<input type="text" name="nombre" class="form-control" placeholder="Nombre de la ocupaci&oacute;n">		 	
+  			<input type="text" required name="nombre" class="form-control" placeholder="Nombre de la ocupaci&oacute;n">		 	
   		<div class="form-group">
   			<label for="descripci&oacute;n">Descripci&oacute;n</label>
-  			<input type="text" name="descripcion" class="form-control" placeholder="Descripci&oacute;n de la ocupaci&oacute;n"> 	
+  			<input type="text"  name="descripcion" class="form-control" placeholder="Descripci&oacute;n de la ocupaci&oacute;n"> 	
   		</div>
 
   		<button type="submit" class="btn btn-info">Guardar</button>

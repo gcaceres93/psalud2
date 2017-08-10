@@ -21,7 +21,7 @@
 	<div class="form-group"> 
       <label>Persona</label>
        
-      <select  name="persona" id="persona" class="form-control selectpicker">
+      <select required  name="persona" id="persona" class="form-control selectpicker">
         <option value="" >Seleccionar persona</option>
         @foreach($personas as $persona)
           <option   value="{{ $persona->id }}">{{ $persona->apellido }}, {{ $persona->nombre}} </option>
@@ -33,15 +33,15 @@
   			
   		<div class="form-group">
   			<label for="descripci&oacute;n">Nombre</label>
-  			<input type="text" name="name" id="name" class="form-control" placeholder="Nombre del Usuario"> 	
+  			<input type="text" name="name" required id="name" class="form-control" placeholder="Nombre del Usuario"> 	
   		</div>
       <div class="form-group">
         <label for="E-mai">E-mail</label>
-        <input type="text" name="email" id="email" class="form-control" placeholder="E-mail del Usuario">   
+        <input type="text" name="email" id="email" required class="form-control" placeholder="E-mail del Usuario">   
       </div>
       <div class="form-group">
         <label for="Contraseña">Contraseña</label>
-        <input type="password" " name="password" class="form-control" placeholder="Contraseña del Usuario">   
+        <input type="password" " name="password"  required class="form-control" placeholder="Contraseña del Usuario">   
       </div>
       
       <div class="form-group"> 
@@ -49,7 +49,7 @@
        
 		<br/>
         @foreach($roles as $rol)
-         <input type="checkbox" name="roles[]" id = "roles" value="{{ $rol->id }}" />{{ $rol->nombre }}<br />
+         <input  type="checkbox" name="roles[]" id = "roles" value="{{ $rol->id }}" />{{ $rol->nombre }}<br />
           
         @endforeach
     

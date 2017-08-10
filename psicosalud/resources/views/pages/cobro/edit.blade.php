@@ -23,7 +23,7 @@
           			<label for="factura">Factura</label>
           			
             	
-                <select  name="factura_id" id="factura_id"    value ="" class="form-control selectpicker">
+                <select required  name="factura_id" id="factura_id"    value ="" class="form-control selectpicker">
                  <option selected  value ="{{$cobros->factura_id}}">{{$cobros->nro}}</option> 
 
               	</select>
@@ -34,7 +34,7 @@
   			
   	<div class="form-group">
           			<label for="tipo_pago">Tipo de Pago:</label>
-          			<select  name="tipo_pago" id="tipo_pago"  class="form-control selectpicker">
+          			<select  required name="tipo_pago" id="tipo_pago"  class="form-control selectpicker">
                 	<option value="" >Seleccionar Tipo de Pago</option>
                       <option <?php if ($cobros->tipo_pago == 1) {echo ('selected');}  ?>   value="1">Efectivo </option>
                       <option <?php if ($cobros->tipo_pago == 2) {echo ('selected');}  ?>  value="2">Tarjeta de Credito </option>
@@ -44,7 +44,7 @@
           	</div>
           	<div class="form-group">
           			<label for="monto_a_cobrar">Monto a Cobrar:</label>
-          			<input type="number" name="monto_a_cobrar"  id="monto_a_cobrar"  class="form-control" value="{{$cobros->monto}}"placeholder="Monto" > 	
+          			<input  required type="number" name="monto_a_cobrar"  id="monto_a_cobrar"  class="form-control" value="{{$cobros->monto}}"placeholder="Monto" > 	
           	</div>
           	<div class="form-group">
           			<label for="observacion">Observacion:</label>

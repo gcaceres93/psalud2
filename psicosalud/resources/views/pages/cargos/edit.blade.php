@@ -22,7 +22,7 @@
   		
   		<div class="form-group">
   			<label for="descripci&oacute;n">Descripci&oacute;n</label>
-  			<input type="text" name="descripcion" class="form-control" placeholder="Descripci&oacute;n del cargo" value="{{ $cargos->descripcion }}"> 	
+  			<input type="text" name="descripcion" required class="form-control" placeholder="Descripci&oacute;n del cargo" value="{{ $cargos->descripcion }}"> 	
   		</div>
 
       <div class="form-group">

@@ -48,7 +48,7 @@
         	<div class="col-md-12">
         		<div class="form-group"> 
         			<label for="consulta">Consulta asociada:</label>
-				<select id="consulta" name="consulta" class="form-control selectpicker">
+				<select id="consulta" required name="consulta" class="form-control selectpicker">
                     <option value="" >--- Seleccionar consulta ---</option>
                     @foreach($consultas as $consulta)
                       <option value="{{ $consulta->id }}">{{ $consulta->fecha }} </option>

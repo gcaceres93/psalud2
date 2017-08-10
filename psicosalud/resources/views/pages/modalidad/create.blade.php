@@ -20,7 +20,7 @@
 
   		<div class="form-group">
   			<label for="nombre">Descripci&oacute;n</label>
-  			<input type="text" name="descripcion" class="form-control" placeholder="Nombre de la modalidad">		 	
+  			<input type="text" required name="descripcion" class="form-control" placeholder="Nombre de la modalidad">		 	
   	   
       <br /> 
   		<button type="submit" class="btn btn-info">Guardar</button>

@@ -20,10 +20,10 @@
 
   		<div class="form-group">
   			<label for="nombre">Nombre</label>
-  			<input type="text" name="nombre" class="form-control" placeholder="Nombre del Impuesto">		 	
+  			<input type="text" required name="nombre" class="form-control" placeholder="Nombre del Impuesto">		 	
   		<div class="form-group">
   			<label for="porcentaje">Porcentaje</label>
-  			<input type="text" name="porcentaje" class="form-control" placeholder="Porcentaje"> 	
+  			<input type="text" required  name="porcentaje" class="form-control" placeholder="Porcentaje"> 	
   		</div>
 
   		<button type="submit" class="btn btn-info">Guardar</button>

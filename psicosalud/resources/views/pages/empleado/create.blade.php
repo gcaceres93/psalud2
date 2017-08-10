@@ -30,7 +30,7 @@
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  name="nombre" placeholder="Nombres" class="form-control"  type="text">
+  <input required name="nombre" placeholder="Nombres" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -42,7 +42,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="apellido" placeholder="Apellidos" class="form-control"  type="text">
+  <input required name="apellido" placeholder="Apellidos" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -52,7 +52,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="cedula" placeholder="Cédula de identidad" class="form-control"  type="text">
+  <input required name="cedula" placeholder="Cédula de identidad" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -62,7 +62,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-  <input name="nacimiento" placeholder="Fecha y año de nacimiento" class="form-control"  type="date">
+  <input required name="nacimiento" placeholder="Fecha y año de nacimiento" class="form-control"  type="date">
     </div>
   </div>
 </div>
@@ -72,7 +72,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-ok-sign"></i></span>
-  <input name="codigo" placeholder="Código de empleado" class="form-control"  type="text">
+  <input required name="codigo" placeholder="Código de empleado" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -83,7 +83,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="email" placeholder="Dirección de correo" class="form-control"  type="text">
+  <input required name="email" placeholder="Dirección de correo" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -96,7 +96,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-  <input name="telefono" placeholder="Ej.:(0961)555-1212" class="form-control" type="text">
+  <input required name="telefono" placeholder="Ej.:(0961)555-1212" class="form-control" type="text">
     </div>
   </div>
 </div>
@@ -108,7 +108,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="direccion" placeholder="Dirección particular y/o profesional" class="form-control" type="text">
+  <input required name="direccion" placeholder="Dirección particular y/o profesional" class="form-control" type="text">
     </div>
   </div>
 </div>
@@ -119,9 +119,9 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"> Desde:  <i class="glyphicon glyphicon-calendar"></i></span>
-  <input name="disponibilidad_desde" placeholder="Ej.:08:00:00" class="form-control"  type="text">
+  <input required name="disponibilidad_desde" placeholder="Ej.:08:00:00" class="form-control"  type="text">
   <span class="input-group-addon">  Hasta:  <i class="glyphicon glyphicon-calendar"></i></span>
-   <input name="disponibilidad_hasta" placeholder="Ej.:17:00:00" class="form-control"  type="text">
+   <input required name="disponibilidad_hasta" placeholder="Ej.:17:00:00" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -136,7 +136,7 @@
       <div class="col-md-4 selectContainer">
       <div class="input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-      <select name="cargo" class="form-control selectpicker">
+      <select required name="cargo" class="form-control selectpicker">
         <option value="" >Seleccionar cargo</option>
         @foreach($profesionales_salud as $cargo)
           <option value="{{ $cargo->id }}">{{ $cargo->descripcion }}</option>

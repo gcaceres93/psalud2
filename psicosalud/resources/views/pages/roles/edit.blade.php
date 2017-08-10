@@ -22,7 +22,7 @@
 
   		<div class="form-group">
   			<label for="nombre">Nombre</label>
-  			<input type="text" name="nombre" class="form-control" placeholder="Nombre del Rol" value="{{ $roles->nombre }}"> 	
+  			<input type="text" required name="nombre" class="form-control" placeholder="Nombre del Rol" value="{{ $roles->nombre }}"> 	
   		</div>
 
   		<button type="submit" class="btn btn-success">Actualizar</button>

@@ -21,7 +21,7 @@
   		<div class="form-group"> 
               <label>Paciente</label>
                
-              <select  name="paciente" id="paciente" class="form-control selectpicker">
+              <select required name="paciente" id="paciente" class="form-control selectpicker">
                 <option value="" >Seleccionar paciente</option>
                 @foreach($personas as $paciente)
                   <option   value="{{ $paciente->id }}">{{ $paciente->apellido }}, {{ $paciente->nombre}} </option>
@@ -33,7 +33,7 @@
   			<div class="form-group"> 
               <label>Test</label>
                
-              <select  name="test" id="test" class="form-control selectpicker">
+              <select required  name="test" id="test" class="form-control selectpicker">
                 <option value="" >Seleccionar test</option>
                 @foreach($test as $tes)
                   <option   value="{{ $tes->id }}">{{ $tes->nombre }} </option>
@@ -46,11 +46,11 @@
 			<div class="col-md-6">
         			<div class="form-group">
           			<label for="Fecha">Fecha</label>
-          			<input type="date" name="fecha" id="fecha" class="form-control" > 	
+          			<input type="date" required name="fecha" value= <?php  $dia= date('o-m-d'); echo($dia); ?>  id="fecha" class="form-control" > 	
           		</div>
           		<div class="form-group">
           			<label for="tipo_aplicacion">Tipo de Aplicacion</label>
-          			<select  name="tipo_aplicacion" id="tipo_aplicacion" class="form-control selectpicker">
+          			<select required  name="tipo_aplicacion" id="tipo_aplicacion" class="form-control selectpicker">
                           <option selected  value="1">Diagnostico</option>
                           <option   value="2">Tratamiento</option>
                         
