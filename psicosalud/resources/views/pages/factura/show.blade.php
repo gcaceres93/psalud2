@@ -148,7 +148,12 @@
           	</div>
           		
   		</div>
-  
+  			@if ($facturas->estado == 'Anulada')
+  				@php
+  				 		$bar= "<center><h1 < style='font-size:72px;'>Anulada</h1></center>";
+  				 		echo $bar;
+  				@endphp	
+  			@endif
   		
   		<div class="col-md-12">
   		<table id="tabla" name="tabla" class="table table-hover table-bordered table-condensed">

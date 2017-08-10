@@ -44,14 +44,18 @@
 	  					<td class="clickable-row" data-href="{{ route('factura.show', $row->id)  }}">{{ $row->estado}}</td>
 	  					<td>
 	  					<center>
+	  					@if ($row->estado  != 'Anulada')
+	  						@if ($row->estado  != 'Cobrado')
 	  						<a href="{{ route('factura.edit', $row->id) }}" class="btn btn-info">Editar</a></br>
 <!-- 	  						<a class="btn btn-success" href="{{ URL('/factura/'.$row->id.'/edit#Cobro') }}"> Cobrar </a> -->
 	  						<a href="{{ route('cobro.create', $row->id) }}" class="btn btn-success">Cobrar</a>
+	  						@endif
 							<form action="{{ route('factura.destroy', $row->id) }}" method="post">
 								<input type="hidden" name="_method" value="DELETE">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<button type="submit" class="btn btn-danger">Anular</button>
 							</form>
+						@endif	
 						</center>	  					
 						</td>
 	  				</tr>	
