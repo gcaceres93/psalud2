@@ -23,8 +23,8 @@
 	  			<tbody>
 	  			@foreach($data as $row)
 	  				<tr>
-	  					<td>{{ $row->id }}</td>
-	  					<td>{{ $row->descripcion }}</td>
+	  					<td class="clickable-row" data-href="{{ route('cargo.show', $row->id)  }}" >{{ $row->id }}</td>
+	  					<td class="clickable-row" data-href="{{ route('cargo.show', $row->id)  }}">{{ $row->descripcion }}</td>
 	  					<td>
 	  					<center>
 	  						<a href="{{ route('cargo.edit', $row->id) }}" class="btn btn-info">Editar</a>

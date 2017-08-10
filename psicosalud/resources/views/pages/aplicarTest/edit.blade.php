@@ -24,7 +24,7 @@
   		<div class="form-group"> 
               <label>Paciente</label>
                
-              <select  name="paciente" id="paciente" class="form-control selectpicker">
+              <select disabled  name="paciente" id="paciente" class="form-control selectpicker">
                 <option value="" >Seleccionar paciente</option>
                 @foreach($personas as $paciente)
                
@@ -46,7 +46,7 @@
   			<div class="form-group"> 
               <label>Test</label>
                
-              <select  name="test" id="test" class="form-control selectpicker">
+              <select disabled name="test" id="test" class="form-control selectpicker">
                 <option value="" >Seleccionar test</option>
                 @foreach($test as $tes)
                 <?php
@@ -68,11 +68,11 @@
 			<div class="col-md-6">
         			<div class="form-group">
           			<label for="Fecha">Fecha</label>
-          			<input type="date" name="fecha" id="fecha" value="{{$aplicar->fecha}}" class="form-control" > 	
+          			<input type="date" name="fecha" id="fecha" disabled value="{{$aplicar->fecha}}" class="form-control" > 	
           		</div>
           		<div class="form-group">
           			<label for="tipo_aplicacion">Tipo de Aplicacion</label>
-          			<select  name="tipo_aplicacion" id="tipo_aplicacion" class="form-control selectpicker">
+          			<select  disabled name="tipo_aplicacion" id="tipo_aplicacion" class="form-control selectpicker">
                           <option @php if ($aplicar->tipo_aplicacion == 1){ echo ("selected");} @endphp  value="1">Diagnostico</option>
                           <option @php if ($aplicar->tipo_aplicacion == 2){ echo ("selected");} @endphp   value="2">Tratamiento</option>
                         

@@ -30,15 +30,15 @@
 	  			<tbody>
 	  			@foreach($data as  $row)
 	  				<tr>
-	  					<td>{{ $row->id }}</td>
-	  					<td>{{ $row->nombre }} {{ $row->apellido }}</td>
-	  					<td>{{ $row->razon_social }}</td>
-	  					<td>{{ $row->ruc }}</td>
-	  					<td>{{ $row->nro }}</td>
-	  					<td>{{ $row->fecha}}</td>
-	  					<td>{{ $row->monto_total}}</td>
-	  					<td>{{ $row->tipo_pago}}</td>
-	  					<td>{{ $row->estado}}</td>
+	  					<td class="clickable-row" data-href="{{ route('factura.show', $row->id)  }}">{{ $row->id }}</td>
+	  					<td class="clickable-row" data-href="{{ route('factura.show', $row->id)  }}">{{ $row->nombre }} {{ $row->apellido }}</td>
+	  					<td class="clickable-row" data-href="{{ route('factura.show', $row->id)  }}">{{ $row->razon_social }}</td>
+	  					<td class="clickable-row" data-href="{{ route('factura.show', $row->id)  }}">{{ $row->ruc }}</td>
+	  					<td class="clickable-row" data-href="{{ route('factura.show', $row->id)  }}">{{ $row->nro }}</td>
+	  					<td class="clickable-row" data-href="{{ route('factura.show', $row->id)  }}">{{ $row->fecha}}</td>
+	  					<td class="clickable-row" data-href="{{ route('factura.show', $row->id)  }}">{{ $row->monto_total}}</td>
+	  					<td class="clickable-row" data-href="{{ route('factura.show', $row->id)  }}">{{ $row->tipo_pago}}</td>
+	  					<td class="clickable-row" data-href="{{ route('factura.show', $row->id)  }}">{{ $row->estado}}</td>
 	  					<td>
 	  					<center>
 	  						<a href="{{ route('factura.edit', $row->id) }}" class="btn btn-info">Editar</a></br>

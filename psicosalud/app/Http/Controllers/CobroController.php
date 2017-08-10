@@ -94,6 +94,18 @@ class CobroController extends Controller
     public function show($cobro)
     {
         //
+        $cob = DB::table('cobro')
+        ->join('factura_cabecera','cobro.factura_id','=','factura_cabecera.id')
+        ->select('cobro.*','factura_cabecera.nro')
+        ->where('cobro.id','=',$cobro)
+        ->get();
+        
+        foreach ($cob as $cobro){
+            $cobros=$cobro;
+            
+        }
+        //         dd($cobros->all());
+        return view('pages.cobro.show',compact('cobros'));
     }
 
     /**

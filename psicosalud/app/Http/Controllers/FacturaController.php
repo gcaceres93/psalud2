@@ -243,9 +243,54 @@ class FacturaController extends Controller
      * @param  \App\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function show(Factura $factura)
+    public function show( $factura)
     {
         //
+        $facturas = Factura::findOrFail($factura);
+        
+        $personas=DB::table('paciente')
+        ->join('persona','paciente.persona_id','=','persona.id')
+        ->select('paciente.*','persona.nombre','persona.apellido')
+        ->groupBy('persona.apellido','persona.nombre','paciente.id')
+        ->orderBy('persona.apellido')
+        ->get();
+        $empleados=DB::table('empleado')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->select('empleado.*','persona.nombre','persona.apellido')
+        ->where('es_medico','=',true)
+        ->groupBy('persona.apellido','persona.nombre','empleado.id')
+        ->orderBy('persona.apellido')
+        ->get();
+        $consultas = DB::table('consulta')
+        ->join('empleado','consulta.empleado_id','=','empleado.id')
+        ->join('persona','empleado.persona_id','=','persona.id')
+        ->select('consulta.*','persona.nombre','persona.apellido')
+        ->where('consulta.empleado_id', '=',$facturas->empleado_id)
+        ->where('consulta.paciente_id', '=',$facturas->paciente_id)
+        ->where('consulta.estado' , '=', 'Consulta')
+        ->orWhere('consulta.id', '=', $facturas->consulta_id)
+        ->get();
+        $factura_detalle =   DB::table('factura_detalle as fd')
+        ->join('impuesto as i','fd.impuesto_id','=','i.id')
+        ->select('fd.*','i.porcentaje as iva','i.porcentaje as porcentaje')
+        ->where('fd.factura_cabecera_id', '=',$facturas->id)
+        ->get();
+        
+        foreach ($factura_detalle as $fact){
+            $i=1;
+            $iva=$fact->iva;
+            $monto= $fact->monto / (1 + ($iva * 0.01)) ;
+            $mon= $fact->monto - $monto;
+            $fact->iva=(int) round($mon);
+//             (fd.monto - round((fd.monto/(1+(i.porcentaje*0.01))) ,0))
+        }
+        
+        $factura_conceptos = FacturaConcepto::all()->sortBy('descripcion');
+        $impuestos = Impuestos::all()->sortBy('nombre');
+        //         DB::table('files')->orderBy('upload_time', 'desc')->first();
+        //         $cargos = Cargo::all()->sortBy('descripcion');
+        return view('pages.'.$this->path.'.show',compact('personas','facturas','empleados','factura_conceptos','impuestos','consultas','factura_detalle'));
+        
     }
 
     /**
