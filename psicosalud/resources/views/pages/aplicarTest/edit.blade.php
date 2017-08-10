@@ -183,7 +183,7 @@ $(document).ready(function() {
             	 document.getElementById('aplicarT').style.visibility = 'hidden';
             	 document.getElementById('finalizar').style.visibility = 'visible';
                 console.log(data);  
-                var nombre = data[0].pid;
+                var nombre = data[0].fila;
                 data.forEach(recorrerdata.bind(null,nombre));
             	
 //             	$('#consulta').html('	');
@@ -209,12 +209,15 @@ $(document).ready(function() {
     });
 });
 function recorrerdata(nom,value,index,ar){
+
+
 	if (index==0){
 		
 		$('#cabecera').append("<tr id='cabe' name='cabe'> <th>Pregunta </th>  </tr>");
 		
 		pid=0;
-	}else{
+	}
+	else{
 		
  		pid=ar[index-1].pid;
  		

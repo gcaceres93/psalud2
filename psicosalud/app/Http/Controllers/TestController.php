@@ -171,9 +171,19 @@ class TestController extends Controller
      * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function show(Test $test)
+    public function show( $tests)
     {
-        //
+        $test = Test::findOrFail($tests);
+        $preguntas =  DB::table('pregunta_por_test')
+        ->select('pregunta_por_test.*')
+        ->where('test_id', '=', $test->id)
+        ->get();
+        $resultado =  DB::table('resultado_por_test')
+        ->select('resultado_por_test.*')
+        ->where('test_id', '=', $test->id)
+        ->get();
+        
+        return view('pages.'.$this->path.'.show',compact('test','preguntas','resultado'));
     }
 
     /**

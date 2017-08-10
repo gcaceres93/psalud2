@@ -7,6 +7,9 @@
   <div class="row">
     <h1>Lista de test</h1>
     <h4><a class="btn btn-success" href="{{ route('test.create') }}">Registrar nuevo test</a></h4>
+     <div class="alert alert-info">
+ 		 Para ver detalle del registro, hacer click encima de la fila.
+	</div>
     <hr />
   </div>
   <div class="row">
@@ -33,9 +36,9 @@
 							
 							}
 					@endphp	  				
-	  					<td>{{ $row->id }}</td>
-	  					<td>{{ $row->nombre }}</td>
-	  					<td>{{ $abst }}</td>
+	  					<td class="clickable-row" data-href="{{ route('test.show', $row->id)  }}">{{ $row->id }}</td>
+	  					<td class="clickable-row" data-href="{{ route('test.show', $row->id)  }}">{{ $row->nombre }}</td>
+	  					<td class="clickable-row" data-href="{{ route('test.show', $row->id)  }}">{{ $abst }}</td>
 	  					<td>
 	  						<center>
 	  						<a href="{{ route('test.edit', $row->id) }}" class="btn btn-info">Editar</a>

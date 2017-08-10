@@ -212,7 +212,7 @@ $(document).ready(function() {
 		var idre = [];
 		var ids=  $('#ids').val(); 
 		var nombre=  $('#nombre').val();
-		if ($('#abstracto').checked){
+		if ($('#abstracto').prop('checked') ){
 			var abstracto=  "True" ;}
 			else	{ 	var abstracto=  "False"; }
 		var _token= "{{ csrf_token() }}";
@@ -365,7 +365,7 @@ $(document).ready(function() {
 		var val_max = [];
 		var ids=  $('#ids').val();
 		var nombre=  $('#nombre').val();
-		if ( $('#abstracto').checked ) {
+		if ($('#abstracto').prop('checked') ){
 			var abstracto =  "True" }
 			else	{ 	var abstracto =  "False"  }
 		var _token= "{{ csrf_token() }}";

@@ -7,7 +7,10 @@
   <div class="row">
     <h1>Lista de Facturas</h1>
     <h4><a class="btn btn-success" href="{{ route('factura.create') }}">Registrar nueva factura</a></h4>
-    <hr />
+    
+     <div class="alert alert-info">
+ 		 Para imprimir la factura, hacer click encima de la fila.
+	</div><hr />
   </div>
   <div class="row">
   	<div class="table-responsive">

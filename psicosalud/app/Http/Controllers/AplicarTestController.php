@@ -150,12 +150,37 @@ class AplicarTestController extends Controller
         
         $test=$request->test;
         
-        
+        $cant_preg=0;
+        $preg_id=0;
+        $canti=0;
+        $fila=0;
         $pregunta=DB::table('pregunta_por_test')
         ->join('respuesta_por_pregunta','pregunta_por_test.id','=','respuesta_por_pregunta.pregunta_id')
         ->select('pregunta_por_test.nombre as pnombre','pregunta_por_test.descripcion','pregunta_por_test.id as pid','respuesta_por_pregunta.nombre as rnombre','respuesta_por_pregunta.valor','respuesta_por_pregunta.id as rid')
         ->where('pregunta_por_test.test_id','=',$test)
         ->get();
+        if(count($pregunta)>0){
+            foreach ($pregunta as $key=>$preg){
+                if ($preg->pid==$preg_id){
+                    $cant_preg=$cant_preg+1;
+                }else{
+                        $cant_preg=0;
+                    }
+                  if  ($cant_preg > $canti){
+                      $canti=$canti+1;
+                      $fila=$preg->pid;
+                  }
+                  
+                $preg_id=$preg->pid;
+                $preg->fila=0;
+            }
+           
+        foreach ($pregunta as $pregu){
+            $pregu->fila=$fila;
+        }
+      
+        }
+        
        
         return json_encode($pregunta);
         
