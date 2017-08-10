@@ -235,7 +235,9 @@ class AnamnesisController extends Controller
             $anamnesis->delete();
             return redirect()->route('anamnesis.index');
         } catch(Exception $e){
-            return "Fatal error - ".$e->getMessage();
+            $var = '<script language="javascript">alert("No se puede eliminar este registro ya que tiene registros hijos"); window.history.go(-1);</script>';
+            return ("$var ");
+//             return "Fatal error - ".$e->getMessage();
         }
     }
 }

@@ -51,7 +51,7 @@
         	<div class="col-md-12">
         		<div class="form-group"> 
         			<label for="consulta">Consulta asociada:</label>
-				<select  id="consulta" name="consulta" class="form-control selectpicker">
+				<select required  id="consulta" name="consulta" class="form-control selectpicker">
                     <option value="{{$diagnostico->cid}}" >{{ $diagnostico->fecha }}</option>
                    	@foreach($consultas as $consulta)
                    	   <option value="{{ $consulta->id }}" >{{ $consulta->fecha }}</option>
@@ -115,7 +115,7 @@
 		<div class="row">
       		<div class="form-group col-md-12">
               <label for="comentario">Diagnóstico final:</label>
-              <textarea name="diagnostico_final"  class="form-control" rows="5" id="diagnostico_final">{{ $diagnostico->diagnostico_final }}</textarea>
+              <textarea name="diagnostico_final" required  class="form-control" rows="5" id="diagnostico_final">{{ $diagnostico->diagnostico_final }}</textarea>
             </div>
 		</div>
 		
@@ -123,21 +123,21 @@
 		<div class="row">
       		<div class="form-group col-md-12">
               <label for="comentario">Observaciones:</label>
-              <textarea name="observaciones"  class="form-control" rows="5" id="observaciones">{{ $diagnostico->observaciones }}</textarea>
+              <textarea name="observaciones" required  class="form-control" rows="5" id="observaciones">{{ $diagnostico->observaciones }}</textarea>
             </div>
 		</div>
 		
 		<div class="row">
       		<div class="form-group col-md-12">
               <label for="comentario">Resultado obtenido:</label>
-              <textarea name="resultado_obtenido"  class="form-control" rows="5" id="resultado_obtenido">{{ $diagnostico->resultado_obtenido }}</textarea>
+              <textarea name="resultado_obtenido" required  class="form-control" rows="5" id="resultado_obtenido">{{ $diagnostico->resultado_obtenido }}</textarea>
             </div>
 		</div>
 		
 		<div class="row">
       		<div class="form-group col-md-12">
               <label for="comentario">Recomendaciones:</label>
-              <textarea name="recomendaciones"  class="form-control" rows="5" id="recomendaciones">{{ $diagnostico->recomendaciones }}</textarea>
+              <textarea name="recomendaciones" required class="form-control" rows="5" id="recomendaciones">{{ $diagnostico->recomendaciones }}</textarea>
             </div>
 		</div>
 		

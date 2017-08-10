@@ -85,7 +85,7 @@
           	
           	<div class="form-group">
           			<label for="monto">Monto Total:</label>
-          			<input type="number" name="monto" id="monto" value="{{ $facturas->monto_total }}" class="form-control" placeholder="Monto" > 	
+          			<input type="number" name="monto" id="monto"  required value="{{ $facturas->monto_total }}" class="form-control" placeholder="Monto" > 	
           	</div>
           	<div class="form-group">
           			<label for="observacion">Observaciones:</label>

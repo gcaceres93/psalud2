@@ -241,6 +241,13 @@ class DiagnosticoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $diagnostico = Diagnostico::findOrFail($id);
+            $diagnostico->delete();
+            return redirect()->route('diagnostico.index');
+        } catch(Exception $e){
+            $var = '<script language="javascript">alert("No se puede eliminar este registro ya que tiene registros hijos asociados a otras tablas."); window.history.go(-1);</script>';
+            return ("$var ");
+        }
     }
 }

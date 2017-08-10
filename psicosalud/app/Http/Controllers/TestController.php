@@ -373,12 +373,14 @@ class TestController extends Controller
         //
         try{
             $test = Test::findOrFail($test);
-            $test->pregunta()->delete();
-            $test->resultado()->delete();
+//             $test->pregunta()->delete();
+//             $test->resultado()->delete();
             $test->delete();
             return redirect()->route('test.index');
         } catch(Exception $e){
-            return "Fatal error - ".$e->getMessage();
+            $var = '<script language="javascript">alert("No se puede eliminar este registro ya que tiene registros hijos asociados a otras tablas."); window.history.go(-1);</script>';
+            return ("$var ");
+//             return "Fatal error - ".$e->getMessage();
         }
     }
 }

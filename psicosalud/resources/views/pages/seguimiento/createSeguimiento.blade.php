@@ -48,7 +48,7 @@
         	<div class="col-md-12">
         		<div class="form-group"> 
         			<label for="consulta">Consulta asociada:</label>
-				<select id="consulta" name="consulta" class="form-control selectpicker">
+				<select required id="consulta" name="consulta" class="form-control selectpicker">
                     <option value="" >--- Seleccionar consulta ---</option>
                     @foreach($consultas as $consulta)
                       <option value="{{ $consulta->id }}">{{ $consulta->fecha }} </option>
@@ -65,7 +65,7 @@
 	
 		<div class="row">
       		<div class="form-group col-md-12">
-              <label for="observaciones">Observaciones:</label>
+              <label required for="observaciones">Observaciones:</label>
               <textarea name="observaciones" class="form-control" rows="5" id="observaciones"></textarea>
             </div>
 		</div>

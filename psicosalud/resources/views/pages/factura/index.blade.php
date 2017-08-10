@@ -50,7 +50,7 @@
 							<form action="{{ route('factura.destroy', $row->id) }}" method="post">
 								<input type="hidden" name="_method" value="DELETE">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
-								<button type="submit" class="btn btn-danger">Eliminar</button>
+								<button type="submit" class="btn btn-danger">Anular</button>
 							</form>
 						</center>	  					
 						</td>

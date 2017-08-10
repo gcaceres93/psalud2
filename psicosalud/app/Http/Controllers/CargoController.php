@@ -111,7 +111,9 @@ class CargoController extends Controller
             $cargos->delete();
             return redirect()->route('cargo.index');
         } catch(Exception $e){
-            return "Fatal error - ".$e->getMessage();
+            $var = '<script language="javascript">alert("No se puede eliminar este registro ya que tiene registros hijos asociados a otras tablas."); window.history.go(-1);</script>';
+            return ("$var ");
+//             return "Fatal error - ".$e->getMessage();
         }
     }
 }

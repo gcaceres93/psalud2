@@ -89,7 +89,7 @@
 		<div class="row">
       		<div class="form-group col-md-12">
               <label for="comentario">Diagnóstico final:</label>
-              <textarea name="diagnostico_final" class="form-control" rows="5" id="diagnostico_final"></textarea>
+              <textarea name="diagnostico_final"  required class="form-control" rows="5" id="diagnostico_final"></textarea>
             </div>
 		</div>
 		
@@ -97,21 +97,21 @@
 		<div class="row">
       		<div class="form-group col-md-12">
               <label for="comentario">Observaciones:</label>
-              <textarea name="observaciones" class="form-control" rows="5" id="observaciones"></textarea>
+              <textarea name="observaciones" required class="form-control" rows="5" id="observaciones"></textarea>
             </div>
 		</div>
 		
 		<div class="row">
       		<div class="form-group col-md-12">
               <label for="comentario">Resultado obtenido:</label>
-              <textarea name="resultado_obtenido" class="form-control" rows="5" id="resultado_obtenido"></textarea>
+              <textarea name="resultado_obtenido" required class="form-control" rows="5" id="resultado_obtenido"></textarea>
             </div>
 		</div>
 		
 		<div class="row">
       		<div class="form-group col-md-12">
               <label for="comentario">Recomendaciones:</label>
-              <textarea name="recomendaciones" class="form-control" rows="5" id="recomendaciones"></textarea>
+              <textarea name="recomendaciones" required class="form-control" rows="5" id="recomendaciones"></textarea>
             </div>
 		</div>
 		

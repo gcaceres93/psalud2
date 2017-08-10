@@ -166,12 +166,14 @@ class RegisterController extends Controller
          try{
             $user = User::findOrFail($user);
             $id=$user->id;
-            $user->roles()->detach();
+//             $user->roles()->detach();
             $user->delete();
             
             return redirect()->route('user.index');
         } catch(Exception $e){
-            return "Fatal error - ".$e->getMessage();
+            $var = '<script language="javascript">alert("No se puede eliminar este registro ya que tiene registros hijos asociados a otras tablas."); window.history.go(-1);</script>';
+            return ("$var ");
+//             return "Fatal error - ".$e->getMessage();
         }
     }
     /**

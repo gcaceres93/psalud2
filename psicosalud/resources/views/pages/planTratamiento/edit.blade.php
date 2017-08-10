@@ -49,7 +49,7 @@
         	<div class="col-md-12">
         		<div class="form-group"> 
         			<label for="consulta">Tipo de terapia:</label>
-				<select id="tipoTerapia" name="tipoTerapia" class="form-control selectpicker">
+				<select  required id="tipoTerapia" name="tipoTerapia" class="form-control selectpicker">
                     <option value="{{ $plan->tid }}" >{{ $plan->tnombre }}</option>
                     @foreach($tipoTerapias as $tp)
                       <option value="{{ $tp->id }}">{{ $tp->nombre }} </option>
@@ -65,7 +65,7 @@
   		<div class="row">
       		<div class="form-group col-md-4">
               <label for="fecha_inicio">Fecha de inicio:</label>
-              <input type="date" name="fecha_inicio" class="form-control" id="fecha_inicio" value="{{ $plan->fecha_inicio }}">
+              <input required type="date" name="fecha_inicio" class="form-control" id="fecha_inicio" value="{{ $plan->fecha_inicio }}">
             </div>
             <div class="form-group col-md-4">
               <label for="fecha_inicio">Fecha final:</label>
@@ -73,7 +73,7 @@
             </div>
             <div class="form-group col-md-4">
               <label for="cantidad_sesiones">Cantidad de sesiones:</label>
-              <input type="number" name="cantidad_sesiones" class="form-control"  id="cantidad_sesiones" value="{{ $plan->cantidad_sesiones }}">
+              <input type="number"  required name="cantidad_sesiones" class="form-control"  id="cantidad_sesiones" value="{{ $plan->cantidad_sesiones }}">
             </div>
 		</div>
 		
@@ -81,14 +81,14 @@
 		<div class="row">
       		<div class="form-group col-md-12">
               <label for="alcance">Alcance:</label>
-              <textarea name="alcance" class="form-control" rows="5" id="alcance">{{ $plan->alcance }}</textarea>
+              <textarea name="alcance" required class="form-control" rows="5" id="alcance">{{ $plan->alcance }}</textarea>
             </div>
 		</div>
 		
 		<div class="row">
       		<div class="form-group col-md-12">
               <label for="resultados_esperados">Resultados esperados:</label>
-              <textarea name="resultados_esperados" class="form-control" rows="5" id="resultados_esperados"> {{ $plan->resultados_esperados }} </textarea>
+              <textarea name="resultados_esperados" required class="form-control" rows="5" id="resultados_esperados"> {{ $plan->resultados_esperados }} </textarea>
             </div>
 		</div>
 		
