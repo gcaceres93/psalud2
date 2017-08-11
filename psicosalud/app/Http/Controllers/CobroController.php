@@ -34,22 +34,31 @@ class CobroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Factura $factura)
+    public function create( Factura $factura)
     {
         //
 //         $Factura = New Factura();
 //         $roles_list = User::with('roles')->where('id', $user->id)->get();
 //         $facturass = Factura::with('cobro')->get();
 //         $id=$Factura->asaniu($factura)->get();
-//         $facturas = Factura::findOrFail($factura);
+       // $facturas = Factura::findOrFail($factura);
 //         $facturas = $factura->all();
 //         $facturass = Factura::findOrFail($factura->all());
-        $facturass = ($factura->all());
         
-        foreach ($facturass as $factur){
-             $asd = $factur->attributes;
+//         $facturass = ($factura->all());
+        $facutra= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $pos = strpos($facutra, '?') +1;
+        $ids=substr($facutra, $pos);
+        
+        $facturas = Factura::findOrFail($ids);
+       // dd($facturas);
+//         foreach ($factura as $factur){
+//              $asd = $factur->attributes;
            
-        }
+//         }
+ 
+        
+        
 //         dd($asd->id);
 //          $asd = $asd->all();
 //         foreach ($asd as $fact){
@@ -58,7 +67,7 @@ class CobroController extends Controller
             
 //         }
         
-        return view('pages.cobro.create',compact('asd'));
+        return view('pages.cobro.create',compact('facturas'));
     }
 
     /**
