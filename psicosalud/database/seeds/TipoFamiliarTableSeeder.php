@@ -29,7 +29,6 @@ class TipoFamiliarTableSeeder extends Seeder
             array('nombre'=>'Abuela'),
             array('nombre'=>'Nieto'),
             array('nombre'=>'Nieta'),
-            array('nombre'=>'Padre'),   
       ));      
     }
 }
