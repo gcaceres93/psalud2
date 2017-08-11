@@ -39,7 +39,6 @@
               <ul class="dropdown-menu">
                   <li><a href="{{ route('paciente.create') }}">Registrar paciente</a></li>
                   <li><a href="{{ url('/paciente') }}">Listar pacientes</a></li>
-                  <li><a href="#">Historial de pacientes</a></li>
               </ul>
           </li>
 
