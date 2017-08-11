@@ -13,7 +13,7 @@ class CargoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
         $data= Cargo::all()->sortBy('id');
         return view('pages.cargos.index',compact('data'));
     }
