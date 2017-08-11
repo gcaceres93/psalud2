@@ -65,10 +65,10 @@
 
   <div class="row">		
   		<div class="form-group">
-  			 <label for="agendamiento">Agendamiento</label>
+  			 <label for="agendamiento">Agendamientos con estado asistido</label>
   			 <br/>
   			<div class="col-md-6">
-  			<select  name="agendamiento" id="agendamiento" class="form-control selectpicker">
+  			<select title="Agendamientos con estado asistido"  name="agendamiento" id="agendamiento" class="form-control selectpicker">
                 <option value="" >Seleccionar Agendamiento</option>
               </select>
              </div>
@@ -132,6 +132,10 @@ $(document).ready(function() {
 	    e.preventDefault();
         var observaciones = $('#observaciones').val();
         var agendamiento = $('#agendamiento').val();
+        
+        if (agendamiento ==null){
+        	return	alert('Debe seleccionar un agendamiento, si el campo agendamiento aparece vacio significa que el paciente no tiene agendamientos asistidos');
+            }
         var fecha = $('#fecha').val();
         var cantidad_horas = $('#cantidad_horas').val();
         var medico = $('#medico').val();
@@ -162,7 +166,11 @@ $(document).ready(function() {
     });
 });
 
+
+
 $(document).ready(function() {	
+
+
 	$( '#paciente' ).on( 'change', function(e) {
 	   
         var paciente = $('#paciente').val();
@@ -176,8 +184,17 @@ $(document).ready(function() {
             data:  data,
             success: function(data){
             		console.log(data);
-            		$('#agendamiento').html('	');
-                	$('#agendamiento').append(' <option  </option>');
+//             		$('#agendamiento').html('	');
+//                 	$('#agendamiento').append(' <option  </option>');
+//                 	if (data.length>0){
+//                 		$('#agendamiento').attr('disabled',false)
+//                     	}else{
+//                     		$('#agendamiento').attr('disabled',true)
+//                     		$('#agendamiento').append(' <option selected> No posee agendamientos asistidos</option>'); 
+//                         	}
+					$('#agendamiento').html('');
+				
+					$('#agendamiento').append('<option> </option>');
                 	data.forEach(recorrerdata);
             	    
 
