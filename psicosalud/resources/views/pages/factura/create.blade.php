@@ -79,7 +79,7 @@
          
                <div class="form-group">
           			<label for="fecha">Fecha de Factura:</label>
-          			<input type="date" name="fecha" required id="fecha" class="form-control"  > 	
+          			<input type="date" name="fecha" required id="fecha" value="{{$fecha}}" class="form-control"  > 	
           		</div>
               
           
@@ -122,7 +122,7 @@
 <!--       </div> -->
 <!--       </div> -->
 
-  		<button type="submit" name="guardar" id="guardar" class="btn btn-info">Guardar</button>
+  		<button type="button" name="guardar" id="guardar" class="btn btn-info">Guardar</button>
   	</form>	
     </div>
   
@@ -191,6 +191,7 @@ function asignartotal(){
 //     });
 // });
 $(document).ready(function() {	
+
     $('#guardar').on('click', function () {
     	var monto;
 		var concepto = [];
@@ -243,15 +244,35 @@ $(document).ready(function() {
      	   
      	}
 
-			if (consulta =='' || persona =='' || medico =='' || monto =='' || tipo_pago =='' || nro =='' || fecha =='' || timbrado =='' || vigencia_timbrado == ''  ){
+			if (persona =='' || medico =='' || monto =='' || tipo_pago =='' || nro =='' || fecha =='' || timbrado =='' || vigencia_timbrado == ''  ){
 				return alert ('Debe completar todos los datos en la cabecera de la factura');
 
 			}
-
+			
 
 		     var data = {consulta:consulta,_token:_token,concepto:concepto,cantidad:cantidad,impuesto:impuesto,monto_total:monto_total,persona:persona,medico:medico,monto:monto,observacion:observacion,tipo_pago:tipo_pago,nro:nro,fecha:fecha,timbrado:timbrado,estado:estado,vigencia_timbrado:vigencia_timbrado};
 
-			guardar(data);
+		     $.ajax({
+		            method: 'get',
+		            url: '/tablaDinamica',
+		            data:  data,
+		            async: true,
+		            dataType:"json",
+		            success: function(data){
+// 		            	console.log(data);
+		            	window.location.replace("/factura");
+				
+
+		                
+		            	
+		            },
+		            error: function(data){
+		            	var errors = data.responseJSON;
+//		                 alert(errors);
+		                //console.log(data);
+		            },
+		          
+		        });
 
             
 
@@ -311,27 +332,7 @@ function guardar(data){
 //         	}
 //         var data = {consulta:consulta,_token:_token,concepto:concepto,cantidad:cantidad,impuesto:impuesto,monto_total:monto_total,persona:persona,medico:medico,monto:monto,observacion:observacion,tipo_pago:tipo_pago,nro:nro,fecha:fecha,timbrado:timbrado,estado:estado,vigencia_timbrado:vigencia_timbrado};
 		
-        $.ajax({
-            method: 'get',
-            url: '/tablaDinamica',
-            data:  data,
-            async: true,
-            dataType:"json",
-            success: function(data){
-            	console.log(data);
-            	window.location.replace("/factura");
-		
-
-                
-            	
-            },
-            error: function(data){
-            	var errors = data.responseJSON;
-//                 alert(errors);
-                console.log(data);
-            },
-          
-        });
+       
 }
         
   

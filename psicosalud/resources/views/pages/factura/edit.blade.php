@@ -68,18 +68,22 @@
                
               <select  name="consulta" id="consulta" class="form-control selectpicker">
                 <option value="" >Seleccionar Consulta</option>
+                
                  @foreach($consultas as $consulta)
                 <?php
                                  $selected = ""
                                 
                              ?>
+                         @if($consulta)    
                     	@if ($consulta->id == $facturas->consulta_id)
                         	 <?php
                                  $selected = "selected"
                              ?>
              			@endif 
+             			@endif 
                   <option <?php echo ($selected) ?>   value="{{ $consulta->id }}">{{ $consulta->fecha }} / {{ $consulta->apellido}}, {{ $consulta->nombre}} </option>
                 @endforeach
+                
               </select>
           	</div>
           	
@@ -149,11 +153,8 @@
                                  $selected = ""
                                 
                              ?>
-                    	@if ($consulta->id == $facturas->consulta_id)
-                        	 <?php
-                                 $selected = "selected"
-                             ?>
-             			@endif 
+                           
+                    	
                   <td><select  name='factura_concepto' id='factura_concepto' class='form-control selectpicker'>
     											               <option value='' >Seleccionar Concepto</option>
     											                @foreach($factura_conceptos as $factura_concepto)

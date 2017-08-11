@@ -83,12 +83,12 @@ class FacturaController extends Controller
             $factura->timbrado = '';
             $factura->vigencia_timbrado='';
         }
-        
+        $fecha=date('Y-m-d');
         $factura_conceptos = FacturaConcepto::all()->sortBy('descripcion');
         $impuestos = Impuestos::all()->sortBy('nombre');
 //         DB::table('files')->orderBy('upload_time', 'desc')->first();
 //         $cargos = Cargo::all()->sortBy('descripcion');
-        return view('pages.'.$this->path.'.create',compact('personas','factura','nro_factura','empleados','factura_conceptos','impuestos')); 
+        return view('pages.'.$this->path.'.create',compact('personas','factura','nro_factura','empleados','factura_conceptos','impuestos','fecha')); 
     }
 
     public function verificarConsulta(Request $request){
@@ -125,7 +125,7 @@ class FacturaController extends Controller
 //         dd($request->cantidad);
         //dd($facturat);
        // $factura->store($request);
-       
+        
         return $this->store($request);
         
     }
@@ -142,7 +142,8 @@ class FacturaController extends Controller
     public function store(Request $request)
     {
         //
-//        
+        //        
+      
         try {
             /* Primero instanciamos el modelo Factura */
             $estado="Pendiente";
@@ -173,11 +174,13 @@ class FacturaController extends Controller
             /* Creamos el detalle*/
             
             
-           
+            
          $canti=count($request->concepto);
+         
 //          return json_encode($canti);
          $vari='';
       for ($i = 0; $i < $canti; $i++) {
+          
           $factura_detalle = new FacturaDetalle();
           $factura_detalle->factura_cabecera_id=$lastInsertedId;
           foreach ($request->cantidad as $key=>$cantidad)
@@ -224,7 +227,11 @@ class FacturaController extends Controller
                 
 
          }     
-         return json_encode($factura_detalle);
+         if ($factura_detalle){
+             return json_encode($factura_detalle);
+         
+         }
+        
 
 
             
@@ -325,6 +332,8 @@ class FacturaController extends Controller
         ->where('consulta.estado' , '=', 'Consulta')
         ->orWhere('consulta.id', '=', $facturas->consulta_id)
         ->get();
+        
+        
         $factura_detalle =   DB::table('factura_detalle')
         ->select('factura_detalle.*')
         ->where('factura_cabecera_id', '=',$facturas->id)
