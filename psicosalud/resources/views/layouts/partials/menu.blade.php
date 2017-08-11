@@ -49,7 +49,7 @@
                   <li><a href="{{ route('medico.create') }}">Registrar médico</a></li>
                   <li><a href="{{ url('tarifaHora') }}">Registrar Tarifas</a></li>
                   <li><a href="{{ url('/medico') }}">Listar médicos</a></li>
-                  <li><a href="#">Consultar agenda de médico</a></li>
+                  <li><a href="{{ url('/agendas') }}">Consultar agenda de médico</a></li>
               </ul>
           </li>
 
