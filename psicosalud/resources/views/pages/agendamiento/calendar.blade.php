@@ -32,7 +32,7 @@
   		<br/>
 </div>
 </div>
-<div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
+<div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:700px;'>
     <div class="dhx_cal_navline">
         <div class="dhx_cal_prev_button">&nbsp;</div>
         <div class="dhx_cal_next_button">&nbsp;</div>
@@ -45,7 +45,10 @@
     <div class="dhx_cal_header"></div>
     <div class="dhx_cal_data"></div>       
 </div>
-<script type="text/javascript">
+<script  type="text/javascript">
+
+
+
 $( document ).ready(function() {
 	$('#scheduler_here').hide();
 	$('#medico').on('change', function() {
